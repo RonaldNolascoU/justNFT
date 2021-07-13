@@ -108,3 +108,66 @@ h2 span {
     width: 100%;
   }
 }
+
+@for $i from 1 through 3 {
+  $url: '/images/service-' + $i + '.png';
+  .card-store-bg--#{$i} {
+    background-repeat: no-repeat;
+    background-image: url($url);
+    background-position: center;
+  }
+}
+.store-template {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (max-width: 1550px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.card-store {
+  box-shadow: inset 0px 33.15px 47.6px -30.6px rgba(255, 255, 255, 0.5),
+    inset 0px 5.95px 9.35px -3.4px #ffffff,
+    inset 0px -69.7px 57.8px -54.4px rgba(96, 68, 145, 0.3),
+    inset 0px 83.3px 85px -40.8px rgba(35, 61, 155, 0.34),
+    inset 0px 3.4px 15.3px rgba(154, 146, 210, 0.3),
+    inset 0px 0.85px 34px rgba(227, 222, 255, 0.2);
+  backdrop-filter: blur(85px);
+  background: #e8507e;
+  height: 572px;
+  @media (max-width: 1023px) {
+    height: 500px;
+  }
+}
+.store-card {
+  transition: all 0.5s ease-in;
+  position: relative;
+}
+.card__overlay {
+  background-color: $overlay-color;
+  transition: 0.5s ease;
+  position: absolute;
+  visibility: none;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+.overlay__text {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  text-align: center;
+  z-index: 100;
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+}
+.store-card:hover {
+  .card__overlay {
+    opacity: 0.67;
+  }
+  .overlay__text {
+    opacity: 1;
+  }
+}
