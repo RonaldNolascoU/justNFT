@@ -1,5 +1,5 @@
 <template>
-  <MessageDropdown :messages="$store.state.messages" />
+  <MessageMobileChats :messages="$store.state.messages" />
 </template>
 
 <script>

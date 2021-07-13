@@ -98,15 +98,19 @@
                 <div
                   v-for="(message, index) in chatMessages"
                   :key="index"
-                  class="message mb-3 dark:text-white"
-                  :class="{
-                    'message-out': message.userId === 1,
-                    'message-in dark:bg-gray-1000': message.userId !== 1,
-                  }"
+                  class="w-full inline-block"
                 >
-                  <p class="dark:text-white">
-                    {{ message.msg }}
-                  </p>
+                  <div
+                    class="message mb-3 dark:text-white break-all"
+                    :class="{
+                      'message-out': message.userId === 1,
+                      'message-in dark:bg-gray-1000': message.userId !== 1,
+                    }"
+                  >
+                    <p class="dark:text-white">
+                      {{ message.msg }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -348,7 +352,8 @@ export default {
     scroll-behavior: smooth;
   }
   .message {
-    width: 75%;
+    width: auto;
+    max-width: 90%;
     padding: 1em;
     font-size: 16px;
   }

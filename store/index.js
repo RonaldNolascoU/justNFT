@@ -18,6 +18,7 @@ export const state = () => ({
   returnTo: null,
   messages: [
     {
+      id: 1,
       userId: 11,
       image: 'msg-profile07',
       name: 'Rayella Ferguss',
@@ -26,6 +27,7 @@ export const state = () => ({
       count: 3,
     },
     {
+      id: 2,
       userId: 2,
       image: 'msg-profile06',
       name: 'Mistique Madeline',
@@ -33,6 +35,7 @@ export const state = () => ({
       date: '7w',
     },
     {
+      id: 3,
       userId: 3,
       image: 'msg-profile05',
       name: 'Caroline Daenm..',
@@ -41,6 +44,7 @@ export const state = () => ({
       count: 5,
     },
     {
+      id: 4,
       userId: 4,
       image: 'msg-profile04',
       name: 'Shameil Khan',
@@ -48,6 +52,7 @@ export const state = () => ({
       date: '5d',
     },
     {
+      id: 5,
       userId: 5,
       image: 'msg-profile03',
       name: 'Gizelle Zifadsy',
@@ -56,6 +61,7 @@ export const state = () => ({
       count: 1,
     },
     {
+      id: 6,
       userId: 6,
       image: 'msg-profile02',
       name: 'Shannon Kala.',
@@ -63,6 +69,7 @@ export const state = () => ({
       date: '3d',
     },
     {
+      id: 7,
       userId: 7,
       image: 'msg-profile01',
       name: 'Mikella Jia',
