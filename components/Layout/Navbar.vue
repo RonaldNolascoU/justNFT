@@ -124,26 +124,22 @@
           </div>
         </div>
 
-        <div
-          class="px-4 sm:px-10 2xl:px-10 lg:pl-5"
-          role="button"
-          @click.prevent.stop="
-            isMobile ? $router.push('/') : handleOpenModals('store')
-          "
-        >
-          <span
-            class="my-3 text-white lg:my-0 notification material-icons fs-40 fs-res-24 icons-color select-none"
+        <div class="px-4 sm:px-10 2xl:px-10 lg:pl-5" role="button">
+          <nuxt-link to="/store">
+            <span
+              class="my-3 text-white lg:my-0 notification material-icons fs-40 fs-res-24 icons-color select-none"
+            >
+              store
+            </span></nuxt-link
           >
-            store
-          </span>
-          <div
+          <!-- <div
             v-if="!isMobile"
             class="hidden lg:flex justify-center ease-in-out"
             :class="{ 'ease-in-out': storeBox }"
           >
             <img v-if="storeBox" src="~/assets/img/dropdown.png" class="mx-0" />
-            <!-- <MessageMsgNotification v-if="storeBox" :messages="messages" /> -->
-          </div>
+            MessageMsgNotification v-if="storeBox" :messages="messages" />
+          </div> -->
         </div>
       </div>
 
@@ -249,13 +245,13 @@ export default {
   },
   beforeDestroy() {
     if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.onResize, { passive: true })
+      // window.removeEventListener('resize', this.onResize, { passive: true })
     }
   },
   mounted() {
     this.darkMode = this.$store.state.darkMode
     this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
+    // window.addEventListener('resize', this.onResize, { passive: true })
   },
   methods: {
     onResize() {
