@@ -245,18 +245,19 @@ export default {
   },
   beforeDestroy() {
     if (typeof window !== 'undefined') {
-      // window.removeEventListener('resize', this.onResize, { passive: true })
+      window.removeEventListener('resize', this.onResize, { passive: true })
     }
   },
   mounted() {
     this.darkMode = this.$store.state.darkMode
     this.onResize()
-    // window.addEventListener('resize', this.onResize, { passive: true })
+    window.addEventListener('resize', this.onResize, { passive: true })
   },
   methods: {
     onResize() {
       this.isMobile = window.innerWidth < 1024
-      if (!this.isMobile) {
+      const forbiddenRoutes = ['/chats', '/notifications', '/suggestions']
+      if (!this.isMobile && forbiddenRoutes.includes(this.$route.path)) {
         this.$router.push('/')
       }
     },

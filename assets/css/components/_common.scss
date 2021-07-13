@@ -118,6 +118,8 @@ h2 span {
   }
 }
 .store-template {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   @media (max-width: 1550px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
