@@ -31,7 +31,7 @@
 <script>
 import getCookie from '@/scripts/cookies.js'
 export default {
-  // middleware: ['router-auth'],
+  middleware: ['router-auth'],
   mounted() {
     if (
       ['dark', 'system'].includes(this.$colorMode.preference) &&
