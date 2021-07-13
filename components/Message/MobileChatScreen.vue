@@ -210,7 +210,7 @@ export default {
   }
   .chat__screen {
     scroll-behavior: smooth;
-    height: 693px;
+    height: 500px;
   }
   .message {
     // width: 75%;
