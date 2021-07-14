@@ -6,7 +6,11 @@
       </div>
       <div class="flex justify-between flex-auto">
         <div>
-          <b class="text-lg font-bold dark:text-white fs-24">{{ post.user }}</b>
+          <nuxt-link to="/mia" class="hover:underline">
+            <b class="text-lg font-bold dark:text-white fs-24">{{
+              post.user
+            }}</b>
+          </nuxt-link>
           <p class="mt-1 text-muted fs-24">44m</p>
         </div>
         <div class="self-center fs-24">

@@ -9,7 +9,7 @@
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="store-card m-0.5 last:w-full last:last__card"
+        class="store-card m-0.5 mb-4 md:mb-0 last:w-full last:last__card"
       >
         <div class="card-store rounded-xl flex flex-col justify-center">
           <div

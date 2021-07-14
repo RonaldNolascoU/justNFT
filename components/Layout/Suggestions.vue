@@ -16,9 +16,9 @@
             <img :src="`/images/${suggestion.img}`" />
             <div class="absolute flex justify-center w-full center top-80">
               <vs-button block class="w-full truncate pills" color="#c53761">
-                <span class="block text-white truncate fs-20">
+                <nuxt-link class="block text-white truncate fs-20" :to="'/mia'">
                   {{ suggestion.title }}
-                </span>
+                </nuxt-link>
               </vs-button>
             </div>
           </div>
