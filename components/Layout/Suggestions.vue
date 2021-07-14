@@ -28,7 +28,7 @@
           class="flex justify-center my-16 pb-24"
         >
           <vs-button class="pills" color="#c53761" block>
-            <span class="fs-24 btn-letter-spacing">VIEW ALL </span>
+            <span class="fs-20 btn-letter-spacing">VIEW ALL </span>
           </vs-button>
         </div>
       </div>

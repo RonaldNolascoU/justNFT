@@ -257,7 +257,11 @@ export default {
     onResize() {
       this.isMobile = window.innerWidth < 1024
       const forbiddenRoutes = ['/chats', '/notifications', '/suggestions']
-      if (!this.isMobile && forbiddenRoutes.includes(this.$route.path)) {
+      if (
+        !this.isMobile &&
+        (forbiddenRoutes.includes(this.$route.path) ||
+          this.$route.name == 'chats-id')
+      ) {
         this.$router.push('/')
       }
     },

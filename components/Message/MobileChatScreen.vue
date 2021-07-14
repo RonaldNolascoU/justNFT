@@ -1,91 +1,91 @@
 <template>
-  <nav class="messages_dropdown mobile_messages__dropdown__wrapper">
-    <div class="wrapper_box bg-white dark:bg-black dark:box-messages">
-      <div class="wrapper show">
-        <!-- Chat Screen -->
-        <ul class="setting-drop">
-          <li class="flex items-center justify-between arrow back-setting-btn">
-            <div class="flex items-center">
-              <span
-                class="fas fa-arrow-left cursor-pointer dark:text-white fs-20 mr-4"
-                @click="back"
-              ></span>
-              <div class="flex items-center justify-between" v-if="chat">
-                <div class="flex current_chat items-center">
-                  <img
-                    class="rounded-full absolute"
-                    width="40"
-                    height="40"
-                    :src="require(`~/assets/img/msg/${chat.image}.png`)"
-                  />
-                  <div class="ml-16">
-                    <div class="text-left fs-20 dark:text-white">
-                      {{ chat.name }}
-                    </div>
-                    <div class="text-left fs-16 text-primary text-ellipsis">
-                      Active {{ chat.date }} ago
-                    </div>
+  <div>
+    <div class="chat__screen" ref="chatScreen">
+      <div
+        class="fixed w-full pt-2 bg-white dark:bg-black shadow-md top-0 left-0 px-4"
+      >
+        <li class="flex items-center justify-between arrow back-setting-btn">
+          <div class="flex items-center">
+            <span
+              class="fas fa-arrow-left cursor-pointer dark:text-white fs-20 mr-4"
+              @click="back"
+            ></span>
+            <div class="flex items-center justify-between" v-if="chat">
+              <div class="flex current_chat items-center">
+                <img
+                  class="rounded-full absolute"
+                  width="40"
+                  height="40"
+                  :src="require(`~/assets/img/msg/${chat.image}.png`)"
+                />
+                <div class="ml-16">
+                  <div class="text-left fs-20 dark:text-white">
+                    {{ chat.name }}
+                  </div>
+                  <div class="text-left fs-16 text-primary text-ellipsis">
+                    Active {{ chat.date }} ago
                   </div>
                 </div>
               </div>
             </div>
-            <i class="fas fa-ellipsis-v text-gray"></i>
-          </li>
-          <div class="mt-5">
-            <div
-              class="chat__screen h-screen overflow-y-scroll"
-              ref="chatScreen"
-            >
-              <div
-                v-for="(message, index) in chatMessages"
-                :key="index"
-                class="w-full inline-block"
-              >
-                <div
-                  class="message mb-3 dark:text-white break-all"
-                  :class="{
-                    'message-out': message.userId === 1,
-                    'message-in dark:bg-gray-1000': message.userId !== 1,
-                  }"
-                >
-                  <p class="dark:text-white">
-                    {{ message.msg }}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
+          <i class="fas fa-ellipsis-v text-gray"></i>
+        </li>
+      </div>
+
+      <div class="mt-20 mb-16 messages_dropdown">
+        <div class="chat__screen h-screen overflow-y-scroll">
           <div
-            class="flex items-center justify-between arrow back-setting-btn add__message relative"
+            v-for="(message, index) in chatMessages"
+            :key="index"
+            class="w-full inline-block"
           >
-            <textarea
-              type="text"
-              placeholder="Say something..."
-              class="dark:bg-gray-1000 dark:text-white"
-              ref="addCommentTextArea"
-              @keyup="textAreaAdjust($event)"
-              @keydown.enter="addMessage"
-              v-model="comment"
-            />
             <div
-              class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 pointer-events-none action__icon"
+              class="message mb-3 dark:text-white break-all"
+              :class="{
+                'message-out': message.userId === 1,
+                'message-in dark:bg-gray-1000': message.userId !== 1,
+              }"
             >
-              <i
-                class="mr-2 cursor-pointer fas fa-camera text-primary right-0"
-              ></i>
-            </div>
-            <div
-              class="absolute cursor-pointer left-0 bottom-0 flex items-center pr-3 pointer-events-none smily_face"
-            >
-              <i
-                class="mr-2 cursor-pointer far fa-grin-alt text-primary left-0"
-              ></i>
+              <p class="dark:text-white">
+                {{ message.msg }}
+              </p>
             </div>
           </div>
-        </ul>
+        </div>
       </div>
     </div>
-  </nav>
+
+    <div
+      class="fixed w-full flex justify-between flex-auto fixed__footer_chat px-4 pb-4 left-0 bg-white dark:bg-black"
+    >
+      <div
+        class="flex items-center justify-between arrow back-setting-btn add__message relative flex-1"
+      >
+        <textarea
+          type="text"
+          placeholder="Say something..."
+          class="dark:bg-gray-1000 dark:text-white flex-1"
+          ref="addCommentTextArea"
+          @keyup="textAreaAdjust($event)"
+          @keydown.enter="addMessage"
+          v-model="comment"
+        />
+        <div
+          class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 pointer-events-none action__icon"
+        >
+          <i class="mr-2 cursor-pointer fas fa-camera text-primary right-0"></i>
+        </div>
+        <div
+          class="absolute cursor-pointer left-0 bottom-0 flex items-center pr-3 pointer-events-none smily_face"
+        >
+          <i
+            class="mr-2 cursor-pointer far fa-grin-alt text-primary left-0"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -176,12 +176,9 @@ export default {
         element.style.height = -25 + element.scrollHeight + 'px'
       }
     },
-    scrollChatScreen(added = false) {
+    scrollChatScreen() {
       let chatScreen = this.$refs.chatScreen
-      console.log(chatScreen.scrollHeight)
-      chatScreen.scrollTop = added
-        ? chatScreen.scrollHeight
-        : chatScreen.scrollHeight
+      window.scrollTo({ top: chatScreen.scrollHeight, behavior: 'smooth' })
     },
     addMessage() {
       if ((this.comment && this.comment.length == 0) || !this.comment) return
@@ -194,7 +191,7 @@ export default {
       this.comment = null
       this.$refs.addCommentTextArea.style.height = 35
       this.$nextTick(() => {
-        this.scrollChatScreen(true)
+        this.scrollChatScreen()
       })
     },
   },
@@ -203,14 +200,33 @@ export default {
 
 <style scoped lang="scss">
 // CHAT SCREEN
+
 .messages_dropdown {
   padding-bottom: 1em;
   @media (min-width: 768px) and (max-width: 1023px) {
     padding-bottom: 2em;
   }
+
+  .chat_screen__wrapper {
+    height: 73vh;
+    @media (max-width: 360px) {
+      height: 66vh;
+    }
+    @media (min-width: 361px) and (max-width: 400px) {
+      height: 73vh;
+    }
+
+    @media (min-width: 401px) and (max-width: 500px) {
+      height: 71vh;
+    }
+
+    @media (orientation: landscape) {
+      height: 40vh;
+    }
+  }
   .chat__screen {
     scroll-behavior: smooth;
-    height: 500px;
+    height: 100%;
   }
   .message {
     // width: 75%;
@@ -231,12 +247,15 @@ export default {
     background: #f1f0f0;
     float: left;
   }
+}
 
+.fixed__footer_chat {
+  bottom: 65px;
+  @media (min-width: 678px) and (max-width: 1023px) {
+    bottom: 81px;
+  }
   .add__message {
     padding-top: 1em;
-    @media (min-width: 700px) and (max-width: 1023px) {
-      padding-top: initial !important;
-    }
     textarea {
       overflow: hidden;
       resize: none;
