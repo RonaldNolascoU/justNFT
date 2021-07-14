@@ -1,13 +1,7 @@
 <template>
   <div class="px-3 suggestions lg:w-3/4 3xl:w-4/3">
     <p
-      class="
-        text-center
-        fs-24
-        btn-letter-spacing
-        lg:mb-3 lg:-ml-4
-        dark:text-white
-      "
+      class="text-center fs-24 btn-letter-spacing lg:mb-3 lg:-ml-4 dark:text-white"
     >
       SUGGESTED
     </p>
@@ -33,7 +27,7 @@
 
       <div class="flex justify-center my-16">
         <vs-button class="pills" color="#c53761" block>
-          <span class="fs-24 btn-letter-spacing">VIEW ALL </span>
+          <span class="fs-20 btn-letter-spacing">VIEW ALL </span>
         </vs-button>
       </div>
     </div>

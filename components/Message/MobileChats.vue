@@ -14,7 +14,7 @@
             >
             </vs-input>
           </div>
-          <div class="overflow-y-scroll messages_boxes h-screen">
+          <div class="overflow-y-scroll messages_boxes h-screen mt-8">
             <li
               class="flex items-center justify-between mb-4 rounded-lg setting-item dark:hover:bg-light-gray"
               v-for="(msg, index) in filteredMessages"
@@ -86,6 +86,20 @@ export default {
 }
 </script>
 <style lang="scss">
+.dark {
+  .mobile_messages__dropdown__wrapper {
+    .vs-input--placeholder {
+      color: white;
+    }
+    .vs-icon {
+      color: #999999;
+    }
+    input {
+      color: white;
+    }
+  }
+}
+
 .mobile_messages__dropdown__wrapper {
   .names {
     max-width: 50%;
@@ -95,6 +109,11 @@ export default {
   }
   .vs-input--placeholder {
     top: initial;
+    color: #999999;
+  }
+
+  .vs-icon {
+    color: white;
   }
   input {
     border-radius: 53px !important;
@@ -102,15 +121,17 @@ export default {
   .vs-con-input-label {
     width: 100%;
   }
-}
 
-.messages__dropdown__wrapper {
   .messages_boxes {
-    height: 100vh;
+    height: 80% !important;
   }
   .menu-bar {
     width: 100%;
+    height: 100vh !important;
   }
+}
+
+.messages__dropdown__wrapper {
   .wrapper ul.setting-drop {
     display: none;
   }
