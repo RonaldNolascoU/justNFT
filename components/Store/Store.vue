@@ -1,11 +1,11 @@
 <template>
   <div class="pb-10 lg:pb-0">
-    <h4 class="store__heading dark:text-white fs-24">
+    <h4 class="store__heading dark:text-white fs-24 mt-1">
       The <span class="text-navy">J</span>
       <span class="text-primary y__text">Y</span>
       Store
     </h4>
-    <div class="grid store-template gap-4 lg:gap-2">
+    <div class="md:grid store-template gap-4 lg:gap-1 lg:mt-10">
       <div
         v-for="(item, index) in items"
         :key="index"
@@ -14,15 +14,19 @@
         <div class="card-store rounded-xl flex flex-col justify-center">
           <div
             :class="[
-              'text-center flex flex-col flex-grow pt-16',
+              'text-center flex flex-col flex-grow pt-16 relative',
               `card-store-bg--${index + 1}`,
             ]"
           >
-            <p class="price-number pt-2">{{ item.msgNumber }}</p>
-            <p class="fs-24 text-blue">INTERACTIVE MESSAGES</p>
+            <div class="price-number pt-2">{{ item.msgNumber }}</div>
+            <div
+              class="fs-24 text-blue absolute top-store-card-title w-11/12 text-center"
+            >
+              INTERACTIVE MESSAGES
+            </div>
           </div>
           <div
-            class="flex items-center justify-center bg-navy text-center rounded-b-lg flex-none"
+            class="flex items-center justify-center bg-navy text-center rounded-b-lg flex-none py-1"
           >
             <img src="~/assets/img/wallet-icon.png" alt="" />
             <span class="fs-24 ml-2 font-bold text-white"
@@ -74,13 +78,13 @@ export default {
 }
 
 .last\:last__card:last-child {
-  @media (min-width: 501px) and (max-width: 1500px) {
+  @media (min-width: 768px) and (max-width: 1500px) {
     justify-self: center;
     grid-column: 1 / -1;
     width: 50%;
   }
   @media (max-width: 500px) {
-    width: 75%;
+    // width: 75%;
     justify-self: center;
     grid-column: 1 / -1;
   }

@@ -34,12 +34,12 @@
   }
 }
 .price-number {
-  font-size: 160px !important;
-  @media (max-width: 1023px) {
-    font-size: 100px !important;
-  }
+  font-size: 215px !important;
   color: $primary-color;
   mix-blend-mode: multiply;
+  @media (max-width: 1799px) {
+    font-size: 160px !important;
+  }
 }
 .fs-24 {
   font-size: 24px !important;

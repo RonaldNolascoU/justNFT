@@ -40,13 +40,13 @@ body {
 }
 
 .sidebar-container {
-  width: 20.4%;
+  width: 18.4%;
 }
 .page-container {
-  width: 44.3%;
+  width: 47.3%;
 }
 .suggestions-container {
-  width: 35.3%;
+  width: 34.3%;
 }
 h2 {
   width: 100%;
@@ -76,7 +76,7 @@ h2 span {
   background: rgba(229, 231, 235, 0.9);
   position: absolute;
   height: 1px;
-  z-index: 100;
+  z-index: 20;
   top: 6rem;
 }
 
@@ -172,4 +172,7 @@ h2 span {
   .overlay__text {
     opacity: 1;
   }
+}
+.top-store-card-title {
+  top: 21rem;
 }
