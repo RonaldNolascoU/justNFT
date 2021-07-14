@@ -20,7 +20,7 @@
         <Nuxt />
       </div>
       <div
-        class="hidden lg:flex items-start justify-center pt-12 pb-20 lg:h-screen lg:overflow-y-scroll suggestions-container"
+        class="hidden lg:flex items-start justify-center pt-12 pb-20 suggestions-container"
       >
         <LayoutSuggestions />
       </div>

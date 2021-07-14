@@ -1,7 +1,7 @@
 <template>
   <div class="px-3 suggestions lg:w-3/4 3xl:w-4/3">
     <p
-      class="text-center fs-24 btn-letter-spacing lg:mb-3 lg:-ml-4 dark:text-white"
+      class="fs-24 btn-letter-spacing text-center dark:text-white bg-white dark:bg-black"
     >
       SUGGESTED
     </p>
@@ -23,12 +23,14 @@
             </div>
           </div>
         </vs-card>
-      </div>
-
-      <div class="flex justify-center my-16">
-        <vs-button class="pills" color="#c53761" block>
-          <span class="fs-20 btn-letter-spacing">VIEW ALL </span>
-        </vs-button>
+        <div
+          v-if="suggestions.length == index + 1"
+          class="flex justify-center my-16 pb-24"
+        >
+          <vs-button class="pills" color="#c53761" block>
+            <span class="fs-20 btn-letter-spacing">VIEW ALL </span>
+          </vs-button>
+        </div>
       </div>
     </div>
   </div>
