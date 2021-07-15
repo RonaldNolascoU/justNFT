@@ -23,9 +23,9 @@
             >
               <div class="flex icon">
                 <div class="relative pb-1">
-                  <img
+                  <nuxt-img
                     class="rounded-full"
-                    :src="require(`~/assets/img/msg/${msg.image}.png`)"
+                    :src="`/images/msg/${msg.image}.png`"
                   />
                   <div v-if="!!msg.count" class="text-center status-circle">
                     <span class="relative dark:text-black">
@@ -103,7 +103,7 @@ export default {
 .mobile_messages__dropdown__wrapper {
   .names {
     max-width: 50%;
-    @media (min-width: 500px) and (max-width: 1023px) {
+    @media (min-width: 500px) and (max-width: 1279px) {
       max-width: 100%;
     }
   }

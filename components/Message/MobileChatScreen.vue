@@ -12,11 +12,11 @@
             ></span>
             <div class="flex items-center justify-between" v-if="chat">
               <div class="flex current_chat items-center">
-                <img
+                <nuxt-img
                   class="rounded-full absolute"
                   width="40"
                   height="40"
-                  :src="require(`~/assets/img/msg/${chat.image}.png`)"
+                  :src="`/images/msg/${chat.image}.png`"
                 />
                 <div class="ml-16">
                   <div class="text-left fs-20 dark:text-white">
@@ -203,7 +203,7 @@ export default {
 
 .messages_dropdown {
   padding-bottom: 1em;
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1279px) {
     padding-bottom: 2em;
   }
 
@@ -251,7 +251,7 @@ export default {
 
 .fixed__footer_chat {
   bottom: 65px;
-  @media (min-width: 678px) and (max-width: 1023px) {
+  @media (min-width: 678px) and (max-width: 1279px) {
     bottom: 81px;
   }
   .add__message {

@@ -1,11 +1,11 @@
 <template>
-  <div class="pb-10 lg:pb-0">
+  <div class="pb-10 xl:pb-0">
     <h4 class="store__heading dark:text-white fs-24 mt-1">
       The <span class="text-navy">J</span>
       <span class="text-primary y__text">Y</span>
       Store
     </h4>
-    <div class="md:grid store-template gap-4 lg:gap-1 lg:mt-10">
+    <div class="md:grid store-template gap-4 xl:gap-1 xl:mt-10">
       <div
         v-for="(item, index) in items"
         :key="index"
@@ -28,7 +28,7 @@
           <div
             class="flex items-center justify-center bg-navy text-center rounded-b-lg flex-none py-1"
           >
-            <img src="~/assets/img/wallet-icon.png" alt="" />
+            <nuxt-img src="/images/wallet-icon.png" alt="JUST Icon" />
             <span class="fs-24 ml-2 font-bold text-white"
               >{{ item.cost }} JUST</span
             >
@@ -71,7 +71,7 @@ export default {
 .y__text {
   // margin-right: -1%;
   // margin-left: -3%;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     margin-right: -1%;
     margin-left: -1%;
   }

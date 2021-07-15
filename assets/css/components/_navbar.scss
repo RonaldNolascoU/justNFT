@@ -3,7 +3,7 @@
   position: fixed;
   // top: 0;
   padding-bottom: 1em;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     width: 100%;
     top: initial;
     bottom: 0;
@@ -20,7 +20,7 @@
   // overflow-y: hidden !important;
   position: relative;
   top: 6rem;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     top: 0;
     // position: static;
     // padding-right: 2em;
@@ -29,7 +29,7 @@
 
 .nav-items {
   width: 87.5%;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     width: 100%;
     padding: 0;
   }
@@ -39,7 +39,7 @@
 }
 .logo-container {
   width: 68px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     width: 50px;
   }
   @media (max-width: 677px) {
@@ -144,7 +144,7 @@
   .just-logo {
     left: -12px;
     top: -5px;
-    @media (max-width: 1023px) {
+    @media (max-width: 1279px) {
       top: -16px;
     }
   }
@@ -157,7 +157,7 @@
       right: 0;
       left: 0;
     }
-    @media (min-width: 381px) and (max-width: 1024px) {
+    @media (min-width: 381px) and (max-width: 1280px) {
       width: 320px;
       left: 10%;
     }
@@ -198,7 +198,7 @@
     top: 40px;
     display: flex;
 
-    @media (min-width: 320px) and (max-width: 1024px) {
+    @media (min-width: 320px) and (max-width: 1280px) {
       padding: 0;
     }
     // position: absolute;
@@ -209,7 +209,7 @@
     top: 65px;
     display: flex;
     width: 600px;
-    @media (min-width: 320px) and (max-width: 1024px) {
+    @media (min-width: 320px) and (max-width: 1280px) {
       width: 320px;
     }
     overflow: hidden;
@@ -224,7 +224,7 @@
   }
   .wrapper ul {
     width: 600px;
-    @media (min-width: 320px) and (max-width: 1024px) {
+    @media (min-width: 320px) and (max-width: 1280px) {
       width: 320px;
     }
     list-style: none;
@@ -322,7 +322,7 @@
   height: 500px;
   right: 3%;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     left: calc(50% - 200px);
     width: 400px;
   }

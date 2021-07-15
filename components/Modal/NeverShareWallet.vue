@@ -7,7 +7,7 @@
       </p>
       <div class="actions mt-2 flex justify-evenly">
         <button
-          class="bg-navy rounded-xl px-10 lg:px-16 py-1 mr-3 text-white font-semibold"
+          class="bg-navy rounded-xl px-10 xl:px-16 py-1 mr-3 text-white font-semibold"
           @click="agree"
         >
           I agree
@@ -34,14 +34,14 @@ export default {
     max-width: 50%;
   }
   width: 25%;
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     width: 50%;
   }
   @media (min-width: 1440px) {
     width: 40%;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     width: 90%;
   }
   font-size: 24px;
@@ -50,7 +50,7 @@ export default {
   background: #efefef;
   box-shadow: inset 0px 4px 96px rgba(13, 13, 13, 0.53);
   border-radius: 36px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     font-size: 16px;
   }
   position: absolute;

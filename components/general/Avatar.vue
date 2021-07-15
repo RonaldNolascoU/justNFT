@@ -6,7 +6,7 @@
     <div
       class="w-full border-4 rounded-full border-color-primary profile__wrapper"
     >
-      <img
+      <nuxt-img
         class="w-full rounded-full profile-img"
         :class="isGrayScale ? 'filter grayscale' : null"
         :src="image"
@@ -27,7 +27,7 @@ export default {
     },
     image: {
       type: String,
-      default: '~/assets/img/profile.png',
+      default: '/images/profile.png',
     },
     showAvailableStatus: {
       type: Boolean,
@@ -47,23 +47,29 @@ export default {
   @media (max-width: 576px) {
     width: 4rem;
   }
+  @media (min-width: 577px) and (max-width: 767px) {
+    width: 5rem;
+  }
 }
 
 .absolute__profile_pic {
   position: absolute;
   bottom: -50%;
 
-  @media (min-width: 1024px) and (max-width: 1200px) {
-    bottom: -60%;
-    width: 5rem;
+  @media (min-width: 880px) and (max-width: 1280px) {
+    bottom: -35%;
   }
 
-  @media (min-width: 1201px) and (max-width: 1500px) {
-    bottom: -60%;
+  @media (min-width: 1281px) and (max-width: 1500px) {
+    bottom: -40%;
     width: 6rem;
   }
 
-  @media (max-width: 576px) {
+  @media (min-width: 1501px) {
+    bottom: -45%;
+  }
+
+  @media (max-width: 767px) {
     bottom: -50%;
   }
 }

@@ -1,11 +1,11 @@
 <template>
-  <div class="px-3 suggestions lg:w-3/4 3xl:w-4/3">
+  <div class="px-3 suggestions xl:w-3/4 3xl:w-4/3">
     <p
-      class="fs-24 btn-letter-spacing text-center dark:text-white bg-white dark:bg-black"
+      class="fs-24 btn-letter-spacing text-center dark:text-white bg-white dark:bg-black font-semibold"
     >
       SUGGESTED
     </p>
-    <div id="scroll-suggestion" class="lg:h-screen lg:overflow-y-scroll">
+    <div id="scroll-suggestion" class="xl:h-screen xl:overflow-y-scroll">
       <div
         v-for="(suggestion, index) in suggestions"
         :key="index"
@@ -13,11 +13,14 @@
       >
         <vs-card actionable class="cardx">
           <div slot="media" class="relative">
-            <img :src="`/images/${suggestion.img}`" />
+            <nuxt-img :src="`/images/${suggestion.img}`" />
             <div class="absolute flex justify-center w-full center top-80">
               <vs-button block class="w-full truncate pills" color="#c53761">
-                <nuxt-link class="block text-white truncate fs-20" :to="'/mia'">
-                  {{ suggestion.title }}
+                <nuxt-link
+                  class="block text-white truncate fs-20"
+                  :to="nametoSlug(suggestion.name)"
+                >
+                  {{ suggestion.name }} - {{ suggestion.price }} $JUST
                 </nuxt-link>
               </vs-button>
             </div>
@@ -37,28 +40,34 @@
 </template>
 
 <script>
+import stringToSlug from '@/scripts/slug.js'
 export default {
   name: 'Suggestions',
   data() {
     return {
       suggestions: [
         {
-          title: 'Lana Fernandes - 12 $JUST',
+          name: 'Lana Fernandes',
           price: 12,
           img: 'suggestion3.png',
         },
         {
-          title: 'Sarina Izvyk - 7 $JUST',
+          name: 'Sarina Izvyk',
           price: 7,
           img: 'suggestion2.png',
         },
         {
-          title: 'Mariska XX - 5 $JUST',
+          name: 'Mariska XX',
           price: 5,
           img: 'suggestion1.png',
         },
       ],
     }
+  },
+  methods: {
+    nametoSlug(str) {
+      return stringToSlug(str)
+    },
   },
 }
 </script>
@@ -66,10 +75,10 @@ export default {
 <style scoped>
 .top-80 {
   top: 75%;
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     top: 60%;
   }
-  @media (min-width: 1450px) {
+  @media (min-width: 1536px) {
     top: 75%;
   }
 }

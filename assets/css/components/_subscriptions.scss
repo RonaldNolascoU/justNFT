@@ -7,7 +7,7 @@
     // @media (max-width: 768px) {
     //   margin-left: 4em;
     // }
-    // @media (min-width: 1024px) and (max-width: 1300px) {
+    // @media (min-width: 1280px) and (max-width: 1300px) {
     //   margin-left: -1em;
     // }
     // @media (min-width: 1301px) {
@@ -29,11 +29,11 @@
   }
 
   .tab__action {
-    @media (max-width: 1023px) {
+    @media (max-width: 1279px) {
       padding-left: 1em;
       padding-right: 1em;
     }
-    @media (min-width: 1024px) and (max-width: 1500px) {
+    @media (min-width: 1280px) and (max-width: 1500px) {
       padding-left: 1em;
       padding-right: 1em;
     }
@@ -41,10 +41,10 @@
 }
 
 #scroll-suggestion {
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     margin-left: -1.5em;
   }
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     height: 100% !important;
   }
 }

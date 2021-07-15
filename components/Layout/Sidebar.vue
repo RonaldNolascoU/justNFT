@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="pl-4 sidebar lg:pl-3 xl:pl-8">
+    <div class="pl-4 sidebar xl:pl-3 xl:pl-8">
       <div class="flex flex-col items-start 2xl:items-center">
         <GeneralAvatar image="/images/profile.png" />
 
@@ -9,15 +9,17 @@
           :key="index"
           class="w-1/2 mb-12 sidebar__route"
         >
-          <div class="text-left fs-24 grid grid-cols-2 gap-1 items-center">
+          <div
+            class="text-left fs-24 grid grid-cols-2 gap-1 items-center text-secondary dark:text-active hover:text-black dark:hover:text-white"
+          >
             <i
               v-if="route.name !== 'dark'"
               :class="route.icon"
-              class="dark:text-active text-secondary hover:text-black dark:hover:text-white text-white"
+              class="text-secondary dark:text-active hover:text-black dark:hover:text-white"
             />
             <NuxtLink
               v-if="route.name !== 'dark'"
-              :to="route.to"
+              :to="route.to == '/profile' ? nametoSlug('me') : route.to"
               class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
             >
               <span class="">
@@ -51,6 +53,7 @@
 </template>
 
 <script>
+import stringToSlug from '@/scripts/slug.js'
 export default {
   name: 'Sidebar',
   data() {
@@ -98,6 +101,9 @@ export default {
   methods: {
     toggleDarkMode() {
       this.$store.commit('TOGGLE_DARK_MODE')
+    },
+    nametoSlug(str) {
+      return stringToSlug(str)
     },
   },
   mounted() {},

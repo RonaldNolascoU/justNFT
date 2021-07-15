@@ -1,16 +1,18 @@
 <template>
-  <div class="p-5 lg:overflow-hidden lg:p-0 dark:bg-black layout-container">
+  <div
+    class="px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container"
+  >
     <ModalAge v-if="$store.state.modals.age" />
-    <div class="lg:container">
+    <div class="xl:container">
       <LayoutNavbar />
     </div>
-    <div class="infinity-divider w-screen hidden lg:block"></div>
+    <div class="infinity-divider w-screen hidden xl:block"></div>
     <div
       id="body-container"
-      class="flex flex-wrap w-full lg:container pb-10 lg:h-screen"
+      class="flex flex-wrap w-full xl:container pb-10 xl:h-screen"
     >
       <div
-        class="flex-col justify-start hidden px-2 pt-12 sidebar-container lg:flex"
+        class="flex-col justify-start hidden px-2 pt-12 sidebar-container xl:flex"
       >
         <LayoutSidebar />
       </div>
@@ -24,7 +26,7 @@
         <Nuxt />
       </div>
       <div
-        class="hidden lg:flex items-start justify-center pt-12 pb-20 suggestions-container"
+        class="hidden xl:flex items-start justify-center pt-12 pb-20 suggestions-container"
       >
         <LayoutSuggestions />
       </div>
@@ -63,7 +65,7 @@ export default {
 #scroll-suggestion {
   /* overflow-y: scroll; */
   height: 100vh;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     height: 100% !important;
   }
 }

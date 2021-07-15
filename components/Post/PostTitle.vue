@@ -1,12 +1,15 @@
 <template>
-  <div class="mb-5 lg:mx-6">
+  <div class="mb-5 xl:mx-6">
     <div class="flex">
       <div class="flex flex-shrink-0 mr-4">
-        <img src="/images/post.png" class="rounded-full" />
+        <nuxt-img src="/images/post.png" class="rounded-full" />
       </div>
       <div class="flex justify-between flex-auto">
         <div>
-          <nuxt-link to="/mia" class="hover:underline dark:hover:text-white">
+          <nuxt-link
+            :to="nametoSlug(post.user)"
+            class="hover:underline dark:hover:text-white"
+          >
             <b class="text-lg font-bold dark:text-white fs-24">{{
               post.user
             }}</b>
@@ -27,10 +30,17 @@
 </template>
 
 <script>
+import stringToSlug from '@/scripts/slug.js'
 export default {
   props: {
     post: {
       type: Object,
+    },
+  },
+  computed: {},
+  methods: {
+    nametoSlug(str) {
+      return stringToSlug(str)
     },
   },
 }
