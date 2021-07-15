@@ -35,7 +35,7 @@
         ></i>
         <div
           v-click-outside="hide"
-          class="absolute ease-in-out transform shadow-md  rounded-xl px-7 dark:bg-black dark:custom-box-shadow subscriptions menu__options"
+          class="absolute ease-in-out transform shadow-md rounded-xl px-7 dark:bg-black dark:custom-box-shadow subscriptions menu__options"
           v-if="isMenuOpen"
         >
           <ul>

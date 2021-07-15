@@ -176,3 +176,24 @@ h2 span {
 .top-store-card-title {
   top: 21rem;
 }
+#scrollable {
+  @media (min-width: 1280px) {
+    padding-bottom: 15rem;
+  }
+}
+#subs__container,
+#nuxt__container {
+  transition: 0.4s;
+}
+.sub_nav {
+  width: 100vw !important;
+  left: 0rem;
+
+  .btn-fs {
+    font-size: 10px !important;
+    white-space: nowrap;
+    @media (min-width: 767px) {
+      font-size: 18px !important;
+    }
+  }
+}

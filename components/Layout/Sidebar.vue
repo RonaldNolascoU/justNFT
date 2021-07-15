@@ -18,7 +18,7 @@
             <NuxtLink
               v-if="route.name !== 'dark'"
               :to="route.to"
-              class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link"
+              class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
             >
               <span class="">
                 {{ route.name }}
