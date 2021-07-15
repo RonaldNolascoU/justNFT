@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-3 gap-4">
-    <template v-if="!isSubscribed">
+    <template v-if="isSubscribed">
       <ProfilePremiumMedia
         v-for="(content, index) in media"
         :key="index"

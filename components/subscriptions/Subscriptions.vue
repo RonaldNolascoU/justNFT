@@ -3,7 +3,9 @@
     <div
       class="bg-white shadow-lg rounded-3xl subscriptions dark:bg-black dark:custom-box-shadow"
     >
-      <div class="sub_nav fixed xl:hidden z-20 top-0 pt-5 bg-white px-2">
+      <div
+        class="sub_nav fixed xl:hidden z-20 top-0 pt-5 bg-white dark:bg-black px-2"
+      >
         <span
           class="flex justify-center py-3 font-semibold text-pink fs-20 btn-letter-spacing border-b-2 border-lighter"
           >MY SUBSCRIPTIONS</span

@@ -252,7 +252,7 @@ export default {
         (forbiddenRoutes.includes(this.$route.path) ||
           this.$route.name == 'chats-id')
       ) {
-        this.$router.push('/')
+        this.$router.push('/').catch(() => {})
       }
     },
     openMessages() {

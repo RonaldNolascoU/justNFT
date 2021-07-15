@@ -19,8 +19,8 @@
       <div
         id="nuxt__container"
         :class="[
-          'w-full lg:pb-20 lg:border-l lg:border-r border-lighter page-container lg:w-full lg:pt-12',
-          { 'lg:h-screen lg:overflow-y-scroll': !scroll },
+          'w-full xl:pb-20 xl:border-l xl:border-r border-lighter page-container xl:w-full xl:pt-12',
+          { 'xl:h-screen xl:overflow-y-scroll': !scroll },
         ]"
       >
         <Nuxt />
