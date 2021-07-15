@@ -17,7 +17,11 @@
         <LayoutSidebar />
       </div>
       <div
-        class="w-full xl:h-screen xl:overflow-y-scroll xl:pb-20 xl:border-l xl:border-r border-lighter page-container xl:w-full xl:pt-12"
+        id="nuxt__container"
+        :class="[
+          'w-full lg:pb-20 lg:border-l lg:border-r border-lighter page-container lg:w-full lg:pt-12',
+          { 'lg:h-screen lg:overflow-y-scroll': !scroll },
+        ]"
       >
         <Nuxt />
       </div>
@@ -33,7 +37,13 @@
 <script>
 import getCookie from '@/scripts/cookies.js'
 export default {
-  // middleware: ['router-auth'],
+  middleware: ['router-auth'],
+  computed: {
+    scroll() {
+      let routes = ['subscriptions']
+      return routes.includes(this.$nuxt.$route.name)
+    },
+  },
   mounted() {
     if (
       ['dark', 'system'].includes(this.$colorMode.preference) &&

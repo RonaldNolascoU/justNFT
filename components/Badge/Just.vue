@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
     <div
-      class="relative flex items-center px-5 px-10 py-1 border-solid rounded-full border-custom-gray fs-16 dark:bg-white xl:dark:bg-transparent cursor-pointer"
-      @click.prevent.stop="buyJust = !buyJust"
+      class="relative flex items-center px-5 px-10 py-1 border-solid rounded-full border-custom-gray fs-16 dark:bg-white lg:dark:bg-transparent cursor-pointer"
+      @click="buyJust = !buyJust"
     >
       <nuxt-img
         class="absolute self-start my-3 mr-2 xl:my-0 just-logo"

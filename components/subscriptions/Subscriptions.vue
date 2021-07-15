@@ -1,28 +1,57 @@
 <template>
-  <div class="px-4">
+  <div class="xl:px-4">
     <div
       class="bg-white shadow-lg rounded-3xl subscriptions dark:bg-black dark:custom-box-shadow"
     >
-      <span
-        class="flex justify-center py-3 font-semibold text-white rounded-t-3xl bg-primary fs-20"
-        >My Subscriptions</span
-      >
-      <div class="p-5 my-5">
-        <div class="flex justify-between actions">
+      <div class="sub_nav fixed xl:hidden z-20 top-0 pt-5 bg-white px-2">
+        <span
+          class="flex justify-center py-3 font-semibold text-pink fs-20 btn-letter-spacing border-b-2 border-lighter"
+          >MY SUBSCRIPTIONS</span
+        >
+        <div class="flex justify-between actions py-3">
           <div
             v-for="tab in tabs"
             :key="tab.name"
-            class="flex items-center py-3 rounded-full cursor-pointer 3xl:px-16 xl:px-10 border-primary action__item hover:bg-primary hover:text-white tab__action"
+            class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action"
             @click="selectOption(tab)"
             :class="tab.active ? 'bg-primary text-white' : 'text-primary'"
           >
-            <span class="flex items-center font-semibold cursor-pointer fs-20">
+            <span class="flex items-center font-semibold cursor-pointer btn-fs">
               <span class="mr-2 material-icons-round">{{ tab.icon }}</span>
               {{ tab.name }}
             </span>
           </div>
         </div>
-        <div class="flex flex-col items-center subscription__cards">
+      </div>
+      <span
+        class="hidden xl:flex justify-center py-3 font-semibold text-white rounded-t-3xl bg-primary fs-20 hidden"
+        >My Subscriptions</span
+      >
+      <div id="subs__container" class="p-5 my-5 overflow-hidden">
+        <div class="hidden xl:flex justify-between actions hidden">
+          <div
+            v-for="(tab, index) in tabs"
+            :id="`tab__action_${index}`"
+            :key="tab.name"
+            class="flex items-center py-3 rounded-full cursor-pointer 3xl:px-16 xl:px-10 border-primary action__item hover:bg-primary hover:text-white tab__action"
+            @click="selectOption(tab)"
+            :class="tab.active ? 'bg-primary text-white' : 'text-primary'"
+          >
+            <span
+              class="flex items-center font-semibold cursor-pointer fs-20 truncate"
+            >
+              <span class="mr-1 sm:mr-2 material-icons-round">{{
+                tab.icon
+              }}</span>
+              {{ tab.name }}
+            </span>
+          </div>
+        </div>
+        <div
+          id="scrollable"
+          class="flex flex-col items-center subscription__cards xl:h-screen xl:overflow-y-scroll pt-8 xl:pt-0"
+          @scroll="scrollFunction"
+        >
           <SubscriptionsCard
             v-for="subscription in filteredList"
             :key="subscription.name"
@@ -115,6 +144,35 @@ export default {
         x.active = false
       })
       tab.active = !tab.active
+    },
+    scrollFunction() {
+      let subContainer = document.getElementById('subs__container')
+      let nuxtContainer = document.getElementById('nuxt__container')
+
+      if (
+        document.documentElement.scrollTop > 40 ||
+        document.getElementById('scrollable').scrollTop > 40
+      ) {
+        nuxtContainer.classList.remove('xl:pt-12')
+        nuxtContainer.classList.add('xl:pt-2')
+        subContainer.classList.remove('p-5', 'my-5')
+        subContainer.classList.add('pt-0', 'mt-1', 'px-5', 'pb-5', 'mb-5')
+        for (var i = 0; i < 3; i++) {
+          let tabBtn = document.getElementById(`tab__action_${i}`)
+          tabBtn.classList.remove('py-3')
+          tabBtn.classList.add('py-0')
+        }
+      } else {
+        subContainer.classList.remove('pt-0', 'mt-0', 'px-5', 'pb-5', 'mb-5')
+        subContainer.classList.add('p-5', 'my-5')
+        nuxtContainer.classList.add('xl:pt-12')
+        nuxtContainer.classList.remove('xl:pt-2')
+        for (var i = 0; i < 3; i++) {
+          let tabBtn = document.getElementById(`tab__action_${i}`)
+          tabBtn.classList.add('py-3')
+          tabBtn.classList.remove('py-0')
+        }
+      }
     },
   },
 }
