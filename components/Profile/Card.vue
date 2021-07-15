@@ -41,11 +41,11 @@
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
           >
             <span class="material-icons-outlined mr-3"> lock </span>
-            <span><b>Subscribe</b> to unlock content</span>
+            <span><b>Subscribe</b> for 5000 $JUST</span>
           </a>
         </div>
       </div>
-      <div class="mt-5 hidden xl:block">
+      <div class="mt-5 hidden">
         <div class="pricing__wrapper">
           <ProfilePricingCards />
         </div>
