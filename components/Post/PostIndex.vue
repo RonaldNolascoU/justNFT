@@ -6,7 +6,7 @@
     <!-- Image -->
     <vs-card actionable class="w-full">
       <div slot="media">
-        <img :src="post.image" :alt="post.user" class="ml-1" />
+        <nuxt-img :src="post.image" :alt="post.user" class="ml-1" />
       </div>
     </vs-card>
 

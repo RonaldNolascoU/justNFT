@@ -1,5 +1,5 @@
 <template>
-  <div class="user__profile px-4">
+  <div class="user__profile xl:px-4 pb-8 xl:pb-0">
     <div class="flex flex-col items-center subscription__cards">
       <ProfileCard :model="model" />
     </div>

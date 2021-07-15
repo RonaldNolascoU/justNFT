@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3 fs-24 lg:mx-7">
+  <div class="mt-3 fs-24 xl:mx-7">
     <div class="flex justify-between">
       <div class="flex-auto font-semibold cursor-pointer">
         <i class="fas fa-heart heart"></i>
@@ -27,7 +27,7 @@
           :key="comment.content"
         >
           <div class="flex-shrink-0 block mr-4">
-            <img :src="comment.user.img" class="w-12 h-12 rounded-full" />
+            <nuxt-img :src="comment.user.img" class="w-12 h-12 rounded-full" />
           </div>
           <div class="flex justify-between flex-auto">
             <div>
@@ -55,13 +55,13 @@
       <div class="mt-3 add__comment">
         <div class="flex items-center">
           <div class="flex-shrink-0 mr-4">
-            <img src="/images/post.png" class="w-12 h-12 rounded-full" />
+            <nuxt-img src="/images/post.png" class="w-12 h-12 rounded-full" />
           </div>
           <div class="flex-auto comment">
             <div class="relative mt-1">
               <input
                 type="text"
-                class="block w-full p-2 lg:pt-4 pl-4 pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+                class="block w-full p-2 xl:pt-4 pl-4 pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
                 placeholder="Add your comment"
                 v-model="comment"
                 @keyup.enter="addComment(post)"
@@ -92,7 +92,7 @@
     </div>
     <!-- Comment -->
     <div
-      class="my-8 lg:my-16 divider dark:border-gray-700"
+      class="my-8 xl:my-16 divider dark:border-gray-700"
       v-if="post.id != 3"
     ></div>
   </div>
@@ -150,7 +150,7 @@ export default {
   width: 100%;
   height: 58px;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     height: 100%;
   }
 

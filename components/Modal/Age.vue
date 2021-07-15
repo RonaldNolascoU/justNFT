@@ -4,13 +4,13 @@
       <p class="text-center">Are you 18 or older?</p>
       <div class="actions mt-2 flex justify-evenly">
         <button
-          class="bg-primary rounded-xl px-10 lg:px-16 py-1 mr-3 text-white"
+          class="bg-primary rounded-xl px-10 xl:px-16 py-1 mr-3 text-white"
           @click="goToHomepage"
         >
           Yes
         </button>
         <button
-          class="bg-navy rounded-xl px-10 lg:px-16 py-1 text-white"
+          class="bg-navy rounded-xl px-10 xl:px-16 py-1 text-white"
           @click="returnBack"
         >
           No
@@ -43,7 +43,7 @@ export default {
   background: #efefef;
   box-shadow: inset 0px 4px 96px rgba(13, 13, 13, 0.53);
   border-radius: 46px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     font-size: 16px;
   }
   position: absolute;

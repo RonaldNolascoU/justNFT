@@ -36,7 +36,7 @@
                   <div class="relative pb-1">
                     <img
                       class="rounded-full"
-                      :src="require(`~/assets/img/msg/${msg.image}.png`)"
+                      :src="`/images/msg/${msg.image}.png`"
                     />
                     <div v-if="!!msg.count" class="text-center status-circle">
                       <span class="relative dark:text-black">
@@ -72,13 +72,11 @@
                   v-if="currentChat"
                 >
                   <div class="flex current_chat items-center">
-                    <img
+                    <nuxt-img
                       class="rounded-full absolute"
                       width="40"
                       height="40"
-                      :src="
-                        require(`~/assets/img/msg/${currentChat.image}.png`)
-                      "
+                      :src="`/images/msg/${currentChat.image}.png`"
                     />
                     <div class="ml-16">
                       <div class="text-left fs-20 dark:text-white">
@@ -336,7 +334,7 @@ export default {
   height: 500px;
   right: 3%;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     left: calc(50% - 200px);
     width: 400px;
   }

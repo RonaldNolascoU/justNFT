@@ -3,7 +3,7 @@
     <div class="relative">
       <vs-card actionable class="w-full">
         <div slot="media">
-          <img
+          <nuxt-img
             :src="subscription.cover"
             :alt="subscription.name"
             :class="!subscription.active ? 'filter grayscale' : null"
@@ -20,7 +20,13 @@
     <div class="flex justify-between -mt-4">
       <!-- <div></div> -->
       <div class="personal__data">
-        <h3 class="font-semibold text-pink fs-24">{{ subscription.name }}</h3>
+        <h3 class="font-semibold text-pink fs-24">
+          <nuxt-link
+            :to="nametoSlug(subscription.name)"
+            class="hover:underline dark:hover:text-primary"
+            >{{ subscription.name }}</nuxt-link
+          >
+        </h3>
         <span class="font-semibold text-blue fs-16">{{
           subscription.active
             ? subscription.subscribed_at
@@ -35,7 +41,7 @@
         ></i>
         <div
           v-click-outside="hide"
-          class="absolute ease-in-out transform shadow-md  rounded-xl px-7 dark:bg-black dark:custom-box-shadow subscriptions menu__options"
+          class="absolute ease-in-out transform shadow-md rounded-xl px-7 dark:bg-black dark:custom-box-shadow subscriptions menu__options"
           v-if="isMenuOpen"
         >
           <ul>
@@ -71,6 +77,7 @@
 </template>
 
 <script>
+import stringToSlug from '@/scripts/slug.js'
 export default {
   props: {
     subscription: {
@@ -88,6 +95,9 @@ export default {
     },
     hide() {
       this.isMenuOpen = false
+    },
+    nametoSlug(str) {
+      return stringToSlug(str)
     },
   },
 }

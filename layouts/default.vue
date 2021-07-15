@@ -1,26 +1,28 @@
 <template>
-  <div class="p-5 lg:overflow-hidden lg:p-0 dark:bg-black layout-container">
+  <div
+    class="px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container"
+  >
     <ModalAge v-if="$store.state.modals.age" />
-    <div class="lg:container">
+    <div class="xl:container">
       <LayoutNavbar />
     </div>
-    <div class="infinity-divider w-screen hidden lg:block"></div>
+    <div class="infinity-divider w-screen hidden xl:block"></div>
     <div
       id="body-container"
-      class="flex flex-wrap w-full lg:container pb-10 lg:h-screen"
+      class="flex flex-wrap w-full xl:container pb-10 xl:h-screen"
     >
       <div
-        class="flex-col justify-start hidden px-2 pt-12 sidebar-container lg:flex"
+        class="flex-col justify-start hidden px-2 pt-12 sidebar-container xl:flex"
       >
         <LayoutSidebar />
       </div>
       <div
-        class="w-full lg:h-screen lg:overflow-y-scroll lg:pb-20 lg:border-l lg:border-r border-lighter page-container lg:w-full lg:pt-12"
+        class="w-full xl:h-screen xl:overflow-y-scroll xl:pb-20 xl:border-l xl:border-r border-lighter page-container xl:w-full xl:pt-12"
       >
         <Nuxt />
       </div>
       <div
-        class="hidden lg:flex items-start justify-center pt-12 pb-20 suggestions-container"
+        class="hidden xl:flex items-start justify-center pt-12 pb-20 suggestions-container"
       >
         <LayoutSuggestions />
       </div>
@@ -31,7 +33,7 @@
 <script>
 import getCookie from '@/scripts/cookies.js'
 export default {
-  middleware: ['router-auth'],
+  // middleware: ['router-auth'],
   mounted() {
     if (
       ['dark', 'system'].includes(this.$colorMode.preference) &&
@@ -53,7 +55,7 @@ export default {
 #scroll-suggestion {
   /* overflow-y: scroll; */
   height: 100vh;
-  @media (max-width: 1023px) {
+  @media (max-width: 1279px) {
     height: 100% !important;
   }
 }

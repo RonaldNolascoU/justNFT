@@ -30,7 +30,8 @@ export default {
       },
       {
         rel: 'prefetch',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css',
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css',
       },
       {
         rel: 'stylesheet',
@@ -73,6 +74,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
+    '@nuxt/image',
   ],
   tailwindcss: {
     jit: true,
