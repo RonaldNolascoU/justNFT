@@ -160,7 +160,7 @@ h2 span {
   transform: translate(-50%, -50%);
   position: absolute;
   text-align: center;
-  z-index: 100;
+  z-index: 1;
   opacity: 0;
   left: 50%;
   top: 50%;
@@ -195,5 +195,14 @@ h2 span {
     @media (min-width: 767px) {
       font-size: 18px !important;
     }
+  }
+}
+.upload-form {
+  input[type='text'] {
+    padding: 10px 82px 10px 20px;
+  }
+  .chart-counter {
+    right: 20px;
+    bottom: 10px;
   }
 }

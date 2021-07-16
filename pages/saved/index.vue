@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <PostCreateNewPost />
+</template>
 
 <script>
 export default {}
