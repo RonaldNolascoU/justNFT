@@ -37,7 +37,7 @@
 <script>
 import getCookie from '@/scripts/cookies.js'
 export default {
-  // middleware: ['router-auth'],
+  middleware: ['router-auth'],
   computed: {
     scroll() {
       let routes = ['subscriptions']
