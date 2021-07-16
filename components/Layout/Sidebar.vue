@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="pl-4 sidebar xl:pl-3 xl:pl-8">
+    <div class="pl-4 sidebar xl:pl-3">
       <div class="flex flex-col items-start 2xl:items-center">
         <GeneralAvatar image="/images/profile.png" />
 
@@ -10,7 +10,7 @@
           class="w-1/2 mb-12 sidebar__route"
         >
           <div
-            class="text-left fs-24 grid grid-cols-2 gap-1 items-center text-secondary dark:text-active hover:text-black dark:hover:text-white"
+            class="text-left fs-24 grid grid-cols-2 gap-2 items-center text-secondary dark:text-active hover:text-black dark:hover:text-white"
           >
             <i
               v-if="route.name !== 'dark'"
