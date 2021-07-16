@@ -75,6 +75,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     '@nuxt/image',
+    '@nuxtjs/date-fns',
   ],
   tailwindcss: {
     jit: true,

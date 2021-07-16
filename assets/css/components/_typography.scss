@@ -24,6 +24,11 @@
   color: $navy-blue-color !important;
 }
 
+.text-separate {
+  line-height: 22px;
+  letter-spacing: 8.18333px;
+}
+
 .fs-36 {
   font-size: 36px !important;
 }
@@ -55,6 +60,9 @@
   @media (max-width: 677px) {
     font-size: 16px !important;
   }
+}
+.fs-18 {
+  font-size: 18px;
 }
 .fs-16 {
   font-size: 16px;

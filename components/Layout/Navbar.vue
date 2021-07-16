@@ -70,29 +70,31 @@
           </div>
         </div>
 
-        <div
-          class="px-4 sm:px-10 2xl:px-10 xl:px-5"
-          role="button"
-          @click.prevent.stop="
-            isMobile
-              ? $router.push('/notifications')
-              : handleOpenModals('notify')
-          "
-        >
+        <div class="px-4 sm:px-10 2xl:px-10 xl:px-5" role="button">
           <span
-            class="my-3 text-white xl:my-0 notification material-icons fs-40 fs-res-24 icons-color select-none"
+            class="my-3 mb-0 text-white xl:my-0 material-icons fs-40 fs-res-24 icons-color select-none"
+            @click.prevent.stop="
+              isMobile
+                ? $router.push('/notifications')
+                : handleOpenModals('notify')
+            "
           >
             notifications_active
           </span>
           <div
             v-if="!isMobile"
-            class="hidden xl:flex justify-center ease-in-out"
+            class="relative justify-center ease-in-out hidden xl:flex messages__dropdown__wrapper"
             :class="{ 'ease-in-out': notifyBox }"
           >
             <img
               v-if="notifyBox"
               src="~/assets/img/dropdown.png"
               class="mx-0 absolute"
+            />
+            <NotificationDropdown
+              v-if="notifyBox"
+              :messages="messages"
+              @hidden="notifyBox = false"
             />
           </div>
         </div>

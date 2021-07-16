@@ -77,6 +77,59 @@ export const state = () => ({
       date: '1d',
     },
   ],
+  notifications: [
+    {
+      id: 1,
+      image: 'msg-profile07',
+      name: 'Rayella Ferguss',
+      msg: 'commented on your post.',
+      date: '2021-07-15',
+    },
+    {
+      id: 2,
+      image: 'msg-profile06',
+      name: 'Mistique Madeline',
+      msg: 'tagged you in "like we.."',
+      date: '2021-07-12',
+    },
+    {
+      id: 3,
+      image: 'msg-profile05',
+      name: 'Caroline Daenm..',
+      msg: 'subscribed to your plan.',
+      date: '2021-07-10',
+      isSubscription: true,
+    },
+    {
+      id: 4,
+      image: 'msg-profile04',
+      name: 'Shameil Khan',
+      msg: 'liked your image.',
+      date: '2021-07-10',
+    },
+    {
+      id: 5,
+      image: 'msg-profile03',
+      name: 'Gizelle Zifadsy',
+      msg: 'liked your image "Requiem for..."',
+      date: '2021-07-04',
+    },
+    {
+      id: 6,
+      image: 'msg-profile02',
+      name: 'Shannon Kala.',
+      msg: 'tagged you in her post...',
+      date: '2021-06-19',
+    },
+    {
+      id: 7,
+      image: 'msg-profile01',
+      name: 'Mikella Jia',
+      msg: 'Subscribed to your plan.',
+      date: '2021-04-10',
+      isSubscription: true,
+    },
+  ],
 })
 
 export const getters = {
