@@ -22,7 +22,7 @@
       <div class="personal__data">
         <h3 class="font-semibold text-pink fs-24">
           <nuxt-link
-            :to="nametoSlug(subscription.name)"
+            :to="localePath(nametoSlug(subscription.name), $i18n.locale)"
             class="hover:underline dark:hover:text-primary"
             >{{ subscription.name }}</nuxt-link
           >
@@ -49,25 +49,33 @@
               <span class="mr-3 material-icons-round text-gray text-primary"
                 >mode</span
               >
-              <span class="font-semibold fs-14 text-gray"> Manage </span>
+              <span class="font-semibold fs-14 text-gray">
+                {{ $t('subscriptions.options.manage') }}
+              </span>
             </li>
             <li class="flex items-center my-3 cursor-pointer">
               <span class="mr-3 material-icons-round text-gray text-primary"
                 >clear</span
               >
-              <span class="font-semibold fs-14 text-gray"> Remove </span>
+              <span class="font-semibold fs-14 text-gray">
+                {{ $t('subscriptions.options.remove') }}
+              </span>
             </li>
             <li class="flex items-center my-3 cursor-pointer">
               <span class="mr-3 material-icons-round text-gray text-primary"
                 >autorenew</span
               >
-              <span class="font-semibold fs-14 text-gray"> Renew </span>
+              <span class="font-semibold fs-14 text-gray">
+                {{ $t('subscriptions.options.renew') }}
+              </span>
             </li>
             <li class="flex items-center my-3 cursor-pointer">
               <span class="mr-3 material-icons-round text-gray text-primary"
                 >do_not_disturb_on_total_silence</span
               >
-              <span class="font-semibold fs-14 text-gray"> Mute User </span>
+              <span class="font-semibold fs-14 text-gray">
+                {{ $t('subscriptions.options.mute') }}
+              </span>
             </li>
           </ul>
         </div>

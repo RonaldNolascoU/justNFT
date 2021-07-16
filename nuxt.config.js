@@ -1,3 +1,4 @@
+import i18n from './config/i18n'
 require('dotenv').config()
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -87,7 +88,49 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['nuxt-webfontloader', 'nuxt-material-design-icons'],
+  modules: ['nuxt-webfontloader', 'nuxt-material-design-icons', 'nuxt-i18n'],
+  i18n: {
+    vueI18nLoader: true,
+    silentTranslationWarn: true,
+    strategy: 'prefix_and_default',
+    // strategy: 'no_prefix',
+    defaultLocale: 'en',
+    // detectBrowserLanguage: {
+    //   useCookie: false,
+    //   cookieKey: 'i18n_redirected',
+    //   onlyOnRoot: true, // recommended
+    // },
+    pages: {
+      parsePages: false,
+    },
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+      },
+      {
+        code: 'es',
+        name: 'Spanish',
+      },
+      {
+        code: 'fr',
+        name: 'French',
+      },
+      {
+        code: 'zh',
+        name: 'Chinesse',
+      },
+      {
+        code: 'ja',
+        name: 'Japan',
+      },
+      {
+        code: 'ru',
+        name: 'Russian',
+      },
+    ],
+    vueI18n: i18n,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

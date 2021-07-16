@@ -16,10 +16,12 @@
       <div class="personal__data">
         <h3 class="font-semibold fs-24">
           <span class="dark:text-white"
-            >Posts <span class="text-primary">79</span></span
+            >{{ $t('profile.posts') }}
+            <span class="text-primary">79</span></span
           >
           <span class="dark:text-white"
-            >Likes <span class="text-primary">2.3k</span></span
+            >{{ $t('profile.likes') }}
+            <span class="text-primary">2.3k</span></span
           >
         </h3>
       </div>
@@ -41,7 +43,9 @@
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
           >
             <span class="material-icons-outlined mr-3"> lock </span>
-            <span><b>Subscribe</b> for 5000 $JUST</span>
+            <span
+              ><b>{{ $t('profile.subscribeFrom') }}</b> for 5000 $JUST</span
+            >
           </a>
         </div>
       </div>
@@ -63,7 +67,7 @@
               <span class="material-icons-round mr-1 sm:mr-3">
                 {{ tab.icon }}
               </span>
-              {{ tab.name }}
+              {{ $t(`profile.${tab.slug}`) }}
             </button>
           </div>
           <div class="mt-5">

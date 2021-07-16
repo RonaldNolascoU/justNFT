@@ -13,6 +13,7 @@
     "core-js": "^3.9.1",
     "material-icons": "^0.7.4",
     "nuxt": "^2.15.3",
+    "nuxt-i18n": "^6.27.3",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-webfontloader": "^1.1.0",
     "sass": "^1.35.1",

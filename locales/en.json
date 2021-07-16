@@ -1,0 +1,75 @@
+{
+  "test": "test",
+  "navbar": { 
+    "search": "Search",
+    "messages" : {
+      "title": "Messages",
+      "search":"Search messages" 
+    },
+    "buyJust": "Buy JUST",
+    "notifications" : {
+      "title": "Notifications",
+      "latest":"Latest",
+      "commentedOn": "commented on your post",
+      "taggedOn": "tagged you on ...",
+      "subscribedOn": "subscribed to your plan",
+      "likedOn": "liked your image"
+    }
+  },
+  "sidebar" : {
+    "profile": "My Profile",
+    "home": "Home",
+    "saved": "Saved",
+    "subscriptions": "Subscriptions",
+    "settings": "Settings",
+    "darkMode": "Dark Mode",
+    "logOut": "Log Out"
+  },
+  "home": {
+    "social": {
+      "likes": "Likes",
+      "comments": "Comments",
+      "save": "Save",
+      "like": "Like",
+      "reply": "Reply",
+      "viewMoreComments": "View {count} more comments",
+      "addComment": "Add comment"
+    }
+  },
+  "suggestions": {
+    "title": "Suggested",
+    "viewAll": "View All"
+  },
+  "subscriptions": {
+    "title": "My Subscriptions",
+    "viewAll": "View All",
+    "active": "Active",
+    "renew": "Renew",
+    "subscribedSince": "Subscribed since",
+    "expiredSince": "Expired on",
+    "options": {
+      "manage": "Manage",
+      "remove": "Remove",
+      "renew": "Renew",
+      "mute": "Mute User"
+    }
+  },
+  "profile": {
+    "posts": "Posts",
+    "likes": "Likes",
+    "subscribeFrom": "Subscribe for",
+    "images": "Images",
+    "videos": "Videos",
+    "livestreams": "Livestreams"
+  },
+  "store": {
+    "title": {
+      "the": "The",
+      "store": "Store"
+    },
+    "plans": {
+      "confirm": "Confirm",
+      "messages": "Interactive Messages"
+    }
+  }
+}

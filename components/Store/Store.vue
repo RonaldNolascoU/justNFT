@@ -22,7 +22,7 @@
             <div
               class="fs-24 text-blue absolute top-store-card-title w-11/12 text-center"
             >
-              INTERACTIVE MESSAGES
+              {{ $t('store.plans.messages') }}
             </div>
           </div>
           <div
@@ -37,7 +37,9 @@
         <div class="card__overlay"></div>
         <div class="overlay__text">
           <a href="#" class="bg-navy rounded-lg px-4 py-2">
-            <span class="text-white fs-24 font-bold">Confirm</span>
+            <span class="text-white fs-24 font-bold">{{
+              $t('store.plans.confirm')
+            }}</span>
           </a>
         </div>
       </div>

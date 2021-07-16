@@ -17,7 +17,9 @@
       :class="{ 'ease-in-out': buyJust }"
     >
       <nuxt-img class="ml-1.5 mr-1" src="/images/just-pink.png" />
-      <span class="fs-16 text-white font-bold mr-1.5">BUY JUST</span>
+      <span class="fs-16 text-white font-bold mr-1.5">{{
+        $t('navbar.buyJust')
+      }}</span>
     </div>
   </div>
 </template>

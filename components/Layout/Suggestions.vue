@@ -3,7 +3,8 @@
     <p
       class="fs-24 btn-letter-spacing text-center dark:text-white bg-white dark:bg-black font-semibold"
     >
-      SUGGESTED
+      {{ $t('suggestions.title') }}
+      <!-- SUGGESTED -->
     </p>
     <div id="scroll-suggestion" class="xl:h-screen xl:overflow-y-scroll">
       <div
@@ -18,7 +19,7 @@
               <vs-button block class="w-full truncate pills" color="#c53761">
                 <nuxt-link
                   class="block text-white truncate fs-20"
-                  :to="nametoSlug(suggestion.name)"
+                  :to="localePath(nametoSlug(suggestion.name), $i18n.locale)"
                 >
                   {{ suggestion.name }} - {{ suggestion.price }} $JUST
                 </nuxt-link>
@@ -31,7 +32,9 @@
           class="flex justify-center my-16 pb-24"
         >
           <vs-button class="pills" color="#c53761" block>
-            <span class="fs-20 btn-letter-spacing">VIEW ALL </span>
+            <span class="fs-20 btn-letter-spacing"
+              >{{ $t('suggestions.viewAll') }}
+            </span>
           </vs-button>
         </div>
       </div>

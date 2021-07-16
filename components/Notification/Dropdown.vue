@@ -7,9 +7,9 @@
         <div class="wrapper show">
           <ul class="menu-bar">
             <div class="flex justify-between">
-              <span class="fs-20 dark:text-white font-semibold"
-                >Notifications</span
-              >
+              <span class="fs-20 dark:text-white font-semibold">{{
+                $t('navbar.notifications.title')
+              }}</span>
               <span
                 ><i class="cursor-pointer fas fa-ellipsis-v text-gray"
               /></span>
@@ -17,7 +17,7 @@
             <div class="mt-2 mb-3 content-inputs dark:bg-input">
               <span
                 class="text-primary text-separate fs-18 uppercase font-semibold"
-                >Latest</span
+                >{{ $t('navbar.notifications.latest') }}</span
               >
               <div
                 class="border border-1 divider bg-primary border-primary"

@@ -8,7 +8,7 @@
       >
         <span
           class="flex justify-center py-3 font-semibold text-pink fs-20 btn-letter-spacing border-b-2 border-lighter"
-          >MY SUBSCRIPTIONS</span
+          >{{$t('subscriptions.title')}}</span
         >
         <div class="flex justify-between actions py-3">
           <div
@@ -27,7 +27,7 @@
       </div>
       <span
         class="hidden xl:flex justify-center py-3 font-semibold text-white rounded-t-3xl bg-primary fs-20 hidden"
-        >My Subscriptions</span
+        >{{$t('subscriptions.title')}}</span
       >
       <div id="subs__container" class="p-5 my-5 overflow-hidden">
         <div class="hidden xl:flex justify-between actions hidden">
@@ -45,7 +45,8 @@
               <span class="mr-1 sm:mr-2 material-icons-round">{{
                 tab.icon
               }}</span>
-              {{ tab.name }}
+
+              {{ $t(`subscriptions.${tab.i18n}`) }}
             </span>
           </div>
         </div>
@@ -74,18 +75,21 @@ export default {
           slug: 'all',
           icon: 'visibility',
           name: 'View All',
+          i18n: 'viewAll',
           active: true,
         },
         {
           slug: 'active',
           icon: 'stars',
           name: 'Active',
+          i18n: 'active',
           active: false,
         },
         {
           slug: 'renew',
           icon: 'autorenew',
           name: 'Renew',
+          i18n: 'renew',
           active: false,
         },
       ],

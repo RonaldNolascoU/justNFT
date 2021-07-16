@@ -7,7 +7,9 @@
         <div class="wrapper show">
           <ul class="menu-bar">
             <div class="flex justify-between">
-              <span class="fs-20 dark:text-white font-semibold">Messages</span>
+              <span class="fs-20 dark:text-white font-semibold">{{
+                $t('navbar.messages.title')
+              }}</span>
               <span
                 ><i class="cursor-pointer fas fa-ellipsis-v text-gray"
               /></span>
@@ -20,7 +22,7 @@
                 type="text"
                 icon-after
                 v-model="msgSearchValue"
-                placeholder="Search Messages"
+                :placeholder="$t('navbar.messages.search')"
                 icon="search"
               >
               </vs-input>

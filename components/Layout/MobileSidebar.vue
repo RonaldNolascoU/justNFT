@@ -27,7 +27,7 @@
               class="flex justify-center items-center pb-2 pt-2 my-2"
             >
               <span class="fs-20">
-                {{ option.name }}
+                {{ $t(`sidebar.${option.i18n}`) }}
               </span>
               <i
                 v-if="option.pack == 'fa'"
@@ -46,7 +46,7 @@
                 @click="toggleDarkMode"
                 class="mr-3 fs-20 cursor-pointer select-none text-secondary xl:whitespace-nowrap"
                 for="dark"
-                >Dark Mode</label
+                >{{ $t('sidebar.darkMode') }}</label
               >
               <vs-switch
                 color="#C53761"
@@ -62,7 +62,7 @@
               @click="$router.push('/signin')"
             >
               <span class="fs-20">
-                {{ option.name }}
+                {{ $t(`sidebar.${option.i18n}`) }}
               </span>
               <span class="material-icons-round fs-20 ml-3">
                 {{ option.icon }}
@@ -84,40 +84,47 @@ export default {
           icon: 'fas fa-user',
           pack: 'fa',
           name: 'My Profile',
+          i18n: 'profile',
           to: '/profile',
         },
         {
           icon: 'home',
           pack: 'material',
           name: 'Home',
+          i18n: 'home',
           to: '/',
         },
         {
           icon: 'bookmark',
           pack: 'material',
           name: 'Saved',
+          i18n: 'saved',
           to: '/saved',
         },
         {
           icon: 'payment',
           pack: 'material',
           name: 'Subscriptions',
+          i18n: 'subscriptions',
           to: '/subscriptions',
         },
         {
           icon: 'settings',
           pack: 'material',
           name: 'Settings',
+          i18n: 'settings',
           to: '/settings',
         },
         {
           type: 'switch',
           name: 'Dark Mode',
+          i18n: 'darkMode',
         },
         {
           icon: 'power_settings_new',
           pack: 'material',
           name: 'Log out',
+          i18n: 'logOut',
         },
       ],
     }

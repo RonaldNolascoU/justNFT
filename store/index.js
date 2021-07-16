@@ -2,6 +2,7 @@ export const state = () => ({
   userAuth: null,
   user: null,
   darkMode: false,
+  lang: 'en',
 
   account: {
     address: null,
@@ -201,5 +202,8 @@ export const mutations = {
   TOGGLE_DARK_MODE(state) {
     state.darkMode = !state.darkMode
     this.$colorMode.preference = state.darkMode ? 'dark' : 'light'
+  },
+  UPDATE_LANG(state, payload) {
+    state.lang = payload
   },
 }

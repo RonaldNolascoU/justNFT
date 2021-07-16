@@ -9,7 +9,7 @@
               type="text"
               icon-after
               v-model="msgSearchValue"
-              placeholder="Search Messages"
+              :placeholder="$t('navbar.messages.search')"
               icon="search"
             >
             </vs-input>
@@ -80,7 +80,7 @@ export default {
   mounted() {},
   methods: {
     openChat(msg) {
-      this.$router.push(`/chats/${msg.id}`)
+      this.$router.push(this.localePath(`/chats/${msg.id}`, this.$i18n.locale))
     },
   },
 }

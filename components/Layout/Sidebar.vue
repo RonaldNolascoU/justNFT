@@ -19,11 +19,16 @@
             />
             <NuxtLink
               v-if="route.name !== 'dark'"
-              :to="route.to == '/profile' ? nametoSlug('me') : route.to"
+              :to="
+                localePath(
+                  route.to == '/profile' ? nametoSlug('me') : route.to,
+                  $i18n.locale
+                )
+              "
               class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
             >
               <span class="">
-                {{ route.name }}
+                {{ $t(`sidebar.${route.i18n}`) }}
               </span>
             </NuxtLink>
             <template v-else class="text-xl text-secondary">
@@ -41,7 +46,7 @@
                   @click="toggleDarkMode()"
                   class="text-xl cursor-pointer select-none text-secondary xl:whitespace-nowrap sidebar__route_link"
                   for="dark"
-                  >Dark Mode</label
+                  >{{ $t('sidebar.darkMode') }}</label
                 >
               </div>
             </template>
@@ -62,37 +67,37 @@ export default {
         {
           to: '/profile',
           name: 'My Profile',
-          class: '',
+          i18n: 'profile',
           icon: 'fas fa-user-alt',
         },
         {
           to: '/',
           name: 'Home',
-          class: '',
+          i18n: 'home',
           icon: 'fas fa-home',
         },
         {
           to: '/saved',
           name: 'Saved',
-          class: '',
+          i18n: 'saved',
           icon: 'fas fa-bookmark',
         },
         {
           to: '/subscriptions',
           name: 'Subscriptions',
-          class: '',
+          i18n: 'subscriptions',
           icon: 'fas fa-money-check',
         },
         {
           to: '/settings',
           name: 'Settings',
-          class: '',
+          i18n: 'settings',
           icon: 'fas fa-cog',
         },
         {
           to: '#',
           name: 'dark',
-          class: '',
+          i18n: 'darkMode',
           icon: 'fas fa-cog',
         },
       ],

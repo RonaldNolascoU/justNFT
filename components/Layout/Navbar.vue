@@ -8,12 +8,12 @@
     >
       <div
         class="logo-container mr-2 md:mr-3 2xl:mr-10 2xl:mr-0 cursor-pointer"
-        @click="$router.push('/')"
+        @click="$router.push(localePath('/', $i18n.locale))"
       >
         <img
           class="self-start my-3 xl:my-0"
           src="~/assets/img/logo.svg"
-          @click="$router.push('/')"
+          @click="$router.push(localePath('/', $i18n.locale))"
         />
       </div>
 
@@ -25,7 +25,7 @@
           type="text"
           icon-after
           v-model="searchValue"
-          placeholder="Search"
+          :placeholder="$t('navbar.search')"
           icon="search"
           class=""
         >
@@ -44,7 +44,9 @@
           <span
             class="my-3 mb-0 text-white xl:my-0 material-icons fs-40 fs-res-24 icons-color select-none"
             @click.prevent.stop="
-              isMobile ? $router.push('/chats') : handleOpenModals('msg')
+              isMobile
+                ? $router.push(localePath('/chats', $i18n.locale))
+                : handleOpenModals('msg')
             "
           >
             question_answer
@@ -75,7 +77,7 @@
             class="my-3 mb-0 text-white xl:my-0 material-icons fs-40 fs-res-24 icons-color select-none"
             @click.prevent.stop="
               isMobile
-                ? $router.push('/notifications')
+                ? $router.push(localePath('/notifications', $i18n.locale))
                 : handleOpenModals('notify')
             "
           >
@@ -103,7 +105,9 @@
           class="px-4 sm:px-10 2xl:px-10 xl:px-5 block xl:hidden"
           role="button"
           @click.prevent.stop="
-            isMobile ? $router.push('/suggestions') : handleOpenModals('notify')
+            isMobile
+              ? $router.push(localePath('/suggestions', $i18n.locale))
+              : handleOpenModals('notify')
           "
         >
           <span
@@ -125,7 +129,7 @@
         </div>
 
         <div class="px-4 sm:px-10 2xl:px-10 xl:pl-5" role="button">
-          <nuxt-link to="/store">
+          <nuxt-link :to="localePath('/store', $i18n.locale)">
             <span
               class="my-3 text-white xl:my-0 notification material-icons fs-40 fs-res-24 icons-color select-none"
             >
@@ -139,8 +143,12 @@
         <BadgeJust />
       </div>
 
-      <div class="hidden xl:flex xl:ml-5 2xl:ml-10">
+      <div class="hidden xl:flex xl:ml-5 2xl:ml-5">
         <BadgeAddress />
+      </div>
+
+      <div class="hidden xl:flex xl:ml-5">
+        <GeneralTranslateDropdown />
       </div>
 
       <div
@@ -254,7 +262,9 @@ export default {
         (forbiddenRoutes.includes(this.$route.path) ||
           this.$route.name == 'chats-id')
       ) {
-        this.$router.push('/').catch(() => {})
+        this.$router
+          .push(this.localePath('/', this.$i18n.locale))
+          .catch(() => {})
       }
     },
     openMessages() {

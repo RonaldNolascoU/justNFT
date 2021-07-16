@@ -1,0 +1,75 @@
+{
+  "test": "Prueba",
+  "navbar": { 
+    "search": "Buscar",
+    "messages" : {
+      "title": "Mensajes",
+      "search":"Buscar mensajes" 
+    },
+    "buyJust": "Compra JUST",
+    "notifications" : {
+      "title": "Notificaciones",
+      "latest":"Recientes",
+      "commentedOn": "comentó en tu publicación",
+      "taggedOn": "te etiquetó en...",
+      "subscribedOn": "se suscribió a tu plan",
+      "likedOn": "le ha gustado tu foto"
+    }
+  },
+  "sidebar" : {
+    "profile": "Mi Perfil",
+    "home": "Inicio",
+    "saved": "Guardados",
+    "subscriptions": "Suscripciones",
+    "settings": "Ajustes",
+    "darkMode": "Modo Oscuro",
+    "logOut": "Cerrar Sesión"
+  },
+  "home": {
+    "social": {
+      "likes": "Me gusta",
+      "comments": "Comentarios",
+      "save": "Guardar",
+      "like": "Me gusta",
+      "reply": "Responder",
+      "viewMoreComments": "Ver {count} comentarios",
+      "addComment": "Agregar comentario"
+    }
+  },
+  "suggestions": {
+    "title": "Sugeridos",
+    "viewAll": "Ver Todos"
+  },
+  "subscriptions": {
+    "title": "Mis Suscripciones",
+    "viewAll": "Ver Todas",
+    "active": "Activas",
+    "renew": "Expiradas",
+    "subscribedSince": "Suscrito desde",
+    "expiredSince": "Expiró en",
+    "options": {
+      "manage": "Editar",
+      "remove": "Remover",
+      "renew": "Renovar",
+      "mute": "Silenciar Usuario"
+    }
+  },
+  "profile": {
+    "posts": "Publicaciones",
+    "likes": "Me gusta",
+    "subscribeFrom": "Suscríbete por",
+    "images": "Imágenes",
+    "videos": "Videos",
+    "livestreams": "Transmisiones"
+  },
+  "store": {
+    "title": {
+      "the": "La",
+      "store": "Tienda"
+    },
+    "plans": {
+      "confirm": "Confirmar",
+      "messages": "Mensajes Interactivos"
+    }
+  }
+}

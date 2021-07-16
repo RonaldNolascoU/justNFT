@@ -4,17 +4,17 @@
       <div class="flex-auto font-semibold cursor-pointer">
         <i class="fas fa-heart heart"></i>
         <span class="text-pink"> {{ post.likes }} </span>
-        <span class="dark:text-white"> Likes </span>
+        <span class="dark:text-white"> {{ $t('home.social.likes') }} </span>
       </div>
       <div class="flex-auto font-semibold text-center cursor-pointer">
         <i class="fas fa-comment-alt comments"></i>
         <span class="text-pink"> {{ post.comments }} </span>
-        <span class="dark:text-white"> Comments </span>
+        <span class="dark:text-white"> {{ $t('home.social.comments') }} </span>
       </div>
       <div
         class="flex-auto font-semibold text-right cursor-pointer dark:text-white"
       >
-        Save
+        {{ $t('home.social.save') }}
         <i class="fas fa-bookmark save"></i>
       </div>
     </div>
@@ -35,8 +35,12 @@
                 {{ comment.content }}
               </p>
               <div class="flex">
-                <p class="mt-1 mr-4 cursor-pointer text-muted">Like</p>
-                <p class="mt-1 cursor-pointer text-muted">Reply</p>
+                <p class="mt-1 mr-4 cursor-pointer text-muted">
+                  {{ $t('home.social.like') }}
+                </p>
+                <p class="mt-1 cursor-pointer text-muted">
+                  {{ $t('home.social.reply') }}
+                </p>
               </div>
             </div>
             <div>
@@ -50,8 +54,9 @@
       <span
         class="font-semibold cursor-pointer dark:text-white"
         v-if="post.commentsArray.length"
-        >View {{ post.commentsArray.length }} more comments</span
       >
+        {{ $tc('home.social.viewMoreComments', post.commentsArray.length) }}
+      </span>
       <div class="mt-3 add__comment">
         <div class="flex items-center">
           <div class="flex-shrink-0 mr-4">
@@ -62,7 +67,7 @@
               <input
                 type="text"
                 class="block w-full p-2 xl:pt-4 pl-4 pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
-                placeholder="Add your comment"
+                :placeholder="$t('home.social.addComment')"
                 v-model="comment"
                 @keyup.enter="addComment(post)"
               />
