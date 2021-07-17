@@ -1,3 +1,107 @@
 {
-  "message": "Japan!"
+  "login": {
+    "title": "あなただけのコンテンツクリエータープラットフォーム！",
+    "metamask": "Metamaskでログイン",
+    "or": "または",
+    "email": "Eメール",
+    "password": "パスワード",
+    "username": "ユーザー名",
+    "forgot": "パスワードをお忘れですか？",
+    "login": "ログイン",
+    "signup": "サインアップ",
+    "noAccount": "まだアカウントをお持ちではありませんか？",
+    "haveAccount": "すでにアカウントをお持ちですか？",
+    "tokenomics": "Tokenomics",
+    "contact": "連絡先",
+    "help": "助けて",
+    "about": "約"
+  },
+  "wallet": {
+    "warningModal": "警告：Just Yours Supportを含め、これを他の人と共有しないでください。",
+    "agree": "同意する",
+    "newWallet": "新しいウォレットが作成されました！",
+    "phrase": "あなたのニーモニックフレーズe",
+    "backup": "以下のテキストを紙にバックアップし、秘密で安全な場所に保管してください。",
+    "recoveryKey": "回復キーを書き留めました",
+    "privatekey": "秘密鍵を表示する",
+    "whatIsThis": "これは何ですか？",
+    "alreadyCreatedWallet": "あなたはすでにあなたの財布を作成しました",
+    "home": "ホームホーム"
+  },
+  "navbar": { 
+    "search": "探す",
+    "messages" : {
+      "title": "メッセージ",
+      "search":"メッセージを検索する",
+      "active": "アクティブ",
+      "since": "以来",
+      "now": "今",
+      "ago": "前"
+    },
+    "buyJust": "購入 JUST",
+    "notifications" : {
+      "title": "通知",
+      "latest":"最新",
+      "commentedOn": "あなたにコメントしました...",
+      "taggedOn": "あなたにタグを付けました...",
+      "subscribedOn": "あなたの計画を購読しました",
+      "likedOn": "あなたの写真を気に入って"
+    }
+  },
+  "sidebar" : {
+    "profile": "私のプロフィール",
+    "home": "ホームホーム",
+    "saved": "保存しました",
+    "subscriptions": "サブスクリプション",
+    "settings": "設定",
+    "darkMode": "ダークモード",
+    "logOut": "ログアウト"
+  },
+  "home": {
+    "social": {
+      "likes": "いいね",
+      "comments": "コメント",
+      "save": "セーブ",
+      "like": "お気に入り",
+      "reply": "応答",
+      "viewMoreComments": "さらに{count}つのコメントを表示",
+      "addComment": "コメントを追加する"
+    }
+  },
+  "suggestions": {
+    "title": "提案",
+    "viewAll": "すべて表示"
+  },
+  "subscriptions": {
+    "title": "私のサブスクリプション",
+    "viewAll": "すべて表示",
+    "active": "アクティブ",
+    "renew": "更新",
+    "subscribedSince": "以来購読",
+    "expiredSince": "有効期限が切れました",
+    "options": {
+      "manage": "管理する",
+      "remove": "削除する",
+      "renew": "更新",
+      "mute": "ミュート"
+    }
+  },
+  "profile": {
+    "posts": "投稿",
+    "likes": "いいね",
+    "subscribeFrom": "購読する",
+    "images": "画像",
+    "videos": "ビデオ",
+    "livestreams": "ライブストリーム"
+  },
+  "store": {
+    "title": {
+      "the": "The",
+      "store": "お店"
+    },
+    "plans": {
+      "confirm": "確認",
+      "messages": "インタラクティブメッセージ"
+    }
+  }
 }

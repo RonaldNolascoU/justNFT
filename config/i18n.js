@@ -4,7 +4,6 @@ import fr from '../locales/fr.json'
 import zh from '../locales/zh.json'
 import ja from '../locales/ja.json'
 import ru from '../locales/ru.json'
-console.log(en, es, 'msgs')
 export default {
   locale: 'en',
   fallbackLocale: 'en',

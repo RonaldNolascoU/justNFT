@@ -7,7 +7,7 @@
       <div class="flex justify-between flex-auto">
         <div>
           <nuxt-link
-            :to="localePath(nametoSlug(post.user), $i18n.locale)"
+            :to="nametoSlug(post.user)"
             class="hover:underline dark:hover:text-white"
           >
             <b class="text-lg font-bold dark:text-white fs-24">{{

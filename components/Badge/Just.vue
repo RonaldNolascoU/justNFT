@@ -17,9 +17,12 @@
       :class="{ 'ease-in-out': buyJust }"
     >
       <nuxt-img class="ml-1.5 mr-1" src="/images/just-pink.png" />
-      <span class="fs-16 text-white font-bold mr-1.5">{{
-        $t('navbar.buyJust')
-      }}</span>
+      <a
+        href="https://trade.zoocoin.cash/trade/market?inputCurrency=FTM&outputCurrency=0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8"
+        target="_blank"
+        class="fs-16 text-white font-bold mr-1.5"
+        >{{ $t('navbar.buyJust') }}</a
+      >
     </div>
   </div>
 </template>

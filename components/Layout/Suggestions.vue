@@ -19,7 +19,7 @@
               <vs-button block class="w-full truncate pills" color="#c53761">
                 <nuxt-link
                   class="block text-white truncate fs-20"
-                  :to="localePath(nametoSlug(suggestion.name), $i18n.locale)"
+                  :to="nametoSlug(suggestion.name)"
                 >
                   {{ suggestion.name }} - {{ suggestion.price }} $JUST
                 </nuxt-link>

@@ -8,7 +8,7 @@
       >
         <span
           class="flex justify-center py-3 font-semibold text-pink fs-20 btn-letter-spacing border-b-2 border-lighter"
-          >{{$t('subscriptions.title')}}</span
+          >{{ $t('subscriptions.title') }}</span
         >
         <div class="flex justify-between actions py-3">
           <div
@@ -27,7 +27,7 @@
       </div>
       <span
         class="hidden xl:flex justify-center py-3 font-semibold text-white rounded-t-3xl bg-primary fs-20 hidden"
-        >{{$t('subscriptions.title')}}</span
+        >{{ $t('subscriptions.title') }}</span
       >
       <div id="subs__container" class="p-5 my-5 overflow-hidden">
         <div class="hidden xl:flex justify-between actions hidden">
@@ -95,32 +95,36 @@ export default {
       ],
       subscriptions: [
         {
+          i18n: 'subscribedSince',
           name: 'Alisha Soprano',
-          subscribed_at: 'Subscribed since 12th march',
+          subscribed_at: '12th march',
           cover: '/images/subscriptions/1.png',
           profile_pic: '/images/subscriptions/2.png',
           active: true,
         },
         {
+          i18n: 'subscribedSince',
           name: 'Alisha Soprano2',
-          subscribed_at: 'Subscribed since 26th April',
+          subscribed_at: '26th April',
           cover: '/images/subscriptions/3.png',
           profile_pic: '/images/subscriptions/4.png',
           active: true,
         },
         {
+          i18n: 'subscribedSince',
           name: 'Alisha Soprano3',
-          subscribed_at: 'Subscribed since 9th may',
+          subscribed_at: '9th may',
           cover: '/images/subscriptions/5.png',
           profile_pic: '/images/subscriptions/6.png',
           active: true,
         },
         {
+          i18n: 'expiredSince',
           name: 'Beach Bum XOX',
-          subscribed_at: 'Subscribed since 14th June',
+          subscribed_at: '14th June',
           cover: '/images/subscriptions/7.png',
           profile_pic: '/images/subscriptions/8.png',
-          expired_at: 'Expired on 12th march',
+          expired_at: '12th march',
           active: false,
         },
       ],
@@ -143,6 +147,7 @@ export default {
       })
     },
   },
+  created() {},
   methods: {
     selectOption(tab) {
       this.selectedTab = tab

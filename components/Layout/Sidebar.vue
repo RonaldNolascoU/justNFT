@@ -19,12 +19,7 @@
             />
             <NuxtLink
               v-if="route.name !== 'dark'"
-              :to="
-                localePath(
-                  route.to == '/profile' ? nametoSlug('me') : route.to,
-                  $i18n.locale
-                )
-              "
+              :to="route.to == '/profile' ? nametoSlug('me') : route.to"
               class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
             >
               <span class="">

@@ -8,12 +8,12 @@
     >
       <div
         class="logo-container mr-2 md:mr-3 2xl:mr-10 2xl:mr-0 cursor-pointer"
-        @click="$router.push(localePath('/', $i18n.locale))"
+        @click="$router.push('/')"
       >
         <img
           class="self-start my-3 xl:my-0"
           src="~/assets/img/logo.svg"
-          @click="$router.push(localePath('/', $i18n.locale))"
+          @click="$router.push('/')"
         />
       </div>
 
@@ -44,9 +44,7 @@
           <span
             class="my-3 mb-0 text-white xl:my-0 material-icons fs-40 fs-res-24 icons-color select-none"
             @click.prevent.stop="
-              isMobile
-                ? $router.push(localePath('/chats', $i18n.locale))
-                : handleOpenModals('msg')
+              isMobile ? $router.push('/chats') : handleOpenModals('msg')
             "
           >
             question_answer
@@ -77,7 +75,7 @@
             class="my-3 mb-0 text-white xl:my-0 material-icons fs-40 fs-res-24 icons-color select-none"
             @click.prevent.stop="
               isMobile
-                ? $router.push(localePath('/notifications', $i18n.locale))
+                ? $router.push('/notifications')
                 : handleOpenModals('notify')
             "
           >
@@ -105,9 +103,7 @@
           class="px-4 sm:px-10 2xl:px-10 xl:px-5 block xl:hidden"
           role="button"
           @click.prevent.stop="
-            isMobile
-              ? $router.push(localePath('/suggestions', $i18n.locale))
-              : handleOpenModals('notify')
+            isMobile ? $router.push('/suggestions') : handleOpenModals('notify')
           "
         >
           <span
@@ -129,7 +125,7 @@
         </div>
 
         <div class="px-4 sm:px-10 2xl:px-10 xl:pl-5" role="button">
-          <nuxt-link :to="localePath('/store', $i18n.locale)">
+          <nuxt-link :to="'/store'">
             <span
               class="my-3 text-white xl:my-0 notification material-icons fs-40 fs-res-24 icons-color select-none"
             >
@@ -262,9 +258,7 @@ export default {
         (forbiddenRoutes.includes(this.$route.path) ||
           this.$route.name == 'chats-id')
       ) {
-        this.$router
-          .push(this.localePath('/', this.$i18n.locale))
-          .catch(() => {})
+        this.$router.push('/').catch(() => {})
       }
     },
     openMessages() {

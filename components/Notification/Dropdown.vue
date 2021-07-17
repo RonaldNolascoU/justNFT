@@ -53,7 +53,7 @@
                           'text-primary font-bold': notification.isSubscription,
                         }"
                       >
-                        {{ notification.msg }}
+                        {{ $t(`navbar.notifications.${notification.i18n}`) }}
                       </span>
                     </div>
                   </div>

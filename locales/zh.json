@@ -1,3 +1,107 @@
 {
-  "message": "Chinesse!"
+  "login": {
+    "title": "您专属的内容创作平台！",
+    "metamask": "使用 Metamask 登录",
+    "or": "或者",
+    "email": "电子邮件",
+    "password": "密码",
+    "username": "用户名",
+    "forgot": "忘记密码？",
+    "login": "登录",
+    "signup": "报名",
+    "noAccount": "还没有账号？",
+    "haveAccount": "已经有账户？",
+    "tokenomics": "Tokenomics",
+    "contact": "接触",
+    "help": "帮助",
+    "about": "关于"
+  },
+  "wallet": {
+    "warningModal": "警告：切勿与任何人共享此信息，包括 Just Yours Support。",
+    "agree": "我同意",
+    "newWallet": "新钱包创建！",
+    "phrase": "你的助记词",
+    "backup": "请将下面的文字备份在纸上，并将其保存在秘密和安全的地方。",
+    "recoveryKey": "我写下了我的恢复密钥",
+    "privatekey": "查看您的私钥",
+    "whatIsThis": "这是什么？",
+    "alreadyCreatedWallet": "您已经创建了钱包",
+    "home": "家"
+  },
+  "navbar": { 
+    "search": "搜索",
+    "messages" : {
+      "title": "留言",
+      "search":"搜索消息",
+      "active": "积极的",
+      "since": "自从",
+      "now": "现在",
+      "ago": "前"
+    },
+    "buyJust": "买 JUST",
+    "notifications" : {
+      "title": "通知",
+      "latest":"最新的",
+      "commentedOn": "评论了你的帖子",
+      "taggedOn": "将你标记为...",
+      "subscribedOn": "订阅了你的计划",
+      "likedOn": "喜欢你的照片"
+    }
+  },
+  "sidebar" : {
+    "profile": "我的简历",
+    "home": "家",
+    "saved": "已保存",
+    "subscriptions": "订阅",
+    "settings": "设置",
+    "darkMode": "黑暗模式",
+    "logOut": "登出"
+  },
+  "home": {
+    "social": {
+      "likes": "喜欢",
+      "comments": "注释",
+      "save": "保存",
+      "like": "喜欢",
+      "reply": "回复",
+      "viewMoreComments": "查看更多 {count} 条评论",
+      "addComment": "添加评论"
+    }
+  },
+  "suggestions": {
+    "title": "建议",
+    "viewAll": "查看全部"
+  },
+  "subscriptions": {
+    "title": "我的订阅",
+    "viewAll": "查看全部",
+    "active": "积极的",
+    "renew": "更新",
+    "subscribedSince": "自订阅以来",
+    "expiredSince": "过期日期",
+    "options": {
+      "manage": "管理",
+      "remove": "去掉",
+      "renew": "更新",
+      "mute": "沉默的"
+    }
+  },
+  "profile": {
+    "posts": "帖子",
+    "likes": "喜欢",
+    "subscribeFrom": "订阅",
+    "images": "图片",
+    "videos": "视频",
+    "livestreams": "直播"
+  },
+  "store": {
+    "title": {
+      "the": "The",
+      "store": "店铺"
+    },
+    "plans": {
+      "confirm": "确认",
+      "messages": "互动讯息"
+    }
+  }
 }

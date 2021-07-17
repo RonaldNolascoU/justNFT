@@ -44,7 +44,7 @@
           >
             <span class="material-icons-outlined mr-3"> lock </span>
             <span
-              ><b>{{ $t('profile.subscribeFrom') }}</b> for 5000 $JUST</span
+              ><b>{{ $t('profile.subscribeFrom') }}</b> 5000 $JUST</span
             >
           </a>
         </div>

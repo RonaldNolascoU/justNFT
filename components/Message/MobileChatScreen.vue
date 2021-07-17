@@ -23,7 +23,12 @@
                     {{ chat.name }}
                   </div>
                   <div class="text-left fs-16 text-primary text-ellipsis">
-                    Active {{ chat.date }} ago
+                    {{ $t('navbar.messages.active') }} {{ chat.date }}
+                    {{
+                      !['es'].includes($i18n.locale)
+                        ? $t('navbar.messages.ago')
+                        : ''
+                    }}
                   </div>
                 </div>
               </div>

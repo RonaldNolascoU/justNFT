@@ -88,18 +88,23 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['nuxt-webfontloader', 'nuxt-material-design-icons', 'nuxt-i18n'],
+  modules: [
+    'nuxt-webfontloader',
+    'nuxt-material-design-icons',
+    'nuxt-i18n',
+    '@nuxtjs/axios',
+  ],
   i18n: {
     vueI18nLoader: true,
     silentTranslationWarn: true,
-    strategy: 'prefix_and_default',
+    strategy: 'no_prefix',
     // strategy: 'no_prefix',
     defaultLocale: 'en',
-    // detectBrowserLanguage: {
-    //   useCookie: false,
-    //   cookieKey: 'i18n_redirected',
-    //   onlyOnRoot: true, // recommended
-    // },
+    detectBrowserLanguage: {
+      useCookie: false,
+      cookieKey: 'i18n_redirected',
+      onlyOnRoot: true, // recommended
+    },
     pages: {
       parsePages: false,
     },
@@ -110,23 +115,23 @@ export default {
       },
       {
         code: 'es',
-        name: 'Spanish',
+        name: 'Español',
       },
       {
         code: 'fr',
-        name: 'French',
+        name: 'Français',
       },
       {
         code: 'zh',
-        name: 'Chinesse',
+        name: '简体中文',
       },
       {
         code: 'ja',
-        name: 'Japan',
+        name: '日本語',
       },
       {
         code: 'ru',
-        name: 'Russian',
+        name: 'Pусский',
       },
     ],
     vueI18n: i18n,

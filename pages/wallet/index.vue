@@ -6,13 +6,15 @@
       <p
         class="mt-5 text-center fs-16 xl:fs-20 text-primary xl:text-black wallet_created"
       >
-        New Wallet Created!
+        {{ $t('wallet.newWallet') }}
       </p>
       <div class="rounded-full mt-3 wallet__container">
         <div
           class="header hidden xl:block p-3 bg-primary text-center rounded-t-2xl"
         >
-          <p class="fs-24 text-white font-semibold">Your Mnemonic Phrase</p>
+          <p class="fs-24 text-white font-semibold">
+            {{ $t('wallet.phrase') }}
+          </p>
         </div>
         <div class="secret__words rounded-b-2xl p-5">
           <div>
@@ -20,8 +22,7 @@
               <i class="fas fa-info text-white fs-16"></i>
             </div>
             <p class="inline font-medium">
-              Please backup the text below on paper and keep it somewhere secret
-              and safe.
+              {{ $t('wallet.backup') }}
             </p>
           </div>
           <div
@@ -46,12 +47,12 @@
               class="fs-16 xl:fs-20 py-2 px-5 xl:px-20 w-full justify-center flex xl:block md:w-1/2 xl:w-auto bg-primary text-white rounded-full cursor-pointer font-semibold"
               @click="$router.push('/')"
             >
-              I wrote down my recovery key
+              {{ $t('wallet.recoveryKey') }}
             </a>
             <a
               class="fs-16 xl:fs-20 py-2 px-5 xl:px-16 w-full justify-center flex xl:block md:w-1/2 xl:w-auto border-primary border-1 text-primary rounded-full cursor-pointer font-semibold mt-4 xl:mt-0"
             >
-              View your private key
+              {{ $t('wallet.privatekey') }}
             </a>
           </div>
         </div>
@@ -59,20 +60,20 @@
       <p
         class="text-center text-navy cursor-pointer fs-20 font-medium hover:underline"
       >
-        What Is This?
+        {{ $t('wallet.whatIsThis') }}
       </p>
     </template>
     <template v-else>
       <p
         class="mt-5 text-center fs-16 xl:fs-20 text-primary xl:text-black wallet_created"
       >
-        You already created your wallet
+        {{ $t('wallet.alreadyCreatedWallet') }}
       </p>
       <a
         class="fs-16 xl:fs-20 py-2 px-5 xl:px-20 justify-center flex bg-primary text-white rounded-full cursor-pointer font-semibold"
         @click="$router.push('/')"
       >
-        Home
+        {{ $t('wallet.home') }}
       </a>
     </template>
     <ModalNeverShareWallet v-if="$store.state.modals.agree" />

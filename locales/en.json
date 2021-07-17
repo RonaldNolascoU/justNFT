@@ -1,10 +1,42 @@
 {
-  "test": "test",
+  "login": {
+    "title": "Your exclusive content creator platform!",
+    "metamask": "Login with Metamask",
+    "or": "OR",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "forgot": "Forgot Password?",
+    "login": "Login",
+    "signup": "Sign Up",
+    "noAccount": "Don't have an account yet?",
+    "haveAccount": "Already have an account?",
+    "tokenomics": "Tokenomics",
+    "contact": "Contact",
+    "help": "Help",
+    "about": "About"
+  },
+  "wallet": {
+    "warningModal": "Warning: Never share this with anyone, including Just Yours Support.",
+    "agree": "I Agree",
+    "newWallet": "New Wallet Created!",
+    "phrase": "Your Mnemonic Phrase",
+    "backup": "Please backup the text below on paper and keep it somewhere secret and safe.",
+    "recoveryKey": "I wrote down my recovery key",
+    "privatekey": "View your private key",
+    "whatIsThis": "What Is This?",
+    "alreadyCreatedWallet": "You already created your wallet",
+    "home": "Home"
+  },
   "navbar": { 
     "search": "Search",
     "messages" : {
       "title": "Messages",
-      "search":"Search messages" 
+      "search":"Search messages",
+      "active": "Active",
+      "since": "since",
+      "now": "now",
+      "ago": "ago"
     },
     "buyJust": "Buy JUST",
     "notifications" : {

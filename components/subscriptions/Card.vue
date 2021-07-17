@@ -22,15 +22,19 @@
       <div class="personal__data">
         <h3 class="font-semibold text-pink fs-24">
           <nuxt-link
-            :to="localePath(nametoSlug(subscription.name), $i18n.locale)"
+            :to="nametoSlug(subscription.name)"
             class="hover:underline dark:hover:text-primary"
             >{{ subscription.name }}</nuxt-link
           >
         </h3>
         <span class="font-semibold text-blue fs-16">{{
           subscription.active
-            ? subscription.subscribed_at
-            : subscription.expired_at
+            ? $t(`subscriptions.${subscription.i18n}`) +
+              ' ' +
+              subscription.subscribed_at
+            : $t(`subscriptions.${subscription.i18n}`) +
+              ' ' +
+              subscription.expired_at
         }}</span>
       </div>
       <div class="relative">

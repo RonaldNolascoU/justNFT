@@ -2,6 +2,9 @@
   <div>
     <ModalAge v-if="$store.state.modals.age" />
     <Nuxt />
+    <div class="translations relative">
+      <GeneralTranslateDropdown />
+    </div>
   </div>
 </template>
 
@@ -17,4 +20,30 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.translations {
+  .translations__dropdown {
+    top: initial !important;
+    right: 20%;
+    bottom: 0;
+    .code {
+      color: #c53761;
+    }
+    .language {
+      display: flex;
+      justify-content: center;
+    }
+    .language__icon {
+      display: block !important;
+    }
+    img {
+      width: 70px !important;
+      display: none;
+    }
+    .dropdown {
+      top: -15em !important;
+      padding: 1em;
+    }
+  }
+}
+</style>

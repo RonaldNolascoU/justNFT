@@ -44,6 +44,7 @@ export default {
       return routes.includes(this.$nuxt.$route.name)
     },
   },
+  created() {},
   mounted() {
     if (
       ['dark', 'system'].includes(this.$colorMode.preference) &&

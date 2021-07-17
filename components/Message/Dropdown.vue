@@ -85,7 +85,18 @@
                         {{ currentChat.name }}
                       </div>
                       <div class="text-left fs-16 text-primary text-ellipsis">
-                        Active {{ currentChat.date }} ago
+                        {{ $t('navbar.messages.active') }}
+                        {{
+                          ['es'].includes($i18n.locale)
+                            ? $t('navbar.messages.since')
+                            : ''
+                        }}
+                        {{ currentChat.date }}
+                        {{
+                          !['es'].includes($i18n.locale)
+                            ? $t('navbar.messages.ago')
+                            : ''
+                        }}
                       </div>
                     </div>
                   </div>

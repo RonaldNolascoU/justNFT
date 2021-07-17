@@ -80,7 +80,7 @@ export default {
   mounted() {},
   methods: {
     openChat(msg) {
-      this.$router.push(this.localePath(`/chats/${msg.id}`, this.$i18n.locale))
+      this.$router.push(`/chats/${msg.id}`)
     },
   },
 }

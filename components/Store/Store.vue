@@ -1,9 +1,9 @@
 <template>
   <div class="pb-10 xl:pb-0">
     <h4 class="store__heading dark:text-white fs-24 mt-1">
-      The <span class="text-navy">J</span>
+      {{ $i18n.locale == 'en' ? 'The' : null }} <span class="text-navy">J</span>
       <span class="text-primary y__text">Y</span>
-      Store
+      {{ $t('store.title.store') }}
     </h4>
     <div class="md:grid store-template gap-4 xl:gap-1 xl:mt-10">
       <div

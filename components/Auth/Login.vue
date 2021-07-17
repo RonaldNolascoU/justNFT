@@ -17,29 +17,9 @@
       <div class="w-4/5 lg:w-2/5 xl:w-1/2 2xl:w-2/5 lg:pl-8 2xl:pr-32">
         <div class="flex flex-col items-center">
           <img src="/just_logo.png" alt="" />
-          <span class="fs-18 text-blue text-center mt-3 lg:mt-2"
-            >Your exclusive content creator platform!</span
-          >
-          <div class="w-full mt-5 lg:mt-5">
-            <button class="w-full" @click="loginWithEmail()">
-              <div class="flex">
-                <div
-                  class="rounded-l-3xl border border-2 border-color-primary flex justify-center items-center bg-white icon-width"
-                >
-                  <span
-                    class="material-icons-outlined text-pink email-login mx-5"
-                  >
-                    email
-                  </span>
-                </div>
-                <div
-                  class="w-11/12 bg-primary text-white w-full rounded-r-3xl input-height fs-24 flex justify-start pl-6 items-center"
-                >
-                  <span class=""> Login with email </span>
-                </div>
-              </div>
-            </button>
-          </div>
+          <span class="fs-18 text-blue text-center mt-3 lg:mt-2">{{
+            $t('login.title')
+          }}</span>
           <div class="w-full mt-3 lg:mt-3">
             <!-- <vue-metamask userMessage="msg" @onComplete="onComplete">
             </vue-metamask> -->
@@ -48,53 +28,64 @@
                 <div
                   class="rounded-l-3xl border border-2 border-color-primary flex justify-center items-center bg-white icon width metamask__icon"
                 >
-                  <img src="/images/metamask-logo.png" class="mx-5" />
+                  <img src="/images/metamask.svg" class="mx-5" />
                 </div>
                 <div
                   class="w-11/12 bg-primary text-white w-full rounded-r-3xl input-height fs-24 flex justify-start pl-6 items-center"
                 >
-                  <div>Login with Metamask</div>
+                  <div>{{ $t('login.metamask') }}</div>
                 </div>
               </div>
             </button>
           </div>
-          <div class="hidden lg:block mt-3 lg:mt-3">
-            <a href="" class="fs-18 text-pink">Forgot Password?</a>
-          </div>
         </div>
 
         <h2 class="mt-5 lg:mt-5">
-          <span class="fs-24 text-black bg-white">OR</span>
+          <span class="fs-24 text-black bg-white">{{ $t('login.or') }}</span>
         </h2>
 
         <div class="flex flex-col items-center login-form">
-          <span class="fs-24 text-secondary">Sign Up</span>
-
           <input
-            class="input-height fs-24 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-            placeholder="E-mail"
+            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+            v-model="email"
+            :placeholder="$t('login.email')"
             type="text"
           />
           <input
-            class="input-height fs-24 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
-            placeholder="Password"
-            type="text"
+            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
+            v-model="password"
+            :placeholder="$t('login.password')"
+            type="password"
           />
           <input
-            class="input-height fs-24 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
-            placeholder="Retype Password"
+            v-if="!isLogin"
+            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+            v-model="username"
+            :placeholder="$t('login.username')"
             type="text"
           />
+          <div class="flex w-full mt-3 lg:mt-3" v-if="isLogin">
+            <a href="" class="fs-16 text-pink">{{ $t('login.forgot') }}</a>
+          </div>
 
           <button
-            @click="signUp()"
-            class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4"
+            @click="isLogin ? loginWithEmailAndPassword() : signUp()"
+            class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
           >
-            Sign Up
+            {{ isLogin ? $t('login.login') : $t('login.signup') }}
           </button>
-          <div class="block lg:hidden mt-3">
-            <a href="" class="fs-18 text-pink">Forgot Password?</a>
-          </div>
+        </div>
+
+        <h2 class="mt-5 lg:mt-5"></h2>
+        <div class="text-center">
+          <p v-if="!isLogin">{{ $t('login.haveAccount') }}</p>
+          <p v-else>{{ $t('login.noAccount') }}</p>
+          <a
+            class="mt-3 fs-16 text-primary font-semibold cursor-pointer"
+            @click="isLogin = !isLogin"
+          >
+            {{ isLogin ? $t('login.signup') : $t('login.login') }}
+          </a>
         </div>
       </div>
     </div>
@@ -103,11 +94,17 @@
       <div class="flex justify-between items-center fs-18 fs-res-12 text-pink">
         <div class="mx-3 lg:mx-5"><a href="">Tokenomics</a></div>
         <span class="material-icons fs-5"> fiber_manual_record </span>
-        <div class="mx-3 lg:mx-5"><a href="">Contact</a></div>
+        <div class="mx-3 lg:mx-5">
+          <a href="">{{ $t('login.contact') }}</a>
+        </div>
         <span class="material-icons fs-5"> fiber_manual_record </span>
-        <div class="mx-3 lg:mx-5"><a href="">Help</a></div>
+        <div class="mx-3 lg:mx-5">
+          <a href="">{{ $t('login.help') }}</a>
+        </div>
         <span class="material-icons fs-5"> fiber_manual_record </span>
-        <div class="mx-3 lg:mx-5"><a href="">About</a></div>
+        <div class="mx-3 lg:mx-5">
+          <a href="">{{ $t('login.about') }}</a>
+        </div>
       </div>
 
       <div class="flex justify-between items-center mt-3 lg:mt-5">
@@ -146,13 +143,30 @@
 
 <script>
 // import VueMetamask from 'vue-metamask'
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
-      msg: 'This is demo net work',
+      isLogin: true,
+      username: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+
+      passwordRules: [
+        (v) => !!v || 'Password is required',
+        (v) =>
+          (v && v.length <= 10) || 'Password must be less than 10 characters',
+      ],
+      emailRules: [
+        (v) => !!v || 'E-mail is required',
+        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
     }
   },
   methods: {
+    ...mapActions('auth', ['login', 'signUp']),
     getAccount() {
       return new Promise((resolve) => {
         this.$web3.eth.getAccounts().then((res) => {
@@ -176,10 +190,17 @@ export default {
           })
       })
     },
-    loginWithEmail() {
+    loginWithEmailAndPassword() {
+      // const credentials = { email: this.email, password: this.password }
+      // this.login(credentials)
+      //   .then((response) => {
+      //     console.log(response, 'response')
+      //   })
+      //   .catch((err) => {
+      //     console.log(err, 'error')
+      //   })
       this.$store.commit('SET_USER_AUTH', {
-        name: 'Test',
-        lname: 'Test',
+        user: 'test',
         wallet: true,
       })
     },
@@ -203,10 +224,20 @@ export default {
       // })
     },
     signUp() {
+      // const credentials = {
+      //   username: this.username,
+      //   email: this.email,
+      //   password: this.password,
+      // }
+      // this.signUp(credentials)
+      //   .then((response) => {
+      //     console.log(response, 'response')
+      //   })
+      //   .catch((err) => {
+      //     console.log(err, 'error')
+      //   })
       this.$store.commit('SET_USER_AUTH', {
-        name: 'Meta',
-        lname: 'Mask',
-        wallet: false,
+        user: 'test',
       })
     },
     onComplete(data) {
@@ -217,6 +248,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+input::placeholder {
+  font-size: 16px !important;
+}
 .metamask__icon {
   max-width: 79px;
 }

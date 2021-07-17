@@ -1,3 +1,107 @@
 {
-  "message": "French!"
+  "login": {
+    "title": "Votre plateforme exclusive de création de contenu !",
+    "metamask": "Connectez-vous avec Metamask",
+    "or": "Ou alors",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "username": "Nom d'utilisateur",
+    "forgot": "Mot de passe oublié?",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "noAccount": "Vous n'avez pas encore de compte?",
+    "haveAccount": "Vous avez déjà un compte?",
+    "tokenomics": "Tokenomics",
+    "contact": "Contacter",
+    "help": "Aider",
+    "about": "À propos"
+  },
+  "wallet": {
+    "warningModal": "Avertissement : Ne partagez jamais cela avec qui que ce soit, y compris Just Yours Support.",
+    "agree": "Je suis d'accord",
+    "newWallet": "Nouveau portefeuille créé !",
+    "phrase": "Votre phrase mnémotechnique",
+    "backup": "Veuillez sauvegarder le texte ci-dessous sur papier et le garder dans un endroit secret et sûr.",
+    "recoveryKey": "J'ai noté ma clé de récupération",
+    "privatekey": "Afficher votre clé privée",
+    "whatIsThis": "Qu'est-ce que c'est?",
+    "alreadyCreatedWallet": "Vous avez déjà créé votre portefeuille",
+    "home": "Accueil"
+  },
+  "navbar": { 
+    "search": "Rechercher",
+    "messages" : {
+      "title": "Messages",
+      "search":"Rechercher",
+      "active": "Active",
+      "since": "puisque",
+      "now": "à présent",
+      "ago": "depuis"
+    },
+    "buyJust": "Acheter JUST",
+    "notifications" : {
+      "title": "Notifications",
+      "latest":"Dernière",
+      "commentedOn": "commenté sur",
+      "taggedOn": "t'a tagué sur...",
+      "subscribedOn": "souscrit à votre forfait",
+      "likedOn": "j'ai aimé ta photo"
+    }
+  },
+  "sidebar" : {
+    "profile": "Mon profil",
+    "home": "Accueil",
+    "saved": "Signets",
+    "subscriptions": "Abonnements",
+    "settings": "Plus",
+    "darkMode": "Mode lumière",
+    "logOut": "Déconnexion"
+  },
+  "home": {
+    "social": {
+      "likes": "J'aime",
+      "comments": "commentaires",
+      "save": "Signet",
+      "like": "J'aime",
+      "reply": "Réponse",
+      "viewMoreComments": "Voit {count} commentaires",
+      "addComment": "Ajouter un commentaire"
+    }
+  },
+  "suggestions": {
+    "title": "Suggéré",
+    "viewAll": "Voir tout"
+  },
+  "subscriptions": {
+    "title": "Mon Abonnements",
+    "viewAll": "Tous",
+    "active": "Actifs",
+    "renew": "Expirés",
+    "subscribedSince": "Abonné depuis",
+    "expiredSince": "A expiré le",
+    "options": {
+      "manage": "Gérer",
+      "remove": "Supprimer",
+      "renew": "Renouveler",
+      "mute": "Muet"
+    }
+  },
+  "profile": {
+    "posts": "Postes",
+    "likes": "j'aime",
+    "subscribeFrom": "Abonnez-vous pour",
+    "images": "Images",
+    "videos": "Vidéos",
+    "livestreams": "Diffusions"
+  },
+  "store": {
+    "title": {
+      "the": "The",
+      "store": "Boutique"
+    },
+    "plans": {
+      "confirm": "Confirmer",
+      "messages": "Interactive Messages"
+    }
+  }
 }

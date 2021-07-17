@@ -1,10 +1,42 @@
 {
-  "test": "Prueba",
+  "login": {
+    "title": "Tu plataforma exclusiva para creadores de contenido!",
+    "metamask": "Iniciar con Metamask",
+    "or": "O",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "username": "Usuario",
+    "forgot": "Olvidaste tu contraseña?",
+    "login": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "noAccount": "No tienes una cuenta?",
+    "haveAccount": "Ya tienes una cuenta?",
+    "tokenomics": "Tokenomics",
+    "contact": "Contacto",
+    "help": "Ayuda",
+    "about": "Acerca de"
+  },
+  "wallet": {
+    "warningModal": "Precaución: Nunca compartas esto con nadie, ni con el soporte de Just Yours.",
+    "agree": "De acuerdo",
+    "newWallet": "Nueva Cartera Creada!",
+    "phrase": "Tu Frase Mnemotécnica",
+    "backup": "Por favor anota la frase de abajo en papel y guárdala en un lugar seguro.",
+    "recoveryKey": "Anoté mi llave de recuperación",
+    "privatekey": "Ver mi llave privada",
+    "whatIsThis": "Qué es esto?",
+    "alreadyCreatedWallet": "Ya has creado tu cartera",
+    "home": "Inicio"
+  },
   "navbar": { 
     "search": "Buscar",
     "messages" : {
       "title": "Mensajes",
-      "search":"Buscar mensajes" 
+      "search":"Buscar mensajes",
+      "active": "Activo ",
+      "since": "hace",
+      "now": "ahora",
+      "ago": "hace"
     },
     "buyJust": "Compra JUST",
     "notifications" : {
@@ -51,7 +83,7 @@
       "manage": "Editar",
       "remove": "Remover",
       "renew": "Renovar",
-      "mute": "Silenciar Usuario"
+      "mute": "Silenciar"
     }
   },
   "profile": {

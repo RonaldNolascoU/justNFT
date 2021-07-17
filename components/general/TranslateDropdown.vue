@@ -10,6 +10,7 @@
             class="mr-2"
             :src="`/locales/${selectedLanguage.code}_flag.png`"
           />
+          <i class="fas fa-globe language__icon text-primary mr-2"></i>
           <span class="code">
             {{ selectedLanguage.name }}
           </span>
@@ -44,32 +45,6 @@ export default {
     return {
       isLanguagesDropdownOpen: false,
       selectedLanguage: { code: 'en', name: 'English' },
-      locales: [
-        {
-          slug: 'en',
-          name: 'English',
-        },
-        {
-          slug: 'es',
-          name: 'Spanish',
-        },
-        {
-          slug: 'fr',
-          name: 'French',
-        },
-        {
-          slug: 'zh',
-          name: 'Chinesse',
-        },
-        {
-          slug: 'ja',
-          name: 'Japan',
-        },
-        {
-          slug: 'ru',
-          name: 'Russian',
-        },
-      ],
     }
   },
   computed: {
@@ -80,7 +55,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$i18n)
     this.selectedLanguage = {
       code: this.$i18n.locale,
       name: this.$i18n.locales.find((x) => {
@@ -94,8 +68,9 @@ export default {
     },
     selectLanguage(language) {
       this.selectedLanguage = language
-      this.$router.push(`/${language.code}`)
-      this.$store.commit('UPDATE_LANG', this.selectedLanguage.code || 'en')
+      this.$i18n.setLocaleCookie(language.code)
+      this.$i18n.setLocale(language.code)
+      this.$store.commit('UPDATE_LANG', language.code || 'en')
     },
     hide() {
       this.isLanguagesDropdownOpen = false
@@ -106,6 +81,11 @@ export default {
 
 <style scoped lang="scss">
 .translations__dropdown {
+  .language__icon {
+    display: none;
+  }
+  .code {
+  }
   top: 30%;
   @media (min-width: 1280px) and (max-width: 1439px) {
     .code {
@@ -122,6 +102,8 @@ img {
   margin-bottom: 0.5em;
   display: flex;
   align-items: center;
+  width: 105px;
+  max-width: 105px;
 }
 
 .dropdown {

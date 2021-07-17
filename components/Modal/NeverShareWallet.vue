@@ -3,14 +3,14 @@
     <div class="warning__wallet flex flex-col items-center">
       <img src="/images/warning.svg" alt="Warning icon" />
       <p class="text-center font-semibold">
-        Warning: Never share this with anyone, including Just Yours Support.
+        {{ $t('wallet.warningModal') }}
       </p>
       <div class="actions mt-2 flex justify-evenly">
         <button
           class="bg-navy rounded-xl px-10 xl:px-16 py-1 mr-3 text-white font-semibold"
           @click="agree"
         >
-          I agree
+          {{ $t('wallet.agree') }}
         </button>
       </div>
     </div>
