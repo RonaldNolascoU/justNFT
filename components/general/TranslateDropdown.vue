@@ -116,12 +116,13 @@ img {
     width: 30px;
     height: 30px;
   }
+
   @media (max-width: 1279px) {
+    bottom: 100%;
     img {
       width: 25px !important;
       height: 20px !important;
     }
-    bottom: 100%;
   }
   @media (min-width: 1280px) and (max-width: 1439px) {
     left: auto;

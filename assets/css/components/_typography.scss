@@ -48,10 +48,10 @@
 }
 .fs-24 {
   font-size: 24px !important;
-  @media (max-width: 677px) {
+  @media (max-width: 768px) {
     font-size: 16px !important;
   }
-  @media (min-width: 678px) and (max-width: 1280px) {
+  @media (min-width: 769px) and (max-width: 1280px) {
     font-size: 20px !important;
   }
 }
@@ -81,12 +81,12 @@
   font-size: 5px !important;
 }
 .fs-res-24 {
-  @media (max-width: 677px) {
+  @media (max-width: 768px) {
     font-size: 24px !important;
   }
 }
 .fs-res-20 {
-  @media (max-width: 1279px) {
+  @media (max-width: 768px) {
     font-size: 20px !important;
   }
 }

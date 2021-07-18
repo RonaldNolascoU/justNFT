@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex items-start justify-center pt-12 pb-20 suggestions-container"
-  >
+  <div class="flex items-start justify-center py-5 suggestions-container">
     <LayoutSuggestions />
   </div>
 </template>

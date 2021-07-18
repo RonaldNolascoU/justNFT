@@ -24,6 +24,11 @@ export default {
 .translations {
   .translations__dropdown {
     top: initial !important;
+    @media (max-width: 1280px) {
+      display: flex;
+      justify-content: center;
+      margin-top: 1em;
+    }
     right: 20%;
     bottom: 0;
     .code {
@@ -43,6 +48,9 @@ export default {
     .dropdown {
       top: -15em !important;
       padding: 1em;
+      @media (max-width: 1280px) {
+        bottom: initial !important;
+      }
     }
   }
 }

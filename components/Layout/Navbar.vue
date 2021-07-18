@@ -41,12 +41,14 @@
         class="flex items-center justify-between 2xl:ml-10 xl:pr-1 2xl:pr-10"
       >
         <div
-          class="px-4 sm:px-10 2xl:px-10 xl:pl-3 xl:pr-5 flex align-center xl:align-start"
+          class="px-4 sm:px-10 2xl:px-10 xl:pl-3 xl:pr-5 flex flex-col align-center xl:align-center"
           role="button"
         >
           <span
-            class="mb-0 text-white material-icons fs-40 fs-res-24 icons-color select-none"
-            @click="isMobile ? $router.push('/chats') : handleOpenModals('msg')"
+            class="mb-0 text-white material-icons fs-40 fs-res-20 icons-color select-none"
+            @click.prevent.stop="
+              isMobile ? $router.push('/chats') : handleOpenModals('msg')
+            "
           >
             question_answer
           </span>
@@ -57,7 +59,7 @@
           >
             <img
               v-if="msgBox"
-              @click="openMessages"
+              @click.prevent.stop="openMessages"
               src="~/assets/img/dropdown.png"
               :class="`absolute mx-0 dropdown ${
                 msgBox ? 'dropdown-active' : ''
@@ -72,12 +74,12 @@
         </div>
 
         <div
-          class="px-4 sm:px-10 2xl:px-10 xl:px-5 flex align-center xl:align-start"
+          class="px-4 sm:px-10 2xl:px-10 xl:px-5 flex flex-col align-center xl:align-center"
           role="button"
         >
           <span
-            class="mb-0 text-white material-icons fs-40 fs-res-24 icons-color select-none"
-            @click="
+            class="mb-0 text-white material-icons fs-40 fs-res-20 icons-color select-none"
+            @click.prevent.stop="
               isMobile
                 ? $router.push('/notifications')
                 : handleOpenModals('notify')
@@ -104,14 +106,14 @@
         </div>
 
         <div
-          class="px-4 sm:px-10 2xl:px-10 xl:px-5 flex xl:hidden align-center xl:align-start"
+          class="px-4 sm:px-10 2xl:px-10 xl:px-5 flex flex-col xl:hidden align-center xl:align-center"
           role="button"
-          @click="
+          @click.prevent.stop="
             isMobile ? $router.push('/suggestions') : handleOpenModals('notify')
           "
         >
           <span
-            class="text-white notification material-icons fs-40 fs-res-24 icons-color select-none"
+            class="text-white notification material-icons fs-40 fs-res-20 icons-color select-none"
           >
             try
           </span>
@@ -129,16 +131,15 @@
         </div>
 
         <div
-          class="px-4 sm:px-10 2xl:px-10 xl:pl-5 flex align-center xl:align-start pt-2 sm:pt-0"
+          class="px-4 sm:px-10 2xl:px-10 xl:pl-5 flex flex-col align-center xl:align-start sm:pt-0"
           role="button"
+          @click="$router.push('/store')"
         >
-          <nuxt-link :to="'/store'">
-            <span
-              class="text-white material-icons fs-40 fs-res-24 icons-color select-none"
-            >
-              store
-            </span></nuxt-link
+          <span
+            class="text-white material-icons fs-40 fs-res-20 icons-color select-none"
           >
+            store
+          </span>
         </div>
       </div>
 
@@ -155,7 +156,7 @@
       </div>
 
       <div
-        class="block menu xl:hidden fs-40 text-secondary pl-2 md:pl-5 xl:pl-0"
+        class="block menu xl:hidden fs-40 fs-res-20 text-secondary pl-2 md:pl-5 xl:pl-0"
       >
         <i
           role="button"

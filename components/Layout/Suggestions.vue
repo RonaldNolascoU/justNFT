@@ -10,7 +10,7 @@
       <div
         v-for="(suggestion, index) in suggestions"
         :key="index"
-        class="mt-7 mb-16 pb-0.5"
+        class="mt-7 mb-5 xl:mb-16 pb-0.5"
       >
         <vs-card actionable class="cardx">
           <div slot="media" class="relative">
@@ -29,7 +29,7 @@
         </vs-card>
         <div
           v-if="suggestions.length == index + 1"
-          class="flex justify-center my-16 pb-24"
+          class="flex justify-center xl:my-16 xl:pb-24"
         >
           <vs-button class="pills" color="#c53761" block>
             <span class="fs-20 btn-letter-spacing"

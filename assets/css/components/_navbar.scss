@@ -3,6 +3,9 @@
   position: fixed;
   // top: 0;
   padding-bottom: 1em;
+  @media (max-width: 768px) {
+    padding-bottom: 0;
+  }
   @media (max-width: 1279px) {
     width: 100%;
     top: initial;
@@ -39,10 +42,10 @@
 }
 .logo-container {
   width: 68px;
-  @media (max-width: 1279px) {
+  @media (min-width: 769px) and (max-width: 1279px) {
     width: 50px;
   }
-  @media (max-width: 677px) {
+  @media (max-width: 768px) {
     width: 30px;
   }
 }
