@@ -3,7 +3,7 @@
     <div class="xl:absolute translations__dropdown">
       <div class="relative text-center" v-click-outside="hide">
         <div
-          class="language cursor-pointer dark:text-white"
+          class="language cursor-pointer dark:text-gray"
           @click="openDropdown()"
         >
           <nuxt-img
@@ -13,7 +13,7 @@
           <i
             class="fas fa-globe language__icon text-primary mr-2 order-1 xl:order-2"
           ></i>
-          <span class="code code-name mr-2 fs-20">
+          <span class="code code-name mr-2 fs-14 fs-res-16">
             {{ selectedLanguage.name }}
           </span>
         </div>
@@ -22,7 +22,7 @@
           class="dropdown absolute bg-white dark:bg-black"
         >
           <div
-            class="language cursor-pointer dark:text-white"
+            class="language cursor-pointer dark:text-gray"
             v-for="(language, index) in filteredLocales"
             :key="index"
             @click="selectLanguage(language)"
@@ -31,7 +31,7 @@
               class="mr-2"
               :src="`/locales/${language.code}_flag.png`"
             />
-            <span class="code fs-20">
+            <span class="code fs-14 fs-res-16">
               {{ language.name }}
             </span>
           </div>
@@ -104,12 +104,15 @@ img {
   align-items: center;
   width: 105px;
   max-width: 105px;
+  @media (min-width: 1440px) {
+    flex-direction: row-reverse;
+  }
 }
 
 .dropdown {
   box-shadow: 0px 0px 20px rgba(188, 188, 188, 0.3);
   left: -10px;
-  padding: 1em 2em 1em 0.5em;
+  padding: 1em;
   border-radius: 16px;
   z-index: 201;
   img {
