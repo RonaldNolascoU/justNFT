@@ -58,6 +58,12 @@
 
 // DARK MODE
 
+.dark {
+  .dark\:text-gray {
+    color: #7c7c7c;
+  }
+}
+
 .dark .dark\:text-light-gray {
   color: #d7d7d7;
 }

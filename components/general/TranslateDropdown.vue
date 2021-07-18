@@ -107,6 +107,10 @@ img {
   @media (min-width: 1440px) {
     flex-direction: row-reverse;
   }
+  @media (max-width: 1280px) {
+    width: 120px;
+    max-width: 120px;
+  }
 }
 
 .dropdown {
@@ -115,6 +119,11 @@ img {
   padding: 1em;
   border-radius: 16px;
   z-index: 201;
+  .language {
+    @media (min-width: 1440px) {
+      flex-direction: row !important;
+    }
+  }
   img {
     width: 30px;
     height: 30px;
