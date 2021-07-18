@@ -8,11 +8,11 @@
     "username": "用户名",
     "forgot": "忘记密码？",
     "login": "登录",
-    "signup": "报名",
+    "signup": "注册",
     "noAccount": "还没有账号？",
     "haveAccount": "已经有账户？",
     "tokenomics": "Tokenomics",
-    "contact": "接触",
+    "contact": "联络",
     "help": "帮助",
     "about": "关于"
   },
@@ -49,8 +49,8 @@
     }
   },
   "sidebar" : {
-    "profile": "我的简历",
-    "home": "家",
+    "profile": "我的资料",
+    "home": "首页",
     "saved": "已保存",
     "subscriptions": "订阅",
     "settings": "设置",
@@ -69,13 +69,13 @@
     }
   },
   "suggestions": {
-    "title": "建议",
+    "title": "改用",
     "viewAll": "查看全部"
   },
   "subscriptions": {
     "title": "我的订阅",
     "viewAll": "查看全部",
-    "active": "积极的",
+    "active": "積極的改啥",
     "renew": "更新",
     "subscribedSince": "自订阅以来",
     "expiredSince": "过期日期",
@@ -83,7 +83,7 @@
       "manage": "管理",
       "remove": "去掉",
       "renew": "更新",
-      "mute": "沉默的"
+      "mute": "静音🔇"
     }
   },
   "profile": {
