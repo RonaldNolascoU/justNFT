@@ -1,17 +1,19 @@
 <template>
   <transition name="box">
-    <div class="absolute translations__dropdown">
-      <div class="relative" v-click-outside="hide">
+    <div class="xl:absolute translations__dropdown">
+      <div class="relative text-center" v-click-outside="hide">
         <div
           class="language cursor-pointer dark:text-white"
           @click="openDropdown()"
         >
           <nuxt-img
-            class="mr-2"
+            class="mr-2 order-2 xl:order-1"
             :src="`/locales/${selectedLanguage.code}_flag.png`"
           />
-          <i class="fas fa-globe language__icon text-primary mr-2"></i>
-          <span class="code">
+          <i
+            class="fas fa-globe language__icon text-primary mr-2 order-1 xl:order-2"
+          ></i>
+          <span class="code code-name mr-2 fs-20">
             {{ selectedLanguage.name }}
           </span>
         </div>
@@ -29,7 +31,7 @@
               class="mr-2"
               :src="`/locales/${language.code}_flag.png`"
             />
-            <span class="code">
+            <span class="code fs-20">
               {{ language.name }}
             </span>
           </div>
@@ -84,11 +86,9 @@ export default {
   .language__icon {
     display: none;
   }
-  .code {
-  }
   top: 30%;
   @media (min-width: 1280px) and (max-width: 1439px) {
-    .code {
+    .code-name {
       display: none;
     }
   }
@@ -111,16 +111,21 @@ img {
   left: -10px;
   padding: 1em 2em 1em 0.5em;
   border-radius: 16px;
+  z-index: 201;
   img {
     width: 30px;
     height: 30px;
   }
-
-  @media (min-width: 1280px) and (max-width: 1439px) {
-    padding-right: 0.2em;
+  @media (max-width: 1279px) {
     img {
-      width: 100%;
+      width: 25px !important;
+      height: 20px !important;
     }
+    bottom: 100%;
+  }
+  @media (min-width: 1280px) and (max-width: 1439px) {
+    left: auto;
+    right: 30px;
   }
 }
 </style>

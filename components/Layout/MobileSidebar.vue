@@ -57,6 +57,12 @@
               />
             </div>
             <div
+              v-else-if="option.type == 'language'"
+              class="flex justify-center items-center pt-2 my-2 cursor-pointer"
+            >
+              <GeneralTranslateDropdown />
+            </div>
+            <div
               v-else
               class="flex justify-center items-center pt-2 my-2 cursor-pointer"
               @click="$router.push('/signin')"
@@ -114,6 +120,9 @@ export default {
           name: 'Settings',
           i18n: 'settings',
           to: '/settings',
+        },
+        {
+          type: 'language',
         },
         {
           type: 'switch',
