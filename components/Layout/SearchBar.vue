@@ -6,10 +6,11 @@
       icon-after
       :placeholder="$t('navbar.search')"
       icon="search"
-      @click="categoriesBox = true"
+      @click.prevent.stop="categoriesBox = true"
     >
     </vs-input>
     <div
+      v-click-outside="hide"
       v-if="categoriesBox"
       class="absolute w-full p-3 bg-white dark:bg-black z-50"
     >
@@ -18,7 +19,7 @@
           v-for="(category, index) in $store.state.categories"
           :key="index"
           :class="[
-            'text-white font-bold text-center rounded-full  py-2  md:py-2 border-2 fs-res-12',
+            'text-white font-bold text-center rounded-full  py-2  md:py-2 border-2 fs-res-12 cursor-pointer',
             { 'border-color-primary': isSelected(category.color) },
           ]"
           :style="`background-color: ${category.color};`"
@@ -35,7 +36,7 @@
           class="flex items-center mt-2"
         >
           <img class="rounded-full" :src="`/images/msg/${result.image}.png`" />
-          <div class="fs-18 ml-3">{{ result.name }}</div>
+          <div class="fs-18 ml-3 dark:text-gray">{{ result.name }}</div>
         </div>
       </div>
 
@@ -43,8 +44,10 @@
         class="mt-4 flex items-center overflow-y-auto cursor-pointer"
         @click="showAll"
       >
-        <span class="material-icons-outlined text-secondary"> search </span>
-        <span class="text-secondary font-bold ml-2"
+        <span class="material-icons-outlined text-secondary dark:text-gray">
+          search
+        </span>
+        <span class="text-secondary font-bold ml-2 dark:text-gray"
           >Show all result for <span class="text-primary">Ana</span></span
         >
       </div>
@@ -76,6 +79,9 @@ export default {
     },
     showAll() {
       console.log('showAll')
+    },
+    hide() {
+      this.categoriesBox = false
     },
   },
 }
