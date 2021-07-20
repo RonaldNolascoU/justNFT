@@ -23,7 +23,8 @@
           <div class="w-full mt-3 lg:mt-3">
             <!-- <vue-metamask userMessage="msg" @onComplete="onComplete">
             </vue-metamask> -->
-            <button class="w-full" @click="loginWithMetamask()">
+            <AuthMetamask :userMessage="msg" @onComplete="onComplete" />
+            <!-- <button class="w-full" @click="loginWithMetamask()">
               <div class="flex">
                 <div
                   class="rounded-l-3xl border border-2 border-color-primary flex justify-center items-center bg-white icon width metamask__icon"
@@ -36,7 +37,7 @@
                   <div>{{ $t('login.metamask') }}</div>
                 </div>
               </div>
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -142,7 +143,6 @@
 </template>
 
 <script>
-// import VueMetamask from 'vue-metamask'
 import { mapActions } from 'vuex'
 
 export default {
@@ -153,6 +153,7 @@ export default {
       email: null,
       password: null,
       confirmPassword: null,
+      msg: 'Metamask',
 
       passwordRules: [
         (v) => !!v || 'Password is required',
@@ -242,6 +243,11 @@ export default {
     },
     onComplete(data) {
       console.log('data:', data)
+      this.$store.commit('auth/setWalletAddress', data)
+      this.$store.commit('SET_USER_AUTH', {
+        user: 'test',
+        wallet: true,
+      })
     },
   },
 }

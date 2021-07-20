@@ -1139,6 +1139,13 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
+"@metamask/onboarding@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@metamask/onboarding/-/onboarding-1.0.1.tgz#14a36e1e175e2f69f09598e2008ab6dc1b3297e6"
+  integrity sha512-FqHhAsCI+Vacx2qa5mAFcWNSrTcVGMNjzxVgaX8ECSny/BJ9/vgXP9V7WF/8vb9DltPeQkxr+Fnfmm6GHfmdTQ==
+  dependencies:
+    bowser "^2.9.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -2472,6 +2479,11 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
+
+bowser@^2.9.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/bowser/-/bowser-2.11.0.tgz#5ca3c35757a7aa5771500c70a73a9f91ef420a8f"
+  integrity sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA==
 
 boxen@^5.0.1:
   version "5.0.1"
@@ -11183,7 +11195,7 @@ web3-utils@1.4.0:
     underscore "1.12.1"
     utf8 "3.0.0"
 
-web3@^1.0.0-beta.48:
+web3@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.4.0.tgz#717c01723226daebab9274be5cb56644de860688"
   integrity sha512-faT3pIX+1tuo+wqmUFQPe10MUGaB1UvRYxw9dmVJFLxaRAIfXErSilOf3jFhSwKbbPNkwG0bTiudCLN9JgeS7A==

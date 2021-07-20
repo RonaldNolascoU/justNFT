@@ -2,6 +2,10 @@ import AuthService from '@/services/auth'
 
 export const state = () => ({
   authUser: {},
+  wallet: {
+    address: null,
+    balance: 0,
+  },
   loading: false,
 })
 
@@ -28,6 +32,11 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token
+  },
+  setWalletAddress(state, wallet) {
+    const { metaMaskAddress, balance } = wallet
+    state.wallet.address = metaMaskAddress
+    state.wallet.balance = balance
   },
 }
 

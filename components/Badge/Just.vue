@@ -8,7 +8,9 @@
         class="absolute self-start my-3 mr-2 xl:my-0 just-logo"
         src="/images/wallet-icon.png"
       />
-      <span class="ml-3 font-semibold text-blue">54,000</span>
+      <span class="ml-3 font-semibold text-blue">{{
+        $store.state.auth.wallet.balance || 0
+      }}</span>
       <span class="ml-1 font-semibold text-primary">JUST</span>
     </div>
     <div
