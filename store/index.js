@@ -138,6 +138,30 @@ export const state = () => ({
       isSubscription: true,
     },
   ],
+  categories: [
+    { name: 'Hardcore', color: '#CF5151' },
+    { name: 'PAWG', color: '#F1B075' },
+    { name: 'Big Ass', color: '#DFAB6D' },
+    { name: 'Big Tits', color: '#FF998B' },
+    { name: 'Pussy', color: '#FF80A5' },
+    { name: 'Ebony', color: '#AB4626' },
+    { name: 'Hairy', color: '#D88484' },
+    { name: 'MILF', color: '#E45656' },
+    { name: 'Teen', color: '#C53761' },
+    { name: 'JAV', color: '#D4899F' },
+    { name: 'Asian', color: '#F1A2E0' },
+    { name: 'Brunette', color: '#C53761' },
+    { name: 'Blowjob', color: '#EA785E' },
+    { name: 'BBW', color: '#DE9BAE' },
+    { name: 'Furry', color: '#C76884' },
+    { name: 'Lactating', color: '#FC9EBA' },
+  ],
+  searchResult: [
+    { name: 'Ana Kurston', image: 'msg-profile07' },
+    { name: 'Ana Mika', image: 'msg-profile05' },
+    { name: 'Ana Campbell', image: 'msg-profile04' },
+    { name: 'Ana Yalzsin', image: 'msg-profile03' },
+  ],
 })
 
 export const getters = {

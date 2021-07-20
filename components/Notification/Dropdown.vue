@@ -2,7 +2,7 @@
   <transition name="box">
     <nav class="notifications__dropdown" v-click-outside="hide">
       <div
-        class="px-3 py-3 wrapper_box bg-white dark:bg-messages dark:box-messages"
+        class="md:px-3 py-3 wrapper_box bg-white dark:bg-messages dark:box-messages"
       >
         <div class="wrapper show">
           <ul class="menu-bar">
@@ -14,14 +14,12 @@
                 ><i class="cursor-pointer fas fa-ellipsis-v text-gray"
               /></span>
             </div>
-            <div class="mt-2 mb-3 content-inputs dark:bg-input">
+            <div class="mt-2 mb-3 content-inputs dark:bg-input flex">
               <span
                 class="text-primary text-separate fs-18 uppercase font-semibold"
                 >{{ $t('navbar.notifications.latest') }}</span
               >
-              <div
-                class="border border-1 divider bg-primary border-primary"
-              ></div>
+              <div class="w-full border-b-2 border-color-primary"></div>
             </div>
             <div class="overflow-y-scroll messages_boxes">
               <li
@@ -30,14 +28,14 @@
                 :key="index"
                 @click="goToNotification(notification)"
               >
-                <div class="flex icon">
+                <div class="flex icon pr-2">
                   <div class="relative pb-1">
-                    <nuxt-img
+                    <img
                       class="rounded-full"
                       :src="`/images/msg/${notification.image}.png`"
                     />
                   </div>
-                  <div class="ml-6">
+                  <div class="ml-6 notify-body">
                     <div class="text-left fs-20 dark:text-white">
                       <span
                         :class="{
@@ -58,9 +56,10 @@
                     </div>
                   </div>
                 </div>
-                <span class="text-secondary">{{
+                <!-- <span class="text-secondary">{{
                   getFormattedTime(notification.date)
-                }}</span>
+                }}</span> -->
+                <span class="text-secondary">33w</span>
               </li>
             </div>
           </ul>
@@ -72,17 +71,6 @@
 
 <script>
 export default {
-  data() {
-    return {}
-  },
-  props: {
-    messages: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  computed: {},
-  mounted() {},
   methods: {
     getFormattedTime(date) {
       return this.$dateFns.formatDistance(
