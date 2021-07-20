@@ -17,24 +17,10 @@
         />
       </div>
 
-      <div class="hidden 2xl:block" style="width: 12%"></div>
+      <div class="hidden 3xl:block" style="width: 12%"></div>
 
       <div class="hidden search-input xl:flex">
-        <vs-input
-          block
-          type="text"
-          icon-after
-          v-model="searchValue"
-          :placeholder="$t('navbar.search')"
-          icon="search"
-          class=""
-        >
-          <template #icon>
-            <span class="fs-40">
-              <i class="cursor-pointer fs-40 fas fa-search text-secondary" />
-            </span>
-          </template>
-        </vs-input>
+        <LayoutSearchBar />
       </div>
 
       <div

@@ -206,3 +206,14 @@ h2 span {
     bottom: 10px;
   }
 }
+
+@media (max-width: 400px) {
+  .notify-body {
+    width: 65%;
+  }
+}
+
+.category-template {
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 15px 10px;
+}

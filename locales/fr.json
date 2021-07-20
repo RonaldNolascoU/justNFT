@@ -1,7 +1,7 @@
 {
   "login": {
     "title": "Votre plateforme exclusive de création de contenu !",
-    "metamask": "Connectez-vous avec Metamask",
+    "metamask": "Se connecter avec Metamask",
     "or": "Ou alors",
     "email": "E-mail",
     "password": "Mot de passe",
@@ -28,27 +28,27 @@
     "alreadyCreatedWallet": "Vous avez déjà créé votre portefeuille",
     "home": "Accueil"
   },
-  "navbar": { 
+  "navbar": {
     "search": "Rechercher",
-    "messages" : {
+    "messages": {
       "title": "Messages",
-      "search":"Rechercher",
+      "search": "Rechercher",
       "active": "Active",
       "since": "puisque",
       "now": "à présent",
       "ago": "depuis"
     },
     "buyJust": "Acheter JUST",
-    "notifications" : {
+    "notifications": {
       "title": "Notifications",
-      "latest":"Dernière",
+      "latest": "Dernière",
       "commentedOn": "commenté sur",
       "taggedOn": "t'a tagué sur...",
       "subscribedOn": "souscrit à votre forfait",
       "likedOn": "j'ai aimé ta photo"
     }
   },
-  "sidebar" : {
+  "sidebar": {
     "profile": "Mon profil",
     "home": "Accueil",
     "saved": "Signets",

@@ -1,9 +1,3 @@
 <template>
-  <h1>Notifications</h1>
+  <NotificationDropdown />
 </template>
-
-<script>
-export default {}
-</script>
-
-<style></style>
