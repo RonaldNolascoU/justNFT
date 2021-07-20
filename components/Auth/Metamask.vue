@@ -167,7 +167,7 @@ export default {
     },
   },
   async mounted() {
-    this.connectToMetamask()
+    // this.connectToMetamask()
   },
 }
 </script>
