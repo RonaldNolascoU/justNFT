@@ -46,35 +46,65 @@
         </h2>
 
         <div class="flex flex-col items-center login-form">
-          <input
-            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-            v-model="email"
-            :placeholder="$t('login.email')"
-            type="text"
-          />
-          <input
-            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
-            v-model="password"
-            :placeholder="$t('login.password')"
-            type="password"
-          />
-          <input
-            v-if="!isLogin"
-            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-            v-model="username"
-            :placeholder="$t('login.username')"
-            type="text"
-          />
-          <div class="flex w-full mt-3 lg:mt-3" v-if="isLogin">
-            <a href="" class="fs-16 text-pink">{{ $t('login.forgot') }}</a>
-          </div>
-
-          <button
-            @click="isLogin ? loginWithEmailAndPassword() : signUp()"
-            class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
+          <form
+            @submit.prevent="isLogin ? loginWithEmailAndPassword() : register()"
+            class="w-full"
           >
-            {{ isLogin ? $t('login.login') : $t('login.signup') }}
-          </button>
+            <input
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+              v-model="email"
+              :placeholder="$t('login.email')"
+              type="email"
+              required
+            />
+            <span
+              v-if="errors.email"
+              class="fs-16 text-primary font-semibold w-full"
+              >{{ errors.email }}</span
+            >
+            <input
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
+              v-model="password"
+              :placeholder="$t('login.password')"
+              type="password"
+              required
+            />
+            <span
+              v-if="errors.password"
+              class="fs-16 text-primary font-semibold w-full"
+              >{{ errors.password }}</span
+            >
+            <input
+              v-if="!isLogin"
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+              v-model="username"
+              :placeholder="$t('login.username')"
+              type="text"
+              required
+            />
+            <span
+              v-if="errors.username"
+              class="fs-16 text-primary font-semibold w-full"
+              >{{ errors.username }}</span
+            >
+            <div class="flex w-full mt-3 lg:mt-3" v-if="isLogin">
+              <a href="" class="fs-16 text-pink">{{ $t('login.forgot') }}</a>
+            </div>
+
+            <span
+              v-if="successfulSignUp"
+              class="fs-16 text-primary font-semibold w-full"
+              >Email registered. Activation mail has been sent to user.</span
+            >
+            <button
+              type="submit"
+              :disabled="successfulSignUp"
+              class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
+            >
+              {{ isLogin ? $t('login.login') : $t('login.signup') }}
+              <GeneralLoader v-if="loading" />
+            </button>
+          </form>
         </div>
 
         <h2 class="mt-5 lg:mt-5"></h2>
@@ -154,100 +184,61 @@ export default {
       password: null,
       confirmPassword: null,
       msg: 'Metamask',
-
-      passwordRules: [
-        (v) => !!v || 'Password is required',
-        (v) =>
-          (v && v.length <= 10) || 'Password must be less than 10 characters',
-      ],
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
+      errors: {
+        username: null,
+        email: null,
+        password: null,
+      },
+      loading: false,
+      successfulSignUp: false,
     }
   },
   methods: {
     ...mapActions('auth', ['login', 'signUp']),
-    getAccount() {
-      return new Promise((resolve) => {
-        this.$web3.eth.getAccounts().then((res) => {
-          if (!res.length) {
-            alert('Please login to MetaMask!')
-            return
-          }
-          return resolve(res[0])
-        })
-      })
-    },
-    createSignature(address, nonce) {
-      return new Promise((resolve, reject) => {
-        window.$web3.eth.personal
-          .sign(`Sign Nonce: ${nonce}`, address.toLowerCase(), '')
-          .then((signature) => {
-            return resolve(signature)
-          })
-          .catch((e) => {
-            return reject(e)
-          })
-      })
-    },
     loginWithEmailAndPassword() {
-      // const credentials = { email: this.email, password: this.password }
-      // this.login(credentials)
-      //   .then((response) => {
-      //     console.log(response, 'response')
-      //   })
-      //   .catch((err) => {
-      //     console.log(err, 'error')
-      //   })
-      this.$store.commit('SET_USER_AUTH', {
-        user: 'test',
-        wallet: true,
-      })
+      if (this.successfulSignUp) return
+      this.loading = true
+      const credentials = { email: this.email, password: this.password }
+      this.login(credentials)
+        .then((response) => {
+          console.log(response, 'response')
+          this.loading = false
+        })
+        .catch((err) => {
+          console.log(err, 'error')
+          this.errors.email = err
+          this.loading = false
+        })
     },
-    loginWithMetamask() {
-      const address = this.$store.state.account.address
-      if (!address) return alert('Please login to Metamask first')
-      // const nonce = (await this.$axios.$get(`/api/v1/user/nonce/${address}`)).nonce;
-      // const signature = await this.createSignature(address, nonce);
-      // console.log(signature);
-      // this.$store.state.user.signature = signature;
-      // const auth = {
-      //     address: address,
-      //     nonce: nonce,
-      //     signature: signature,
-      // };
-
-      // this.$store.commit('SET_USER_AUTH', {
-      //   name: 'Meta',
-      //   lname: 'Mask',
-      //   wallet: true,
-      // })
-    },
-    signUp() {
-      // const credentials = {
-      //   username: this.username,
-      //   email: this.email,
-      //   password: this.password,
-      // }
-      // this.signUp(credentials)
-      //   .then((response) => {
-      //     console.log(response, 'response')
-      //   })
-      //   .catch((err) => {
-      //     console.log(err, 'error')
-      //   })
-      this.$store.commit('SET_USER_AUTH', {
-        user: 'test',
-      })
+    register() {
+      if (this.successfulSignUp) return
+      this.loading = true
+      const credentials = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      }
+      this.signUp(credentials)
+        .then((response) => {
+          console.log(response, 'response')
+          this.successfulSignUp = true
+          this.loading = false
+        })
+        .catch((err) => {
+          console.log(err, 'error')
+          this.loading = false
+        })
     },
     onComplete(data) {
       console.log('data:', data)
-      this.$store.commit('auth/setWalletAddress', data)
-      this.$store.commit('SET_USER_AUTH', {
-        user: 'test',
-        wallet: true,
-      })
+      const { metaMaskAddress } = data
+      if (metaMaskAddress) {
+        this.$store.commit('auth/setWalletAddress', data)
+        this.$store.commit('SET_USER_AUTH', {
+          user: 'test',
+          wallet: true,
+        })
+      }
     },
   },
 }

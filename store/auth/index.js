@@ -1,7 +1,7 @@
 import AuthService from '@/services/auth'
 
 export const state = () => ({
-  authUser: {},
+  user: null,
   wallet: {
     address: null,
     balance: 0,
@@ -11,10 +11,10 @@ export const state = () => ({
 
 export const getters = {
   getAuth(state) {
-    return state.authUser
+    return state.user
   },
   isLoggedIn(state) {
-    return Boolean(state.authUser)
+    return Boolean(state.user)
   },
   isPremiumUser(state, getters) {
     // We must check here with the backend data
@@ -27,8 +27,9 @@ export const getters = {
 }
 
 export const mutations = {
-  setAuth(state, authUser) {
-    state.authUser = authUser
+  setAuth(state, user) {
+    state.user = user
+    this.$router.push({ name: 'index' })
   },
   setToken(state, token) {
     state.token = token
@@ -49,7 +50,9 @@ export const actions = {
 
       AuthService.signUp(payload)
         .then(({ data }) => {
-          console.log(data, 'DATA')
+          if (!data.success) {
+            return reject(data.msg)
+          }
 
           resolve(data)
         })
@@ -65,17 +68,20 @@ export const actions = {
 
       AuthService.login(payload)
         .then(({ data }) => {
-          console.log(data)
+          if (!data.success) {
+            return reject(data.msg)
+          }
 
           localStorage.setItem('token', data.token)
-          // localStorage.setItem('user', JSON.stringify(data.payload.user))
-          // commit('setAuth', Object.assign({}, data.payload.user))
-          // this.$router.push({ path: '/' })
-
+          localStorage.setItem('user', JSON.stringify(data.user))
+          commit(
+            'setAuth',
+            Object.assign({}, { ...data.user, token: data.token })
+          )
           resolve(data)
         })
         .catch((err) => {
-          reject(err)
+          reject(err, 'err')
           // commit('setLoading', false)
         })
     })

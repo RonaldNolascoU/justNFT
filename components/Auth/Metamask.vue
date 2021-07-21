@@ -78,9 +78,10 @@ export default {
     },
     getBalance() {
       this.web3.eth
-        .getBalance(this.MetaMaskAddress)
+        .getBalance('0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8')
         .then((result) => {
           this.metaMaskBalance = result
+          console.log(this.metaMaskBalance)
         })
         .catch((err) => {
           console.log(err, 'err')
@@ -143,6 +144,7 @@ export default {
       if (window.ethereum) {
         window.web3 = new Web3(ethereum)
         try {
+          await ethereum.request({ method: 'eth_requestAccounts' })
           this.web3TimerCheck(window.web3)
         } catch (error) {
           this.Log(
@@ -156,7 +158,7 @@ export default {
       } else {
         this.web3 = null
         this.Log(this.MetamaskMsg.METAMASK_NOT_INSTALL, 'NO_INSTALL_METAMASK')
-        console.error(
+        alert(
           'Non-Ethereum browser detected. You should consider trying MetaMask!'
         )
       }

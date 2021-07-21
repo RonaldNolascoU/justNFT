@@ -1,5 +1,5 @@
 export default function ({ window, app, store, redirect, route }) {
-  const isUserSignedIn = store.state.user || store.state.userAuth
+  const isUserSignedIn = store.getters['auth/isLoggedIn']
   const isSigninRoute = route.path === '/signin'
 
   app.i18n.setLocaleCookie(store.state.lang)
