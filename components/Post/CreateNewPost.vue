@@ -22,7 +22,7 @@
           <span class="text-center mt-3">
             <img src="/images/up-arrow.png" />
           </span>
-          <span class="text-center fs-36">Upload Media</span>
+          <span class="text-center fs-36 dark:text-white">Upload Media</span>
           <div
             class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-white font-bold mt-3 py-2 px-16"
           >
@@ -34,39 +34,41 @@
           <div class="upload-form w-11/12">
             <div class="relative">
               <div class="mt-5">
-                <b class="fs-16">Add Caption</b>
+                <b class="fs-16 dark:text-white">Add Caption</b>
               </div>
               <input
                 v-model="caption"
                 type="text"
-                class="w-full bg-pink-10 rounded-full pink-inputs break-words mt-1"
+                class="w-full bg-pink-10 rounded-full pink-inputs break-words mt-1 dark:text-white"
                 :maxlength="maxLength"
               />
               <b class="chart-counter absolute">
-                <span>{{ maxLength - caption.length }}</span>
+                <span class="dark:text-white">{{
+                  maxLength - caption.length
+                }}</span>
                 <span class="text-pink">/{{ maxLength }}</span>
               </b>
             </div>
             <div>
               <div class="mt-5">
-                <b class="fs-16">
+                <b class="fs-16 dark:text-white">
                   Add Location <i class="text-pink">(Optional)</i>
                 </b>
               </div>
               <input
                 v-model="location"
                 type="text"
-                class="w-full bg-pink-10 rounded-full pink-inputs mt-1"
+                class="w-full bg-pink-10 rounded-full pink-inputs mt-1 dark:text-white"
               />
             </div>
             <div>
               <div class="mt-5">
-                <b class="fs-16">Tag People</b>
+                <b class="fs-16 dark:text-white">Tag People</b>
               </div>
               <input
                 v-model="people"
                 type="text"
-                class="w-full bg-pink-10 rounded-full pink-inputs mt-1"
+                class="w-full bg-pink-10 rounded-full pink-inputs mt-1 dark:text-white"
               />
             </div>
           </div>
