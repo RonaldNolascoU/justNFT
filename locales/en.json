@@ -14,7 +14,8 @@
     "tokenomics": "Tokenomics",
     "contact": "Contact",
     "help": "Help",
-    "about": "About"
+    "about": "About",
+    "forgotBtn": "Send Email"
   },
   "wallet": {
     "warningModal": "Warning: Never share this with anyone, including Just Yours Support.",
@@ -28,27 +29,27 @@
     "alreadyCreatedWallet": "You already created your wallet",
     "home": "Home"
   },
-  "navbar": { 
+  "navbar": {
     "search": "Search",
-    "messages" : {
+    "messages": {
       "title": "Messages",
-      "search":"Search messages",
+      "search": "Search messages",
       "active": "Active",
       "since": "since",
       "now": "now",
       "ago": "ago"
     },
     "buyJust": "Buy JUST",
-    "notifications" : {
+    "notifications": {
       "title": "Notifications",
-      "latest":"Latest",
+      "latest": "Latest",
       "commentedOn": "commented on your post",
       "taggedOn": "tagged you on ...",
       "subscribedOn": "subscribed to your plan",
       "likedOn": "liked your image"
     }
   },
-  "sidebar" : {
+  "sidebar": {
     "profile": "My Profile",
     "home": "Home",
     "saved": "Saved",

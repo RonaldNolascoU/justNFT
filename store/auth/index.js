@@ -87,6 +87,25 @@ export const actions = {
     })
   },
 
+  forgotPassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      localStorage.clear()
+
+      AuthService.forgotPassword(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err, 'err')
+          // commit('setLoading', false)
+        })
+    })
+  },
+
   logout({ commit, dispatch }) {
     return new Promise((resolve, reject) => {
       // commit('setLoading', true)

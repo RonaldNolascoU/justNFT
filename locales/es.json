@@ -14,7 +14,8 @@
     "tokenomics": "Tokenomics",
     "contact": "Contacto",
     "help": "Ayuda",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "forgotBtn": "Enviar Correo"
   },
   "wallet": {
     "warningModal": "Precaución: Nunca compartas esto con nadie, ni con el soporte de Just Yours.",
@@ -28,27 +29,27 @@
     "alreadyCreatedWallet": "Ya has creado tu cartera",
     "home": "Inicio"
   },
-  "navbar": { 
+  "navbar": {
     "search": "Buscar",
-    "messages" : {
+    "messages": {
       "title": "Mensajes",
-      "search":"Buscar mensajes",
+      "search": "Buscar mensajes",
       "active": "Activo ",
       "since": "hace",
       "now": "ahora",
       "ago": "hace"
     },
     "buyJust": "Compra JUST",
-    "notifications" : {
+    "notifications": {
       "title": "Notificaciones",
-      "latest":"Recientes",
+      "latest": "Recientes",
       "commentedOn": "comentó en tu publicación",
       "taggedOn": "te etiquetó en...",
       "subscribedOn": "se suscribió a tu plan",
       "likedOn": "le ha gustado tu foto"
     }
   },
-  "sidebar" : {
+  "sidebar": {
     "profile": "Mi Perfil",
     "home": "Inicio",
     "saved": "Guardados",

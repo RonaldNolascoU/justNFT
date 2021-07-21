@@ -14,7 +14,8 @@
     "tokenomics": "Tokenomics",
     "contact": "Contacter",
     "help": "Aider",
-    "about": "À propos"
+    "about": "À propos",
+    "forgotBtn": "Envoyer un E-mail"
   },
   "wallet": {
     "warningModal": "Avertissement : Ne partagez jamais cela avec qui que ce soit, y compris Just Yours Support.",

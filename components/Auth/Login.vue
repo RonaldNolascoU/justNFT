@@ -23,7 +23,11 @@
           <div class="w-full mt-3 lg:mt-3">
             <!-- <vue-metamask userMessage="msg" @onComplete="onComplete">
             </vue-metamask> -->
-            <AuthMetamask :userMessage="msg" @onComplete="onComplete" />
+            <AuthMetamask
+              v-if="mode == 'auth'"
+              :userMessage="msg"
+              @onComplete="onComplete"
+            />
             <!-- <button class="w-full" @click="loginWithMetamask()">
               <div class="flex">
                 <div
@@ -42,14 +46,13 @@
         </div>
 
         <h2 class="mt-5 lg:mt-5">
-          <span class="fs-24 text-black bg-white">{{ $t('login.or') }}</span>
+          <span class="fs-24 text-black bg-white">{{
+            mode == 'auth' ? $t('login.or') : $t('login.forgot')
+          }}</span>
         </h2>
 
         <div class="flex flex-col items-center login-form">
-          <form
-            @submit.prevent="isLogin ? loginWithEmailAndPassword() : register()"
-            class="w-full"
-          >
+          <form @submit.prevent="onSubmit" class="w-full">
             <input
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
               v-model="email"
@@ -63,6 +66,7 @@
               >{{ errors.email }}</span
             >
             <input
+              v-if="mode == 'auth'"
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
               v-model="password"
               :placeholder="$t('login.password')"
@@ -75,7 +79,7 @@
               >{{ errors.password }}</span
             >
             <input
-              v-if="!isLogin"
+              v-if="!isLogin && mode == 'auth'"
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
               v-model="username"
               :placeholder="$t('login.username')"
@@ -87,8 +91,15 @@
               class="fs-16 text-primary font-semibold w-full"
               >{{ errors.username }}</span
             >
-            <div class="flex w-full mt-3 lg:mt-3" v-if="isLogin">
-              <a href="" class="fs-16 text-pink">{{ $t('login.forgot') }}</a>
+            <div
+              class="flex w-full mt-3 lg:mt-3"
+              v-if="isLogin && mode == 'auth'"
+            >
+              <a
+                @click.prevent="mode = 'forgot'"
+                class="fs-16 text-pink cursor-pointer"
+                >{{ $t('login.forgot') }}</a
+              >
             </div>
 
             <span
@@ -96,12 +107,20 @@
               class="fs-16 text-primary font-semibold w-full"
               >Email registered. Activation mail has been sent to user.</span
             >
+            <span
+              v-if="successfulSendEmail"
+              class="fs-16 text-primary font-semibold w-full"
+              >Email was sent successfully.</span
+            >
             <button
               type="submit"
               :disabled="successfulSignUp"
               class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
             >
-              {{ isLogin ? $t('login.login') : $t('login.signup') }}
+              <span v-if="mode == 'auth'">
+                {{ isLogin ? $t('login.login') : $t('login.signup') }}
+              </span>
+              <span v-else>{{ $t('login.forgotBtn') }}</span>
               <GeneralLoader v-if="loading" />
             </button>
           </form>
@@ -113,9 +132,14 @@
           <p v-else>{{ $t('login.noAccount') }}</p>
           <a
             class="mt-3 fs-16 text-primary font-semibold cursor-pointer"
-            @click="isLogin = !isLogin"
+            @click="
+              isLogin = !isLogin
+              mode = 'auth'
+            "
           >
-            {{ isLogin ? $t('login.signup') : $t('login.login') }}
+            <span>
+              {{ isLogin ? $t('login.signup') : $t('login.login') }}
+            </span>
           </a>
         </div>
       </div>
@@ -184,6 +208,7 @@ export default {
       password: null,
       confirmPassword: null,
       msg: 'Metamask',
+      mode: 'auth',
       errors: {
         username: null,
         email: null,
@@ -191,10 +216,18 @@ export default {
       },
       loading: false,
       successfulSignUp: false,
+      successfulSendEmail: false,
     }
   },
   methods: {
-    ...mapActions('auth', ['login', 'signUp']),
+    ...mapActions('auth', ['login', 'signUp', 'forgotPassword']),
+    onSubmit() {
+      if (this.mode == 'auth') {
+        this.isLogin ? this.loginWithEmailAndPassword() : this.register()
+      } else {
+        this.sendEmailToRestartPass()
+      }
+    },
     loginWithEmailAndPassword() {
       if (this.successfulSignUp) return
       this.loading = true
@@ -223,6 +256,29 @@ export default {
           console.log(response, 'response')
           this.successfulSignUp = true
           this.loading = false
+        })
+        .catch((err) => {
+          console.log(err, 'error')
+          this.loading = false
+        })
+    },
+    sendEmailToRestartPass() {
+      if (this.successfulSendEmail) return
+      this.loading = true
+      const credentials = {
+        email: this.email,
+      }
+
+      this.forgotPassword(credentials)
+        .then((response) => {
+          console.log(response, 'response')
+          this.successfulSendEmail = true
+          this.loading = false
+          this.email = ''
+          setTimeout(() => {
+            this.mode = 'auth'
+            this.successfulSendEmail = false
+          }, 3000)
         })
         .catch((err) => {
           console.log(err, 'error')

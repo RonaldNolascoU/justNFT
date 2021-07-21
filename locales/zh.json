@@ -14,7 +14,8 @@
     "tokenomics": "Tokenomics",
     "contact": "联络",
     "help": "帮助",
-    "about": "关于"
+    "about": "关于",
+    "forgotBtn": "发送电子邮件"
   },
   "wallet": {
     "warningModal": "警告：切勿与任何人共享此信息，包括 Just Yours Support。",
@@ -28,27 +29,27 @@
     "alreadyCreatedWallet": "您已经创建了钱包",
     "home": "家"
   },
-  "navbar": { 
+  "navbar": {
     "search": "搜索",
-    "messages" : {
+    "messages": {
       "title": "留言",
-      "search":"搜索消息",
+      "search": "搜索消息",
       "active": "积极的",
       "since": "自从",
       "now": "现在",
       "ago": "前"
     },
     "buyJust": "买 JUST",
-    "notifications" : {
+    "notifications": {
       "title": "通知",
-      "latest":"最新的",
+      "latest": "最新的",
       "commentedOn": "评论了你的帖子",
       "taggedOn": "将你标记为...",
       "subscribedOn": "订阅了你的计划",
       "likedOn": "喜欢你的照片"
     }
   },
-  "sidebar" : {
+  "sidebar": {
     "profile": "我的资料",
     "home": "首页",
     "saved": "已保存",

@@ -1,6 +1,9 @@
 <template>
   <div
-    class="px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container"
+    :class="[
+      'px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container',
+      { 'h-screen': scroll },
+    ]"
   >
     <ModalAge v-if="$store.state.modals.age" />
     <div class="xl:container">

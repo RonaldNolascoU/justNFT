@@ -14,7 +14,8 @@
     "tokenomics": "Tokenomics",
     "contact": "Контакт",
     "help": "Помощь",
-    "about": "О"
+    "about": "О",
+    "forgotBtn": "отправить электронное письмо"
   },
   "wallet": {
     "warningModal": "Предупреждение: никогда не делитесь этим с кем-либо, включая Just Yours Support.",
@@ -28,27 +29,27 @@
     "alreadyCreatedWallet": "Вы уже создали свой кошелек",
     "home": "Дом"
   },
-  "navbar": { 
+  "navbar": {
     "search": "Поиск",
-    "messages" : {
+    "messages": {
       "title": "Сообщения",
-      "search":"Искать сообщения",
+      "search": "Искать сообщения",
       "active": "Активный",
       "since": "поскольку",
       "now": "сейчас",
       "ago": "тому назад"
     },
     "buyJust": "Купить JUST",
-    "notifications" : {
+    "notifications": {
       "title": "Уведомления",
-      "latest":"Последний",
+      "latest": "Последний",
       "commentedOn": "прокомментировал ваш пост",
       "taggedOn": "отметил вас на ...",
       "subscribedOn": "подписался на ваш план",
       "likedOn": "понравился твой образ"
     }
   },
-  "sidebar" : {
+  "sidebar": {
     "profile": "Мой профиль",
     "home": "Дом",
     "saved": "Сохранено",

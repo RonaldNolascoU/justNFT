@@ -9,7 +9,9 @@ class AuthService {
   login(data) {
     return HTTP.post('login', data, { cache: false })
   }
-
+  forgotPassword(data) {
+    return HTTP.post('forgot-password', data, { cache: false })
+  }
   logout() {
     return HTTP.get(`logout`, { cache: false })
   }
