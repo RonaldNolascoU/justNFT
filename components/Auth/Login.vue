@@ -96,7 +96,7 @@
               v-if="isLogin && mode == 'auth'"
             >
               <a
-                @click.prevent="mode = 'forgot'"
+                @click.prevent="openForgotPassword()"
                 class="fs-16 text-pink cursor-pointer"
                 >{{ $t('login.forgot') }}</a
               >
@@ -114,7 +114,7 @@
             >
             <button
               type="submit"
-              :disabled="successfulSignUp"
+              :disabled="loading"
               class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
             >
               <span v-if="mode == 'auth'">
@@ -132,10 +132,7 @@
           <p v-else>{{ $t('login.noAccount') }}</p>
           <a
             class="mt-3 fs-16 text-primary font-semibold cursor-pointer"
-            @click="
-              isLogin = !isLogin
-              mode = 'auth'
-            "
+            @click="changeAuthMode()"
           >
             <span>
               {{ isLogin ? $t('login.signup') : $t('login.login') }}
@@ -221,6 +218,26 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['login', 'signUp', 'forgotPassword']),
+    clearErrors() {
+      this.errors = {
+        username: null,
+        email: null,
+        password: null,
+      }
+      this.email = null
+      this.password = null
+      this.username = null
+    },
+    openForgotPassword() {
+      this.mode = 'forgot'
+      this.clearErrors()
+    },
+    changeAuthMode() {
+      this.isLogin = !this.isLogin
+      this.mode = 'auth'
+      this.clearErrors()
+      this.successfulSignUp = false
+    },
     onSubmit() {
       if (this.mode == 'auth') {
         this.isLogin ? this.loginWithEmailAndPassword() : this.register()
@@ -229,7 +246,7 @@ export default {
       }
     },
     loginWithEmailAndPassword() {
-      if (this.successfulSignUp) return
+      if (this.loading) return
       this.loading = true
       const credentials = { email: this.email, password: this.password }
       this.login(credentials)
@@ -244,7 +261,7 @@ export default {
         })
     },
     register() {
-      if (this.successfulSignUp) return
+      if (this.loading) return
       this.loading = true
       const credentials = {
         username: this.username,
@@ -255,10 +272,12 @@ export default {
         .then((response) => {
           console.log(response, 'response')
           this.successfulSignUp = true
+          this.clearErrors()
           this.loading = false
         })
         .catch((err) => {
           console.log(err, 'error')
+          this.errors.email = err
           this.loading = false
         })
     },
@@ -274,7 +293,8 @@ export default {
           console.log(response, 'response')
           this.successfulSendEmail = true
           this.loading = false
-          this.email = ''
+          this.clearErrors()
+
           setTimeout(() => {
             this.mode = 'auth'
             this.successfulSendEmail = false
@@ -282,6 +302,7 @@ export default {
         })
         .catch((err) => {
           console.log(err, 'error')
+          this.errors.email = err
           this.loading = false
         })
     },
@@ -290,10 +311,7 @@ export default {
       const { metaMaskAddress } = data
       if (metaMaskAddress) {
         this.$store.commit('auth/setWalletAddress', data)
-        this.$store.commit('SET_USER_AUTH', {
-          user: 'test',
-          wallet: true,
-        })
+        this.$store.commit('auth/setAuth', {})
       }
     },
   },

@@ -67,6 +67,7 @@
       <div
         class="flex items-center justify-between arrow back-setting-btn add__message relative flex-1"
       >
+        <!-- <form @submit="addMessage" class="w-full"> -->
         <textarea
           type="text"
           placeholder="Say something..."
@@ -76,20 +77,34 @@
           @keydown.enter="addMessage"
           v-model="comment"
         />
+        <!-- </form> -->
         <div
-          class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 pointer-events-none action__icon"
+          class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 action__icon"
         >
-          <i class="mr-2 cursor-pointer fas fa-camera text-primary right-0"></i>
+          <i
+            class="mr-2 cursor-pointer fas fa-camera text-primary right-0"
+            @click="showMediaUpload"
+          ></i>
         </div>
         <div
-          class="absolute cursor-pointer left-0 bottom-0 flex items-center pr-3 pointer-events-none smily_face"
+          class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 send__icon"
+        >
+          <i
+            class="mr-2 cursor-pointer text-primary right-0 fas fa-paper-plane"
+            @click="addMessage"
+          ></i>
+        </div>
+        <div
+          class="absolute cursor-pointer left-0 bottom-0 flex items-center pr-3 smily_face"
         >
           <i
             class="mr-2 cursor-pointer far fa-grin-alt text-primary left-0"
+            @click="addEmoji"
           ></i>
         </div>
       </div>
     </div>
+    <ModalAddMediaUpload v-show="showingMediaUpload" />
   </div>
 </template>
 
@@ -139,6 +154,7 @@ export default {
         },
       ],
       comment: null,
+      showingMediaUpload: false,
     }
   },
   mounted() {
@@ -198,6 +214,13 @@ export default {
       this.$nextTick(() => {
         this.scrollChatScreen()
       })
+    },
+    showMediaUpload() {
+      // We must do something similar to this: https://stackoverflow.com/questions/52517523/add-slidedown-effect-on-modal-close-css
+      this.showingMediaUpload = !this.showingMediaUpload
+    },
+    addEmoji() {
+      console.log('adding emoji')
     },
   },
 }
@@ -274,6 +297,11 @@ export default {
       padding-left: 2.5em;
       padding-right: 2.5em;
       background: #f1f0f0;
+    }
+
+    .send__icon {
+      right: 3em;
+      bottom: 0.6em !important;
     }
     .action__icon {
       bottom: 0.6em !important;
