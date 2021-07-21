@@ -62,9 +62,9 @@ export default {
         this.Log(this.MetamaskMsg.METAMASK_NOT_INSTALL, 'NO_INSTALL_METAMASK')
       }
     },
-    checkAccounts() {
+    async checkAccounts() {
       if (this.web3 === null) return
-      this.web3.eth.getAccounts((err, accounts) => {
+      await this.web3.eth.getAccounts((err, accounts) => {
         if (err != null)
           return this.Log(this.MetamaskMsg.NETWORK_ERROR, 'NETWORK_ERROR')
         if (accounts.length === 0) {
@@ -73,51 +73,68 @@ export default {
           return
         }
         this.MetaMaskAddress = accounts[0] // user Address
-        this.getBalance()
       })
     },
-    getBalance() {
-      this.web3.eth
-        .getBalance('0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8')
-        .then((result) => {
-          this.metaMaskBalance = result
-          console.log(this.metaMaskBalance)
+    async getBalance() {
+      // The minimum ABI to get ERC20 Token balance
+      let minABI = [
+        // balanceOf
+        {
+          constant: true,
+          inputs: [{ name: '_owner', type: 'address' }],
+          name: 'balanceOf',
+          outputs: [{ name: 'balance', type: 'uint256' }],
+          type: 'function',
+        },
+        // decimals
+        {
+          constant: true,
+          inputs: [],
+          name: 'decimals',
+          outputs: [{ name: '', type: 'uint8' }],
+          type: 'function',
+        },
+      ]
+
+      let justYoursTokenAddress = '0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8'
+      // Get ERC20 Token contract instance
+      let contract = new this.web3.eth.Contract(minABI, justYoursTokenAddress)
+
+      // Call balanceOf function
+      console.log(this.MetaMaskAddress, 'address')
+      await contract.methods
+        .balanceOf(this.MetaMaskAddress)
+        .call()
+        .then(async (result) => {
+          console.log(result, 'result')
+          await contract.methods
+            .decimals()
+            .call()
+            .then((decimals) => {
+              this.metaMaskBalance = +result / 10 ** (+decimals - 1)
+            })
+            .catch((err) => {
+              console.log(err, 'Error getting decimals')
+            })
         })
         .catch((err) => {
-          console.log(err, 'err')
-          this.metaMaskBalance = 0
+          console.log(err, 'Error getting balance')
         })
     },
     checkNetWork() {
       console.log('running...')
       this.web3.eth.net.getId((err, netID) => {
-        // Main Network: 1
-        // Ropsten Test Network: 3
-        // Kovan Test Network: 42
-        // Rinkeby Test Network: 4
         // Fantom Opera Network: 250
         if (err !== null)
           return this.Log(this.MetamaskMsg.NETWORK_ERROR, 'NETWORK_ERROR')
 
         this.netID = netID //User MetaMask's current status
-        if (this.MetaMaskAddress !== '') {
-          if (netID === '1')
-            return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, 'MAINNET')
-          if (netID === '3')
-            return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, 'ROPSTEN')
-          if (netID === '42')
-            return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, 'LOVAN')
-          if (netID === '4')
-            return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, 'RINKEBY')
-          if (netID === '250') {
-            return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, 'FTM')
-          }
-          return this.Log(this.MetamaskMsg.METAMASK_MAIN_NET, 'MAINNET')
+        if (netID == '250') {
+          return this.Log(this.MetamaskMsg.METAMASK_MAIN_NET, 'FTM')
         }
       })
     },
     Log(msg, type = '') {
-      console.log(type, 'type')
       const letType = type
       if (letType === this.type) return
       const message = this.userMessage === 'null' ? msg : this.userMessage
@@ -131,14 +148,12 @@ export default {
         balance: this.metaMaskBalance,
       })
     },
-    web3TimerCheck(web3) {
+    async web3TimerCheck(web3) {
       this.web3 = web3
       console.log(this.web3)
-      this.checkAccounts()
-      this.checkNetWork()
-      this.Web3Interval = this.checkWeb3()
-      this.AccountInterval = this.checkAccounts()
-      this.NetworkInterval = this.checkNetWork()
+      await this.checkAccounts()
+      await this.getBalance()
+      await this.checkNetWork()
     },
     async connectToMetamask() {
       if (window.ethereum) {
