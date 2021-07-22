@@ -1,24 +1,26 @@
 <template>
-  <div>
-    <div class="age__modal">
-      <p class="text-center">Are you 18 or older?</p>
-      <div class="actions mt-2 flex justify-evenly">
-        <button
-          class="bg-primary rounded-xl px-10 xl:px-16 py-1 mr-3 text-white"
-          @click="goToHomepage"
-        >
-          Yes
-        </button>
-        <button
-          class="bg-navy rounded-xl px-10 xl:px-16 py-1 text-white"
-          @click="returnBack"
-        >
-          No
-        </button>
+  <client-only>
+    <div>
+      <div class="age__modal">
+        <p class="text-center">Are you 18 or older?</p>
+        <div class="actions mt-2 flex justify-evenly">
+          <button
+            class="bg-primary rounded-xl px-10 xl:px-16 py-1 mr-3 text-white"
+            @click="goToHomepage"
+          >
+            Yes
+          </button>
+          <button
+            class="bg-navy rounded-xl px-10 xl:px-16 py-1 text-white"
+            @click="returnBack"
+          >
+            No
+          </button>
+        </div>
       </div>
+      <div class="overlay"></div>
     </div>
-    <div class="overlay"></div>
-  </div>
+  </client-only>
 </template>
 
 <script>

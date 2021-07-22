@@ -1,6 +1,6 @@
 <template>
   <transition name="box">
-    <nav class="messages_dropdown" v-click-outside="hide">
+    <nav class="messages_dropdown shadow-white" v-click-outside="hide">
       <div
         class="px-3 py-3 wrapper_box bg-white dark:bg-messages dark:box-messages"
       >

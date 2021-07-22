@@ -139,9 +139,11 @@
             </span>
           </a>
         </div>
+        <div class="mt-2 block lg:hidden badge__just">
+          <BadgeBuyJust />
+        </div>
       </div>
     </div>
-
     <LayoutFooter />
   </div>
 </template>
@@ -261,9 +263,10 @@ export default {
     },
     onComplete(data) {
       console.log('data:', data)
-      const { metaMaskAddress } = data
+      const { metaMaskAddress, balance } = data
       if (metaMaskAddress) {
-        this.$store.commit('auth/setWalletAddress', data)
+        this.$store.commit('auth/setWalletAddress', metaMaskAddress)
+        this.$store.commit('auth/setWalletBalance', balance)
         this.$store.commit('auth/setAuth', {})
       }
     },
@@ -281,5 +284,7 @@ input::placeholder {
 .social__icon {
   padding-left: 0.3em;
   padding-right: 0.3em;
+}
+.badge__just {
 }
 </style>

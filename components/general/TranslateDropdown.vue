@@ -87,11 +87,11 @@ export default {
     display: none;
   }
   top: 30%;
-  @media (min-width: 1280px) and (max-width: 1439px) {
-    .code-name {
-      display: none;
-    }
-  }
+  // @media (min-width: 1280px) and (max-width: 1439px) {
+  //   .code-name {
+  //     display: none;
+  //   }
+  // }
 }
 img {
   width: 30px;

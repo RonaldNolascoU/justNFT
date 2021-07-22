@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import getCookie from '@/scripts/cookies.js'
 export default {
   middleware: ['router-auth'],
   computed: {
@@ -54,11 +53,6 @@ export default {
       !this.$store.state.darkMode
     ) {
       this.$store.commit('TOGGLE_DARK_MODE')
-    }
-
-    let modalAge = getCookie('justyours_modal_age')
-    if (modalAge) {
-      this.$store.commit('CLOSE_AGE_MODAL')
     }
   },
 }
