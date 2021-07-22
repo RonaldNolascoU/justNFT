@@ -8,6 +8,7 @@
 @import './components/subscriptions';
 @import './components/_utilities.scss';
 @import 'material-icons/iconfont/material-icons.css';
+@import 'vue-select/src/scss/vue-select.scss';
 
 input::placeholder {
   font-size: 24px;
