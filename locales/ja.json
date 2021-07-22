@@ -17,6 +17,19 @@
     "about": "約",
     "forgotBtn": "メールを送信するには"
   },
+  "signup": {
+    "title": "コンテンツクリエーターとしてサインアップ",
+    "username": "ユーザー名",
+    "birthday": "お誕生日",
+    "address": "住所",
+    "genre": "ジャンル",
+    "id": "ホールドアップID",
+    "img": "ここに画像をアップロードまたはドロップするには、ここをクリックしてください",
+    "link": "現在のOnlyFansまたは同様のもの",
+    "bio": "バイオ",
+    "profile": "プロフィール写真",
+    "genreOptions": ["男性", "女性", "トランス", "非バイナリ"]
+  },
   "wallet": {
     "warningModal": "警告：Just Yours Supportを含め、これを他の人と共有しないでください。",
     "agree": "同意する",

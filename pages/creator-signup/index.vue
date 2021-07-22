@@ -1,12 +1,9 @@
 <template>
-  <AuthLogin />
+  <AuthCreatorSignUp />
 </template>
 
 <script>
 export default {
-  middleware: ['router-auth'],
   layout: 'blank',
 }
 </script>
-
-<style></style>

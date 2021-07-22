@@ -17,6 +17,19 @@
     "about": "关于",
     "forgotBtn": "发送电子邮件"
   },
+  "signup": {
+    "title": "注册为内容创建者",
+    "username": "用户名",
+    "birthday": "生日",
+    "address": "地址",
+    "genre": "类型",
+    "id": "举个身份证",
+    "img": "单击或将您的图片放在这里上传",
+    "link": "Current OnlyFans 或类似",
+    "bio": "生物",
+    "profile": "个人资料图片",
+    "genreOptions": ["男人", "女性", "反式", "非二进制"]
+  },
   "wallet": {
     "warningModal": "警告：切勿与任何人共享此信息，包括 Just Yours Support。",
     "agree": "我同意",

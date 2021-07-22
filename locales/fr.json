@@ -17,6 +17,19 @@
     "about": "À propos",
     "forgotBtn": "Envoyer un E-mail"
   },
+  "signup": {
+    "title": "Inscrivez-vous en tant que créateur de contenu",
+    "username": "Nom d'utilisateur",
+    "birthday": "Date d'anniversaire",
+    "address": "Adresse",
+    "genre": "Genero",
+    "id": "Identification",
+    "img": "Cliquez pour télécharger ou déposer votre image ici",
+    "link": "Actuel OnlyFans ou similaire",
+    "bio": "Biographie",
+    "profile": "image de profil",
+    "genreOptions": ["Mâle", "Femelle", "Trans", "Non Binaire"]
+  },
   "wallet": {
     "warningModal": "Avertissement : Ne partagez jamais cela avec qui que ce soit, y compris Just Yours Support.",
     "agree": "Je suis d'accord",

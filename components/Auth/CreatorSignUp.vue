@@ -20,43 +20,21 @@
           <span class="fs-18 text-blue text-center mt-3 lg:mt-2">{{
             $t('login.title')
           }}</span>
-          <div class="w-full mt-3 lg:mt-3">
-            <!-- <vue-metamask userMessage="msg" @onComplete="onComplete">
-            </vue-metamask> -->
-            <AuthMetamask
-              v-if="mode == 'auth'"
-              :userMessage="msg"
-              @onComplete="onComplete"
-            />
-            <!-- <button class="w-full" @click="loginWithMetamask()">
-              <div class="flex">
-                <div
-                  class="rounded-l-3xl border border-2 border-color-primary flex justify-center items-center bg-white icon width metamask__icon"
-                >
-                  <img src="/images/metamask.svg" class="mx-5" />
-                </div>
-                <div
-                  class="w-11/12 bg-primary text-white w-full rounded-r-3xl input-height fs-24 flex justify-start pl-6 items-center"
-                >
-                  <div>{{ $t('login.metamask') }}</div>
-                </div>
-              </div>
-            </button> -->
-          </div>
         </div>
 
-        <h2 class="mt-5 lg:mt-5">
+        <div class="mt-5 lg:mt-5 text-center">
           <span class="fs-24 text-black bg-white">{{
-            mode == 'auth' ? $t('login.or') : $t('login.forgot')
+            $t('signup.title')
           }}</span>
-        </h2>
+        </div>
 
         <div class="flex flex-col items-center login-form">
           <form @submit.prevent="onSubmit" class="w-full">
+            <!-- username -->
             <input
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
               v-model="email"
-              :placeholder="$t('login.email')"
+              :placeholder="$t('signup.username')"
               type="email"
               required
             />
@@ -65,11 +43,21 @@
               class="fs-16 text-primary font-semibold w-full"
               >{{ errors.email }}</span
             >
+
+            <!-- birthday -->
+            <div class="mt-3 lg:mt-2">
+              <DatePicker
+                :language="languages[$i18n.locale]"
+                format="d MMMM yyyy"
+                :placeholder="$t('signup.birthday')"
+              />
+            </div>
+            <div>{{ $i18n.locale }}</div>
+            <!-- address -->
             <input
-              v-if="mode == 'auth'"
-              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
               v-model="password"
-              :placeholder="$t('login.password')"
+              :placeholder="$t('signup.address')"
               type="password"
               required
             />
@@ -78,11 +66,28 @@
               class="fs-16 text-primary font-semibold w-full"
               >{{ errors.password }}</span
             >
+
+            <!-- genre -->
+            <div class="mt-3 lg:mt-2">
+              <VSelect
+                :placeholder="$t('signup.genre')"
+                :options="$t('signup.genreOptions')"
+              />
+            </div>
+
+            <!-- ID -->
+            <div class="mt-3 lg:mt-2">
+              <button v-if="!idVisible" @click="idVisible = true">
+                {{ $t('signup.id') }}
+              </button>
+              <UploadImages v-if="idVisible" :uploadMsg="$t('signup.img')" />
+            </div>
+
+            <!-- link -->
             <input
-              v-if="!isLogin && mode == 'auth'"
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
               v-model="username"
-              :placeholder="$t('login.username')"
+              :placeholder="$t('signup.link')"
               type="text"
               required
             />
@@ -91,15 +96,30 @@
               class="fs-16 text-primary font-semibold w-full"
               >{{ errors.username }}</span
             >
-            <div
-              class="flex w-full mt-3 lg:mt-3"
-              v-if="isLogin && mode == 'auth'"
+
+            <!-- bio -->
+            <input
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+              v-model="username"
+              :placeholder="$t('signup.bio')"
+              type="text"
+              required
+            />
+            <span
+              v-if="errors.username"
+              class="fs-16 text-primary font-semibold w-full"
+              >{{ errors.username }}</span
             >
-              <a
-                @click.prevent="openForgotPassword()"
-                class="fs-16 text-pink cursor-pointer"
-                >{{ $t('login.forgot') }}</a
-              >
+
+            <!-- profile pic -->
+            <div class="mt-3 lg:mt-2">
+              <button v-if="!profileVisible" @click="profileVisible = true">
+                {{ $t('signup.profile') }}
+              </button>
+              <UploadImages
+                v-if="profileVisible"
+                :uploadMsg="$t('signup.img')"
+              />
             </div>
 
             <span
@@ -117,16 +137,13 @@
               :disabled="loading"
               class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
             >
-              <span v-if="mode == 'auth'">
-                {{ isLogin ? $t('login.login') : $t('login.signup') }}
-              </span>
-              <span v-else>{{ $t('login.forgotBtn') }}</span>
+              {{ $t('login.signup') }}
               <GeneralLoader v-if="loading" />
             </button>
           </form>
         </div>
 
-        <h2 class="mt-5 lg:mt-5"></h2>
+        <!-- <h2 class="mt-5 lg:mt-5"></h2>
         <div class="text-center">
           <p v-if="!isLogin">{{ $t('login.haveAccount') }}</p>
           <p v-else>{{ $t('login.noAccount') }}</p>
@@ -135,25 +152,33 @@
             @click="changeAuthMode()"
           >
             <span>
-              {{ isLogin ? $t('login.signup') : $t('login.login') }}
+              {{ $t('login.login') }}
             </span>
           </a>
-        </div>
-        <div class="mt-2 block lg:hidden badge__just">
-          <BadgeBuyJust />
-        </div>
+        </div> -->
       </div>
     </div>
+
     <LayoutFooter />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import VSelect from 'vue-select'
+import DatePicker from 'vuejs-datepicker'
+import * as lang from 'vuejs-datepicker/src/locale'
+
+import UploadImages from 'vue-upload-drop-images'
 
 export default {
+  components: { UploadImages, DatePicker, VSelect },
   data() {
     return {
+      idVisible: false,
+      profileVisible: false,
+      languages: lang,
+
       isLogin: true,
       username: null,
       email: null,
@@ -263,10 +288,9 @@ export default {
     },
     onComplete(data) {
       console.log('data:', data)
-      const { metaMaskAddress, balance } = data
+      const { metaMaskAddress } = data
       if (metaMaskAddress) {
-        this.$store.commit('auth/setWalletAddress', metaMaskAddress)
-        this.$store.commit('auth/setWalletBalance', balance)
+        this.$store.commit('auth/setWalletAddress', data)
         this.$store.commit('auth/setAuth', {})
       }
     },
@@ -284,7 +308,5 @@ input::placeholder {
 .social__icon {
   padding-left: 0.3em;
   padding-right: 0.3em;
-}
-.badge__just {
 }
 </style>
