@@ -63,6 +63,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/vuesax.js' },
+    { src: '~/plugins/client-init', mode: 'client' },
     { src: '~/plugins/directives', mode: 'client' },
     { src: '~/plugins/scripts', mode: 'client' },
   ],
@@ -101,8 +102,8 @@ export default {
     // strategy: 'no_prefix',
     defaultLocale: 'en',
     detectBrowserLanguage: {
-      useCookie: false,
-      cookieKey: 'i18n_redirected',
+      useCookie: true,
+      cookieKey: 'jy_locale',
       onlyOnRoot: true, // recommended
     },
     pages: {

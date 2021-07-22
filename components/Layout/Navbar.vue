@@ -85,7 +85,6 @@
             />
             <NotificationDropdown
               v-if="notifyBox"
-              :messages="messages"
               @hidden="notifyBox = false"
             />
           </div>

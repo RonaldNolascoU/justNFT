@@ -1,10 +1,10 @@
 <template>
   <div class="mb-5 xl:mx-6">
-    <div class="flex">
-      <div class="flex flex-shrink-0 mr-4">
+    <div class="flex relative">
+      <div class="flex flex-shrink-0 mr-4 absolute">
         <nuxt-img src="/images/post.png" class="rounded-full" />
       </div>
-      <div class="flex justify-between flex-auto">
+      <div class="flex justify-between flex-auto" style="margin-left: 5em">
         <div>
           <nuxt-link
             :to="nametoSlug(post.user)"

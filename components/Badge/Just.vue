@@ -2,7 +2,7 @@
   <div class="relative">
     <div
       class="relative flex items-center px-5 px-10 py-1 border-solid rounded-full border-custom-gray fs-16 dark:bg-white lg:dark:bg-transparent cursor-pointer"
-      @click="buyJust = !buyJust"
+      @click.prevent.stop="buyJust = !buyJust"
     >
       <nuxt-img
         class="absolute self-start my-3 mr-2 xl:my-0 just-logo"
@@ -15,7 +15,8 @@
     </div>
     <div
       v-if="buyJust"
-      class="absolute flex items-center px-10 py-1 mt-3 rounded-full bg-navy z-50 cursor-pointer select-none"
+      v-click-outside="hide"
+      class="absolute flex items-center px-4 w-full justify-center py-1 mt-3 rounded-full bg-navy z-50 cursor-pointer select-none"
       :class="{ 'ease-in-out': buyJust }"
     >
       <nuxt-img class="ml-1.5 mr-1" src="/images/just-pink.png" />
@@ -35,6 +36,11 @@ export default {
     return {
       buyJust: false,
     }
+  },
+  methods: {
+    hide() {
+      this.buyJust = false
+    },
   },
 }
 </script>

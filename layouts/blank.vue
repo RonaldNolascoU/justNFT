@@ -1,8 +1,9 @@
 <template>
   <div>
+    <BadgeBuyJust />
     <ModalAge v-if="$store.state.modals.age" />
     <Nuxt />
-    <div class="translations relative">
+    <div class="container translations relative">
       <GeneralTranslateDropdown />
     </div>
   </div>
@@ -14,7 +15,7 @@ export default {
   mounted() {
     let modalAge = getCookie('justyours_modal_age')
     if (modalAge) {
-      this.$store.commit('CLOSE_AGE_MODAL')
+      // this.$store.commit('CLOSE_AGE_MODAL')
     }
   },
 }

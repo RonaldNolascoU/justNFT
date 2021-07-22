@@ -139,6 +139,9 @@
             </span>
           </a>
         </div>
+        <div class="mt-2 block lg:hidden badge__just">
+          <BadgeBuyJust />
+        </div>
       </div>
     </div>
 
@@ -183,10 +186,17 @@
         </a>
         <a
           class="fs-24 social__icon p-1.5 flex fs-res-24 rounded-full bg-primary text-white mx-5"
-          href="https://discord.gg/justyours"
+          href="https://instagram.com/justyours.me"
           target="_blank"
         >
           <i class="fs-16 fab fa-instagram"></i>
+        </a>
+        <a
+          class="fs-24 social__icon p-1.5 flex fs-res-24 rounded-full bg-primary text-white mx-5"
+          href="https://www.youtube.com/channel/UCtuZ-6bHigaEK3mriX2WVbw"
+          target="_blank"
+        >
+          <i class="fs-16 fab fa-youtube"></i>
         </a>
       </div>
     </div>
@@ -308,9 +318,10 @@ export default {
     },
     onComplete(data) {
       console.log('data:', data)
-      const { metaMaskAddress } = data
+      const { metaMaskAddress, balance } = data
       if (metaMaskAddress) {
-        this.$store.commit('auth/setWalletAddress', data)
+        this.$store.commit('auth/setWalletAddress', metaMaskAddress)
+        this.$store.commit('auth/setWalletBalance', balance)
         this.$store.commit('auth/setAuth', {})
       }
     },
@@ -328,5 +339,7 @@ input::placeholder {
 .social__icon {
   padding-left: 0.3em;
   padding-right: 0.3em;
+}
+.badge__just {
 }
 </style>

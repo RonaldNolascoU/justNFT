@@ -1,8 +1,8 @@
 <template>
   <transition name="box">
-    <nav class="notifications__dropdown" v-click-outside="hide">
+    <nav class="notifications__dropdown shadow-white" v-click-outside="hide">
       <div
-        class="md:px-3 py-3 wrapper_box bg-white dark:bg-black dark:xl:bg-messages dark:box-messages"
+        class="md:px-3 py-3 wrapper_box bg-white dark:bg-black xl:dark:bg-messages dark:box-messages"
       >
         <div class="wrapper show">
           <ul class="menu-bar">
