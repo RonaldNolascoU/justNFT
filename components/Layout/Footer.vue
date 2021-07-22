@@ -45,6 +45,13 @@
       >
         <i class="fs-16 fab fa-instagram"></i>
       </a>
+      <a
+        class="fs-24 social__icon p-1.5 flex fs-res-24 rounded-full bg-primary text-white mx-5"
+        href="https://www.youtube.com/channel/UCtuZ-6bHigaEK3mriX2WVbw"
+        target="_blank"
+      >
+        <i class="fs-16 fab fa-youtube"></i>
+      </a>
     </div>
   </div>
 </template>

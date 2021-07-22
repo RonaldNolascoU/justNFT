@@ -10,7 +10,7 @@
       <ul>
         <li
           class="flex items-center my-3 cursor-pointer hover:underline transform transition duration-300 ease-in-out hover:scale-110"
-          @click="$router.push('/')"
+          @click="$router.push('/creator-signup')"
         >
           <span class="mr-3 material-icons-round text-gray text-primary"
             >verified</span

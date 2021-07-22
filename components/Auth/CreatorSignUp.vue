@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:container lg:mx-5">
+  <div class="xl:container lg:mx-5 content__creator">
     <div class="flex justify-center pt-5 lg:pt-10 3xl:mx-32">
       <div
         class="lg:w-3/5 xl:w-1/2 2xl:w-3/5 hidden lg:flex justify-end pt-8 3xl:mx-16"
@@ -52,7 +52,7 @@
                 :placeholder="$t('signup.birthday')"
               />
             </div>
-            <div>{{ $i18n.locale }}</div>
+            <!-- <div>{{ $i18n.locale }}</div> -->
             <!-- address -->
             <input
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
@@ -77,8 +77,11 @@
 
             <!-- ID -->
             <div class="mt-3 lg:mt-2">
-              <button v-if="!idVisible" @click="idVisible = true">
-                {{ $t('signup.id') }}
+              <button
+                @click.prevent.stop="idVisible = !idVisible"
+                class="underline"
+              >
+                <i class="fas fa-angle-right"></i> {{ $t('signup.id') }}
               </button>
               <UploadImages v-if="idVisible" :uploadMsg="$t('signup.img')" />
             </div>
@@ -113,8 +116,11 @@
 
             <!-- profile pic -->
             <div class="mt-3 lg:mt-2">
-              <button v-if="!profileVisible" @click="profileVisible = true">
-                {{ $t('signup.profile') }}
+              <button
+                @click.prevent.stop="profileVisible = !profileVisible"
+                class="underline"
+              >
+                <i class="fas fa-angle-right"></i> {{ $t('signup.profile') }}
               </button>
               <UploadImages
                 v-if="profileVisible"
@@ -132,9 +138,10 @@
               class="fs-16 text-primary font-semibold w-full"
               >Email was sent successfully.</span
             >
+            <!-- TODO: DISABLED PROP MUST BE DYNAMIC -->
             <button
               type="submit"
-              :disabled="loading"
+              :disabled="true"
               class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
             >
               {{ $t('login.signup') }}
@@ -298,15 +305,39 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-input::placeholder {
-  font-size: 16px !important;
-}
-.metamask__icon {
-  max-width: 79px;
-}
-.social__icon {
-  padding-left: 0.3em;
-  padding-right: 0.3em;
+<style lang="scss">
+.content__creator {
+  input::placeholder {
+    font-size: 16px !important;
+  }
+  .vs__dropdown-toggle {
+    border-radius: 9999px;
+    height: 45px;
+    color: rgba(0, 0, 0, 0.4);
+    border-width: 2px;
+    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+
+    .vs__selected-options {
+      input::placeholder {
+        position: relative;
+        left: 0.4em;
+      }
+    }
+  }
+  .vdp-datepicker {
+    .vdp-datepicker__calendar {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+      height: 45px;
+      border-radius: 9999px;
+      border: 2px solid rgba(229, 231, 235, var(--tw-border-opacity));
+    }
+    input::placeholder {
+      position: relative;
+      left: 1em;
+    }
+  }
 }
 </style>
