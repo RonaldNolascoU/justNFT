@@ -261,10 +261,9 @@
 <script>
 import { mapActions } from 'vuex'
 import VSelect from 'vue-select'
-import UploadImages from 'vue-upload-drop-images'
 
 export default {
-  components: { UploadImages, VSelect },
+  components: { VSelect },
   data() {
     return {
       idVisible: false,

@@ -27,7 +27,6 @@
     "vee-validate": "^3.4.11",
     "vue-filepond": "^6.0.0",
     "vue-select": "^3.11.2",
-    "vue-upload-drop-images": "^1.0.7",
     "vuesax": "^3",
     "web3": "^1.4.0"
   },
