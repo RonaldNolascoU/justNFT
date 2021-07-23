@@ -29,125 +29,213 @@
         </div>
 
         <div class="flex flex-col items-center login-form">
-          <form @submit.prevent="onSubmit" class="w-full">
-            <!-- username -->
-            <input
-              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-              v-model="email"
-              :placeholder="$t('signup.username')"
-              type="email"
-              required
-            />
-            <span
-              v-if="errors.email"
-              class="fs-16 text-primary font-semibold w-full"
-              >{{ errors.email }}</span
-            >
-
-            <!-- birthday -->
-            <div class="mt-3 lg:mt-2">
-              <DatePicker
-                :language="languages[$i18n.locale]"
-                format="d MMMM yyyy"
-                :placeholder="$t('signup.birthday')"
-              />
-            </div>
-            <!-- <div>{{ $i18n.locale }}</div> -->
-            <!-- address -->
-            <input
-              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-              v-model="password"
-              :placeholder="$t('signup.address')"
-              type="password"
-              required
-            />
-            <span
-              v-if="errors.password"
-              class="fs-16 text-primary font-semibold w-full"
-              >{{ errors.password }}</span
-            >
-
-            <!-- genre -->
-            <div class="mt-3 lg:mt-2">
-              <VSelect
-                :placeholder="$t('signup.genre')"
-                :options="$t('signup.genreOptions')"
-              />
-            </div>
-
-            <!-- ID -->
-            <div class="mt-3 lg:mt-2">
-              <button
-                @click.prevent.stop="idVisible = !idVisible"
-                class="underline"
+          <ValidationObserver ref="registrationForm">
+            <form @submit.prevent="onSubmit" class="w-full">
+              <!-- username -->
+              <ValidationProvider
+                name="Username"
+                rules="required"
+                v-slot="{ errors }"
               >
-                <i class="fas fa-angle-right"></i> {{ $t('signup.id') }}
-              </button>
-              <UploadImages v-if="idVisible" :uploadMsg="$t('signup.img')" />
-            </div>
+                <input
+                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  v-model="form.username"
+                  :placeholder="$t('signup.username')"
+                  type="text"
+                  required
+                />
+                <span class="fs-16 text-primary font-semibold w-full">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
 
-            <!-- link -->
-            <input
-              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-              v-model="username"
-              :placeholder="$t('signup.link')"
-              type="text"
-              required
-            />
-            <span
-              v-if="errors.username"
-              class="fs-16 text-primary font-semibold w-full"
-              >{{ errors.username }}</span
-            >
-
-            <!-- bio -->
-            <input
-              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-              v-model="username"
-              :placeholder="$t('signup.bio')"
-              type="text"
-              required
-            />
-            <span
-              v-if="errors.username"
-              class="fs-16 text-primary font-semibold w-full"
-              >{{ errors.username }}</span
-            >
-
-            <!-- profile pic -->
-            <div class="mt-3 lg:mt-2">
-              <button
-                @click.prevent.stop="profileVisible = !profileVisible"
-                class="underline"
+              <!-- birthday -->
+              <div class="mt-3 lg:mt-2">
+                <ValidationProvider
+                  name="Birthday"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <VueDatePicker
+                    v-model="form.birthday"
+                    clearable
+                    :placeholder="$t('signup.birthday')"
+                    :color="'#c53761'"
+                    fullscreen-mobile
+                    :locale="{ lang: $i18n.locale }"
+                    noCalendarIcon
+                    ref="menu"
+                    :max-date="$dateFns.subYears(new Date(), 18).toISOString()"
+                    min-date="1980-01-01"
+                    @onOpen="menu = true"
+                    @onClose="menu = false"
+                  />
+                  <span class="fs-16 text-primary font-semibold w-full">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+              <!-- address -->
+              <ValidationProvider
+                name="Address"
+                rules="required"
+                v-slot="{ errors }"
               >
-                <i class="fas fa-angle-right"></i> {{ $t('signup.profile') }}
-              </button>
-              <UploadImages
-                v-if="profileVisible"
-                :uploadMsg="$t('signup.img')"
-              />
-            </div>
+                <input
+                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  v-model="form.address"
+                  :placeholder="$t('signup.address')"
+                  type="address"
+                  required
+                />
+                <span class="fs-16 text-primary font-semibold w-full">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
 
-            <span
+              <!-- genre -->
+              <div class="mt-3 lg:mt-2">
+                <ValidationProvider
+                  name="Genre"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <VSelect
+                    :placeholder="$t('signup.genre')"
+                    :options="$t('signup.genreOptions')"
+                    v-model="form.genre"
+                  >
+                    <template #search="{ attributes, events }">
+                      <input
+                        class="vs__search"
+                        :required="!form.genre"
+                        v-bind="attributes"
+                        v-on="events"
+                      />
+                    </template>
+                  </VSelect>
+                  <span class="fs-16 text-primary font-semibold w-full">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+
+              <!-- ID -->
+              <div class="mt-3 lg:mt-2">
+                <button
+                  v-tooltip="
+                    getTooltipOptions(
+                      'Attach front and back images from your ID'
+                    )
+                  "
+                  @click.prevent.stop="idVisible = !idVisible"
+                  class="underline"
+                >
+                  <i class="fas fa-angle-right"></i> {{ $t('signup.id') }}
+                </button>
+                <client-only>
+                  <ValidationProvider
+                    name="ID"
+                    mode="lazy"
+                    rules="required"
+                    v-slot="{ errors }"
+                  >
+                    <file-pond
+                      v-model="form.id"
+                      name="id_imgs"
+                      ref="pond"
+                      label-idle="Drop files here..."
+                      v-bind:allow-multiple="true"
+                      accepted-file-types="image/jpeg, image/png"
+                      maxFiles="2"
+                      :credits="[]"
+                      required
+                    />
+                    <span class="fs-16 text-primary font-semibold w-full">{{
+                      errors[0]
+                    }}</span>
+                  </ValidationProvider>
+                </client-only>
+              </div>
+
+              <!-- link -->
+              <input
+                class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                v-model="form.onlyfans"
+                :placeholder="$t('signup.link')"
+                type="text"
+              />
+              <span class="fs-16 text-primary font-semibold w-full">{{
+                errors[0]
+              }}</span>
+
+              <!-- bio -->
+              <ValidationProvider
+                name="Bio"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input
+                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  v-model="form.bio"
+                  :placeholder="$t('signup.bio')"
+                  type="text"
+                  required
+                />
+                <span class="fs-16 text-primary font-semibold w-full">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+
+              <!-- profile pic -->
+              <div class="mt-3 lg:mt-2">
+                <button
+                  v-tooltip="getTooltipOptions('Attach a profile image')"
+                  @click.prevent.stop="profileVisible = !profileVisible"
+                  class="underline"
+                >
+                  <i class="fas fa-angle-right"></i> {{ $t('signup.profile') }}
+                </button>
+                <client-only>
+                  <ValidationProvider
+                    mode="lazy"
+                    name="Profile Picture"
+                    rules="required"
+                    v-slot="{ errors }"
+                  >
+                    <file-pond
+                      name="profile_picture"
+                      ref="pond"
+                      label-idle="Drop files here..."
+                      v-bind:allow-multiple="true"
+                      accepted-file-types="image/jpeg, image/png"
+                      maxFiles="1"
+                      :credits="[]"
+                      v-model="form.profilePicture"
+                      required
+                    />
+                    <span class="fs-16 text-primary font-semibold w-full">{{
+                      errors[0]
+                    }}</span>
+                  </ValidationProvider>
+                </client-only>
+              </div>
+
+              <!-- <span
               v-if="successfulSignUp"
               class="fs-16 text-primary font-semibold w-full"
               >Email registered. Activation mail has been sent to user.</span
-            >
-            <span
-              v-if="successfulSendEmail"
-              class="fs-16 text-primary font-semibold w-full"
-              >Email was sent successfully.</span
-            >
-            <!-- TODO: DISABLED PROP MUST BE DYNAMIC -->
-            <button
-              type="submit"
-              :disabled="true"
-              class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
-            >
-              {{ $t('login.signup') }}
-              <GeneralLoader v-if="loading" />
-            </button>
-          </form>
+            > -->
+              <!-- TODO: DISABLED PROP MUST BE DYNAMIC -->
+              <button
+                type="submit"
+                class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
+              >
+                {{ $t('login.signup') }}
+                <GeneralLoader v-if="loading" />
+              </button>
+            </form>
+          </ValidationObserver>
         </div>
 
         <!-- <h2 class="mt-5 lg:mt-5"></h2>
@@ -173,26 +261,24 @@
 <script>
 import { mapActions } from 'vuex'
 import VSelect from 'vue-select'
-import DatePicker from 'vuejs-datepicker'
-import * as lang from 'vuejs-datepicker/src/locale'
-
 import UploadImages from 'vue-upload-drop-images'
 
 export default {
-  components: { UploadImages, DatePicker, VSelect },
+  components: { UploadImages, VSelect },
   data() {
     return {
       idVisible: false,
       profileVisible: false,
-      languages: lang,
-
-      isLogin: true,
-      username: null,
-      email: null,
-      password: null,
-      confirmPassword: null,
-      msg: 'Metamask',
-      mode: 'auth',
+      form: {
+        username: null,
+        birthday: null,
+        address: null,
+        genre: null,
+        id: null,
+        onlyfans: null,
+        bio: null,
+        profilePicture: null,
+      },
       errors: {
         username: null,
         email: null,
@@ -200,8 +286,14 @@ export default {
       },
       loading: false,
       successfulSignUp: false,
-      successfulSendEmail: false,
+      date: new Date(),
+      menu: false,
     }
+  },
+  watch: {
+    menu(val) {
+      val && setTimeout(() => (this.$refs.menu.$refs.agenda.mode = 'year'))
+    },
   },
   methods: {
     ...mapActions('auth', ['login', 'signUp', 'forgotPassword']),
@@ -215,6 +307,19 @@ export default {
       this.password = null
       this.username = null
     },
+    getTooltipOptions(msg) {
+      return {
+        content: msg,
+        placement: 'top',
+        classes: ['info'],
+        targetClasses: ['it-has-a-tooltip'],
+        offset: 10,
+        delay: {
+          show: 500,
+          hide: 300,
+        },
+      }
+    },
     openForgotPassword() {
       this.mode = 'forgot'
       this.clearErrors()
@@ -226,11 +331,20 @@ export default {
       this.successfulSignUp = false
     },
     onSubmit() {
-      if (this.mode == 'auth') {
-        this.isLogin ? this.loginWithEmailAndPassword() : this.register()
-      } else {
-        this.sendEmailToRestartPass()
-      }
+      console.log(this.form, 'FORM')
+      console.log(this.$refs.registrationForm.validate(), 'refs')
+
+      let { id } = this.form
+      id.map((id) => {
+        console.log(id, 'ID PHOTO')
+        this.form.id.push(id.file)
+      })
+
+      // if (this.mode == 'auth') {
+      //   this.isLogin ? this.loginWithEmailAndPassword() : this.register()
+      // } else {
+      //   this.sendEmailToRestartPass()
+      // }
     },
     loginWithEmailAndPassword() {
       if (this.loading) return
@@ -317,6 +431,11 @@ export default {
     border-width: 2px;
     border-color: rgba(229, 231, 235, var(--tw-border-opacity));
 
+    .vs__selected {
+      left: 0.5em;
+      position: relative;
+    }
+
     .vs__selected-options {
       input::placeholder {
         position: relative;
@@ -324,19 +443,18 @@ export default {
       }
     }
   }
-  .vdp-datepicker {
-    .vdp-datepicker__calendar {
-      width: 100%;
-    }
+  .vd-picker__input {
+    height: 45px;
+    border-radius: 9999px;
+    border: 2px solid rgba(229, 231, 235, var(--tw-border-opacity));
     input {
       width: 100%;
-      height: 45px;
-      border-radius: 9999px;
-      border: 2px solid rgba(229, 231, 235, var(--tw-border-opacity));
+      padding-left: 1em;
     }
-    input::placeholder {
-      position: relative;
-      left: 1em;
+    .vd-picker__input-clear {
+      position: absolute;
+      right: 1em;
+      top: 0.5em;
     }
   }
 }

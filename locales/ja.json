@@ -28,7 +28,8 @@
     "link": "現在のOnlyFansまたは同様のもの",
     "bio": "バイオ",
     "profile": "プロフィール写真",
-    "genreOptions": ["男性", "女性", "トランス", "非バイナリ"]
+    "genreOptions": ["男性", "女性", "トランス", "非バイナリ"],
+    "maxUploadError": "あなたはすでに最大の画像をアップロードしました"
   },
   "wallet": {
     "warningModal": "警告：Just Yours Supportを含め、これを他の人と共有しないでください。",

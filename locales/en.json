@@ -28,7 +28,8 @@
     "link": "Current OnlyFans or Similar",
     "bio": "Bio",
     "profile": "Profile Picture",
-    "genreOptions": ["Male", "Female", "Trans", "Non Binary"]
+    "genreOptions": ["Male", "Female", "Trans", "Non Binary"],
+    "maxUploadError": "You already uploaded the maximum images"
   },
   "wallet": {
     "warningModal": "Warning: Never share this with anyone, including Just Yours Support.",

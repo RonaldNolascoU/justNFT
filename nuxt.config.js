@@ -64,6 +64,7 @@ export default {
   plugins: [
     { src: '~plugins/vuesax.js' },
     { src: '~/plugins/client-init', mode: 'client' },
+    { src: '~/plugins/third-party', mode: 'client' },
     { src: '~/plugins/directives', mode: 'client' },
     { src: '~/plugins/scripts', mode: 'client' },
   ],
@@ -141,5 +142,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true,
+    transpile: ['vee-validate'],
   },
 }

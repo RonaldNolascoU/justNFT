@@ -23,12 +23,13 @@
     "birthday": "Fecha de Nacimiento",
     "address": "Direccion",
     "genre": "Genero",
-    "id": "Hold up ID along with selfies",
+    "id": "Foto de ID's",
     "img": "Click para subir or Arrastra aqui tu imagen",
     "link": "Link de OnlyFans o Similar",
     "bio": "Biografia",
     "profile": "Foto de Perfil",
-    "genreOptions": ["Hombre", "Mujer", "Trans", "No Binario"]
+    "genreOptions": ["Hombre", "Mujer", "Trans", "No Binario"],
+    "maxUploadError": "Ya has alcanzado la máxima cantidad de fotos"
   },
   "wallet": {
     "warningModal": "Precaución: Nunca compartas esto con nadie, ni con el soporte de Just Yours.",

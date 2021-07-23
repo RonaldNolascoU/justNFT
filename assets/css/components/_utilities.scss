@@ -61,6 +61,25 @@
   border-radius: 6%;
 }
 
+.tooltip {
+  // ...
+
+  &.info {
+    .tooltip-inner {
+      background: rgba(#004499, 0.9);
+      color: white;
+      padding: 16px;
+      border-radius: 5px;
+      box-shadow: 0 5px 30px rgba(black, 0.1);
+      max-width: 250px;
+    }
+
+    .tooltip-arrow {
+      border-color: rgba(#004499, 0.9);
+    }
+  }
+}
+
 // DARK MODE
 
 .dark {

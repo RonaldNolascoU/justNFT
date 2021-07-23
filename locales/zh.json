@@ -28,7 +28,8 @@
     "link": "Current OnlyFans 或类似",
     "bio": "生物",
     "profile": "个人资料图片",
-    "genreOptions": ["男人", "女性", "反式", "非二进制"]
+    "genreOptions": ["男人", "女性", "反式", "非二进制"],
+    "maxUploadError": "您已经上传了最大数量的图片"
   },
   "wallet": {
     "warningModal": "警告：切勿与任何人共享此信息，包括 Just Yours Support。",

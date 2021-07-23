@@ -23,11 +23,11 @@
           <div class="w-full mt-3 lg:mt-3">
             <!-- <vue-metamask userMessage="msg" @onComplete="onComplete">
             </vue-metamask> -->
-            <AuthMetamask
+            <!-- <AuthMetamask
               v-if="mode == 'auth'"
               :userMessage="msg"
               @onComplete="onComplete"
-            />
+            /> -->
             <!-- <button class="w-full" @click="loginWithMetamask()">
               <div class="flex">
                 <div
@@ -45,11 +45,11 @@
           </div>
         </div>
 
-        <h2 class="mt-5 lg:mt-5">
+        <!-- <h2 class="mt-5 lg:mt-5">
           <span class="fs-24 text-black bg-white">{{
             mode == 'auth' ? $t('login.or') : $t('login.forgot')
           }}</span>
-        </h2>
+        </h2> -->
 
         <div class="flex flex-col items-center login-form">
           <form @submit.prevent="onSubmit" class="w-full">
@@ -78,7 +78,7 @@
               class="fs-16 text-primary font-semibold w-full"
               >{{ errors.password }}</span
             >
-            <input
+            <!-- <input
               v-if="!isLogin && mode == 'auth'"
               class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
               v-model="username"
@@ -90,7 +90,7 @@
               v-if="errors.username"
               class="fs-16 text-primary font-semibold w-full"
               >{{ errors.username }}</span
-            >
+            > -->
             <div
               class="flex w-full mt-3 lg:mt-3"
               v-if="isLogin && mode == 'auth'"
@@ -202,24 +202,26 @@ export default {
     },
     loginWithEmailAndPassword() {
       if (this.loading) return
-      this.loading = true
-      const credentials = { email: this.email, password: this.password }
-      this.login(credentials)
-        .then((response) => {
-          console.log(response, 'response')
-          this.loading = false
-        })
-        .catch((err) => {
-          console.log(err, 'error')
-          this.errors.email = err
-          this.loading = false
-        })
+      this.$store.commit('auth/setAuth', {})
+      // TODO: DISABLED FOR NOW UNTIL API IS WORKING ON LIVE DOMAIN
+
+      // this.loading = true
+      // const credentials = { email: this.email, password: this.password }
+      // this.login(credentials)
+      //   .then((response) => {
+      //     console.log(response, 'response')
+      //     this.loading = false
+      //   })
+      //   .catch((err) => {
+      //     console.log(err, 'error')
+      //     this.errors.email = err
+      //     this.loading = false
+      //   })
     },
     register() {
       if (this.loading) return
       this.loading = true
       const credentials = {
-        username: this.username,
         email: this.email,
         password: this.password,
       }

@@ -28,7 +28,8 @@
     "link": "Actuel OnlyFans ou similaire",
     "bio": "Biographie",
     "profile": "image de profil",
-    "genreOptions": ["Mâle", "Femelle", "Trans", "Non Binaire"]
+    "genreOptions": ["Mâle", "Femelle", "Trans", "Non Binaire"],
+    "maxUploadError": "Vous avez déjà téléchargé le maximum d'images"
   },
   "wallet": {
     "warningModal": "Avertissement : Ne partagez jamais cela avec qui que ce soit, y compris Just Yours Support.",
