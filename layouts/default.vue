@@ -1,37 +1,45 @@
 <template>
-  <div
-    :class="[
-      'px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container',
-      { 'h-screen': scroll },
-    ]"
-  >
-    <ModalAge v-if="$store.state.modals.age" />
-    <div class="xl:container">
-      <LayoutNavbar />
+  <div>
+    <div class="block xl:hidden">
+      <LayoutCookiesDisclaimer />
     </div>
-    <div class="infinity-divider w-screen hidden xl:block"></div>
     <div
-      id="body-container"
-      class="flex flex-wrap w-full xl:container pb-10 xl:h-screen"
+      :class="[
+        'px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container',
+        { 'h-screen': scroll },
+      ]"
     >
-      <div
-        class="flex-col justify-start hidden px-2 pt-12 sidebar-container xl:flex"
-      >
-        <LayoutSidebar />
+      <ModalAge v-if="$store.state.modals.age" />
+      <div class="xl:container">
+        <LayoutNavbar />
       </div>
+      <div class="infinity-divider w-screen hidden xl:block"></div>
       <div
-        id="nuxt__container"
-        :class="[
-          'w-full xl:pb-20 xl:border-l xl:border-r border-lighter page-container xl:w-full xl:pt-12',
-          { 'xl:h-screen xl:overflow-y-scroll': !scroll },
-        ]"
+        id="body-container"
+        class="flex flex-wrap w-full xl:container pb-10 xl:h-screen"
       >
-        <Nuxt />
+        <div
+          class="flex-col justify-start hidden px-2 pt-12 sidebar-container xl:flex"
+        >
+          <LayoutSidebar />
+        </div>
+        <div
+          id="nuxt__container"
+          :class="[
+            'w-full xl:pb-20 xl:border-l xl:border-r border-lighter page-container xl:w-full xl:pt-12',
+            { 'xl:h-screen xl:overflow-y-scroll': !scroll },
+          ]"
+        >
+          <Nuxt />
+        </div>
+        <div
+          class="hidden xl:flex items-start justify-center pt-12 pb-20 suggestions-container"
+        >
+          <LayoutSuggestions />
+        </div>
       </div>
-      <div
-        class="hidden xl:flex items-start justify-center pt-12 pb-20 suggestions-container"
-      >
-        <LayoutSuggestions />
+      <div class="hidden xl:block">
+        <LayoutCookiesDisclaimer />
       </div>
     </div>
   </div>
@@ -46,7 +54,6 @@ export default {
       return routes.includes(this.$nuxt.$route.name)
     },
   },
-  created() {},
   mounted() {
     if (
       ['dark', 'system'].includes(this.$colorMode.preference) &&

@@ -6,6 +6,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate'
 import { required, email } from 'vee-validate/dist/rules'
+import VueCookies from 'vue-cookies'
 
 // Styles
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css'
@@ -30,3 +31,5 @@ Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
 
 Vue.use(VTooltip).use(VueDatePicker)
+Vue.use(VueCookies)
+Vue.$cookies.config('30d')

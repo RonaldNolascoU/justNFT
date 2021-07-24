@@ -1,11 +1,14 @@
 <template>
   <div>
-    <BadgeBuyJust />
+    <div class="hidden lg:block">
+      <BadgeBuyJust />
+    </div>
     <ModalAge v-if="$store.state.modals.age" />
     <Nuxt />
     <div class="container translations relative">
       <GeneralTranslateDropdown />
     </div>
+    <LayoutCookiesDisclaimer />
   </div>
 </template>
 

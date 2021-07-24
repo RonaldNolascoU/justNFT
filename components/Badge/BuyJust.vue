@@ -1,5 +1,5 @@
 <template>
-  <div class="buy__just hidden lg:block">
+  <div class="buy__just lg:absolute">
     <div
       class="flex items-center px-8 w-full justify-center py-1 mt-3 rounded-full bg-navy z-50 cursor-pointer select-none"
     >
@@ -20,7 +20,7 @@ export default {}
 
 <style scoped>
 .buy__just {
-  position: absolute;
+  /* position: absolute; */
   top: 1em;
   left: 5em;
 }
