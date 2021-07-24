@@ -28,6 +28,12 @@
           }}</span>
         </div>
 
+        <div class="mt-5" v-if="errorMessages">
+          <span class="fs-16 text-primary font-semibold w-full">{{
+            errorMessages
+          }}</span>
+        </div>
+
         <div class="flex flex-col items-center login-form">
           <ValidationObserver ref="registrationForm">
             <form @submit.prevent="onSubmit" class="w-full">
@@ -42,6 +48,42 @@
                   v-model="form.username"
                   :placeholder="$t('signup.username')"
                   type="text"
+                  required
+                />
+                <span class="fs-16 text-primary font-semibold w-full">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+
+              <!-- Email -->
+              <ValidationProvider
+                name="Email"
+                rules="email"
+                v-slot="{ errors }"
+              >
+                <input
+                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  v-model="form.email"
+                  :placeholder="$t('login.email')"
+                  type="email"
+                  required
+                />
+                <span class="fs-16 text-primary font-semibold w-full">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+
+              <!-- Password -->
+              <ValidationProvider
+                name="Password"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input
+                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  v-model="form.password"
+                  :placeholder="$t('login.password')"
+                  type="password"
                   required
                 />
                 <span class="fs-16 text-primary font-semibold w-full">{{
@@ -211,7 +253,7 @@
                       accepted-file-types="image/jpeg, image/png"
                       maxFiles="1"
                       :credits="[]"
-                      v-model="form.profilePicture"
+                      v-model="form.file"
                       required
                     />
                     <span class="fs-16 text-primary font-semibold w-full">{{
@@ -221,14 +263,15 @@
                 </client-only>
               </div>
 
-              <!-- <span
-              v-if="successfulSignUp"
-              class="fs-16 text-primary font-semibold w-full"
-              >Email registered. Activation mail has been sent to user.</span
-            > -->
-              <!-- TODO: DISABLED PROP MUST BE DYNAMIC -->
+              <span
+                v-if="successfulSignUp"
+                class="fs-16 text-primary font-semibold w-full"
+                >Email registered. Activation mail has been sent to user.</span
+              >
+
               <button
                 type="submit"
+                :disabled="loading"
                 class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
               >
                 {{ $t('login.signup') }}
@@ -237,20 +280,6 @@
             </form>
           </ValidationObserver>
         </div>
-
-        <!-- <h2 class="mt-5 lg:mt-5"></h2>
-        <div class="text-center">
-          <p v-if="!isLogin">{{ $t('login.haveAccount') }}</p>
-          <p v-else>{{ $t('login.noAccount') }}</p>
-          <a
-            class="mt-3 fs-16 text-primary font-semibold cursor-pointer"
-            @click="changeAuthMode()"
-          >
-            <span>
-              {{ $t('login.login') }}
-            </span>
-          </a>
-        </div> -->
       </div>
     </div>
 
@@ -276,17 +305,15 @@ export default {
         id: null,
         onlyfans: null,
         bio: null,
-        profilePicture: null,
+        file: null,
       },
-      errors: {
-        username: null,
-        email: null,
-        password: null,
-      },
+      errors: {},
+      errorMessages: null,
       loading: false,
       successfulSignUp: false,
       date: new Date(),
       menu: false,
+      formData: null,
     }
   },
   watch: {
@@ -295,16 +322,20 @@ export default {
     },
   },
   methods: {
-    ...mapActions('auth', ['login', 'signUp', 'forgotPassword']),
+    ...mapActions('auth', ['creatorSignUp']),
     clearErrors() {
-      this.errors = {
+      this.errorMessages = null
+
+      this.form = {
         username: null,
-        email: null,
-        password: null,
+        birthday: null,
+        address: null,
+        genre: null,
+        id: null,
+        onlyfans: null,
+        bio: null,
+        profilePicture: null,
       }
-      this.email = null
-      this.password = null
-      this.username = null
     },
     getTooltipOptions(msg) {
       return {
@@ -319,56 +350,32 @@ export default {
         },
       }
     },
-    openForgotPassword() {
-      this.mode = 'forgot'
-      this.clearErrors()
-    },
-    changeAuthMode() {
-      this.isLogin = !this.isLogin
-      this.mode = 'auth'
-      this.clearErrors()
-      this.successfulSignUp = false
-    },
     onSubmit() {
-      console.log(this.form, 'FORM')
-      console.log(this.$refs.registrationForm.validate(), 'refs')
-
-      let { id } = this.form
+      if (this.loading) return
+      let { id, file } = this.form
       id.map((id) => {
-        console.log(id, 'ID PHOTO')
         this.form.id.push(id.file)
       })
 
-      // if (this.mode == 'auth') {
-      //   this.isLogin ? this.loginWithEmailAndPassword() : this.register()
-      // } else {
-      //   this.sendEmailToRestartPass()
-      // }
-    },
-    loginWithEmailAndPassword() {
-      if (this.loading) return
-      this.loading = true
-      const credentials = { email: this.email, password: this.password }
-      this.login(credentials)
-        .then((response) => {
-          console.log(response, 'response')
-          this.loading = false
-        })
-        .catch((err) => {
-          console.log(err, 'error')
-          this.errors.email = err
-          this.loading = false
-        })
+      this.form.file = file[0].file
+
+      this.formData = new FormData()
+
+      this.formData.append('file', this.form.file)
+
+      if (this.$refs.registrationForm.validate()) {
+        this.register()
+      }
     },
     register() {
-      if (this.loading) return
       this.loading = true
-      const credentials = {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      }
-      this.signUp(credentials)
+
+      console.log(
+        this.form,
+        { ...this.form, file: this.formData.get('file') },
+        'FORM TO SEND'
+      )
+      this.creatorSignUp({ ...this.form, file: this.formData.get('file') })
         .then((response) => {
           console.log(response, 'response')
           this.successfulSignUp = true
@@ -377,42 +384,9 @@ export default {
         })
         .catch((err) => {
           console.log(err, 'error')
-          this.errors.email = err
+          this.errorMessages = err
           this.loading = false
         })
-    },
-    sendEmailToRestartPass() {
-      if (this.successfulSendEmail) return
-      this.loading = true
-      const credentials = {
-        email: this.email,
-      }
-
-      this.forgotPassword(credentials)
-        .then((response) => {
-          console.log(response, 'response')
-          this.successfulSendEmail = true
-          this.loading = false
-          this.clearErrors()
-
-          setTimeout(() => {
-            this.mode = 'auth'
-            this.successfulSendEmail = false
-          }, 3000)
-        })
-        .catch((err) => {
-          console.log(err, 'error')
-          this.errors.email = err
-          this.loading = false
-        })
-    },
-    onComplete(data) {
-      console.log('data:', data)
-      const { metaMaskAddress } = data
-      if (metaMaskAddress) {
-        this.$store.commit('auth/setWalletAddress', data)
-        this.$store.commit('auth/setAuth', {})
-      }
     },
   },
 }
@@ -426,7 +400,7 @@ export default {
   .vs__dropdown-toggle {
     border-radius: 9999px;
     height: 45px;
-    color: rgba(0, 0, 0, 0.4);
+    color: rgba(10, 5, 5, 0.4);
     border-width: 2px;
     border-color: rgba(229, 231, 235, var(--tw-border-opacity));
 
@@ -449,6 +423,9 @@ export default {
     input {
       width: 100%;
       padding-left: 1em;
+      &::placeholder {
+        color: rgba(5, 0, 0, 0.6);
+      }
     }
     .vd-picker__input-clear {
       position: absolute;

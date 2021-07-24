@@ -71,10 +71,15 @@ export const mutations = {
     // })
     this.$router.push('/signin')
   },
+  setLoading(state) {
+    state.loading = !state.loading
+  },
 }
 
 export const actions = {
   async nuxtClientInit({ state, commit, dispatch }, ctx) {
+    commit('setLoading')
+
     // MODAL AGE
     let modalAge = getCookie('justyours_modal_age')
     if (modalAge) {
@@ -82,9 +87,11 @@ export const actions = {
     }
 
     // END MODAL AGE
+
     await dispatch('checkMetaMaskAccounts')
     await dispatch('getBalance')
     await routerAuth(ctx)
+    commit('setLoading')
   },
   async checkMetaMaskAccounts({ commit, dispatch }) {
     if (window.ethereum === null) commit('disconnect')
@@ -245,6 +252,40 @@ export const actions = {
         })
         .catch((err) => {
           // commit('setLoading', false)
+          reject(err)
+        })
+    })
+  },
+  creatorSignUp({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      localStorage.clear()
+
+      AuthService.creatorSignUp(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  creatorLogin({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      localStorage.clear()
+
+      AuthService.creatorLogin(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
           reject(err)
         })
     })

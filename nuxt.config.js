@@ -144,4 +144,9 @@ export default {
     extractCSS: true,
     transpile: ['vee-validate'],
   },
+  loadingIndicator: {
+    name: 'circle',
+    color: '#3B8070',
+    background: 'black',
+  },
 }

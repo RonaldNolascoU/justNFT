@@ -3,6 +3,7 @@ import HTTP from '../Axios'
 class AuthService {
   // path = 'auth'
 
+  // USERS
   signUp(data) {
     return HTTP.post(`signup`, data, { cache: false })
   }
@@ -18,5 +19,21 @@ class AuthService {
   me() {
     return HTTP.get('me')
   }
+
+  // END USERS
+
+  // CREATORS
+
+  creatorSignUp(data) {
+    return HTTP.post(`contentCreater-signup`, data, {
+      cache: false,
+      // headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  }
+
+  creatorLogin(data) {
+    return HTTP.post(`contentCreater-login`, data, { cache: false })
+  }
+  // END CREATORS
 }
 export default new AuthService()

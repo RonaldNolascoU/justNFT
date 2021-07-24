@@ -23,11 +23,11 @@
           <div class="w-full mt-3 lg:mt-3">
             <!-- <vue-metamask userMessage="msg" @onComplete="onComplete">
             </vue-metamask> -->
-            <!-- <AuthMetamask
+            <AuthMetamask
               v-if="mode == 'auth'"
               :userMessage="msg"
               @onComplete="onComplete"
-            /> -->
+            />
             <!-- <button class="w-full" @click="loginWithMetamask()">
               <div class="flex">
                 <div
@@ -45,11 +45,11 @@
           </div>
         </div>
 
-        <!-- <h2 class="mt-5 lg:mt-5">
+        <h2 class="mt-5 lg:mt-5">
           <span class="fs-24 text-black bg-white">{{
             mode == 'auth' ? $t('login.or') : $t('login.forgot')
           }}</span>
-        </h2> -->
+        </h2>
 
         <div class="flex flex-col items-center login-form">
           <form @submit.prevent="onSubmit" class="w-full">
