@@ -75,11 +75,6 @@ export default {
       return !!this.$store.state.cookies
     },
   },
-  mounted() {
-    if (!this.$cookies.get('jy_cookie_disclaimer')) {
-      this.cookieDisclaimer = true
-    }
-  },
   methods: {
     closeDisclaimer() {
       this.$store.commit('APPROVE_COOKIES')
