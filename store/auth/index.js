@@ -91,10 +91,13 @@ export const actions = {
     await dispatch('checkMetaMaskAccounts')
     await dispatch('getBalance')
     await routerAuth(ctx)
-    commit('setLoading')
   },
   async checkMetaMaskAccounts({ commit, dispatch }) {
-    if (window.ethereum === null) commit('disconnect')
+    if (!window.ethereum) {
+      commit('disconnect')
+      commit('setLoading')
+      return 0
+    }
     window.ethereum.on('accountsChanged', function (accounts) {
       console.log('accountsChanges', accounts)
       if (accounts.length == 0) {
@@ -103,12 +106,14 @@ export const actions = {
         commit('setWalletAddress', accounts[0])
         dispatch('getBalance')
       }
+      commit('setLoading')
     })
 
     // detect Network account change
     window.ethereum.on('chainChanged', function (networkId) {
       console.log('chainChanged', networkId)
       if (networkId != 250) commit('disconnect')
+      commit('setLoading')
     })
     window.web3 = new Web3(ethereum)
 
@@ -119,6 +124,7 @@ export const actions = {
       } else {
         commit('setWalletAddress', accounts[0])
       }
+      commit('setLoading')
     })
   },
   async getBalance({ state, commit }) {
@@ -169,10 +175,12 @@ export const actions = {
             console.log(err, 'Error getting decimals')
             commit('disconnect')
           })
+        commit('setLoading')
       })
       .catch((err) => {
         console.log(err, 'Error getting balance')
         commit('disconnect')
+        commit('setLoading')
       })
   },
   signUp({ commit }, payload) {
