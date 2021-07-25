@@ -1,3 +1,5 @@
+import VueCookies from 'vue-cookies'
+
 export const state = () => ({
   userAuth: null,
   user: null,
@@ -162,6 +164,7 @@ export const state = () => ({
     { name: 'Ana Campbell', image: 'msg-profile04' },
     { name: 'Ana Yalzsin', image: 'msg-profile03' },
   ],
+  cookies: VueCookies.get('jy_cookie_disclaimer'),
 })
 
 export const getters = {
@@ -236,5 +239,9 @@ export const mutations = {
   },
   UPDATE_LANG(state, payload) {
     state.lang = payload
+  },
+  APPROVE_COOKIES(state) {
+    VueCookies.set('jy_cookie_disclaimer', true)
+    state.cookies = VueCookies.get('jy_cookie_disclaimer')
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="cookieDisclaimer"
+      v-if="!cookiesAccepted"
       class="fixed inset-x-0 bottom-0 z-50 cookie__disclaimer"
       :class="isLogin ? '' : 'relative xl:fixed top-0 xl:bottom-0 xl:top-auto'"
     >
@@ -66,27 +66,18 @@
 
 <script>
 export default {
-  data() {
-    return {
-      cookieDisclaimer: false,
-    }
-  },
   computed: {
     isLogin() {
       let routes = ['signin', 'creator-signup']
-      console.log(this.$nuxt.$route.name)
       return routes.includes(this.$nuxt.$route.name)
     },
-  },
-  mounted() {
-    if (!this.$cookies.get('jy_cookie_disclaimer')) {
-      this.cookieDisclaimer = true
-    }
+    cookiesAccepted() {
+      return !!this.$store.state.cookies
+    },
   },
   methods: {
     closeDisclaimer() {
-      this.cookieDisclaimer = false
-      this.$cookies.set('jy_cookie_disclaimer', true)
+      this.$store.commit('APPROVE_COOKIES')
     },
   },
 }
