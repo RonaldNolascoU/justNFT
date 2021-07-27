@@ -95,6 +95,7 @@ export default {
     'nuxt-material-design-icons',
     'nuxt-i18n',
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
   ],
   i18n: {
     vueI18nLoader: true,
@@ -147,6 +148,6 @@ export default {
   loadingIndicator: {
     name: 'circle',
     color: '#3B8070',
-    background: 'black',
+    background: 'white',
   },
 }

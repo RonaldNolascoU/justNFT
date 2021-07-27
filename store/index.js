@@ -1,5 +1,3 @@
-import VueCookies from 'vue-cookies'
-
 export const state = () => ({
   userAuth: null,
   user: null,
@@ -164,7 +162,7 @@ export const state = () => ({
     { name: 'Ana Campbell', image: 'msg-profile04' },
     { name: 'Ana Yalzsin', image: 'msg-profile03' },
   ],
-  cookies: VueCookies.get('jy_cookie_disclaimer'),
+  cookies: false,
 })
 
 export const getters = {
@@ -207,22 +205,8 @@ export const mutations = {
   OPEN_AGE_MODAL(state) {
     state.modals.age = true
   },
-  CLOSE_AGE_MODAL(state, enableCookie = false) {
+  CLOSE_AGE_MODAL(state) {
     state.modals.age = false
-
-    if (enableCookie) {
-      const d = new Date()
-      let days = 365
-      d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000)
-      let expires = 'expires=' + d.toUTCString()
-      document.cookie =
-        'justyours_modal_age' +
-        '=' +
-        state.modals.age +
-        ';' +
-        expires +
-        ';path=/'
-    }
   },
   TOGGLE_SIDEBAR(state) {
     state.sidebar = !state.sidebar
@@ -241,7 +225,6 @@ export const mutations = {
     state.lang = payload
   },
   APPROVE_COOKIES(state) {
-    VueCookies.set('jy_cookie_disclaimer', true)
-    state.cookies = VueCookies.get('jy_cookie_disclaimer')
+    state.cookies = true
   },
 }

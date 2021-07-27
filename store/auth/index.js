@@ -81,9 +81,17 @@ export const actions = {
     commit('setLoading')
 
     // MODAL AGE
-    let modalAge = getCookie('justyours_modal_age')
+    let modalAge = ctx.$cookies.get('justyours_modal_age')
+    let cookieDisclaimer = ctx.$cookies.get('jy_cookie_disclaimer')
+
     if (modalAge) {
+      ctx.$cookies.set('justyours_modal_age', true)
       ctx.app.store.commit('CLOSE_AGE_MODAL')
+    }
+
+    if (cookieDisclaimer) {
+      ctx.$cookies.set('jy_cookie_disclaimer', true)
+      ctx.app.store.commit('APPROVE_COOKIES')
     }
 
     // END MODAL AGE

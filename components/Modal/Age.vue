@@ -27,6 +27,7 @@
 export default {
   methods: {
     goToHomepage() {
+      this.$cookies.set('justyours_modal_age', true)
       this.$store.commit('CLOSE_AGE_MODAL', true)
       this.$router.push('/')
     },

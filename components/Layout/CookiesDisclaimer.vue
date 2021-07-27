@@ -77,6 +77,7 @@ export default {
   },
   methods: {
     closeDisclaimer() {
+      this.$cookies.set('jy_cookie_disclaimer', true)
       this.$store.commit('APPROVE_COOKIES')
     },
   },
