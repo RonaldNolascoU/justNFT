@@ -77,7 +77,10 @@ export default {
   },
   methods: {
     closeDisclaimer() {
-      this.$cookies.set('jy_cookie_disclaimer', true)
+      this.$cookies.set('jy_cookie_disclaimer', true, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      })
       this.$store.commit('APPROVE_COOKIES')
     },
   },
