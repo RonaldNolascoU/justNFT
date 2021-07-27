@@ -101,7 +101,9 @@
 }
 
 .dark .dark\:bg-messages {
-  background: #101010 !important;
+  @media (min-width: 1280px) {
+    background: #101010 !important;
+  }
 }
 
 .dark .nuxt-link-exact-active.dark\:text-active {
