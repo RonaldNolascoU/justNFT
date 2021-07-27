@@ -60,7 +60,7 @@
         </div>
 
         <div
-          class="px-4 sm:px-10 2xl:px-10 xl:px-5 flex flex-col align-center xl:align-center"
+          class="px-4 sm:px-10 2xl:px-10 xl:pl-3 xl:pr-5 flex flex-col align-center xl:align-center"
           role="button"
         >
           <span
@@ -80,8 +80,11 @@
           >
             <img
               v-if="notifyBox"
+              @click.prevent.stop="openMessages"
               src="~/assets/img/dropdown.png"
-              class="mx-0 absolute"
+              :class="`absolute mx-0 dropdown ${
+                notifyBox ? 'dropdown-active' : ''
+              }`"
             />
             <NotificationDropdown
               v-if="notifyBox"

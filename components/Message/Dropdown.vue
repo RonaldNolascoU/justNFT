@@ -105,7 +105,11 @@
               <i class="fas fa-ellipsis-v text-gray"></i>
             </li>
             <div class="mt-5">
-              <div class="chat__screen overflow-y-scroll" ref="chatScreen">
+              <div
+                v-if="!uploadImg"
+                class="chat__screen overflow-y-scroll"
+                ref="chatScreen"
+              >
                 <div
                   v-for="(message, index) in chatMessages"
                   :key="index"
@@ -124,6 +128,9 @@
                   </div>
                 </div>
               </div>
+              <div class="chat__screen" v-else>
+                <MessageUploadImage />
+              </div>
             </div>
             <div
               class="flex items-center justify-between arrow back-setting-btn add__message relative"
@@ -138,18 +145,18 @@
                 v-model="comment"
               />
               <div
-                class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 pointer-events-none action__icon"
+                class="absolute cursor-pointer right-0 bottom-0 flex items-center pr-3 action__icon"
               >
                 <i
-                  @click="addEmoji"
+                  @click="upload"
                   class="mr-2 cursor-pointer fas fa-camera text-primary right-0"
                 ></i>
               </div>
               <div
-                class="absolute cursor-pointer left-0 bottom-0 flex items-center pr-3 pointer-events-none smily_face"
+                class="absolute cursor-pointer left-0 bottom-0 flex items-center pr-3 smily_face"
               >
                 <i
-                  @click="upload"
+                  @click="addEmoji"
                   class="mr-2 cursor-pointer far fa-grin-alt text-primary left-0"
                 ></i>
               </div>
@@ -167,6 +174,7 @@ export default {
     return {
       msgSearchValue: '',
       currentChat: null,
+      uploadImg: false,
       chatMessages: [
         {
           userId: 1,
@@ -283,6 +291,7 @@ export default {
     },
     upload() {
       console.log('upload')
+      this.uploadImg = !this.uploadImg
     },
     hide() {
       this.$emit('hidden')

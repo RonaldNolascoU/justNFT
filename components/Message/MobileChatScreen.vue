@@ -38,7 +38,7 @@
         </li>
       </div>
 
-      <div class="mt-20 mb-16 messages_dropdown">
+      <div v-if="!showingMediaUpload" class="mt-20 mb-16 messages_dropdown">
         <div class="chat__screen h-screen overflow-y-scroll">
           <div
             v-for="(message, index) in chatMessages"
@@ -58,6 +58,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div v-else>
+        <MessageUploadImage />
       </div>
     </div>
 
@@ -104,7 +107,6 @@
         </div>
       </div>
     </div>
-    <ModalAddMediaUpload v-show="showingMediaUpload" />
   </div>
 </template>
 
