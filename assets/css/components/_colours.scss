@@ -19,6 +19,10 @@ $overlay-color: #400013ab;
   border: 1px solid $primary-color !important;
 }
 
+.bg-primary-transparent {
+  background: rgba(197, 55, 97, 0.41) !important;
+}
+
 .border-color-primary {
   border-color: $primary-color !important;
 }
