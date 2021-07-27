@@ -10,6 +10,7 @@ export const state = () => ({
     balance: 0,
   },
   loading: false,
+  returnTo: null,
 })
 
 export const getters = {
@@ -74,6 +75,23 @@ export const mutations = {
   setLoading(state, payload) {
     state.loading = payload
   },
+  SET_RETURN_URL(state, data) {
+    if (state.user) {
+      state.returnTo = null
+      return
+    }
+    // Make sure to not double encode, by decoding first
+    state.returnTo = data ? encodeURI(decodeURI(data)) : null
+  },
+  REDIRECT_RETURN_TO(state) {
+    if (state.returnTo) {
+      const decoded = decodeURI(state.returnTo)
+      state.returnTo = null
+      if (decoded !== window.location.pathname) {
+        this.$router.replace(decoded)
+      }
+    }
+  },
 }
 
 export const actions = {
@@ -99,6 +117,13 @@ export const actions = {
     await dispatch('checkMetaMaskAccounts')
     await dispatch('getBalance')
     await routerAuth(ctx)
+  },
+  redirectUserLogin({ commit, state }) {
+    if (state.returnTo) {
+      commit('REDIRECT_RETURN_TO')
+    } else {
+      this.$router.replace('/').catch(() => {})
+    }
   },
   async checkMetaMaskAccounts({ commit, dispatch }) {
     if (!window.ethereum) {
@@ -135,7 +160,7 @@ export const actions = {
       commit('setLoading', false)
     })
   },
-  async getBalance({ state, commit }) {
+  async getBalance({ state, commit, dispatch }) {
     if (window.ethereum === null) commit('disconnect')
     if (!state.wallet.address) return
     let minABI = [
@@ -178,6 +203,7 @@ export const actions = {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )
             commit('setAuth', {})
+            dispatch('redirectUserLogin')
           })
           .catch((err) => {
             console.log(err, 'Error getting decimals')
