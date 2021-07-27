@@ -8,20 +8,14 @@
     <div class="container translations relative">
       <GeneralTranslateDropdown />
     </div>
-    <LayoutCookiesDisclaimer />
+    <client-only>
+      <LayoutCookiesDisclaimer />
+    </client-only>
   </div>
 </template>
 
 <script>
-import getCookie from '@/scripts/cookies.js'
-export default {
-  mounted() {
-    let modalAge = getCookie('justyours_modal_age')
-    if (modalAge) {
-      // this.$store.commit('CLOSE_AGE_MODAL')
-    }
-  },
-}
+export default {}
 </script>
 
 <style lang="scss">

@@ -71,14 +71,14 @@ export const mutations = {
     // })
     this.$router.push('/signin')
   },
-  setLoading(state) {
-    state.loading = !state.loading
+  setLoading(state, payload) {
+    state.loading = payload
   },
 }
 
 export const actions = {
   async nuxtClientInit({ state, commit, dispatch }, ctx) {
-    commit('setLoading')
+    commit('setLoading', true)
 
     // MODAL AGE
     let modalAge = ctx.$cookies.get('justyours_modal_age')
@@ -103,7 +103,7 @@ export const actions = {
   async checkMetaMaskAccounts({ commit, dispatch }) {
     if (!window.ethereum) {
       commit('disconnect')
-      commit('setLoading')
+      commit('setLoading', false)
       return 0
     }
     window.ethereum.on('accountsChanged', function (accounts) {
@@ -114,14 +114,14 @@ export const actions = {
         commit('setWalletAddress', accounts[0])
         dispatch('getBalance')
       }
-      commit('setLoading')
+      commit('setLoading', false)
     })
 
     // detect Network account change
     window.ethereum.on('chainChanged', function (networkId) {
       console.log('chainChanged', networkId)
       if (networkId != 250) commit('disconnect')
-      commit('setLoading')
+      commit('setLoading', false)
     })
     window.web3 = new Web3(ethereum)
 
@@ -132,7 +132,7 @@ export const actions = {
       } else {
         commit('setWalletAddress', accounts[0])
       }
-      commit('setLoading')
+      commit('setLoading', false)
     })
   },
   async getBalance({ state, commit }) {
@@ -183,12 +183,12 @@ export const actions = {
             console.log(err, 'Error getting decimals')
             commit('disconnect')
           })
-        commit('setLoading')
+        commit('setLoading', false)
       })
       .catch((err) => {
         console.log(err, 'Error getting balance')
         commit('disconnect')
-        commit('setLoading')
+        commit('setLoading', false)
       })
   },
   signUp({ commit }, payload) {

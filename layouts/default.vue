@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="block xl:hidden">
-      <LayoutCookiesDisclaimer />
+      <client-only>
+        <LayoutCookiesDisclaimer />
+      </client-only>
     </div>
     <div
       :class="[
@@ -39,7 +41,9 @@
         </div>
       </div>
       <div class="hidden xl:block">
-        <LayoutCookiesDisclaimer />
+        <client-only>
+          <LayoutCookiesDisclaimer />
+        </client-only>
       </div>
     </div>
   </div>
