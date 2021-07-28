@@ -14,6 +14,10 @@
       <div class="mx-3 lg:mx-5">
         <a href="">{{ $t('login.about') }}</a>
       </div>
+      <span class="material-icons fs-5"> fiber_manual_record </span>
+      <div class="mx-3 lg:mx-5">
+        <nuxt-link to="/privacy-policy">{{ $t('login.privacy') }}</nuxt-link>
+      </div>
     </div>
 
     <div class="flex justify-between items-center mt-3 lg:mt-5">

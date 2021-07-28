@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="hidden lg:block">
+    <div v-if="!isPrivacy" class="hidden lg:block">
       <BadgeBuyJust />
     </div>
     <ModalAge v-if="$store.state.modals.age" />
@@ -15,7 +15,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    isPrivacy() {
+      let routes = ['privacy-policy']
+      return routes.includes(this.$nuxt.$route.name)
+    },
+  },
+}
 </script>
 
 <style lang="scss">

@@ -25,10 +25,7 @@ class AuthService {
   // CREATORS
 
   creatorSignUp(data) {
-    return HTTP.post(`contentCreater-signup`, data, {
-      cache: false,
-      // headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    return HTTP.post(`contentCreater-signup`, data, { cache: false })
   }
 
   creatorLogin(data) {

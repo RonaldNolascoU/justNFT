@@ -1,11 +1,17 @@
 <template>
   <transition name="box">
-    <nav class="notifications__dropdown shadow-white" v-click-outside="hide">
+    <nav
+      :class="['messages_dropdown', { 'shadow-white': !isMobile }]"
+      v-click-outside="hide"
+    >
       <div
-        class="md:px-3 py-3 wrapper_box bg-white dark:bg-black xl:dark:bg-messages dark:box-messages"
+        :class="[
+          'wrapper_box bg-white dark:box-messages',
+          isMobile ? ' dark:bg-black ' : 'px-3 py-3 dark:bg-messages',
+        ]"
       >
         <div class="wrapper show">
-          <ul class="menu-bar">
+          <ul class="menu-bar h-screen xl:h-auto">
             <div class="flex justify-between">
               <span class="fs-20 dark:text-white font-semibold">{{
                 $t('navbar.notifications.title')
@@ -71,6 +77,11 @@
 
 <script>
 export default {
+  computed: {
+    isMobile() {
+      return window.innerWidth < 1280
+    },
+  },
   methods: {
     getFormattedTime(date) {
       return this.$dateFns.formatDistance(
