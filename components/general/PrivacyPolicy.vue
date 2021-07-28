@@ -125,7 +125,7 @@
       identify You. Personally identifiable information may include, but is not
       limited to:
     </p>
-    <ul class="ml-5">
+    <ul class="ml-5 list-disc">
       <li>
         <p>Email address</p>
       </li>
@@ -434,7 +434,7 @@
       such action is necessary to:
     </p>
 
-    <ul class="ml-5">
+    <ul class="ml-5 list-disc">
       <li>Comply with a legal obligation</li>
       <li>Protect and defend the rights or property of the Company</li>
       <li>
@@ -507,8 +507,13 @@
     <p>
       If you have any questions about this Privacy Policy, You can contact us:
     </p>
-    <ul class="ml-5">
-      <li>By email: contact@justyours.me</li>
+    <ul class="">
+      <li>
+        By email:
+        <a class="text-navy" href="mailto:contact@justyours.me"
+          >contact@justyours.me</a
+        >
+      </li>
     </ul>
   </div>
 </template>
