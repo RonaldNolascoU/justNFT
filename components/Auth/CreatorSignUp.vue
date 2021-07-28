@@ -353,29 +353,32 @@ export default {
     onSubmit() {
       if (this.loading) return
       let { id, file } = this.form
-      id.map((id) => {
-        this.form.id.push(id.file)
+
+      let payload = new FormData()
+      for (var key in this.form) {
+        if (!['id', 'file'].includes(key)) {
+          payload.append(key, this.form[key])
+        }
+      }
+      id.forEach((e) => {
+        payload.append('files[]', e)
+      })
+      file.forEach((e) => {
+        console.log(e)
       })
 
-      this.form.file = file[0].file
-
-      this.formData = new FormData()
-
-      this.formData.append('file', this.form.file)
-
       if (this.$refs.registrationForm.validate()) {
-        this.register()
+        this.register(payload)
       }
     },
-    register() {
+    register(payload) {
       this.loading = true
 
-      console.log(
-        this.form,
-        { ...this.form, file: this.formData.get('file') },
-        'FORM TO SEND'
-      )
-      this.creatorSignUp({ ...this.form, file: this.formData.get('file') })
+      for (var pair of payload.entries()) {
+        console.log(pair[0] + ': ' + pair[1])
+      }
+
+      this.creatorSignUp(payload)
         .then((response) => {
           console.log(response, 'response')
           this.successfulSignUp = true
