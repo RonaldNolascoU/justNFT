@@ -55,6 +55,25 @@
                 }}</span>
               </ValidationProvider>
 
+              <!-- Name -->
+
+              <ValidationProvider
+                name="Name"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input
+                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  v-model="form.name"
+                  :placeholder="$t('signup.name')"
+                  type="text"
+                  required
+                />
+                <span class="fs-16 text-primary font-semibold w-full">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+
               <!-- Email -->
               <ValidationProvider
                 name="Email"
@@ -107,8 +126,9 @@
                     :locale="{ lang: $i18n.locale }"
                     noCalendarIcon
                     ref="menu"
+                    format="DD-MM-YYYY"
                     :max-date="$dateFns.subYears(new Date(), 18).toISOString()"
-                    min-date="1980-01-01"
+                    min-date="01-01-1980"
                     @onOpen="menu = true"
                     @onClose="menu = false"
                   />
@@ -125,9 +145,9 @@
               >
                 <input
                   class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-                  v-model="form.address"
+                  v-model="form.country"
                   :placeholder="$t('signup.address')"
-                  type="address"
+                  type="text"
                   required
                 />
                 <span class="fs-16 text-primary font-semibold w-full">{{
@@ -203,7 +223,7 @@
               <!-- link -->
               <input
                 class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-                v-model="form.onlyfans"
+                v-model="form.current"
                 :placeholder="$t('signup.link')"
                 type="text"
               />
@@ -298,13 +318,16 @@ export default {
       idVisible: false,
       profileVisible: false,
       form: {
+        name: null,
+        email: null,
+        password: null,
+        country: null,
         username: null,
-        birthday: null,
-        address: null,
-        genre: null,
-        id: null,
-        onlyfans: null,
         bio: null,
+        genre: null,
+        current: null,
+        birthday: null,
+        id: null,
         file: null,
       },
       errors: {},
@@ -327,14 +350,17 @@ export default {
       this.errorMessages = null
 
       this.form = {
+        name: null,
+        email: null,
+        password: null,
+        country: null,
         username: null,
-        birthday: null,
-        address: null,
-        genre: null,
-        id: null,
-        onlyfans: null,
         bio: null,
-        profilePicture: null,
+        genre: null,
+        current: null,
+        birthday: null,
+        id: null,
+        file: null,
       }
     },
     getTooltipOptions(msg) {
@@ -357,14 +383,15 @@ export default {
       let payload = new FormData()
       for (var key in this.form) {
         if (!['id', 'file'].includes(key)) {
+          if (key == 'birthday') {
+          } else {
+          }
           payload.append(key, this.form[key])
         }
       }
       id.forEach((e) => {
-        payload.append('files[]', e)
-      })
-      file.forEach((e) => {
-        console.log(e)
+        console.log(e, 'id file')
+        payload.append('file', e.file)
       })
 
       if (this.$refs.registrationForm.validate()) {
@@ -373,10 +400,6 @@ export default {
     },
     register(payload) {
       this.loading = true
-
-      for (var pair of payload.entries()) {
-        console.log(pair[0] + ': ' + pair[1])
-      }
 
       this.creatorSignUp(payload)
         .then((response) => {
