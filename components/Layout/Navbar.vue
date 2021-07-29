@@ -31,7 +31,7 @@
           role="button"
         >
           <span
-            class="mb-0 text-white material-icons fs-40 fs-res-20 icons-color select-none"
+            class="mb-0 text-white material-icons fs-40 nav-icons fs-res-20 icons-color select-none"
             @click.prevent.stop="
               isMobile ? $router.push('/chats') : handleOpenModals('msg')
             "
@@ -64,7 +64,7 @@
           role="button"
         >
           <span
-            class="mb-0 text-white material-icons fs-40 fs-res-20 icons-color select-none"
+            class="mb-0 text-white material-icons fs-40 nav-icons fs-res-20 icons-color select-none"
             @click.prevent.stop="
               isMobile
                 ? $router.push('/notifications')
@@ -101,7 +101,7 @@
           "
         >
           <span
-            class="text-white notification material-icons fs-40 fs-res-20 icons-color select-none"
+            class="text-white notification material-icons fs-40 nav-icons fs-res-20 icons-color select-none"
           >
             try
           </span>
@@ -124,7 +124,7 @@
           @click="$router.push('/store')"
         >
           <span
-            class="text-white material-icons fs-40 fs-res-20 icons-color select-none"
+            class="text-white material-icons fs-40 nav-icons fs-res-20 icons-color select-none"
           >
             store
           </span>
@@ -144,7 +144,7 @@
       </div>
 
       <div
-        class="block menu xl:hidden fs-40 fs-res-20 text-secondary pl-2 md:pl-5 xl:pl-0"
+        class="block menu xl:hidden fs-40 nav-icons fs-res-20 text-secondary pl-2 md:pl-5 xl:pl-0"
       >
         <i
           role="button"

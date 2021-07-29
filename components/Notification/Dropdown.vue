@@ -11,7 +11,7 @@
         ]"
       >
         <div class="wrapper show">
-          <ul class="menu-bar h-screen xl:h-auto">
+          <ul class="menu-bar h-auto">
             <div class="flex justify-between">
               <span class="fs-20 dark:text-white font-semibold">{{
                 $t('navbar.notifications.title')

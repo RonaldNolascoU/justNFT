@@ -84,7 +84,7 @@ export default {
           icon: 'fas fa-money-check',
         },
         {
-          to: '/settings',
+          to: '/change-password',
           name: 'Settings',
           i18n: 'settings',
           icon: 'fas fa-cog',

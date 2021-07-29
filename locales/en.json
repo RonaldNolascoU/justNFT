@@ -32,6 +32,13 @@
     "genreOptions": ["Male", "Female", "Trans", "Non Binary"],
     "maxUploadError": "You already uploaded the maximum images"
   },
+  "passwords": {
+    "old_password": "Old Password",
+    "new_password": "New Password",
+    "confirm_password": "Confirm New Password",
+    "btn": "Change Password",
+    "success_mgs": "Password was changed successfully."
+  },
   "wallet": {
     "warningModal": "Warning: Never share this with anyone, including Just Yours Support.",
     "agree": "I Agree",
