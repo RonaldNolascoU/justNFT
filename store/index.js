@@ -220,6 +220,10 @@ export const mutations = {
   TOGGLE_DARK_MODE(state) {
     state.darkMode = !state.darkMode
     this.$colorMode.preference = state.darkMode ? 'dark' : 'light'
+
+    document.body.style.backgroundColor = state.darkMode
+      ? 'rgba(0,0,0,1)'
+      : '#fff'
   },
   UPDATE_LANG(state, payload) {
     state.lang = payload

@@ -1,4 +1,14 @@
 export default function ({ window, app, store, redirect, route }) {
+  if (process.browser) {
+    if (
+      ['signin', 'privacy-policy', 'creator-signup', 'wallet'].includes(
+        route.name
+      )
+    ) {
+      document.body.style.backgroundColor = '#fff'
+    }
+  }
+
   const isUserSignedIn = store.getters['auth/isLoggedIn']
   const isSigninRoute = route.path === '/signin'
 
