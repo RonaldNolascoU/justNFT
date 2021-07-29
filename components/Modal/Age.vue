@@ -29,7 +29,7 @@ export default {
     goToHomepage() {
       this.$cookies.set('justyours_modal_age', true, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 7,
+        maxAge: 86400 * 365,
       })
       this.$store.commit('CLOSE_AGE_MODAL', true)
       this.$router.push('/')

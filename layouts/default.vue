@@ -18,7 +18,7 @@
       <div class="infinity-divider w-screen hidden xl:block"></div>
       <div
         id="body-container"
-        class="flex flex-wrap w-full xl:container pb-10 xl:h-screen"
+        class="flex flex-wrap w-full xl:container pb-10 md:h-screen"
       >
         <div
           class="flex-col justify-start hidden px-2 pt-12 sidebar-container xl:flex"
@@ -29,7 +29,7 @@
           id="nuxt__container"
           :class="[
             'w-full xl:pb-20 xl:border-l xl:border-r border-lighter page-container xl:w-full xl:pt-12',
-            { 'xl:h-screen xl:overflow-y-scroll': !scroll },
+            { 'xl:overflow-y-scroll md:h-screen': !scroll },
           ]"
         >
           <Nuxt />

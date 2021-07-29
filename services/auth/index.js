@@ -32,5 +32,9 @@ class AuthService {
     return HTTP.post(`contentCreater-login`, data, { cache: false })
   }
   // END CREATORS
+
+  changePassword(data) {
+    return HTTP.post(`change-password`, data, { cache: false })
+  }
 }
 export default new AuthService()

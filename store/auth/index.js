@@ -84,12 +84,18 @@ export const actions = {
     let cookieDisclaimer = ctx.$cookies.get('jy_cookie_disclaimer')
 
     if (modalAge) {
-      ctx.$cookies.set('justyours_modal_age', true)
+      ctx.$cookies.set('justyours_modal_age', true, {
+        path: '/',
+        maxAge: 86400 * 365,
+      })
       ctx.app.store.commit('CLOSE_AGE_MODAL')
     }
 
     if (cookieDisclaimer) {
-      ctx.$cookies.set('jy_cookie_disclaimer', true)
+      ctx.$cookies.set('jy_cookie_disclaimer', true, {
+        path: '/',
+        maxAge: 86400 * 365,
+      })
       ctx.app.store.commit('APPROVE_COOKIES')
     }
 
@@ -308,6 +314,21 @@ export const actions = {
       localStorage.clear()
 
       AuthService.creatorLogin(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  changePassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      AuthService.changePassword(payload)
         .then(({ data }) => {
           if (!data.success) {
             return reject(data.msg)
