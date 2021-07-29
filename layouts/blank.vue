@@ -3,7 +3,7 @@
     <div v-if="isPrivacy || isContentCreatorSignUp">
       <nav class="w-full max-w-full bg-primary border-lighter">
         <div
-          class="xl:container py-4 cursor-pointer pl-4 xl:pl-0"
+          class="container py-4 cursor-pointer pl-4 xl:pl-0"
           @click="$router.push('/')"
         >
           <img

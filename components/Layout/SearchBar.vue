@@ -12,7 +12,7 @@
     <div
       v-click-outside="hide"
       v-if="categoriesBox"
-      class="absolute w-full p-3 bg-white dark:bg-black z-50"
+      class="absolute w-full p-3 bg-white dark:bg-black z-50 rounded-b-xl search__bar__results"
     >
       <div class="grid category-template">
         <div
@@ -87,4 +87,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.search__bar__results {
+  box-shadow: 0px 0px 20px rgba(188, 188, 188, 0.3);
+}
+</style>

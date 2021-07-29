@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col items-center login-form">
-      <form @submit.prevent="onSubmit" class="w-full">
+      <form @submit.prevent="onSubmit" class="w-full p-5">
         <input
           class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
           v-model="form.old_password"
@@ -38,13 +38,6 @@
           class="fs-16 text-primary font-semibold w-full"
           >{{ errors.password }}</span
         > -->
-        <div class="flex w-full mt-3 lg:mt-3">
-          <a
-            @click.prevent="openForgotPassword()"
-            class="fs-16 text-pink cursor-pointer"
-            >{{ $t('login.forgot') }}</a
-          >
-        </div>
 
         <span
           v-if="passChanged"

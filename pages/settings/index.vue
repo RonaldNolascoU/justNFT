@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <AuthChangePassword />
+</template>
 
 <script>
 export default {}
