@@ -33,7 +33,7 @@ export const getters = {
 export const mutations = {
   setAuth(state, user) {
     state.user = user
-    this.$router.push({ name: 'index' })
+    this.$router.replace({ name: 'index' }).catch(() => {})
   },
   setToken(state, token) {
     state.token = token
@@ -101,7 +101,7 @@ export const actions = {
 
     // END MODAL AGE
     const isLoggedWithMetaMask = localStorage.getItem('isLoggedWithMetaMask')
-    await routerAuth(ctx)
+    // await routerAuth(ctx)
     if (isLoggedWithMetaMask) {
       await dispatch('checkMetaMaskAccounts')
       await dispatch('getBalance')

@@ -19,12 +19,13 @@ export default function ({ window, app, store, redirect, route }) {
     store.commit('auth/SET_RETURN_URL', route.fullPath)
   }
 
-  if (route.path != '/' && store.state.modals.age && !isSigninRoute) {
-    return redirect('/')
-    // return app.router.push('/')
-  }
+  // if (route.path != '/' && store.state.modals.age && !isSigninRoute) {
+  //   return redirect('/')
+  //   // return app.router.push('/')
+  // }
 
   if (!isUserSignedIn && !isSigninRoute) {
+    console.log('redirect to signin')
     return redirect('/signin')
     // return app.router.push('/signin')
   }
