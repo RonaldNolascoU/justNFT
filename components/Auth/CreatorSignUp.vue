@@ -127,7 +127,7 @@
                     noCalendarIcon
                     ref="menu"
                     format="DD-MM-YYYY"
-                    :max-date="$dateFns.subYears(new Date(), 18).toISOString()"
+                    :max-date="$dateFns.subYears(new Date(), 18)"
                     min-date="01-01-1980"
                     @onOpen="menu = true"
                     @onClose="menu = false"
@@ -342,6 +342,14 @@ export default {
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.menu.$refs.agenda.mode = 'year'))
+      setTimeout(() => {
+        let datesFromPicker = document.querySelectorAll(
+          '.vd-picker__years-button'
+        )
+        Array.from(datesFromPicker).map((date) => {
+          date.removeAttribute('disabled')
+        })
+      }, 1)
     },
   },
   methods: {
@@ -406,6 +414,7 @@ export default {
           console.log(response, 'response')
           this.successfulSignUp = true
           this.clearErrors()
+          this.$refs.registrationForm.reset()
           this.loading = false
         })
         .catch((err) => {

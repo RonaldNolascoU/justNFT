@@ -1,14 +1,32 @@
 <template>
   <div>
-    <div v-if="!isPrivacy" class="hidden lg:block">
+    <div v-if="isPrivacy || isContentCreatorSignUp">
+      <nav class="w-full max-w-full bg-primary border-lighter">
+        <div
+          class="xl:container py-4 cursor-pointer pl-4 xl:pl-0"
+          @click="$router.push('/')"
+        >
+          <img
+            class="self-start my-3 xl:my-0"
+            src="/just_logo_white.png"
+            @click="$router.push('/')"
+            style="width: 200px"
+          />
+        </div>
+      </nav>
+    </div>
+    <div v-if="!$store.state.auth.loading" class="hidden lg:block">
       <BadgeBuyJust />
     </div>
     <ModalAge v-if="$store.state.modals.age" />
     <Nuxt />
-    <div class="container translations relative">
+    <div
+      class="container translations relative"
+      v-if="!$store.state.auth.loading"
+    >
       <GeneralTranslateDropdown />
     </div>
-    <client-only>
+    <client-only v-if="!$store.state.auth.loading">
       <LayoutCookiesDisclaimer />
     </client-only>
   </div>
@@ -20,6 +38,9 @@ export default {
     isPrivacy() {
       let routes = ['privacy-policy']
       return routes.includes(this.$nuxt.$route.name)
+    },
+    isContentCreatorSignUp() {
+      return ['creator-signup'].includes(this.$nuxt.$route.name)
     },
   },
 }

@@ -62,10 +62,11 @@
             >
               <GeneralTranslateDropdown />
             </div>
+            <!-- LOGOUT -->
             <div
               v-else
               class="flex justify-center items-center pt-2 my-2 cursor-pointer"
-              @click="$router.push('/signin')"
+              @click="$store.dispatch('auth/logout')"
             >
               <span class="fs-20">
                 {{ $t(`sidebar.${option.i18n}`) }}

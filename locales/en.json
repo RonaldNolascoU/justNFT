@@ -20,6 +20,7 @@
   },
   "signup": {
     "title": "Sign Up as Content Creator",
+    "name": "Name",
     "username": "Username",
     "birthday": "Birthday",
     "address": "Address",

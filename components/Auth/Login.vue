@@ -269,6 +269,7 @@ export default {
       if (metaMaskAddress) {
         this.$store.commit('auth/setWalletAddress', metaMaskAddress)
         this.$store.commit('auth/setWalletBalance', balance)
+        this.$store.dispatch('auth/saveMetaMaskLoggedState')
         this.$store.commit('auth/setAuth', {})
       }
     },

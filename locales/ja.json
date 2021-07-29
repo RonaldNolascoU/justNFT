@@ -20,6 +20,7 @@
   },
   "signup": {
     "title": "コンテンツクリエーターとしてサインアップ",
+    "name": "名前",
     "username": "ユーザー名",
     "birthday": "お誕生日",
     "address": "住所",

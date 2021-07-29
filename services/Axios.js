@@ -11,8 +11,6 @@ const HTTP = axios.create({
   },
   transformRequest: [
     (data, headers) => {
-      console.log(data, 'data', headers['Content-Type'], 'headers')
-      console.log(qs.stringify(data), 'data stringify')
       if (headers['Content-Type'] == 'multipart/form-data') {
         return data
       }

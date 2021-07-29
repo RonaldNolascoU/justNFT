@@ -9,7 +9,7 @@ export const state = () => ({
     address: null,
     balance: 0,
   },
-  loading: false,
+  loading: true,
   returnTo: null,
 })
 
@@ -44,8 +44,8 @@ export const mutations = {
   setWalletBalance(state, balance) {
     state.wallet.balance = balance
   },
-  // TODO: CHANGE TO AUTH METHOD WHEN AVAILABLE
   disconnect(state) {
+    localStorage.removeItem('isLoggedWithMetaMask')
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     state.user = null
@@ -53,23 +53,6 @@ export const mutations = {
       address: null,
       balance: 0,
     }
-    // window.ethereum.request({
-    //   method: 'eth_requestAccounts',
-    //   params: [
-    //     {
-    //       eth_accounts: {},
-    //     },
-    //   ],
-    // })
-
-    // window.ethereum.request({
-    //   method: 'wallet_requestPermissions',
-    //   params: [
-    //     {
-    //       eth_accounts: {},
-    //     },
-    //   ],
-    // })
     this.$router.push('/signin')
   },
   setLoading(state, payload) {
@@ -96,8 +79,6 @@ export const mutations = {
 
 export const actions = {
   async nuxtClientInit({ state, commit, dispatch }, ctx) {
-    commit('setLoading', true)
-
     // MODAL AGE
     let modalAge = ctx.$cookies.get('justyours_modal_age')
     let cookieDisclaimer = ctx.$cookies.get('jy_cookie_disclaimer')
@@ -113,10 +94,33 @@ export const actions = {
     }
 
     // END MODAL AGE
-
-    await dispatch('checkMetaMaskAccounts')
-    await dispatch('getBalance')
+    const isLoggedWithMetaMask = localStorage.getItem('isLoggedWithMetaMask')
     await routerAuth(ctx)
+    if (isLoggedWithMetaMask) {
+      await dispatch('checkMetaMaskAccounts')
+      await dispatch('getBalance')
+    } else {
+      dispatch('stopNuxtLoading')
+    }
+  },
+  initNuxtLoading({ commit }) {
+    if (process.browser) {
+      setTimeout(() => {
+        window.$nuxt.$loading.start()
+      }, 500)
+    }
+    commit('setLoading', true)
+  },
+  stopNuxtLoading({ commit }) {
+    if (process.browser) {
+      setTimeout(() => {
+        window.$nuxt.$loading.finish()
+      }, 500)
+    }
+    commit('setLoading', false)
+  },
+  saveMetaMaskLoggedState() {
+    localStorage.setItem('isLoggedWithMetaMask', true)
   },
   redirectUserLogin({ commit, state }) {
     if (state.returnTo) {
@@ -128,7 +132,7 @@ export const actions = {
   async checkMetaMaskAccounts({ commit, dispatch }) {
     if (!window.ethereum) {
       commit('disconnect')
-      commit('setLoading', false)
+      dispatch('stopNuxtLoading')
       return 0
     }
     window.ethereum.on('accountsChanged', function (accounts) {
@@ -139,14 +143,14 @@ export const actions = {
         commit('setWalletAddress', accounts[0])
         dispatch('getBalance')
       }
-      commit('setLoading', false)
+      dispatch('stopNuxtLoading')
     })
 
     // detect Network account change
     window.ethereum.on('chainChanged', function (networkId) {
       console.log('chainChanged', networkId)
       if (networkId != 250) commit('disconnect')
-      commit('setLoading', false)
+      dispatch('stopNuxtLoading')
     })
     window.web3 = new Web3(ethereum)
 
@@ -154,10 +158,10 @@ export const actions = {
       console.log(accounts, 'accounts')
       if (accounts.length === 0) {
         commit('disconnect')
+        dispatch('stopNuxtLoading')
       } else {
         commit('setWalletAddress', accounts[0])
       }
-      commit('setLoading', false)
     })
   },
   async getBalance({ state, commit, dispatch }) {
@@ -203,18 +207,19 @@ export const actions = {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )
             commit('setAuth', {})
+            dispatch('saveMetaMaskLoggedState')
             dispatch('redirectUserLogin')
           })
           .catch((err) => {
             console.log(err, 'Error getting decimals')
             commit('disconnect')
           })
-        commit('setLoading', false)
+        dispatch('stopNuxtLoading')
       })
       .catch((err) => {
         console.log(err, 'Error getting balance')
         commit('disconnect')
-        commit('setLoading', false)
+        dispatch('stopNuxtLoading')
       })
   },
   signUp({ commit }, payload) {
@@ -233,7 +238,6 @@ export const actions = {
         })
         .catch((err) => {
           reject(err)
-          // commit('setLoading', false)
         })
     })
   },
@@ -257,7 +261,6 @@ export const actions = {
         })
         .catch((err) => {
           reject(err, 'err')
-          // commit('setLoading', false)
         })
     })
   },
@@ -276,27 +279,12 @@ export const actions = {
         })
         .catch((err) => {
           reject(err, 'err')
-          // commit('setLoading', false)
         })
     })
   },
 
   logout({ commit, dispatch }) {
-    return new Promise((resolve, reject) => {
-      // commit('setLoading', true)
-      // dispatch('loading/loadingState', true, { root: true })
-      AuthService.logout()
-        .then((response) => {
-          // commit('setLoading', false)
-          commit('setAuth', {})
-          // dispatch('loading/loadingState', false, { root: true })
-          resolve(response)
-        })
-        .catch((err) => {
-          // commit('setLoading', false)
-          reject(err)
-        })
-    })
+    commit('disconnect')
   },
   creatorSignUp({ commit }, payload) {
     return new Promise((resolve, reject) => {

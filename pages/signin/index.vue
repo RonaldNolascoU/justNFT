@@ -3,7 +3,7 @@
     <div class="loader__wrapper" v-if="$store.state.auth.loading">
       <GeneralLoader />
     </div>
-    <AuthLogin v-else />
+    <AuthLogin v-if="!$store.state.auth.loading" />
   </div>
 </template>
 

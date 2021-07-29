@@ -20,6 +20,7 @@
   },
   "signup": {
     "title": "Inscrivez-vous en tant que créateur de contenu",
+    "name": "Nom",
     "username": "Nom d'utilisateur",
     "birthday": "Date d'anniversaire",
     "address": "Adresse",

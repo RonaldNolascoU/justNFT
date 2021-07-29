@@ -20,6 +20,7 @@
   },
   "signup": {
     "title": "注册为内容创建者",
+    "name": "名称",
     "username": "用户名",
     "birthday": "生日",
     "address": "地址",
