@@ -112,7 +112,7 @@ export const actions = {
   initNuxtLoading({ commit }) {
     if (process.browser) {
       setTimeout(() => {
-        window.$nuxt.$loading.start()
+        // window.$nuxt.$loading.start()
       }, 500)
     }
     commit('setLoading', true)
@@ -120,7 +120,7 @@ export const actions = {
   stopNuxtLoading({ commit }) {
     if (process.browser) {
       setTimeout(() => {
-        window.$nuxt.$loading.finish()
+        // window.$nuxt.$loading.finish()
       }, 500)
     }
     commit('setLoading', false)
