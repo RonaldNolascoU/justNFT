@@ -53,7 +53,7 @@ export const mutations = {
       address: null,
       balance: 0,
     }
-    this.$router.push('/signin')
+    this.$router.replace('/signin').catch(() => {})
   },
   setLoading(state, payload) {
     state.loading = payload
@@ -71,7 +71,7 @@ export const mutations = {
       const decoded = decodeURI(state.returnTo)
       state.returnTo = null
       if (decoded !== window.location.pathname) {
-        this.$router.replace(decoded)
+        this.$router.replace(decoded).catch(() => {})
       }
     }
   },
