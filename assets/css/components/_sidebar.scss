@@ -81,4 +81,10 @@
     bottom: 13px !important;
     top: initial !important;
   }
+  @media (max-height: 685px) {
+    height: 86vh;
+  }
+  @media screen and (orientation: landscape) {
+    height: 86vh;
+  }
 }

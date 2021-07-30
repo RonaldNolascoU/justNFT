@@ -33,6 +33,13 @@
     "genreOptions": ["Mâle", "Femelle", "Trans", "Non Binaire"],
     "maxUploadError": "Vous avez déjà téléchargé le maximum d'images"
   },
+  "passwords": {
+    "old_password": "ancien mot de passe",
+    "new_password": "nouveau mot de passe",
+    "confirm_password": "Confirmez le mot de passe",
+    "btn": "Changer le mot de passe",
+    "success_mgs": "Password was changed successfully."
+  },
   "wallet": {
     "warningModal": "Avertissement : Ne partagez jamais cela avec qui que ce soit, y compris Just Yours Support.",
     "agree": "Je suis d'accord",

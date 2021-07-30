@@ -1,7 +1,7 @@
 <template>
   <div
     v-click-outside="hideSidebar"
-    class="rounded-xl bg-white dark:bg-black px-4 py-4 absolute -translate-y-full right-0 top-0 mobile__sidebar"
+    class="rounded-xl bg-white dark:bg-black px-4 py-4 absolute -translate-y-full right-0 top-0 mobile__sidebar overflow-y-scroll foobar"
   >
     <div class="user__data flex items-center">
       <div class="badges mt-5 mr-5">
