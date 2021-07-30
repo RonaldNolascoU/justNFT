@@ -27,7 +27,7 @@
               v-if="mode == 'auth'"
               :userMessage="msg"
               @onComplete="onComplete"
-            />
+            ></AuthMetamask>
             <!-- <button class="w-full" @click="loginWithMetamask()">
               <div class="flex">
                 <div
@@ -121,7 +121,7 @@
                 {{ isLogin ? $t('login.login') : $t('login.signup') }}
               </span>
               <span v-else>{{ $t('login.forgotBtn') }}</span>
-              <GeneralLoader v-if="loading" />
+              <GeneralLoader v-if="loading" ></GeneralLoader>
             </button>
           </form>
         </div>
@@ -140,11 +140,11 @@
           </a>
         </div>
         <div class="mt-2 block lg:hidden badge__just">
-          <BadgeBuyJust />
+          <BadgeBuyJust ></BadgeBuyJust>
         </div>
       </div>
     </div>
-    <LayoutFooter />
+    <LayoutFooter ></LayoutFooter>
   </div>
 </template>
 

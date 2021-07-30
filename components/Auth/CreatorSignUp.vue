@@ -295,7 +295,7 @@
                 class="bg-primary text-white w-full rounded-full pl-4 input-height fs-24 mt-3 lg:mt-4 flex justify-center items-center"
               >
                 {{ $t('login.signup') }}
-                <GeneralLoader v-if="loading" />
+                <GeneralLoader v-if="loading"></GeneralLoader>
               </button>
             </form>
           </ValidationObserver>

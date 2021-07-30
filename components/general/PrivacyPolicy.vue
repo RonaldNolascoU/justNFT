@@ -467,16 +467,6 @@
       </p>
 
       <br />
-      <p class="fs-24 text-bold text-primary">Children's Privacy</p>
-      <p>
-        Our Service does not address anyone under the age of 18. We do not
-        knowingly collect personally identifiable information from anyone under
-        the age of 18. If You are a parent or guardian and You are aware that
-        Your child has provided Us with Personal Data, please contact Us. If We
-        become aware that We have collected Personal Data from anyone under the
-        age of 18 without verification of parental consent, We take steps to
-        remove that information from Our servers.
-      </p>
       <p>
         If We need to rely on consent as a legal basis for processing Your
         information and Your country requires consent from a parent, We may
