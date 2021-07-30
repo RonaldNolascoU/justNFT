@@ -33,6 +33,13 @@
     "genreOptions": ["Hombre", "Mujer", "Trans", "No Binario"],
     "maxUploadError": "Ya has alcanzado la máxima cantidad de fotos"
   },
+  "passwords": {
+    "old_password": "Contraseña actual",
+    "new_password": "Contraseña ueva",
+    "confirm_password": "Confirmar Contraseña",
+    "btn": "Cambiar Contraseña",
+    "success_mgs": "Contraseña se cambio correctamente."
+  },
   "wallet": {
     "warningModal": "Precaución: Nunca compartas esto con nadie, ni con el soporte de Just Yours.",
     "agree": "De acuerdo",
