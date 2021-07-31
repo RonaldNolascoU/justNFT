@@ -95,6 +95,7 @@ export default {
     'nuxt-material-design-icons',
     'nuxt-i18n',
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
   ],
   i18n: {
@@ -149,5 +150,31 @@ export default {
     name: 'circle',
     color: '#3B8070',
     background: 'white',
+  },
+  axios: {
+    baseURL: 'http://165.232.182.128',
+  },
+  auth: {
+    redirect: {
+      login: false,
+      logout: false,
+      callback: false,
+      home: '/',
+    },
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          type: '',
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post', property: 'user' },
+          // logout: { url: '/api/auth/logout', method: 'post' },
+          user: false,
+        },
+      },
+    },
   },
 }

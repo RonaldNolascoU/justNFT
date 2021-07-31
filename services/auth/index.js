@@ -36,5 +36,13 @@ class AuthService {
   changePassword(data) {
     return HTTP.post(`change-password`, data, { cache: false })
   }
+
+  getSubscriptions() {
+    return HTTP.post(`subscriptionList`, { cache: false })
+  }
+
+  subscribe(data) {
+    return HTTP.post(`subscribe`, data, { cache: false })
+  }
 }
 export default new AuthService()

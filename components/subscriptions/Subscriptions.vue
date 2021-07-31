@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -147,8 +148,12 @@ export default {
       })
     },
   },
-  created() {},
+  created() {
+    this.getSubs()
+    this.testUpdate()
+  },
   methods: {
+    ...mapActions('auth', ['getSubscriptions', 'subscribe']),
     selectOption(tab) {
       this.selectedTab = tab
       this.tabs.map((x) => {
@@ -184,6 +189,18 @@ export default {
           tabBtn.classList.remove('py-0')
         }
       }
+    },
+    getSubs() {
+      this.getSubscriptions().then((res) => console.log(res))
+    },
+    testUpdate() {
+      this.subscribe({
+        email: 'ronald@test.com',
+        item: 1,
+        time: 1,
+        transactionId: 1,
+        amountPaid: 1,
+      }).then((res) => console.log(res))
     },
   },
 }

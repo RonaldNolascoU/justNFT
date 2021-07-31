@@ -37,8 +37,8 @@
     "old_password": "ancien mot de passe",
     "new_password": "nouveau mot de passe",
     "confirm_password": "Confirmez le mot de passe",
-    "btn": "Changer le mot de passe",
-    "success_mgs": "Password was changed successfully."
+    "btn": "Changeur le mot de passe",
+    "success_mgs": "Le mot de passe a été modifié avec succès."
   },
   "wallet": {
     "warningModal": "Avertissement : Ne partagez jamais cela avec qui que ce soit, y compris Just Yours Support.",
