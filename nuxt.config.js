@@ -152,7 +152,7 @@ export default {
     background: 'white',
   },
   axios: {
-    baseURL: 'http://165.232.182.128',
+    baseURL: 'https://app.justyours.me',
   },
   auth: {
     redirect: {

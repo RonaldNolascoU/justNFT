@@ -2,7 +2,7 @@ import axios from 'axios'
 const qs = require('qs')
 
 const HTTP = axios.create({
-  baseURL: 'http://165.232.182.128/',
+  baseURL: 'https://app.justyours.me',
   headers: {
     'Cache-Control': 'no-cache',
     'Access-Control-Allow-Headers': '*',
