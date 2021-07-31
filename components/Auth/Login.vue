@@ -172,7 +172,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('general', ['login', 'signUp', 'forgotPassword']),
+    ...mapActions('general', [
+      'login',
+      'signUp',
+      'forgotPassword',
+      'redirectUserLogin',
+    ]),
     clearErrors() {
       this.errors = {
         username: null,
@@ -276,6 +281,9 @@ export default {
         this.$store.commit('general/setWalletAddress', metaMaskAddress)
         this.$store.commit('general/setWalletBalance', balance)
         this.$store.dispatch('general/saveMetaMaskLoggedState')
+        // this.redirectUserLogin()
+        // this.$auth.setUser({ name: 'Metamask', loggedIn: true })
+        this.$router.push('/')
         // this.$store.commit('general/setAuth', {})
       }
     },

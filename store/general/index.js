@@ -216,7 +216,7 @@ export const actions = {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )
             // commit('setAuth', {})
-            this.$auth.setUser({ name: 'Metamask' })
+            // this.$auth.setUser({ name: 'Metamask', loggedIn: true })
             // window.$nuxt.$store.state.auth.loggedIn = true
             dispatch('saveMetaMaskLoggedState')
             dispatch('redirectUserLogin')
