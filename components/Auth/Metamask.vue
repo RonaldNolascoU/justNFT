@@ -67,11 +67,11 @@ export default {
     async checkAccounts() {
       if (this.web3 === null) return
       await this.web3.eth.getAccounts((err, accounts) => {
-        if (err != null) this.$store.commit('auth/disconnect')
+        if (err != null) this.$store.commit('general/disconnect')
         if (accounts.length === 0) {
           this.MetaMaskAddress = ''
           this.Log(this.MetamaskMsg.EMPTY_METAMASK_ACCOUNT, 'NO_LOGIN')
-          this.$store.commit('auth/disconnect')
+          this.$store.commit('general/disconnect')
           return
         }
         this.MetaMaskAddress = accounts[0] // user Address

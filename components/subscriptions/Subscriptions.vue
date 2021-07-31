@@ -153,7 +153,7 @@ export default {
     this.testUpdate()
   },
   methods: {
-    ...mapActions('auth', ['getSubscriptions', 'subscribe']),
+    ...mapActions('general', ['getSubscriptions', 'subscribe']),
     selectOption(tab) {
       this.selectedTab = tab
       this.tabs.map((x) => {

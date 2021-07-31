@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="loader__wrapper" v-if="$store.state.auth.loading">
+    <div class="loader__wrapper" v-if="$store.state.general.loading">
       <GeneralLoader></GeneralLoader>
     </div>
-    <AuthLogin v-if="!$store.state.auth.loading"></AuthLogin>
+    <AuthLogin v-if="!$store.state.general.loading"></AuthLogin>
   </div>
 </template>
 

@@ -9,14 +9,14 @@ export default function ({ window, app, store, redirect, route }) {
     }
   }
 
-  const isUserSignedIn = store.getters['auth/isLoggedIn']
+  const isUserSignedIn = store.state.auth.loggedIn
   const isSigninRoute = ['/signin', '/creator-signup'].includes(route.path)
 
   app.i18n.setLocaleCookie(app.$cookies.get('jy_locale'))
   app.i18n.setLocale(app.$cookies.get('jy_locale'))
 
   if (route.path != '/' && !route.path.includes('/signin')) {
-    store.commit('auth/SET_RETURN_URL', route.fullPath)
+    store.commit('general/SET_RETURN_URL', route.fullPath)
   }
 
   // if (route.path != '/' && store.state.modals.age && !isSigninRoute) {
@@ -24,7 +24,8 @@ export default function ({ window, app, store, redirect, route }) {
   //   // return app.router.push('/')
   // }
 
-  if (!isUserSignedIn && !isSigninRoute) {
+  let isLoggedWithMetaMask = localStorage.getItem('isLoggedWithMetaMask')
+  if (!isUserSignedIn && !isSigninRoute && !isLoggedWithMetaMask) {
     return redirect('/signin')
     // return app.router.push('/signin')
   }

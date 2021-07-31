@@ -156,9 +156,9 @@ export default {
   },
   auth: {
     redirect: {
-      login: false,
-      logout: false,
-      callback: false,
+      login: '/',
+      // logout: false,
+      // callback: false,
       home: '/',
     },
     strategies: {

@@ -353,7 +353,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('auth', ['creatorSignUp']),
+    ...mapActions('general', ['creatorSignUp']),
     clearErrors() {
       this.errorMessages = null
 

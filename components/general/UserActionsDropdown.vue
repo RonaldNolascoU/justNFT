@@ -66,7 +66,7 @@ export default {
       }, 5000)
     },
     logout() {
-      this.$store.dispatch('auth/logout')
+      this.$store.dispatch('general/logout')
     },
   },
 }

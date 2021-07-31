@@ -9,7 +9,7 @@
         src="/images/wallet-icon.png"
       />
       <span class="ml-3 font-semibold text-blue">{{
-        $store.state.auth.wallet.balance || 0
+        $store.state.general.wallet.balance || 0
       }}</span>
       <span class="ml-1 font-semibold text-primary">JUST</span>
     </div>

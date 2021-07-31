@@ -94,7 +94,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['changePassword']),
+    ...mapActions('general', ['changePassword']),
     onSubmit() {
       if (this.loading) return
 

@@ -172,7 +172,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['login', 'signUp', 'forgotPassword']),
+    ...mapActions('general', ['login', 'signUp', 'forgotPassword']),
     clearErrors() {
       this.errors = {
         username: null,
@@ -209,8 +209,19 @@ export default {
         .loginWith('local', {
           data: { email: this.email, password: this.password },
         })
-        .then(() => {
-          this.$router.push({ path: '/' })
+        .then((response) => {
+          const { success, user, msg } = response.data
+
+          if (success) {
+            this.$auth.setUser(user)
+          } else {
+            this.errors.email = msg
+          }
+          this.loading = false
+        })
+        .catch((err) => {
+          this.loading = false
+          this.errors.email = err
         })
     },
     register() {
@@ -262,10 +273,10 @@ export default {
       console.log('data:', data)
       const { metaMaskAddress, balance } = data
       if (metaMaskAddress) {
-        this.$store.commit('auth/setWalletAddress', metaMaskAddress)
-        this.$store.commit('auth/setWalletBalance', balance)
-        this.$store.dispatch('auth/saveMetaMaskLoggedState')
-        this.$store.commit('auth/setAuth', {})
+        this.$store.commit('general/setWalletAddress', metaMaskAddress)
+        this.$store.commit('general/setWalletBalance', balance)
+        this.$store.dispatch('general/saveMetaMaskLoggedState')
+        // this.$store.commit('general/setAuth', {})
       }
     },
   },

@@ -66,7 +66,7 @@
             <div
               v-else
               class="flex justify-center items-center pt-2 my-2 cursor-pointer"
-              @click="$store.dispatch('auth/logout')"
+              @click="$store.dispatch('general/logout')"
             >
               <span class="fs-20">
                 {{ $t(`sidebar.${option.i18n}`) }}

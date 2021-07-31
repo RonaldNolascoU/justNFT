@@ -2,13 +2,13 @@
   <div class="relative">
     <div
       class="px-5 py-1 border-solid rounded-full border-custom-gray fs-16 flex justify-center mt-5 xl:mt-0 cursor-pointer"
-      :title="$store.state.auth.wallet.address || ''"
+      :title="$store.state.general.wallet.address || ''"
       @click.prevent.stop="toggleDropdown"
     >
       <input
         type="hidden"
         class="hidden"
-        :value="$store.state.auth.wallet.address || 'N/A'"
+        :value="$store.state.general.wallet.address || 'N/A'"
         ref="address"
       />
       <span class="font-semibold text-gray">
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     formattedAddress() {
-      const { address } = this.$store.state.auth.wallet
+      const { address } = this.$store.state.general.wallet
       if (!address) return
       if (address.length > 4) {
         return (
@@ -53,7 +53,9 @@ export default {
       this.isOpen = false
     },
     copy() {
-      navigator.clipboard.writeText(this.$store.state.auth.wallet.address || '')
+      navigator.clipboard.writeText(
+        this.$store.state.general.wallet.address || ''
+      )
     },
   },
 }

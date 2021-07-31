@@ -48,11 +48,13 @@ export const mutations = {
     localStorage.removeItem('isLoggedWithMetaMask')
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    state.user = null
-    state.wallet = {
-      address: null,
-      balance: 0,
-    }
+    localStorage.clear()
+    this.$cookies.remove('auth._token.local')
+    // state.user = null
+    // state.wallet = {
+    //   address: null,
+    //   balance: 0,
+    // }
     this.$router.replace('/signin').catch(() => {})
   },
   setLoading(state, payload) {
@@ -128,11 +130,12 @@ export const actions = {
   saveMetaMaskLoggedState() {
     localStorage.setItem('isLoggedWithMetaMask', true)
   },
-  redirectUserLogin({ commit, state }) {
+  redirectUserLogin({ commit, state }, ctx) {
+    console.log(ctx, 'context')
     if (state.returnTo) {
       commit('REDIRECT_RETURN_TO')
     } else {
-      this.$router.replace('/').catch(() => {})
+      this.$router.push('/')
     }
   },
   async checkMetaMaskAccounts({ commit, dispatch }) {
@@ -196,7 +199,7 @@ export const actions = {
     let contract = new window.web3.eth.Contract(minABI, justYoursTokenAddress)
 
     // Call balanceOf function
-    console.log(state, 'state')
+    console.log(window.$nuxt.$store.state, 'state')
     await contract.methods
       .balanceOf(state.wallet.address)
       .call()
@@ -212,7 +215,9 @@ export const actions = {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )
-            commit('setAuth', {})
+            // commit('setAuth', {})
+            this.$auth.setUser({ name: 'Metamask' })
+            // window.$nuxt.$store.state.auth.loggedIn = true
             dispatch('saveMetaMaskLoggedState')
             dispatch('redirectUserLogin')
           })

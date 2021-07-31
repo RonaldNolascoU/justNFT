@@ -15,18 +15,18 @@
         </div>
       </nav>
     </div>
-    <div v-if="!$store.state.auth.loading" class="hidden lg:block">
+    <div v-if="!$store.state.general.loading" class="hidden lg:block">
       <BadgeBuyJust></BadgeBuyJust>
     </div>
     <ModalAge v-if="$store.state.modals.age"></ModalAge>
     <Nuxt></Nuxt>
     <div
       class="container translations relative"
-      v-if="!$store.state.auth.loading"
+      v-if="!$store.state.general.loading"
     >
       <GeneralTranslateDropdown></GeneralTranslateDropdown>
     </div>
-    <client-only v-if="!$store.state.auth.loading">
+    <client-only v-if="!$store.state.general.loading">
       <LayoutCookiesDisclaimer></LayoutCookiesDisclaimer>
     </client-only>
   </div>
