@@ -121,7 +121,7 @@
                 {{ isLogin ? $t('login.login') : $t('login.signup') }}
               </span>
               <span v-else>{{ $t('login.forgotBtn') }}</span>
-              <GeneralLoader v-if="loading" ></GeneralLoader>
+              <GeneralLoader v-if="loading"></GeneralLoader>
             </button>
           </form>
         </div>
@@ -140,11 +140,11 @@
           </a>
         </div>
         <div class="mt-2 block lg:hidden badge__just">
-          <BadgeBuyJust ></BadgeBuyJust>
+          <BadgeBuyJust></BadgeBuyJust>
         </div>
       </div>
     </div>
-    <LayoutFooter ></LayoutFooter>
+    <LayoutFooter></LayoutFooter>
   </div>
 </template>
 
@@ -202,21 +202,16 @@ export default {
     },
     loginWithEmailAndPassword() {
       if (this.loading) return
-      this.$store.commit('auth/setAuth', {})
       // TODO: DISABLED FOR NOW UNTIL API IS WORKING ON LIVE DOMAIN
 
-      // this.loading = true
-      // const credentials = { email: this.email, password: this.password }
-      // this.login(credentials)
-      //   .then((response) => {
-      //     console.log(response, 'response')
-      //     this.loading = false
-      //   })
-      //   .catch((err) => {
-      //     console.log(err, 'error')
-      //     this.errors.email = err
-      //     this.loading = false
-      //   })
+      this.loading = true
+      this.$auth
+        .loginWith('local', {
+          data: { email: this.email, password: this.password },
+        })
+        .then(() => {
+          this.$router.push({ path: '/' })
+        })
     },
     register() {
       if (this.loading) return

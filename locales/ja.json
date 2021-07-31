@@ -33,6 +33,13 @@
     "genreOptions": ["男性", "女性", "トランス", "非バイナリ"],
     "maxUploadError": "あなたはすでに最大の画像をアップロードしました"
   },
+  "passwords": {
+    "old_password": "以前のパスワード",
+    "new_password": "新しいパスワード",
+    "confirm_password": "パスワードを認証する",
+    "btn": "パスワードを変更する",
+    "success_mgs": "パスワードが正常に変更されました ."
+  },
   "wallet": {
     "warningModal": "警告：Just Yours Supportを含め、これを他の人と共有しないでください。",
     "agree": "同意する",

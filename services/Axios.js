@@ -34,7 +34,7 @@ const HTTP = axios.create({
 HTTP.interceptors.request.use((config) => {
   let myToken = localStorage.token
   if (myToken != null) {
-    config.headers.Authorization = `Bearer ${myToken}`
+    config.headers.Authorization = `${myToken}`
   }
   return config
 })

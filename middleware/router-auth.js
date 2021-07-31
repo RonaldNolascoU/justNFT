@@ -10,7 +10,7 @@ export default function ({ window, app, store, redirect, route }) {
   }
 
   const isUserSignedIn = store.getters['auth/isLoggedIn']
-  const isSigninRoute = route.path === '/signin'
+  const isSigninRoute = ['/signin', '/creator-signup'].includes(route.path)
 
   app.i18n.setLocaleCookie(app.$cookies.get('jy_locale'))
   app.i18n.setLocale(app.$cookies.get('jy_locale'))
@@ -25,7 +25,6 @@ export default function ({ window, app, store, redirect, route }) {
   // }
 
   if (!isUserSignedIn && !isSigninRoute) {
-    console.log('redirect to signin')
     return redirect('/signin')
     // return app.router.push('/signin')
   }

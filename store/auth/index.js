@@ -341,4 +341,34 @@ export const actions = {
         })
     })
   },
+  getSubscriptions({ commit }) {
+    return new Promise((resolve, reject) => {
+      AuthService.getSubscriptions()
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  subscribe({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      AuthService.subscribe(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
 }

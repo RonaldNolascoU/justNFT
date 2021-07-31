@@ -33,6 +33,13 @@
     "genreOptions": ["男人", "女性", "反式", "非二进制"],
     "maxUploadError": "您已经上传了最大数量的图片"
   },
+  "passwords": {
+    "old_password": "旧密码",
+    "new_password": "新密码",
+    "confirm_password": "确认密码",
+    "btn": "更改密码",
+    "success_mgs": "密码修改成功."
+  },
   "wallet": {
     "warningModal": "警告：切勿与任何人共享此信息，包括 Just Yours Support。",
     "agree": "我同意",
