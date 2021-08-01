@@ -144,11 +144,11 @@
       </div>
 
       <div
-        class="block menu xl:hidden fs-40 nav-icons fs-res-20 text-secondary pl-2 md:pl-5 xl:pl-0"
+        class="block xl:hidden fs-40 nav-icons fs-res-20 text-secondary pl-2 md:pl-5 xl:pl-0"
       >
         <i
           role="button"
-          class="fas fa-bars"
+          class="fas fa-bars menu"
           @click.prevent.stop="toggleSidebar"
         ></i>
         <LayoutMobileSidebar v-if="$store.state.sidebar" />

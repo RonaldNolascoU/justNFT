@@ -41,6 +41,7 @@
         <div class="subscribe__button_wrapper flex justify-center fs-24">
           <a
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
+            @click.prevent="subscribeTo"
           >
             <span class="material-icons-outlined mr-3"> lock </span>
             <span
@@ -84,6 +85,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   props: {
     model: {
@@ -117,6 +119,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('general', ['subscribe']),
     openOptions() {
       this.isMenuOpen = !this.isMenuOpen
     },
@@ -129,6 +132,15 @@ export default {
         x.active = false
       })
       tab.active = !tab.active
+    },
+    subscribeTo() {
+      this.subscribe({
+        email: 'ronald@test.com',
+        item: 1,
+        time: 1,
+        transactionId: 1,
+        amountPaid: 5000,
+      }).then((res) => console.log(res))
     },
   },
 }

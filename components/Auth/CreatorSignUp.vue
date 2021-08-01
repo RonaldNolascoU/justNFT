@@ -312,6 +312,7 @@ import { mapActions } from 'vuex'
 import VSelect from 'vue-select'
 
 export default {
+  name: 'CreatorSignUp',
   components: { VSelect },
   data() {
     return {

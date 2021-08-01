@@ -32,7 +32,7 @@ const HTTP = axios.create({
 })
 
 HTTP.interceptors.request.use((config) => {
-  let myToken = localStorage.token
+  let myToken = localStorage.getItem('auth._token.local')
   if (myToken != null) {
     config.headers.Authorization = `${myToken}`
   }

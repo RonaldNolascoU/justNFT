@@ -47,6 +47,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  name: 'Login',
   data() {
     return {
       email: null,
@@ -102,6 +103,7 @@ export default {
             this.errors.email = msg
           }
           this.loading = false
+          this.$router.push({ path: '/' })
         })
         .catch((err) => {
           this.loading = false
