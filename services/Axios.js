@@ -32,7 +32,8 @@ const HTTP = axios.create({
 })
 
 HTTP.interceptors.request.use((config) => {
-  let myToken = localStorage.getItem('auth._token.local')
+  console.log(window.$nuxt.context.$cookies)
+  let myToken = window.$nuxt.context.$cookies.get('auth._token.local')
   if (myToken != null) {
     config.headers.Authorization = `${myToken}`
   }
