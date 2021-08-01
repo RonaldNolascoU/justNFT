@@ -2,6 +2,10 @@
   <Subscriptions />
 </template>
 
-<script></script>
+<script>
+export default {
+  name: 'SubscriptionsIndex',
+}
+</script>
 
 <style></style>

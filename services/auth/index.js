@@ -5,7 +5,10 @@ class AuthService {
 
   // USERS
   signUp(data) {
-    return HTTP.post(`signup`, data, { cache: false })
+    return HTTP.post(`signup`, data, {
+      cache: false,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
   }
   login(data) {
     return HTTP.post('login', data, { cache: false })

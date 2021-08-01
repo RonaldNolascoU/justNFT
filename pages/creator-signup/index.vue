@@ -1,5 +1,5 @@
 <template>
-  <AuthCreatorSignUp />
+  <AuthCreatorSignUp></AuthCreatorSignUp>
 </template>
 
 <script>

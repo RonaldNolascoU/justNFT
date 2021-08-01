@@ -155,8 +155,9 @@ export default {
     baseURL: 'https://app.justyours.me',
   },
   auth: {
+    localStorage: false,
     redirect: {
-      login: '/signin',
+      signin: '/signin',
       // logout: false,
       // callback: false,
       home: '/',
