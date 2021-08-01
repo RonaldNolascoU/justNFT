@@ -156,7 +156,7 @@ export default {
   },
   auth: {
     redirect: {
-      login: '/',
+      login: '/signin',
       // logout: false,
       // callback: false,
       home: '/',

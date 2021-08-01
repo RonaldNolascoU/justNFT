@@ -150,10 +150,9 @@ export default {
   },
   created() {
     this.getSubs()
-    this.testUpdate()
   },
   methods: {
-    ...mapActions('general', ['getSubscriptions', 'subscribe']),
+    ...mapActions('general', ['getSubscriptions']),
     selectOption(tab) {
       this.selectedTab = tab
       this.tabs.map((x) => {
@@ -192,15 +191,6 @@ export default {
     },
     getSubs() {
       this.getSubscriptions().then((res) => console.log(res))
-    },
-    testUpdate() {
-      this.subscribe({
-        email: 'ronald@test.com',
-        item: 1,
-        time: 1,
-        transactionId: 1,
-        amountPaid: 1,
-      }).then((res) => console.log(res))
     },
   },
 }

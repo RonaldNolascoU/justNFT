@@ -89,5 +89,8 @@ export default {
       border-bottom: 0 !important;
     }
   }
+  @media (max-width: 1280px) {
+    left: 86px;
+  }
 }
 </style>

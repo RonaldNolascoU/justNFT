@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'SingIn',
   middleware: ['router-auth'],
   layout: 'blank',
 }

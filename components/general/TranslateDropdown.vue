@@ -13,7 +13,7 @@
           <i
             class="fas fa-globe language__icon text-primary mr-2 order-1 xl:order-2"
           ></i>
-          <span class="code code-name mr-2 fs-14 fs-res-16">
+          <span :class="['code code-name ', isMobile ? 'fs-20' : 'fs-14']">
             {{ selectedLanguage.name }}
           </span>
         </div>
@@ -22,7 +22,7 @@
           class="dropdown absolute bg-white dark:bg-black"
         >
           <div
-            class="language cursor-pointer dark:text-gray"
+            class="language cursor-pointer dark:text-secondary"
             v-for="(language, index) in filteredLocales"
             :key="index"
             @click="selectLanguage(language)"
@@ -31,7 +31,7 @@
               class="mr-2"
               :src="`/locales/${language.code}_flag.png`"
             />
-            <span class="code fs-14 fs-res-16">
+            <span :class="['code', isMobile ? 'fs-20' : 'fs-14']">
               {{ language.name }}
             </span>
           </div>
@@ -54,6 +54,9 @@ export default {
       return this.$i18n.locales.filter((locale) => {
         return locale.code != this.selectedLanguage.code
       })
+    },
+    isMobile() {
+      return window.innerWidth < 1280
     },
   },
   mounted() {

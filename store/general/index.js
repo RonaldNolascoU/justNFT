@@ -376,4 +376,19 @@ export const actions = {
         })
     })
   },
+  me({ commit }) {
+    return new Promise((resolve, reject) => {
+      AuthService.me()
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
 }
