@@ -51,7 +51,8 @@
 
 <script>
 export default {
-  middleware: ['auth', 'router-auth'],
+  name: 'default',
+  middleware: ['router-auth'],
   computed: {
     scroll() {
       let routes = ['subscriptions']

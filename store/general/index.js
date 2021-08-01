@@ -46,15 +46,8 @@ export const mutations = {
   },
   disconnect(state) {
     localStorage.removeItem('isLoggedWithMetaMask')
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    localStorage.clear()
+    localStorage.removeItem('auth._token.local')
     this.$cookies.remove('auth._token.local')
-    // state.user = null
-    // state.wallet = {
-    //   address: null,
-    //   balance: 0,
-    // }
     this.$router.replace('/signin').catch(() => {})
   },
   setLoading(state, payload) {
@@ -131,7 +124,6 @@ export const actions = {
     localStorage.setItem('isLoggedWithMetaMask', true)
   },
   redirectUserLogin({ commit, state }, ctx) {
-    console.log(ctx, 'context')
     if (state.returnTo) {
       commit('REDIRECT_RETURN_TO')
     } else {
@@ -252,30 +244,6 @@ export const actions = {
         })
     })
   },
-  login({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      localStorage.clear()
-
-      AuthService.login(payload)
-        .then(({ data }) => {
-          if (!data.success) {
-            return reject(data.msg)
-          }
-
-          localStorage.setItem('token', data.token)
-          localStorage.setItem('user', JSON.stringify(data.user))
-          commit(
-            'setAuth',
-            Object.assign({}, { ...data.user, token: data.token })
-          )
-          resolve(data)
-        })
-        .catch((err) => {
-          reject(err, 'err')
-        })
-    })
-  },
-
   forgotPassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
       localStorage.clear()

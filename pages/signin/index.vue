@@ -3,7 +3,7 @@
     <div class="loader__wrapper" v-if="$store.state.general.loading">
       <GeneralLoader></GeneralLoader>
     </div>
-    <AuthLogin v-if="!$store.state.general.loading"></AuthLogin>
+    <AuthForm v-if="!$store.state.general.loading"></AuthForm>
   </div>
 </template>
 
