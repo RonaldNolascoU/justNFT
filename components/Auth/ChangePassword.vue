@@ -73,6 +73,12 @@
               <GeneralLoader v-if="loading" />
             </button>
           </form>
+          <span class="text-primary font-bold fs-24" v-if="success"
+            >Password changed successfully</span
+          >
+          <span class="text-primary font-bold fs-24" v-if="error">{{
+            error
+          }}</span>
         </div>
       </div>
     </div>
@@ -91,23 +97,41 @@ export default {
         old_password: '',
         confirm_password: '',
       },
+      success: false,
+      error: null,
     }
   },
   methods: {
     ...mapActions('general', ['changePassword']),
     onSubmit() {
       if (this.loading) return
-
-      // if (this.$refs.changeForm.validate()) {
-      // }
-
+      this.loading = true
       let payload = {
-        old_password: this.form.old_password,
+        password: this.form.old_password,
         new_password: this.form.new_password,
       }
 
       this.changePassword(payload)
+        .then((result) => {
+          this.success = true
+          this.form = { old_password: null, new_password: null }
+          this.loading = false
+          this.error = null
+        })
+        .catch((err) => {
+          this.success = false
+          this.loading = false
+          this.error = err
+        })
     },
   },
 }
 </script>
+
+<style scoped lang="scss">
+form {
+  input::placeholder {
+    font-size: 16px;
+  }
+}
+</style>

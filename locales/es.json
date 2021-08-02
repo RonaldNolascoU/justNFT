@@ -5,6 +5,7 @@
     "or": "O",
     "email": "Correo electrónico",
     "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
     "username": "Usuario",
     "forgot": "Olvidaste tu contraseña?",
     "login": "Iniciar Sesión",

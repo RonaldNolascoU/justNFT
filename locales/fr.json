@@ -5,6 +5,7 @@
     "or": "Ou alors",
     "email": "E-mail",
     "password": "Mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
     "username": "Nom d'utilisateur",
     "forgot": "Mot de passe oublié?",
     "login": "Connexion",

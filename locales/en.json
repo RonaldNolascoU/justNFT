@@ -5,6 +5,7 @@
     "or": "OR",
     "email": "Email",
     "password": "Password",
+    "confirmPassword": "Confirm Password",
     "username": "Username",
     "forgot": "Forgot Password?",
     "login": "Login",

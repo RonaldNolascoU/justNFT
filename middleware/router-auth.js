@@ -16,15 +16,6 @@ export default function ({ window, app, store, redirect, route }) {
   app.i18n.setLocaleCookie(app.$cookies.get('jy_locale'))
   app.i18n.setLocale(app.$cookies.get('jy_locale'))
 
-  // app.router.beforeResolve((to, from, next) => {
-  //   console.log(to, from)
-  //   if (isUserSignedIn) {
-  //     next('/me')
-  //   } else {
-  //     next('/signin')
-  //   }
-  // })
-
   if (route.path != '/' && !route.path.includes('/signin')) {
     store.commit('general/SET_RETURN_URL', route.fullPath)
   }

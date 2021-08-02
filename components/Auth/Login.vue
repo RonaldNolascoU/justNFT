@@ -103,7 +103,6 @@ export default {
             this.errors.email = msg
           }
           this.loading = false
-          this.$router.push({ path: '/' })
         })
         .catch((err) => {
           this.loading = false

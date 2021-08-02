@@ -5,6 +5,7 @@
     "or": "或者",
     "email": "电子邮件",
     "password": "密码",
+    "confirmPassword": "确认密码",
     "username": "用户名",
     "forgot": "忘记密码？",
     "login": "登录",

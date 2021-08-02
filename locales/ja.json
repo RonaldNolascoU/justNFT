@@ -5,6 +5,7 @@
     "or": "または",
     "email": "Eメール",
     "password": "パスワード",
+    "confirmPassword": "パスワードを認証する",
     "username": "ユーザー名",
     "forgot": "パスワードをお忘れですか？",
     "login": "ログイン",

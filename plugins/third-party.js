@@ -5,7 +5,7 @@ import vueFilePond from 'vue-filepond'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate'
-import { required, email } from 'vee-validate/dist/rules'
+import { required, email, confirmed } from 'vee-validate/dist/rules'
 
 // Styles
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css'
@@ -19,6 +19,11 @@ extend('required', { ...required, message: '{_field_} is required' })
 
 // Install email rule.
 extend('email', email)
+
+extend('confirmed', confirmed, {
+  ...confirmed,
+  message: 'Passwords do not match',
+})
 
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,

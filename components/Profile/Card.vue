@@ -86,6 +86,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import getAccounts from '@/scripts/metamask'
 export default {
   props: {
     model: {
@@ -133,14 +134,41 @@ export default {
       })
       tab.active = !tab.active
     },
-    subscribeTo() {
-      this.subscribe({
-        email: 'ronald@test.com',
-        item: 1,
-        time: 1,
-        transactionId: 1,
-        amountPaid: 5000,
-      }).then((res) => console.log(res))
+    async subscribeTo() {
+      try {
+        console.log(getAccounts())
+        getAccounts()
+          .then(async (result) => {
+            console.log(result, 'result')
+            await window.ethereum
+              .request({
+                method: 'eth_sendTransaction',
+                params: [
+                  {
+                    to: '0x0000000000000000000000000000000000000000',
+                    from: result,
+                    value: '0x00',
+                    // And so on...
+                  },
+                ],
+              })
+              .then((txtHash) => {
+                this.subscribe({
+                  email: 'ronald@test.com',
+                  item: 1,
+                  time: 1,
+                  transactionId: txtHash,
+                  amountPaid: 5000,
+                }).then((res) => console.log(res))
+              })
+              .catch((err) => {})
+          })
+          .catch((err) => {
+            console.log(err, 'err')
+          })
+      } catch (error) {
+        console.error(error)
+      }
     },
   },
 }
