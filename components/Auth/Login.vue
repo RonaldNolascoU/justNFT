@@ -90,7 +90,7 @@ export default {
 
       this.loading = true
       await this.$auth
-        .loginWith('local', {
+        .login({
           data: { email: this.email, password: this.password },
         })
         .then((response) => {

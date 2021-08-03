@@ -3,7 +3,7 @@
     <div class="xl:absolute translations__dropdown">
       <div class="relative text-center" v-click-outside="hide">
         <div
-          class="language cursor-pointer dark:text-gray"
+          class="language cursor-pointer xl:dark:text-gray"
           @click="openDropdown()"
         >
           <nuxt-img
@@ -31,7 +31,9 @@
               class="mr-2"
               :src="`/locales/${language.code}_flag.png`"
             />
-            <span :class="['code', isMobile ? 'fs-20' : 'fs-14']">
+            <span
+              :class="['code dark:text-white', isMobile ? 'fs-20' : 'fs-14']"
+            >
               {{ language.name }}
             </span>
           </div>

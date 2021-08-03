@@ -122,6 +122,7 @@
                       'message-in dark:bg-gray-1000': message.userId !== 1,
                     }"
                   >
+                    <img v-if="message.img" :src="message.img" />
                     <p class="dark:text-white">
                       {{ message.msg }}
                     </p>
@@ -129,7 +130,7 @@
                 </div>
               </div>
               <div class="chat__screen" v-else>
-                <MessageUploadImage />
+                <MessageUploadImage @imgUploaded="imgUploaded" />
               </div>
             </div>
             <div
@@ -333,6 +334,17 @@ export default {
         },
         { complete: done }
       )
+    },
+    imgUploaded(obj) {
+      if (obj) {
+        this.chatMessages.push({
+          msg: obj.price,
+          img: obj.img,
+          userId: 1,
+          type: 'img',
+        })
+      }
+      this.$nextTick(() => (this.uploadImg = !this.uploadImg))
     },
   },
 }

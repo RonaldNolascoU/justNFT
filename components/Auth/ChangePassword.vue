@@ -90,6 +90,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      mode: 'user',
       loading: false,
       passChanged: false,
       form: {
@@ -102,7 +103,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('general', ['changePassword']),
+    ...mapActions('general', ['changePassword', 'changePasswordCreator']),
     onSubmit() {
       if (this.loading) return
       this.loading = true
@@ -111,8 +112,13 @@ export default {
         new_password: this.form.new_password,
       }
 
-      this.changePassword(payload)
-        .then((result) => {
+      let changeFunction =
+        this.mode == 'user'
+          ? this.changePassword(payload)
+          : this.changePasswordCreator(payload)
+
+      changeFunction
+        .then(() => {
           this.success = true
           this.form = { old_password: null, new_password: null }
           this.loading = false

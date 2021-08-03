@@ -314,6 +314,21 @@ export const actions = {
         })
     })
   },
+  changePasswordCreator({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      AuthService.changePasswordCreator(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
   getSubscriptions({ commit }) {
     return new Promise((resolve, reject) => {
       AuthService.getSubscriptions()

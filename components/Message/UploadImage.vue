@@ -18,26 +18,32 @@
           <div
             class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-white font-bold mt-3 py-2 px-16"
           >
-            <span class="text-center font-semibold cursor-pointer btn-fs">
+            <button
+              class="text-center font-semibold cursor-pointer btn-fs"
+              @click="onPickFile"
+            >
               Select
-            </span>
+            </button>
+            <input
+              type="file"
+              style="display: none"
+              ref="fileInput"
+              accept="image/*"
+              @change="onFilePicked"
+            />
           </div>
 
           <div class="text-center mt-16 xl:mt-10">
             <span class="dark:text-white">Set Price in JUST</span>
-            <div
-              class="flex items-center rounded-full cursor-pointer action__item hover:bg-primary hover:text-white tab__action bg-primary-transparent text-white font-bold mt-3 py-2 px-16"
-            >
-              <span
-                class="text-center font-semibold cursor-pointer btn-fs ml-1 dark:text-white"
-              >
-                3500 JUST
-              </span>
-            </div>
+            <input
+              class="rounded-full cursor-pointer action__item hover:bg-primary hover:text-white tab__action bg-primary-transparent text-white font-bold mt-3 p-2"
+              type="text"
+            />
           </div>
 
           <div
             class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-white font-bold mt-16 py-2 px-16 xl:mb-10"
+            @click="finish"
           >
             <i class="material-icons"> check </i>
             <span class="text-center font-semibold cursor-pointer btn-fs ml-1">
@@ -58,8 +64,30 @@ export default {
       location: '',
       people: '',
       maxLength: 150,
+      image: null,
+      url: '',
+      price: '',
     }
   },
-  methods: {},
+  methods: {
+    onPickFile() {
+      this.$refs.fileInput.click()
+    },
+    onFilePicked(event) {
+      const files = event.target.files
+      let filename = files[0].name
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
+      this.url = URL.createObjectURL(files[0])
+    },
+    finish() {
+      this.$emit('imgUploaded', { url: this.url, price: this.price })
+    },
+  },
 }
 </script>
