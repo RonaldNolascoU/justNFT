@@ -122,14 +122,18 @@
                       'message-in dark:bg-gray-1000': message.userId !== 1,
                     }"
                   >
-                    <img v-if="message.img" :src="message.img" />
-                    <p class="dark:text-white">
+                    <img
+                      class="rounded-md"
+                      v-if="message.img"
+                      :src="message.img"
+                    />
+                    <p :class="['dark:text-white', { 'mt-1': message.img }]">
                       {{ message.msg }}
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="chat__screen" v-else>
+              <div class="chat__screen xl:overflow-y-scroll" v-else>
                 <MessageUploadImage @imgUploaded="imgUploaded" />
               </div>
             </div>
@@ -336,10 +340,10 @@ export default {
       )
     },
     imgUploaded(obj) {
-      if (obj) {
+      if (obj.price && obj.url) {
         this.chatMessages.push({
-          msg: obj.price,
-          img: obj.img,
+          msg: obj.price + ' JUST',
+          img: obj.url,
           userId: 1,
           type: 'img',
         })

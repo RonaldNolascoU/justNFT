@@ -52,8 +52,8 @@
                 'message-in dark:bg-gray-1000': message.userId !== 1,
               }"
             >
-              <img v-if="message.img" :src="message.img" />
-              <p class="dark:text-white">
+              <img class="rounded-md" v-if="message.img" :src="message.img" />
+              <p :class="['dark:text-white', { 'mt-1': message.img }]">
                 {{ message.msg }}
               </p>
             </div>
@@ -226,10 +226,10 @@ export default {
       console.log('adding emoji')
     },
     imgUploaded(obj) {
-      if (obj) {
+      if (obj.price && obj.url) {
         this.chatMessages.push({
-          msg: obj.price,
-          img: obj.img,
+          msg: obj.price + ' JUST',
+          img: obj.url,
           userId: 1,
           type: 'img',
         })
