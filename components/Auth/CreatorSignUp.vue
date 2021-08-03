@@ -273,7 +273,7 @@
                       accepted-file-types="image/jpeg, image/png"
                       maxFiles="1"
                       :credits="[]"
-                      v-model="form.file"
+                      v-model="form.profileImage"
                       required
                     />
                     <span class="fs-16 text-primary font-semibold w-full">{{
@@ -329,7 +329,7 @@ export default {
         current: null,
         birthday: null,
         id: null,
-        file: null,
+        profileImage: null,
       },
       errors: {},
       errorMessages: null,
@@ -369,7 +369,7 @@ export default {
         current: null,
         birthday: null,
         id: null,
-        file: null,
+        profileImage: null,
       }
     },
     getTooltipOptions(msg) {
@@ -387,21 +387,17 @@ export default {
     },
     onSubmit() {
       if (this.loading) return
-      let { id, file } = this.form
 
       let payload = new FormData()
       for (var key in this.form) {
-        if (!['id', 'file'].includes(key)) {
-          if (key == 'birthday') {
-          } else {
-          }
+        if (!['id', 'profileImage'].includes(key)) {
           payload.append(key, this.form[key])
+        } else {
+          this.form[key].forEach((x) => {
+            payload.append(key == 'id' ? 'file' : 'profileImage', x.file)
+          })
         }
       }
-      id.forEach((e) => {
-        console.log(e, 'id file')
-        payload.append('file', e.file)
-      })
 
       if (this.$refs.registrationForm.validate()) {
         this.register(payload)

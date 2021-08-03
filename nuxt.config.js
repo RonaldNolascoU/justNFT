@@ -170,9 +170,9 @@ export default {
           // required: true,
           type: '',
         },
-        user: {
-          property: false,
-        },
+        // user: {
+        //   property: false,
+        // },
         endpoints: {
           login: { url: '/login', method: 'post', property: 'user' },
           user: { url: '/me', method: 'post', property: 'user' },
