@@ -31,6 +31,10 @@ class AuthService {
   creatorLogin(data) {
     return HTTP.post(`contentCreater-login`, data, { cache: false })
   }
+
+  addPost(data) {
+    return HTTP.post(`addPost`, data, { cache: false })
+  }
   // END CREATORS
 
   changePassword(data) {
