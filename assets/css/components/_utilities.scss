@@ -121,7 +121,8 @@
 }
 
 .dark .dark\:bg-input {
-  input {
+  input,
+  textarea {
     background: #404040 !important;
   }
 }
@@ -130,6 +131,9 @@
   &:hover {
     background: #3a3b3c !important;
   }
+}
+.dark .dark\:bg-light-gray {
+  background: #3a3b3c !important;
 }
 
 // END DARK MODE

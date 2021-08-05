@@ -3,7 +3,7 @@
     <button class="w-full" @click="connectToMetamask()" :disabled="loading">
       <div class="flex">
         <div
-          class="rounded-l-3xl border border-2 border-color-primary flex justify-center items-center bg-white icon width metamask__icon"
+          class="rounded-l-3xl border border-1 border-color-primary flex justify-center items-center bg-white icon width metamask__icon"
         >
           <img src="/images/metamask.svg" class="mx-5" />
         </div>

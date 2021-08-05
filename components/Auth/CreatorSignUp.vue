@@ -44,7 +44,7 @@
                 v-slot="{ errors }"
               >
                 <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                   v-model="form.username"
                   :placeholder="$t('signup.username')"
                   type="text"
@@ -63,7 +63,7 @@
                 v-slot="{ errors }"
               >
                 <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                   v-model="form.name"
                   :placeholder="$t('signup.name')"
                   type="text"
@@ -81,7 +81,7 @@
                 v-slot="{ errors }"
               >
                 <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                   v-model="form.email"
                   :placeholder="$t('login.email')"
                   type="email"
@@ -99,7 +99,7 @@
                 v-slot="{ errors }"
               >
                 <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                   v-model="form.password"
                   :placeholder="$t('login.password')"
                   type="password"
@@ -144,7 +144,7 @@
                 v-slot="{ errors }"
               >
                 <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                   v-model="form.country"
                   :placeholder="$t('signup.address')"
                   type="text"
@@ -222,7 +222,7 @@
 
               <!-- link -->
               <input
-                class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                 v-model="form.current"
                 :placeholder="$t('signup.link')"
                 type="text"
@@ -238,7 +238,7 @@
                 v-slot="{ errors }"
               >
                 <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
+                  class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
                   v-model="form.bio"
                   :placeholder="$t('signup.bio')"
                   type="text"
