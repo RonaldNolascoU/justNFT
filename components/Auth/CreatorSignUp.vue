@@ -127,8 +127,6 @@
                     noCalendarIcon
                     ref="menu"
                     format="DD-MM-YYYY"
-                    :max-date="$dateFns.subYears(new Date(), 18)"
-                    min-date="01-01-1980"
                     @onOpen="menu = true"
                     @onClose="menu = false"
                   />
