@@ -47,6 +47,12 @@
             </template>
           </div>
         </div>
+        <nuxt-link
+          to="/new-post"
+          class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-2 px-16 text-center font-semibold btn-fs text-white-color"
+        >
+          Add Post
+        </nuxt-link>
       </div>
     </div>
   </transition>
