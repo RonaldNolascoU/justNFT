@@ -7,7 +7,7 @@
     </div>
     <div
       :class="[
-        'px-2 pt-5 pb-8 lg:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container',
+        'pb-8 xl:p-5 xl:overflow-hidden xl:p-0 dark:bg-black layout-container',
         { 'h-screen': scroll },
       ]"
     >
@@ -26,7 +26,7 @@
           <LayoutSidebar />
         </div>
         <div
-          class="w-full border-l border-lighter page-container xl:w-full"
+          class="w-full lg:border-l lg:border-lighter page-container xl:w-full"
           :class="[{ 'xl:overflow-y-scroll md:h-screen': !scroll }]"
         >
           <Nuxt />
