@@ -62,6 +62,18 @@
             >
               <GeneralTranslateDropdown />
             </div>
+
+            <div
+              v-else-if="option.type == 'new-post'"
+              class="flex justify-center items-center my-2 cursor-pointer"
+            >
+              <nuxt-link
+                to="/new-post"
+                class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-1 px-10 text-center font-semibold btn-fs fs-20 text-white-color"
+              >
+                Add Post
+              </nuxt-link>
+            </div>
             <!-- LOGOUT -->
             <div
               v-else
@@ -129,6 +141,10 @@ export default {
           type: 'switch',
           name: 'Dark Mode',
           i18n: 'darkMode',
+        },
+        {
+          type: 'new-post',
+          name: 'New Post',
         },
         {
           icon: 'power_settings_new',
