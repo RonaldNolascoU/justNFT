@@ -96,7 +96,7 @@
     <!-- Comment -->
     <div
       class="my-8 xl:my-16 divider dark:border-gray-700"
-      v-if="post.id != 3"
+      v-if="post.id !== $store.state.posts.length"
     ></div>
   </div>
 </template>

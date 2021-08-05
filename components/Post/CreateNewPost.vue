@@ -19,16 +19,44 @@
         <div
           class="flex flex-col items-center subscription__cards xl:h-screen xl:overflow-y-scroll pt-8 xl:pt-0"
         >
-          <span class="text-center mt-3">
-            <img src="/images/up-arrow.png" />
-          </span>
-          <span class="text-center fs-36 dark:text-white">Upload Media</span>
-          <div
-            class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-white font-bold mt-3 py-2 px-16"
-          >
-            <span class="text-center font-semibold cursor-pointer btn-fs">
-              Select
+          <template v-if="!form.url">
+            <span class="text-center mt-3">
+              <img src="/images/up-arrow.png" />
             </span>
+            <span class="text-center fs-36 dark:text-white">Upload Media</span>
+          </template>
+
+          <div
+            v-if="!form.url"
+            class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-white font-bold mt-3 py-2 px-16"
+            @click="$refs.fileInput.click()"
+          >
+            <button class="text-center font-semibold cursor-pointer btn-fs">
+              Select
+            </button>
+            <input
+              type="file"
+              style="display: none"
+              ref="fileInput"
+              accept="image/*"
+              @change="onFilePicked"
+            />
+          </div>
+
+          <div v-if="form.url" class="mt-5 text-center">
+            <img class="" :src="form.url" />
+            <div class="flex justify-center">
+              <button
+                class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-center text-white font-bold mt-3 p-2"
+                @click.prevent.stop="form.url = null"
+              >
+                <span
+                  class="material-icons-outlined text-center font-semibold cursor-pointer btn-fs"
+                >
+                  cancel
+                </span>
+              </button>
+            </div>
           </div>
 
           <div class="upload-form w-11/12">
@@ -37,14 +65,14 @@
                 <b class="fs-16 dark:text-white">Add Caption</b>
               </div>
               <input
-                v-model="caption"
+                v-model="form.caption"
                 type="text"
                 class="w-full bg-pink-10 rounded-full pink-inputs break-words mt-1 dark:text-white"
                 :maxlength="maxLength"
               />
               <b class="chart-counter absolute">
                 <span class="dark:text-white">{{
-                  maxLength - caption.length
+                  maxLength - form.caption.length
                 }}</span>
                 <span class="text-pink">/{{ maxLength }}</span>
               </b>
@@ -56,7 +84,7 @@
                 </b>
               </div>
               <input
-                v-model="location"
+                v-model="form.location"
                 type="text"
                 class="w-full bg-pink-10 rounded-full pink-inputs mt-1 dark:text-white"
               />
@@ -66,7 +94,7 @@
                 <b class="fs-16 dark:text-white">Tag People</b>
               </div>
               <input
-                v-model="people"
+                v-model="form.people"
                 type="text"
                 class="w-full bg-pink-10 rounded-full pink-inputs mt-1 dark:text-white"
               />
@@ -74,6 +102,7 @@
           </div>
           <div
             class="flex items-center rounded-full cursor-pointer border-primary action__item hover:bg-primary hover:text-white tab__action bg-primary text-white font-bold mt-10 py-2 px-16"
+            @click="add"
           >
             <i class="material-icons"> check </i>
             <span class="text-center font-semibold cursor-pointer btn-fs ml-1">
@@ -87,15 +116,49 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      caption: '',
-      location: '',
-      people: '',
+      form: {
+        caption: '',
+        location: '',
+        people: '',
+        url: null,
+        file: null,
+        message: '',
+      },
       maxLength: 150,
     }
   },
-  methods: {},
+  methods: {
+    ...mapActions('general', ['addPost']),
+    add() {
+      let payload = new FormData()
+
+      for (var key in this.form) {
+        payload.append(key, this.form[key])
+      }
+
+      this.form.id = 4
+      this.form.user = 'Foo Bar'
+      this.form.likes = '0'
+      this.form.comments = '0'
+      this.form.commentsArray = []
+
+      this.addPost(payload)
+        .then(() => {
+          this.$store.commit('ADD_POST', this.form)
+          this.$router.push('/')
+        })
+        .catch((err) => {
+          console.log(err, 'error')
+        })
+    },
+    onFilePicked(event) {
+      this.form.file = event.target.files[0]
+      this.form.url = URL.createObjectURL(event.target.files[0])
+    },
+  },
 }
 </script>

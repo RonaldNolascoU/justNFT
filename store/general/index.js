@@ -374,4 +374,19 @@ export const actions = {
         })
     })
   },
+  addPost({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      AuthService.addPost(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
 }
