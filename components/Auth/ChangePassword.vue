@@ -21,7 +21,7 @@
         >
           <form @submit.prevent="onSubmit" class="w-full">
             <input
-              class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-3"
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
               v-model="form.old_password"
               :placeholder="$t('passwords.old_password')"
               type="password"
@@ -33,7 +33,7 @@
           >{{ errors.email }}</span
         > -->
             <input
-              class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-3"
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
               v-model="form.new_password"
               :placeholder="$t('passwords.new_password')"
               type="password"
@@ -45,7 +45,7 @@
           >{{ errors.password }}</span
         > -->
             <input
-              class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-3"
+              class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
               v-model="form.confirm_password"
               :placeholder="$t('passwords.confirm_password')"
               type="password"

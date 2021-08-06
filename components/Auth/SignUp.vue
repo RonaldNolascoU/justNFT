@@ -9,7 +9,7 @@
       <form @submit.prevent="onSubmit" class="w-full">
         <ValidationProvider name="Email" rules="required" v-slot="{ errors }">
           <input
-            class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-2"
+            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
             v-model="email"
             :placeholder="$t('login.email')"
             type="email"
@@ -28,7 +28,7 @@
         >
           <input
             name="password"
-            class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-3"
+            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
             type="password"
             v-model="password"
             :placeholder="$t('login.password')"
@@ -45,7 +45,7 @@
           v-slot="{ errors }"
         >
           <input
-            class="input-height fs-16 border-lighter border-1 w-full rounded-full pl-4 mt-3 lg:mt-3"
+            class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-3"
             v-model="confirmPassword"
             :placeholder="$t('login.confirmPassword')"
             type="password"

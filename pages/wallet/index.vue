@@ -50,7 +50,7 @@
               {{ $t('wallet.recoveryKey') }}
             </a>
             <a
-              class="fs-16 xl:fs-20 py-2 px-5 xl:px-16 w-full justify-center flex xl:block md:w-1/2 xl:w-auto border-primary border-1 text-primary rounded-full cursor-pointer font-semibold mt-4 xl:mt-0"
+              class="fs-16 xl:fs-20 py-2 px-5 xl:px-16 w-full justify-center flex xl:block md:w-1/2 xl:w-auto border-primary border-2 text-primary rounded-full cursor-pointer font-semibold mt-4 xl:mt-0"
             >
               {{ $t('wallet.privatekey') }}
             </a>

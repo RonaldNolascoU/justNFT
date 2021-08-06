@@ -19,7 +19,7 @@
           v-for="(category, index) in $store.state.categories"
           :key="index"
           :class="[
-            'text-white font-bold text-center rounded-full  py-2  md:py-2 border-1 fs-res-12 cursor-pointer',
+            'text-white font-bold text-center rounded-full  py-2  md:py-2 border-2 fs-res-12 cursor-pointer',
             { 'border-color-primary': isSelected(category.color) },
           ]"
           :style="`background-color: ${category.color};`"
