@@ -50,6 +50,10 @@ export default {
   @media (min-width: 577px) and (max-width: 767px) {
     width: 5rem;
   }
+  .profile-img {
+    max-height: 110px;
+    height: 110px;
+  }
 }
 
 .absolute__profile_pic {

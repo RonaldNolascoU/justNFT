@@ -191,7 +191,6 @@ export const actions = {
     let contract = new window.web3.eth.Contract(minABI, justYoursTokenAddress)
 
     // Call balanceOf function
-    console.log(window.$nuxt.$store.state, 'state')
     await contract.methods
       .balanceOf(state.wallet.address)
       .call()
@@ -207,9 +206,7 @@ export const actions = {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )
-            // commit('setAuth', {})
-            // this.$auth.setUser({ name: 'Metamask', loggedIn: true })
-            // window.$nuxt.$store.state.auth.loggedIn = true
+
             dispatch('saveMetaMaskLoggedState')
             dispatch('redirectUserLogin')
           })
@@ -377,6 +374,36 @@ export const actions = {
   addPost({ commit }, payload) {
     return new Promise((resolve, reject) => {
       AuthService.addPost(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  getContentCreatorDetails({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      AuthService.getDetails(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  isSubscribed({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      AuthService.isSubscribed(payload)
         .then(({ data }) => {
           if (!data.success) {
             return reject(data.msg)

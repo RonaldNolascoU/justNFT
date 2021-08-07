@@ -17,18 +17,6 @@ const HTTP = axios.create({
       return qs.stringify(data)
     },
   ],
-  // transformResponse: [
-  //   (data) => {
-  //     return new Promise((resolve, reject) => {
-  //       let response = JSON.parse(data)
-  //       if (response.success) {
-  //         resolve(response)
-  //       } else {
-  //         reject(response.msg)
-  //       }
-  //     })
-  //   },
-  // ],
 })
 
 HTTP.interceptors.request.use((config) => {
@@ -39,5 +27,20 @@ HTTP.interceptors.request.use((config) => {
   }
   return config
 })
+
+HTTP.interceptors.response.use(
+  function (response) {
+    return response
+  },
+  function (error) {
+    console.log(error.response.data)
+    if (error.response.status === 401) {
+      console.log('Forbidden')
+      // store.dispatch('logout')
+      // router.push('/login')
+    }
+    return Promise.reject(error)
+  }
+)
 
 export default HTTP

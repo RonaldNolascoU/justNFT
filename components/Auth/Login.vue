@@ -94,10 +94,10 @@ export default {
           data: { email: this.email, password: this.password },
         })
         .then((response) => {
-          const { success, user, msg } = response.data
+          const { success, user, msg, user_type } = response.data
           if (success) {
             this.errors = {}
-            this.$auth.setUser(user)
+            this.$auth.setUser({ ...user, type: user_type })
             this.redirectUserLogin()
           } else {
             this.errors.email = msg

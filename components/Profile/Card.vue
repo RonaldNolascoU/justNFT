@@ -3,12 +3,24 @@
     <div class="relative">
       <vs-card actionable class="w-full">
         <div slot="media">
-          <nuxt-img :src="model.cover" :alt="model.name" />
+          <nuxt-img
+            class="cover__photo"
+            :src="
+              contentCreator.cover
+                ? contentCreator.cover
+                : '/images/default_header.png'
+            "
+            :alt="contentCreator.name"
+          />
         </div>
       </vs-card>
       <GeneralAvatar
         :isAbsolute="true"
-        :image="model.profile_pic"
+        :image="
+          contentCreator.cover
+            ? contentCreator.cover
+            : '/images/default_header.png'
+        "
         :showAvailableStatus="false"
       />
     </div>
@@ -29,7 +41,7 @@
     <div class="content mt-10 lg:mt-20">
       <div class="flex justify-between fs-24">
         <div class="info dark:text-white">
-          <b>Ecstatic Wellness</b>
+          <b>{{ contentCreator.name }}</b>
           <p>
             Welcome to Wellness Wednesdays💕 Podcast hosted by @yogawithtaz New
             episode every Wednesday💕
@@ -41,12 +53,21 @@
         <div class="subscribe__button_wrapper flex justify-center fs-24">
           <a
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
+            v-if="isSubscribed || contentCreator.subscribed"
+          >
+            <b>Subscribed</b>
+          </a>
+          <a
+            v-else
+            class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
             @click.prevent="subscribeTo"
           >
             <span class="material-icons-outlined mr-3"> lock </span>
             <span
-              ><b>{{ $t('profile.subscribeFrom') }}</b> 5000 $JUST</span
+              ><b>{{ $t('profile.subscribeFrom') }}</b>
+              {{ contentCreator.subscriptionRate }} $JUST</span
             >
+            <GeneralLoader v-if="loading" />
           </a>
         </div>
       </div>
@@ -87,9 +108,11 @@
 <script>
 import { mapActions } from 'vuex'
 import getAccounts from '@/scripts/metamask'
+import Web3 from 'web3'
+
 export default {
   props: {
-    model: {
+    contentCreator: {
       type: Object,
     },
   },
@@ -117,6 +140,8 @@ export default {
           active: false,
         },
       ],
+      isSubscribed: false,
+      loading: false,
     }
   },
   methods: {
@@ -135,33 +160,103 @@ export default {
       tab.active = !tab.active
     },
     async subscribeTo() {
+      this.loading = true
       try {
-        console.log(getAccounts())
+        const {
+          amountToPaid,
+          wallet_address,
+          subscriptionRate,
+        } = this.contentCreator
         getAccounts()
           .then(async (result) => {
             console.log(result, 'result')
-            await window.ethereum
-              .request({
-                method: 'eth_sendTransaction',
-                params: [
+            // Use BigNumber
+            let decimals = Web3.utils.toBN(10)
+            let amount = Web3.utils.toBN(1)
+
+            let minABI = [
+              // transfer
+              {
+                constant: false,
+                inputs: [
                   {
-                    to: '0x0000000000000000000000000000000000000000',
-                    from: result,
-                    value: '0x00',
-                    // And so on...
+                    name: '_to',
+                    type: 'address',
+                  },
+                  {
+                    name: '_value',
+                    type: 'uint256',
                   },
                 ],
+                name: 'transfer',
+                outputs: [
+                  {
+                    name: '',
+                    type: 'bool',
+                  },
+                ],
+                type: 'function',
+              },
+            ]
+            // Get ERC20 Token contract instance
+            // PRODUCTIOM:
+            // let tokenAddress = '0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8'
+            // END PRODUCTION
+            // DEVELOPMENT:
+            let tokenAddress = '0x5502644A6B8b90264a78088D03f25f8E77D56CB8'
+            // END DEVELOPMENT
+            var web3 = new Web3(Web3.givenProvider)
+            let contract = new web3.eth.Contract(minABI, tokenAddress)
+            console.log(amount)
+            let value = amount.mul(Web3.utils.toBN(10).pow(decimals))
+
+            // TESTING PURPOSES WALLET
+            let toAddress = '0xE1D92283220A68593f2C6f2Ba07f6FaAAA58fcF8'
+            //
+            contract.methods
+              .transfer(toAddress, value)
+              .send({ from: result })
+              .on('transactionHash', (hash) => {
+                console.log(hash)
+                let receiptInterval = setInterval(() => {
+                  getReceipt(this)
+                }, 1000)
+                function getReceipt(instance) {
+                  web3.eth.getTransactionReceipt(hash, (error, receipt) => {
+                    console.log(error, receipt, 'receipt response')
+                    if (receipt) {
+                      setTimeout(() => {
+                        instance
+                          .subscribe({
+                            email: instance.contentCreator.email,
+                            item: 1,
+                            time: 1,
+                            transactionId: hash,
+                            amountPaid: subscriptionRate,
+                          })
+                          .then((res) => {
+                            console.log(res)
+                            const { success } = res
+                            if (success) {
+                              instance.isSubscribed = true
+                            }
+                            instance.loading = false
+                          })
+                          .catch((err) => {
+                            console.log(err)
+                            instance.loading = false
+                          })
+                      }, 5000)
+                      clearReceiptInterval()
+                      return
+                    }
+                  })
+                }
+
+                const clearReceiptInterval = () => {
+                  clearInterval(receiptInterval)
+                }
               })
-              .then((txtHash) => {
-                this.subscribe({
-                  email: 'ronald@test.com',
-                  item: 1,
-                  time: 1,
-                  transactionId: txtHash,
-                  amountPaid: 5000,
-                }).then((res) => console.log(res))
-              })
-              .catch((err) => {})
           })
           .catch((err) => {
             console.log(err, 'err')
@@ -183,6 +278,10 @@ export default {
       text-align: center;
       margin-left: 0;
     }
+  }
+
+  .cover__photo {
+    max-height: 200px;
   }
 
   .content {

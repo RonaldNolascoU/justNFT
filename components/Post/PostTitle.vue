@@ -7,7 +7,7 @@
       <div class="flex justify-between flex-auto" style="margin-left: 5em">
         <div>
           <nuxt-link
-            :to="nametoSlug(post.user)"
+            :to="nametoSlug('Vishal123')"
             class="hover:underline dark:hover:text-white"
           >
             <b class="text-lg font-bold dark:text-white fs-24">{{
