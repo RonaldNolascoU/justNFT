@@ -7,7 +7,10 @@
         Account
       </h1>
 
-      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
+      <form
+        @submit.prevent="onSubmit"
+        class="mt-6 space-y-8 divide-y divide-y-blue-gray-200"
+      >
         <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
           <div class="sm:col-span-6">
             <h3 class="text-xl font-medium text-blue-gray-900 dark:text-white">
@@ -27,6 +30,7 @@
               First name
             </label>
             <input
+              v-model="form.first_name"
               type="text"
               name="first-name"
               id="first-name"
@@ -43,6 +47,7 @@
               Last name
             </label>
             <input
+              v-model="form.last_name"
               type="text"
               name="last-name"
               id="last-name"
@@ -60,6 +65,7 @@
             </label>
             <div class="mt-1 flex rounded-md shadow-sm">
               <input
+                v-model="form.username"
                 type="text"
                 name="username"
                 id="username"
@@ -98,7 +104,9 @@
                     id="user-photo"
                     name="user-photo"
                     type="file"
+                    accept="image/*"
                     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                    @change="onChange"
                   />
                 </div>
                 <button
@@ -120,6 +128,7 @@
             </label>
             <div class="mt-1">
               <textarea
+                v-model="form.description"
                 id="description"
                 name="description"
                 rows="4"
@@ -155,7 +164,7 @@
               name="email-address"
               id="email-address"
               autocomplete="email"
-              v-model="$store.state.auth.user.email"
+              v-model="form.email"
               class="pl-2 mt-1 block w-full border-blue-gray-300 dark:text-white dark:border-none rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
@@ -168,6 +177,7 @@
               Phone number
             </label>
             <input
+              v-model="form.number"
               type="text"
               name="phone-number"
               id="phone-number"
@@ -184,6 +194,7 @@
               Country
             </label>
             <input
+              v-model="form.country"
               type="text"
               name="country"
               id="country"
@@ -212,6 +223,7 @@
               Subscription Rate
             </label>
             <input
+              v-model="form.subscription_rate"
               type="text"
               class="pl-2 mt-1 block w-full border-blue-gray-300 dark:text-white dark:border-none rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
             />
@@ -244,7 +256,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      form: {
+        first_name: '',
+        last_name: '',
+        username: '',
+        description: '',
+        email: '',
+        photo: '',
+        number: '',
+        country: '',
+        subscription_rate: '',
+      },
+    }
+  },
+  mounted() {
+    this.form.email = this.$store.state.auth.user.email || ''
+  },
+  methods: {
+    onSubmit() {
+      let payload = new FormData()
+
+      for (var key in this.form) {
+        payload.append(key, this.form[key])
+      }
+    },
+    onChange(e) {
+      this.form.photo = e.target.files[0]
+    },
+  },
+}
 </script>
 
 <style></style>
