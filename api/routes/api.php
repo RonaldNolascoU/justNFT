@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\Api\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,17 @@ use App\Http\Controllers\Auth\Api\RegisterController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'middleware' => 'api'
+], function () {
+    Route::post('/login', [AuthController::class, 'login'])->middleware('verified');
+    Route::post('/signup', [AuthController::class, 'register']);
 });
 
-Route::middleware('auth:guest')->post('/signup', [RegisterController::class, 'registerUser']);
+Route::group([
+    'middleware' => ['auth:api', 'verified']
+], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/me', [AuthController::class, 'currentUser']);
+});

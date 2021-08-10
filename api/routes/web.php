@@ -12,17 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/foobar', function () {
-    $user = new App\Models\User();
-    $user->first_name = 'william';
-    $user->save();
-    dd($user);
-});
-
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');

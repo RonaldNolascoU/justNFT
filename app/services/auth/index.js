@@ -14,7 +14,7 @@ class AuthService {
     return HTTP.post('forgot-password', data, { cache: false })
   }
   me() {
-    return HTTP.post('me')
+    return HTTP.get('me')
   }
 
   // END USERS

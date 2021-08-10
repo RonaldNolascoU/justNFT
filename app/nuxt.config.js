@@ -152,7 +152,7 @@ export default {
     background: 'white',
   },
   axios: {
-    baseURL: 'https://app.justyours.me',
+    baseURL: isDev ? 'http://localhost:8000/api' : 'https://app.justyours.me',
   },
   auth: {
     localStorage: false,
@@ -164,18 +164,27 @@ export default {
     },
     strategies: {
       local: {
+        scheme: 'refresh',
         token: {
           property: 'token',
           global: true,
+          maxAge: 3600,
           // required: true,
-          type: '',
+          type: 'Bearer',
         },
-        // user: {
-        //   property: false,
-        // },
+        refreshToken: {
+          property: 'token',
+          data: 'token',
+          maxAge: 3600,
+        },
+        user: {
+          property: 'user',
+          autoFetch: false,
+        },
         endpoints: {
           login: { url: '/login', method: 'post', property: 'user' },
-          user: { url: '/me', method: 'post', property: 'user' },
+          refresh: { url: '/refresh', method: 'post' },
+          user: { url: '/me', method: 'get', property: 'user' },
           // logout: { url: '/api/auth/logout', method: 'post' },
         },
       },

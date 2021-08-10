@@ -2,7 +2,8 @@ import axios from 'axios'
 const qs = require('qs')
 
 const HTTP = axios.create({
-  baseURL: 'https://app.justyours.me',
+  // baseURL: 'https://app.justyours.me',
+  baseURL: 'http://localhost:8000/api',
   headers: {
     'Cache-Control': 'no-cache',
     'Access-Control-Allow-Headers': '*',
@@ -23,7 +24,7 @@ HTTP.interceptors.request.use((config) => {
   console.log(window.$nuxt.context.$cookies)
   let myToken = window.$nuxt.context.$cookies.get('auth._token.local')
   if (myToken != null) {
-    config.headers.Authorization = `${myToken}`
+    config.headers.Authorization = `Bearer ${myToken}`
   }
   return config
 })

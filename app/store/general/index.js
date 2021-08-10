@@ -94,6 +94,13 @@ export const actions = {
       ctx.app.store.commit('APPROVE_COOKIES')
     }
 
+    // if (process.browser) {
+    //   setTimeout(() => {
+    //     console.log(ctx.$auth, 'context')
+    //     ctx.$auth.refreshTokens()
+    //   }, 1)
+    // }
+
     // END MODAL AGE
     const isLoggedWithMetaMask = localStorage.getItem('isLoggedWithMetaMask')
     // await routerAuth(ctx)

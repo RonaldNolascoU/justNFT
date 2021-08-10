@@ -94,13 +94,13 @@ export default {
           data: { email: this.email, password: this.password },
         })
         .then((response) => {
-          const { success, user, msg, user_type } = response.data
+          const { success, user, message, access_token } = response.data
           if (success) {
             this.errors = {}
-            this.$auth.setUser({ ...user, type: user_type })
+            this.$auth.setUser({ ...user, token: access_token })
             this.redirectUserLogin()
           } else {
-            this.errors.email = msg
+            this.errors.email = message
           }
           this.loading = false
         })
