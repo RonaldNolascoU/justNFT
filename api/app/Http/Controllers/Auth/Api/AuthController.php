@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Auth\Api;
 
+use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Validator;
-use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -47,10 +42,11 @@ class AuthController extends Controller
 
         $user = User::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password)]
+            ['password' => bcrypt($request->password)],
+            ['role_id' => 1],
         ));
 
-        event(new Registered($user));
+        $user->sendEmailVerificationNotification();
 
         return response()->json([
             'success' => true,
@@ -75,14 +71,14 @@ class AuthController extends Controller
             return response()->json(['success' => false, $validator->errors()], 422);
         }
 
-        if (! $token = auth()->attempt($validator->validated())) {
+        if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
         }
 
         return $this->createNewToken($token);
     }
 
-        /**
+    /**
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse

@@ -19,12 +19,12 @@ use App\Http\Controllers\Auth\Api\AuthController;
 Route::group([
     'middleware' => 'api'
 ], function () {
-    Route::post('/login', [AuthController::class, 'login'])->middleware('verified');
+    Route::post('/login', [AuthController::class, 'login'])->middleware('isVerified');
     Route::post('/signup', [AuthController::class, 'register']);
 });
 
 Route::group([
-    'middleware' => ['auth:api', 'verified']
+    'middleware' => ['auth:api', 'isVerified']
 ], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
