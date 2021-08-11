@@ -19,9 +19,7 @@ class VerificationController extends Controller
             $user->markEmailAsVerified();
         }
 
-        $redirectTo = app()->environment('local') ? 'http://localhost:3000/signin' : env('APP_FRONT_URL');
-
-        return redirect()->to($redirectTo);
+        return redirect()->to(env('APP_FRONT_URL'));
     }
 
     public function resend()
