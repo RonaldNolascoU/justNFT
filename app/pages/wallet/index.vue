@@ -1,6 +1,6 @@
 <template>
   <div class="wallet xl:container py-10 xl:py-20">
-    <template v-if="!$store.state.user.wallet">
+    <template>
       <img src="/just_logo.svg" class="logo" alt="Just Yours Logo" />
 
       <p
@@ -50,10 +50,17 @@
               {{ $t('wallet.recoveryKey') }}
             </a>
             <a
+              @click="showKey = !showKey"
               class="fs-16 xl:fs-20 py-2 px-5 xl:px-16 w-full justify-center flex xl:block md:w-1/2 xl:w-auto border-primary border-2 text-primary rounded-full cursor-pointer font-semibold mt-4 xl:mt-0"
             >
               {{ $t('wallet.privatekey') }}
             </a>
+          </div>
+          <div class="mt-5" v-if="privateKey && showKey">
+            <p class="fs-20">
+              <b>Private Key:</b>
+              {{ privateKey }}
+            </p>
           </div>
         </div>
       </div>
@@ -63,7 +70,7 @@
         {{ $t('wallet.whatIsThis') }}
       </p>
     </template>
-    <template v-else>
+    <!-- <template v-else>
       <p
         class="mt-5 text-center fs-16 xl:fs-20 text-primary xl:text-black wallet_created"
       >
@@ -75,14 +82,31 @@
       >
         {{ $t('wallet.home') }}
       </a>
-    </template>
+    </template> -->
     <ModalNeverShareWallet v-if="$store.state.modals.agree" />
   </div>
 </template>
 
 <script>
 export default {
-  middleware: ['router-auth'],
+  name: 'NewWalletCreated',
+  asyncData({ route, app, $axios, store, redirect }) {
+    const { token, key } = route.query
+    if (store.state.auth.loggedIn) redirect('/')
+    $axios
+      .get('/me', { headers: { Authorization: `Bearer ${token}` } })
+      .then((result) => {
+        const { user } = result.data
+        app.$auth.setUser({ ...user, token })
+        app.$auth.strategy.token.set(token)
+      })
+      .catch((err) => {
+        console.log(err, 'err')
+        redirect('/')
+        // store.commit('general/disconnect')
+      })
+    return { privateKey: key }
+  },
   layout: 'blank',
   data() {
     return {
@@ -112,6 +136,7 @@ export default {
         'Roller',
         'Fall',
       ],
+      showKey: false,
     }
   },
   mounted() {

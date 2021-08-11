@@ -8,12 +8,17 @@
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^6.0.0",
         "jenssegers/mongodb": "^3.8",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "tymon/jwt-auth": "^1.0"
+        "renoki-co/laravel-web3": "^1.1",
+        "tymon/jwt-auth": "^1.0",
+        "sop/asn1": "^3.3",
+        "sop/crypto-encoding": "^0.2.0",
+        "sop/crypto-types": "^0.2.1",
+        "kornrunner/keccak": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -28,7 +33,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers/BlockChainHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

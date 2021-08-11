@@ -2,7 +2,34 @@
   <transition name="slide">
     <div class="pl-4 sidebar xl:pl-3">
       <div class="flex flex-col items-start 2xl:items-center">
-        <GeneralAvatar image="/images/profile.png" />
+        <GeneralAvatar
+          image="/images/profile.png"
+          v-if="$store.state.auth.user.role_id == 2"
+        />
+
+        <div
+          v-if="$store.state.auth.user.role_id == 2"
+          class="w-1/2 mb-12 sidebar__route"
+        >
+          <div
+            class="text-left fs-24 grid grid-cols-2 gap-2 items-center text-secondary dark:text-active hover:text-black dark:hover:text-white"
+          >
+            <!-- My Profile -->
+            <i
+              class="text-secondary dark:text-active hover:text-black dark:hover:text-white fas fa-user-alt"
+            />
+
+            <NuxtLink
+              class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
+              :to="nametoSlug('me')"
+            >
+              <span class="">
+                {{ $t(`sidebar.profile`) }}
+              </span>
+            </NuxtLink>
+          </div>
+          <!-- End profile  -->
+        </div>
 
         <div
           v-for="(route, index) in routes"
@@ -19,14 +46,18 @@
             />
             <NuxtLink
               v-if="route.name !== 'dark'"
-              :to="route.to == '/profile' ? nametoSlug('me') : route.to"
+              :to="route.to"
               class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
             >
               <span class="">
                 {{ $t(`sidebar.${route.i18n}`) }}
               </span>
             </NuxtLink>
-            <template v-else class="text-xl text-secondary">
+            <!-- Dark Mode -->
+            <template
+              v-if="route.name == 'dark'"
+              class="text-xl text-secondary"
+            >
               <div>
                 <vs-switch
                   color="#C53761"
@@ -65,12 +96,6 @@ export default {
   data() {
     return {
       routes: [
-        {
-          to: '/profile',
-          name: 'My Profile',
-          i18n: 'profile',
-          icon: 'fas fa-user-alt',
-        },
         {
           to: '/',
           name: 'Home',

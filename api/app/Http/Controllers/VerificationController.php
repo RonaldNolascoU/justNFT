@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\URL;
 
 class VerificationController extends Controller
 {
@@ -14,12 +16,21 @@ class VerificationController extends Controller
         }
 
         $user = User::findOrFail($user_id);
-
+        $token = null;
+        
         if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
+            $wallet = createWallet();
+            $user->wallet_address = $wallet['address'];
+            // $user->private_key = $wallet['private_key'];
+            $user->save();
+            $token = JWTAuth::fromUser($user);
+            $url = env('APP_FRONT_URL') . '/wallet?token=' . $token . '&key=' . $wallet['private_key'];
+            return redirect()->to($url);
         }
 
-        return redirect()->to(env('APP_FRONT_URL'));
+        $url = env('APP_FRONT_URL') . '/404';
+        return redirect()->to($url);
     }
 
     public function resend()
@@ -30,6 +41,6 @@ class VerificationController extends Controller
 
         auth()->user()->sendEmailVerificationNotification();
 
-        return response()->json(["msg" => "Email verification link sent on your email id"]);
+        return response()->json(["msg" => "Email verification link sent on your email"]);
     }
 }

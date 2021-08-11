@@ -11,7 +11,13 @@ export default function ({ window, app, store, redirect, route }) {
   }
 
   const isUserSignedIn = store.state.auth.loggedIn
+  const user = store.state.auth.user
   const isSigninRoute = ['/signin', '/creator-signup'].includes(route.path)
+  const isContentCreatorRoute = ['model'].includes(route.name)
+
+  if (isUserSignedIn && user && user.role_id != 2 && isContentCreatorRoute) {
+    return redirect('/')
+  }
 
   app.i18n.setLocaleCookie(app.$cookies.get('jy_locale'))
   app.i18n.setLocale(app.$cookies.get('jy_locale'))

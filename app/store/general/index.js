@@ -78,6 +78,12 @@ export const actions = {
     let modalAge = ctx.$cookies.get('justyours_modal_age')
     let cookieDisclaimer = ctx.$cookies.get('jy_cookie_disclaimer')
 
+    setTimeout(() => {
+      ctx.$auth.onError((error, name, endpoint) => {
+        commit('general/disconnect')
+      })
+    }, 1)
+
     if (modalAge) {
       ctx.$cookies.set('justyours_modal_age', true, {
         path: '/',

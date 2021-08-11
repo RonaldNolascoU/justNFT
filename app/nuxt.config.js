@@ -67,6 +67,7 @@ export default {
     { src: '~/plugins/third-party', mode: 'client' },
     { src: '~/plugins/directives', mode: 'client' },
     { src: '~/plugins/scripts', mode: 'client' },
+    { src: '~/plugins/auth', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -160,7 +161,7 @@ export default {
       signin: '/signin',
       // logout: false,
       // callback: false,
-      home: '/',
+      home: false,
     },
     strategies: {
       local: {

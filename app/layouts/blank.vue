@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isPrivacy || isContentCreatorSignUp">
+    <div v-if="isBlankRoute">
       <nav class="w-full max-w-full bg-primary border-lighter">
         <div
           class="container py-4 cursor-pointer pl-4 xl:pl-0"
@@ -35,12 +35,10 @@
 <script>
 export default {
   computed: {
-    isPrivacy() {
-      let routes = ['privacy-policy']
-      return routes.includes(this.$nuxt.$route.name)
-    },
-    isContentCreatorSignUp() {
-      return ['creator-signup'].includes(this.$nuxt.$route.name)
+    isBlankRoute() {
+      return ['privacy-policy', 'creator-signup', 'wallet'].includes(
+        this.$nuxt.$route.name
+      )
     },
   },
 }
