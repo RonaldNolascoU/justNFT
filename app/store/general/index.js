@@ -151,12 +151,14 @@ export const actions = {
     }
     window.ethereum.on('accountsChanged', function (accounts) {
       console.log('accountsChanges', accounts)
-      if (accounts.length == 0) {
-        commit('disconnect')
-      } else {
-        commit('setWalletAddress', accounts[0])
-        dispatch('getBalance')
-      }
+      // TODO: CHECK HERE WITH USER WALLET. IF EXISTS, SO LOGIN
+      commit('disconnect')
+      // if (accounts.length == 0) {
+      //   commit('disconnect')
+      // } else {
+      //   commit('setWalletAddress', accounts[0])
+      //   dispatch('getBalance')
+      // }
       dispatch('stopNuxtLoading')
     })
 
@@ -180,6 +182,7 @@ export const actions = {
   },
   async getBalance({ state, commit, dispatch }) {
     if (window.ethereum === null) commit('disconnect')
+    console.log(state)
     if (!state.wallet.address) return
     let minABI = [
       {
@@ -204,6 +207,7 @@ export const actions = {
     let contract = new window.web3.eth.Contract(minABI, justYoursTokenAddress)
 
     // Call balanceOf function
+    console.log(state)
     await contract.methods
       .balanceOf(state.wallet.address)
       .call()

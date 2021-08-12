@@ -90,58 +90,35 @@
 <script>
 export default {
   name: 'NewWalletCreated',
-  async asyncData({ route, app, $axios, store, redirect }) {
-    const { token, key } = route.query
-    if (store.state.auth.loggedIn) redirect('/')
-    const response = await $axios.get('/me', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    console.log(response, 'response')
-    const { user, success } = response.data
-    if (success) {
-      app.$auth.setUser({ ...user, token })
-      app.$auth.strategy.token.set(token)
-      return {
-        privateKey: user.private_key,
-        walletWords: user.seed_phrase.split(' '),
-      }
-    }
-  },
   layout: 'blank',
   data() {
     return {
-      // walletWords: [
-      //   'Mystery',
-      //   'God',
-      //   'Phrasal',
-      //   'Ramekin',
-      //   'Fragance',
-      //   'Beautiful',
-      //   'Life',
-      //   'Demonic',
-      //   'Typhoon',
-      //   'Absurd',
-      //   'Lane',
-      //   'Fruit',
-      //   'Sun',
-      //   'Mercury',
-      //   'Fun',
-      //   'Limb',
-      //   'Group',
-      //   'Rise',
-      //   'Tycoon',
-      //   'Coster',
-      //   'Astute',
-      //   'Tart',
-      //   'Roller',
-      //   'Fall',
-      // ],
-      walletWords: [],
       showKey: false,
+      walletWords: [],
+      privateKey: null,
     }
   },
-  mounted() {
+  async mounted() {
     this.$store.commit('OPEN_AGREE_MODAL')
+    const { token } = this.$route.query
+    await this.$axios
+      .get('/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((result) => {
+        const { user, success } = result.data
+        if (success) {
+          this.$auth.setUserToken(token, token)
+          this.$auth.setUser(user)
+          this.walletWords = user.seed_phrase.split(' ')
+          this.privateKey = user.private_key
+        } else {
+          this.$router.push('/')
+        }
+      })
+      .catch((err) => {
+        this.$router.push('/')
+      })
   },
 }
 </script>

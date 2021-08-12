@@ -369,6 +369,10 @@ export default {
       this.creatorSignUp(payload)
         .then((response) => {
           console.log(response, 'response')
+          const { success, user } = response
+          if (success) {
+            this.$auth.setUser(user)
+          }
           this.successfulSignUp = true
           this.clearErrors()
           this.$refs.registrationForm.reset()

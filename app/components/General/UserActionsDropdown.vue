@@ -9,6 +9,7 @@
     >
       <ul>
         <li
+          v-if="![2, 3].includes($store.state.auth.user.role_id)"
           class="flex items-center my-3 cursor-pointer hover:underline transform transition duration-300 ease-in-out hover:scale-110"
           @click="$router.push('/creator-signup')"
         >

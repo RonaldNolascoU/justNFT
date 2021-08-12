@@ -26,6 +26,7 @@ class VerificationController extends Controller
             $user->save();
             $user->markEmailAsVerified();
             $token = JWTAuth::fromUser($user);
+            \Auth::login($user, true);
             $url = env('APP_FRONT_URL') . '/wallet?token=' . $token;
             return redirect()->to($url);
         }

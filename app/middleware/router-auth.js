@@ -12,8 +12,17 @@ export default function ({ window, app, store, redirect, route }) {
 
   const isUserSignedIn = store.state.auth.loggedIn
   const user = store.state.auth.user
-  const isSigninRoute = ['/signin', '/creator-signup'].includes(route.path)
+  const isSigninRoute = ['/signin'].includes(route.path)
   const isContentCreatorRoute = ['model'].includes(route.name)
+
+  if (
+    isUserSignedIn &&
+    user &&
+    [2, 3].includes(user.role_id) &&
+    route.name == 'creator-signup'
+  ) {
+    return redirect('/')
+  }
 
   if (isUserSignedIn && user && user.role_id != 2 && isContentCreatorRoute) {
     return redirect('/')
