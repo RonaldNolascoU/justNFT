@@ -24,7 +24,7 @@ HTTP.interceptors.request.use((config) => {
   console.log(window.$nuxt.context.$cookies)
   let myToken = window.$nuxt.context.$cookies.get('auth._token.local')
   if (myToken != null) {
-    config.headers.Authorization = `Bearer ${myToken}`
+    config.headers.Authorization = `${myToken}`
   }
   return config
 })

@@ -74,42 +74,6 @@
                 }}</span>
               </ValidationProvider>
 
-              <!-- Email -->
-              <ValidationProvider
-                name="Email"
-                rules="email"
-                v-slot="{ errors }"
-              >
-                <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-                  v-model="form.email"
-                  :placeholder="$t('login.email')"
-                  type="email"
-                  required
-                />
-                <span class="fs-16 text-primary font-semibold w-full">{{
-                  errors[0]
-                }}</span>
-              </ValidationProvider>
-
-              <!-- Password -->
-              <ValidationProvider
-                name="Password"
-                rules="required"
-                v-slot="{ errors }"
-              >
-                <input
-                  class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
-                  v-model="form.password"
-                  :placeholder="$t('login.password')"
-                  type="password"
-                  required
-                />
-                <span class="fs-16 text-primary font-semibold w-full">{{
-                  errors[0]
-                }}</span>
-              </ValidationProvider>
-
               <!-- birthday -->
               <div class="mt-3 lg:mt-2">
                 <ValidationProvider
@@ -318,8 +282,6 @@ export default {
       profileVisible: false,
       form: {
         name: null,
-        email: null,
-        password: null,
         country: null,
         username: null,
         bio: null,
@@ -392,7 +354,7 @@ export default {
           payload.append(key, this.form[key])
         } else {
           this.form[key].forEach((x) => {
-            payload.append(key == 'id' ? 'file' : 'profileImage', x.file)
+            payload.append(key == 'id' ? 'file[]' : 'profileImage', x.file)
           })
         }
       }

@@ -94,6 +94,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('general', ['signUpWithMetamask']),
     changeAuthMode() {
       this.isLogin = !this.isLogin
       // history.pushState({}, null, this.isLogin ? '/signin' : '/register')
@@ -107,9 +108,21 @@ export default {
         this.$store.commit('general/setWalletAddress', metaMaskAddress)
         this.$store.commit('general/setWalletBalance', balance)
         this.$store.dispatch('general/saveMetaMaskLoggedState')
+
+        this.signUpWithMetamask({ wallet_address: metaMaskAddress })
+          .then((res) => {
+            if (res.success) {
+              this.$auth.setUserToken(res.token, res.token)
+              this.$auth.setUser(res.user)
+
+              this.$router.push('/')
+            }
+          })
+          .catch((err) => console.log(err))
+
         // this.redirectUserLogin()
         // this.$auth.setUser({ name: 'Metamask', loggedIn: true })
-        this.$router.push('/')
+
         // this.$store.commit('general/setAuth', {})
       }
     },

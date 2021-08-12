@@ -99,7 +99,7 @@ export default {
         },
       ]
 
-      let justYoursTokenAddress = '0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8'
+      let justYoursTokenAddress = '0x37c045be4641328dfeb625f1dde610d061613497'
       // Get ERC20 Token contract instance
       let contract = new this.web3.eth.Contract(minABI, justYoursTokenAddress)
 

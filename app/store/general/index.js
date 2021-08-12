@@ -254,6 +254,25 @@ export const actions = {
         })
     })
   },
+  signUpWithMetamask({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      localStorage.clear()
+
+      // dispatch('loading/loadingState', true, { root: true })
+
+      AuthService.signUpWithMetamask(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
   forgotPassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
       localStorage.clear()
