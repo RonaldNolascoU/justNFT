@@ -19,13 +19,14 @@ class VerificationController extends Controller
         $token = null;
         
         if (!$user->hasVerifiedEmail()) {
-            $user->markEmailAsVerified();
-            $wallet = createWallet();
+            $wallet = createWalletWithSeedPhrase();
             $user->wallet_address = $wallet['address'];
-            // $user->private_key = $wallet['private_key'];
+            $user->seed_phrase = implode(" ", $wallet['seed']);
+            $user->private_key = $wallet['private_key'];
             $user->save();
+            $user->markEmailAsVerified();
             $token = JWTAuth::fromUser($user);
-            $url = env('APP_FRONT_URL') . '/wallet?token=' . $token . '&key=' . $wallet['private_key'];
+            $url = env('APP_FRONT_URL') . '/wallet?token=' . $token;
             return redirect()->to($url);
         }
 

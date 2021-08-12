@@ -32,7 +32,7 @@ export default function ({ window, app, store, redirect, route }) {
   // }
 
   let isLoggedWithMetaMask = localStorage.getItem('isLoggedWithMetaMask')
-  console.log(route.fullPath)
+  console.log(route.fullPath, isUserSignedIn)
   if (!isUserSignedIn && !isSigninRoute && !isLoggedWithMetaMask) {
     return redirect('/signin')
   }

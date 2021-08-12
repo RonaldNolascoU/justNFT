@@ -90,52 +90,53 @@
 <script>
 export default {
   name: 'NewWalletCreated',
-  asyncData({ route, app, $axios, store, redirect }) {
+  async asyncData({ route, app, $axios, store, redirect }) {
     const { token, key } = route.query
     if (store.state.auth.loggedIn) redirect('/')
-    $axios
-      .get('/me', { headers: { Authorization: `Bearer ${token}` } })
-      .then((result) => {
-        const { user } = result.data
-        app.$auth.setUser({ ...user, token })
-        app.$auth.strategy.token.set(token)
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-        redirect('/')
-        // store.commit('general/disconnect')
-      })
-    return { privateKey: key }
+    const response = await $axios.get('/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    console.log(response, 'response')
+    const { user, success } = response.data
+    if (success) {
+      app.$auth.setUser({ ...user, token })
+      app.$auth.strategy.token.set(token)
+      return {
+        privateKey: user.private_key,
+        walletWords: user.seed_phrase.split(' '),
+      }
+    }
   },
   layout: 'blank',
   data() {
     return {
-      walletWords: [
-        'Mystery',
-        'God',
-        'Phrasal',
-        'Ramekin',
-        'Fragance',
-        'Beautiful',
-        'Life',
-        'Demonic',
-        'Typhoon',
-        'Absurd',
-        'Lane',
-        'Fruit',
-        'Sun',
-        'Mercury',
-        'Fun',
-        'Limb',
-        'Group',
-        'Rise',
-        'Tycoon',
-        'Coster',
-        'Astute',
-        'Tart',
-        'Roller',
-        'Fall',
-      ],
+      // walletWords: [
+      //   'Mystery',
+      //   'God',
+      //   'Phrasal',
+      //   'Ramekin',
+      //   'Fragance',
+      //   'Beautiful',
+      //   'Life',
+      //   'Demonic',
+      //   'Typhoon',
+      //   'Absurd',
+      //   'Lane',
+      //   'Fruit',
+      //   'Sun',
+      //   'Mercury',
+      //   'Fun',
+      //   'Limb',
+      //   'Group',
+      //   'Rise',
+      //   'Tycoon',
+      //   'Coster',
+      //   'Astute',
+      //   'Tart',
+      //   'Roller',
+      //   'Fall',
+      // ],
+      walletWords: [],
       showKey: false,
     }
   },

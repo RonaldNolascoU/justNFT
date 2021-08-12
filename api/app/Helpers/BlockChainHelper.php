@@ -1,9 +1,12 @@
 <?php
 
+use BIP\BIP44;
+use kornrunner\keccak;
+use Sop\CryptoEncoding\PEM;
+use FurqanSiddiqui\BIP39\BIP39;
+use kornrunner\Ethereum\Address;
 use Sop\CryptoTypes\Asymmetric\EC\ECPublicKey;
 use Sop\CryptoTypes\Asymmetric\EC\ECPrivateKey;
-use Sop\CryptoEncoding\PEM;
-use kornrunner\keccak;
 
 function createWallet()
 {
@@ -51,4 +54,20 @@ function createWallet()
     $wallet_pubic_key = '0x' . $pub_key_hex;
 
     return array("address" => $wallet_address, "private_key" => $wallet_private_key, "public_key" => $wallet_pubic_key);
+}
+
+function createWalletWithSeedPhrase()
+{
+    $mnemonic = BIP39::Generate(24);
+    $seedPhrase = $mnemonic->words;
+    $passphrase = "";
+    $salt = "mnemonic" . $passphrase;
+    $mnemonic = implode(" ", $mnemonic->words);
+    $seed = hash_pbkdf2("sha512", $mnemonic, $salt, 2048, 64 * 2, false);
+    $key = BIP44::fromMasterSeed($seed)->derive("m/44'/60'/0'/0/0");
+    $privateKey = $key->privateKey;
+    $address = new Address($privateKey);
+
+    $walletAddress = '0x' . $address->get();
+    return array("address" => $walletAddress, "private_key" => $address->getPrivateKey(), "seed" => $seedPhrase);
 }
