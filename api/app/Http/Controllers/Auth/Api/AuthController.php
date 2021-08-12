@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth\Api;
 use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -52,6 +53,39 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'User successfully registered',
             'user' => $user
+        ], 201);
+    }
+
+    public function registerWithMetamask(Request $request)
+    {
+        $user = User::where('wallet_address', $request->wallet_address)->first();
+
+        if (!$user) {
+            $validator = Validator::make($request->all(), [
+                'wallet_address' => 'required|unique:users',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 400);
+            }
+
+            $user = User::create(array_merge(
+                $validator->validated(),
+                [
+                    'email' => time() . '@metamask.com',
+                    'email_verified_at' => now(),
+                    'role_id' => 3,
+                ],
+            ));
+        }
+
+        \Auth::login($user, true);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User successfully registered',
+            'user' => $user,
+            'token' =>  JWTAuth::fromUser($user),
         ], 201);
     }
 

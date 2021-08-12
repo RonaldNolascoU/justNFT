@@ -7,6 +7,9 @@ class AuthService {
   signUp(data) {
     return HTTP.post(`signup`, data, { cache: false })
   }
+  signUpWithMetamask(data) {
+    return HTTP.post(`signup-metamask`, data, { cache: false })
+  }
   login(data) {
     return HTTP.post('login', data, { cache: false })
   }
@@ -22,7 +25,7 @@ class AuthService {
   // CREATORS
 
   creatorSignUp(data) {
-    return HTTP.post(`contentCreater-signup`, data, {
+    return HTTP.post(`create-creator`, data, {
       cache: false,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
