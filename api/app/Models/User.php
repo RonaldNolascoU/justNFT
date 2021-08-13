@@ -78,7 +78,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function isMetamask()
     {
         $this->role_id === 3;
-
+    }
     /**
      * User has many subscriptions
      */
