@@ -14,7 +14,13 @@ class AuthService {
     return HTTP.post('login', data, { cache: false })
   }
   forgotPassword(data) {
-    return HTTP.post('forgot-password', data, { cache: false })
+    return HTTP.post('password/email', data, { cache: false })
+  }
+  resetPassword(data) {
+    return HTTP.post('password/reset', data, { cache: false })
+  }
+  changePassword(data) {
+    return HTTP.post('change-password', data, { cache: false })
   }
   me() {
     return HTTP.get('me')
@@ -39,14 +45,6 @@ class AuthService {
     return HTTP.post(`addPost`, data, { cache: false })
   }
   // END CREATORS
-
-  changePassword(data) {
-    return HTTP.post(`change-password`, data, { cache: false })
-  }
-
-  changePasswordCreator(data) {
-    return HTTP.post(`change-password-creator`, data, { cache: false })
-  }
 
   getSubscriptions() {
     return HTTP.post(`subscriptionList`, { cache: false })

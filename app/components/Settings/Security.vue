@@ -117,8 +117,9 @@ export default {
       if (this.loading) return
       this.loading = true
       let payload = {
-        password: this.form.old_password,
+        old_password: this.form.old_password,
         new_password: this.form.new_password,
+        confirm_password: this.form.confirm_password,
       }
 
       let changeFunction =

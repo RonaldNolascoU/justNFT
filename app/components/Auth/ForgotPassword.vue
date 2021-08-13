@@ -57,7 +57,7 @@ export default {
         })
         .catch((err) => {
           console.log(err, 'error')
-          this.errors.email = err
+          this.errors = err
           this.emailSent = false
           this.loading = false
         })

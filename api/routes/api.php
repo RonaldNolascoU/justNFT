@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\CreatorController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\Api\AuthController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login'])->middleware('isVerified');
     Route::post('/signup', [AuthController::class, 'register']);
     Route::post('/signup-metamask', [AuthController::class, 'registerWithMetamask']);
+    Route::post('password/email', [ForgotPasswordController::class, 'forgot']);
+    Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
 });
 
 Route::group([
@@ -33,6 +36,7 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/me', [AuthController::class, 'currentUser']);
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
 
     Route::group([
         'prefix' => 'wallet'

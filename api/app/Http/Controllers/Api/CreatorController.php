@@ -25,7 +25,7 @@ class CreatorController extends Controller
                 'id_img_1' => $idsImgPaths[0],
                 'id_img_2' => $idsImgPaths[1],
                 'profile_img' => $profileImgPath,
-                'role_id' => 2,
+                'approved' => false,
             ]
         );
 
@@ -33,7 +33,13 @@ class CreatorController extends Controller
 
         User::where('email', auth()->user()->email)->update($all);
 
-        return response()->json(['success' => true, 'user' => User::find(auth()->user()->id)]);
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Your request was sent to our system. We’ll notify you via email with request status',
+                'user' => User::find(auth()->user()->id)
+            ]
+        );
     }
 
     public function processImg(array $images)

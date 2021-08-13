@@ -248,7 +248,7 @@
               <span
                 v-if="successfulSignUp"
                 class="fs-16 text-primary font-semibold w-full"
-                >Email registered. Activation mail has been sent to user.</span
+                >{{ successMsg }}</span
               >
 
               <button
@@ -298,6 +298,7 @@ export default {
       date: new Date(),
       menu: false,
       formData: null,
+      successMsg: null,
     }
   },
   watch: {
@@ -369,9 +370,10 @@ export default {
       this.creatorSignUp(payload)
         .then((response) => {
           console.log(response, 'response')
-          const { success, user } = response
+          const { success, user, message } = response
           if (success) {
             this.$auth.setUser(user)
+            this.successMsg = message
           }
           this.successfulSignUp = true
           this.clearErrors()

@@ -2,9 +2,13 @@ export default function ({ window, app, store, redirect, route }) {
   console.log(route.name)
   if (process.browser) {
     if (
-      ['signin', 'privacy-policy', 'creator-signup', 'wallet'].includes(
-        route.name
-      )
+      [
+        'signin',
+        'privacy-policy',
+        'creator-signup',
+        'wallet',
+        'reset-password',
+      ].includes(route.name)
     ) {
       document.body.style.backgroundColor = '#fff'
     }
@@ -12,7 +16,8 @@ export default function ({ window, app, store, redirect, route }) {
 
   const isUserSignedIn = store.state.auth.loggedIn
   const user = store.state.auth.user
-  const isSigninRoute = ['/signin'].includes(route.path)
+  console.log('route.path', route.path)
+  const isSigninRoute = ['/signin', '/reset-password'].includes(route.path)
   const isContentCreatorRoute = ['model'].includes(route.name)
 
   if (
