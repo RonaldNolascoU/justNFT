@@ -50,7 +50,7 @@ class UserController extends Controller
         if ($username != 'me') {
             $creator = User::where('role_id', 2)->where('username', $username)->select('name', 'username', 'role_id', 'profile_img', 'wallet_address', 'rate')->first();
             if ($creator) {
-                $subscription = Subscription::where('creator_id', $creator->id)->first();
+                $subscription = Subscription::where('creator_id', $creator->id)->where('user_id', auth()->user()->id)->first();
                 $creator->isSubscribed = $subscription ? true : false;
             }
         } else {

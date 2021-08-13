@@ -186,6 +186,7 @@ export default {
           creator_id: this.contentCreator._id,
           transactionId: 'free',
           amount: this.contentCreator.rate || 0,
+          wallet_address: this.contentCreator.wallet_address,
         })
           .then((res) => {
             const { success } = res

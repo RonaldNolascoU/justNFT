@@ -26,7 +26,7 @@ class SubscriptionController extends Controller
             'expire_date' => Carbon::now()->addMonth(1)->format('Y-m-d h:i:s')
         ]);
 
-        if ($request->transaction_id == 'free') {
+        if ($request->transactionId == 'free') {
             $subscription = Subscription::create($request->all());
             return response()->json(['success' => $subscription ]);
         }

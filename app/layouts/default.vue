@@ -67,6 +67,13 @@ export default {
       this.$store.commit('TOGGLE_DARK_MODE')
     }
   },
+  created() {
+    window.ethereum.on('accountsChanged', (accounts) => {
+      console.log('accountsChanges', accounts)
+      // TODO: CHECK HERE WITH USER WALLET. IF EXISTS, SO LOGIN
+      this.$store.commit('general/disconnect')
+    })
+  },
 }
 </script>
 
