@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\CreatorController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\Api\AuthController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 
@@ -33,6 +36,30 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/me', [AuthController::class, 'currentUser']);
-    Route::get('/getWallet', [AuthController::class, 'getWallet']);
     Route::post('/change-password', [AuthController::class, 'changePassword']);
+
+    Route::group([
+        'prefix' => 'wallet'
+    ], function () {
+        Route::get('/getWallet', [AuthController::class, 'getWallet']);
+    });
+    
+    Route::group([
+        'prefix' => 'subscriptions'
+    ], function () {
+        Route::get('/', [SubscriptionController::class, 'index']);
+        Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
+    });
+
+    Route::group([
+        'prefix' => 'posts'
+    ], function () {
+        Route::get('/', [PostController::class, 'index']);
+    });
+
+    Route::group([
+        'prefix' => 'users'
+    ], function () {
+        Route::get('/{username}', [UserController::class, 'show']);
+    });
 });

@@ -3,12 +3,16 @@
     <div class="flex justify-between">
       <div class="flex-auto font-semibold cursor-pointer">
         <i class="fas fa-heart heart"></i>
-        <span class="text-pink"> {{ post.likes }} </span>
+        <span class="text-pink">
+          {{ (post.likes && post.likes.length) || 0 }}
+        </span>
         <span class="dark:text-white"> {{ $t('home.social.likes') }} </span>
       </div>
       <div class="flex-auto font-semibold text-center cursor-pointer">
         <i class="fas fa-comment-alt comments"></i>
-        <span class="text-pink"> {{ post.comments }} </span>
+        <span class="text-pink">
+          {{ (post.comments && post.comments.length) || 0 }}
+        </span>
         <span class="dark:text-white"> {{ $t('home.social.comments') }} </span>
       </div>
       <div
@@ -19,7 +23,7 @@
       </div>
     </div>
     <!-- Comment -->
-    <div class="mt-4">
+    <div class="mt-4" v-if="false">
       <div>
         <div
           class="flex"
