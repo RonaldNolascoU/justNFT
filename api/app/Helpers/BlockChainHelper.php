@@ -71,3 +71,29 @@ function createWalletWithSeedPhrase()
     $walletAddress = '0x' . $address->get();
     return array("address" => $walletAddress, "private_key" => $address->getPrivateKey(), "seed" => $seedPhrase);
 }
+
+function getTransactions($walletAddress)
+{
+    $url =  'https://api.ftmscan.com/api?module=account&action=tokentx&contractaddress=0x37c045be4641328dfeb625f1dde610d061613497&address=' . $walletAddress . '&page=1&offset=1&sort=desc&apikey=' . config('constants.FTM_KEY');
+    $response = file_get_contents($url);
+    $response = json_decode($response);
+
+    return $response->result;
+}
+
+function isTransactionValid($walletAddress, $transactionHash)
+{
+    $transactions = getTransactions($walletAddress);
+    $transactionsCount = sizeof($transactions);
+
+    
+    if ($transactionsCount == 0) {
+        return false;
+    }
+    
+    if ($transactions[0]->hash == $transactionHash) {
+        return true;
+    }
+
+    return false;
+}

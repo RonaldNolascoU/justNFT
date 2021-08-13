@@ -1,5 +1,5 @@
 <template>
-  <div class="relative my-3 xl:my-5 profile__card">
+  <div class="relative my-3 xl:my-5 profile__card w-full">
     <div class="relative">
       <vs-card actionable class="w-full">
         <div slot="media">
@@ -29,11 +29,15 @@
         <h3 class="font-semibold fs-24">
           <span class="dark:text-white"
             >{{ $t('profile.posts') }}
-            <span class="text-primary">79</span></span
+            <span class="text-primary">{{
+              (contentCreator.posts && contentCreator.posts.length) || 0
+            }}</span></span
           >
           <span class="dark:text-white"
             >{{ $t('profile.likes') }}
-            <span class="text-primary">2.3k</span></span
+            <span class="text-primary">{{
+              (contentCreator.likes && contentCreator.likes.length) || 0
+            }}</span></span
           >
         </h3>
       </div>
@@ -41,19 +45,18 @@
     <div class="content mt-10 lg:mt-20">
       <div class="flex justify-between fs-24">
         <div class="info dark:text-white">
-          <b>{{ contentCreator.name }}</b>
+          <b>{{ contentCreator.name || '' }}</b>
           <p>
-            Welcome to Wellness Wednesdays💕 Podcast hosted by @yogawithtaz New
-            episode every Wednesday💕
+            {{ contentCreator.bio || '' }}
           </p>
         </div>
         <i class="fas fa-ellipsis-v text-gray" />
       </div>
-      <div class="mt-8">
+      <div class="mt-8" v-if="!contentCreator.me">
         <div class="subscribe__button_wrapper flex justify-center fs-24">
           <a
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
-            v-if="isSubscribed || contentCreator.subscribed"
+            v-if="isSubscribed || contentCreator.isSubscribed"
           >
             <b>Subscribed</b>
           </a>
@@ -63,10 +66,13 @@
             @click.prevent="subscribeTo"
           >
             <span class="material-icons-outlined mr-3"> lock </span>
-            <span
+            <span v-if="isSubscriptionPaid"
               ><b>{{ $t('profile.subscribeFrom') }}</b>
-              {{ contentCreator.subscriptionRate }} $JUST</span
+              {{ contentCreator.rate }} $JUST</span
             >
+            <span v-else>
+              <b>FREE</b>
+            </span>
             <GeneralLoader v-if="loading" />
           </a>
         </div>
@@ -76,7 +82,7 @@
           <ProfilePricingCards />
         </div>
       </div>
-      <div class="mt-5">
+      <div class="mt-5" v-if="hasPosts">
         <div class="bg-gray-200 dark:bg-black media p-3">
           <div class="ctas flex justify-between">
             <button
@@ -100,6 +106,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="mt-5" v-else>
+        <h1 class="text-black dark:text-white fs-24 text-center">No posts</h1>
       </div>
     </div>
   </div>
@@ -142,10 +151,21 @@ export default {
       ],
       isSubscribed: false,
       loading: false,
+      metamaskAddress: null,
     }
   },
+  computed: {
+    isSubscriptionPaid() {
+      return (this.contentCreator.rate && this.contentCreator.rate > 0) || false
+    },
+    hasPosts() {
+      return (
+        (this.contentCreator.posts && this.contentCreator.posts > 0) || false
+      )
+    },
+  },
   methods: {
-    ...mapActions('general', ['subscribe']),
+    ...mapActions('subscriptions', ['subscribeToContentCreator']),
     openOptions() {
       this.isMenuOpen = !this.isMenuOpen
     },
@@ -161,6 +181,24 @@ export default {
     },
     async subscribeTo() {
       this.loading = true
+      if (!this.isSubscriptionPaid) {
+        this.subscribeToContentCreator({
+          creator_id: this.contentCreator._id,
+          transactionId: 'free',
+          amount: this.contentCreator.rate || 0,
+        })
+          .then((res) => {
+            const { success } = res
+            if (success) {
+              this.isSubscribed = true
+            }
+            this.loading = false
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        return
+      }
       try {
         const {
           amountToPaid,
@@ -170,9 +208,10 @@ export default {
         getAccounts()
           .then(async (result) => {
             console.log(result, 'result')
+            this.metamaskAddress = result
             // Use BigNumber
             let decimals = Web3.utils.toBN(10)
-            let amount = Web3.utils.toBN(1)
+            let amount = Web3.utils.toBN(this.contentCreator.rate)
 
             let minABI = [
               // transfer
@@ -200,18 +239,20 @@ export default {
             ]
             // Get ERC20 Token contract instance
             // PRODUCTIOM:
-            // let tokenAddress = '0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8'
+            let justYoursTokenAddress =
+              '0x37c045be4641328dfeb625f1dde610d061613497'
             // END PRODUCTION
             // DEVELOPMENT:
-            let tokenAddress = '0x5502644A6B8b90264a78088D03f25f8E77D56CB8'
+            // let justYoursTokenAddress = '0x5502644A6B8b90264a78088D03f25f8E77D56CB8'
             // END DEVELOPMENT
             var web3 = new Web3(Web3.givenProvider)
-            let contract = new web3.eth.Contract(minABI, tokenAddress)
+            let contract = new web3.eth.Contract(minABI, justYoursTokenAddress)
             console.log(amount)
             let value = amount.mul(Web3.utils.toBN(10).pow(decimals))
-
+            console.log(value, 'value')
             // TESTING PURPOSES WALLET
-            let toAddress = '0xE1D92283220A68593f2C6f2Ba07f6FaAAA58fcF8'
+            // let toAddress = '0xE1D92283220A68593f2C6f2Ba07f6FaAAA58fcF8'
+            let toAddress = this.contentCreator.wallet_address
             //
             contract.methods
               .transfer(toAddress, value)
@@ -227,12 +268,11 @@ export default {
                     if (receipt) {
                       setTimeout(() => {
                         instance
-                          .subscribe({
-                            email: instance.contentCreator.email,
-                            item: 1,
-                            time: 1,
+                          .subscribeToContentCreator({
+                            creator_id: instance.contentCreator._id,
                             transactionId: hash,
-                            amountPaid: subscriptionRate,
+                            amount: instance.contentCreator.rate,
+                            wallet_address: instance.metamaskAddress,
                           })
                           .then((res) => {
                             console.log(res)
@@ -257,12 +297,18 @@ export default {
                   clearInterval(receiptInterval)
                 }
               })
+              .catch((error) => {
+                console.log(error)
+                this.loading = false
+              })
           })
           .catch((err) => {
             console.log(err, 'err')
+            this.loading = false
           })
       } catch (error) {
         console.error(error)
+        this.loading = false
       }
     },
   },

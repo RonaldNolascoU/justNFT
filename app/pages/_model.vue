@@ -9,22 +9,16 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  asyncData({ env, params, $axios }) {
+  asyncData({ env, params, $axios, redirect }) {
     return $axios
-      .post('contentCreater-details', { username: params.model })
+      .get(`users/${params.model}`)
       .then((creator) => {
-        return $axios
-          .post('isSubscribed', { username: params.model })
-          .then((result) => {
-            return {
-              contentCreator: {
-                ...creator.data.contentCreater,
-                posts: creator.data.posts,
-                subscribed: result.data.status,
-              },
-            }
-          })
-          .catch((err) => {})
+        console.log(creator, 'CREATOR')
+        const { user, success } = creator.data
+        if (!success) redirect('/')
+        return {
+          contentCreator: success ? user : {},
+        }
       })
       .catch((err) => {})
   },

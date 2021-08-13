@@ -29,7 +29,7 @@ return [
 
         'http' => [
             'driver' => 'http',
-            'host' => env('WEB3_HTTP_HOST', '"https://ropsten.infura.io/v3/9e6d530e9835469c845878123cbe3dd0"'),
+            'host' => env('WEB3_HTTP_HOST', 'https://ropsten.infura.io/v3/8490d4b3096a43d4b70e902b0f59960b'),
             'provider' => \Web3\Providers\HttpProvider::class,
             'request_manager' => \Web3\RequestManagers\RequestManager::class,
         ],

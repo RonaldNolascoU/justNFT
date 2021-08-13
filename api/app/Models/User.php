@@ -59,4 +59,66 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [];
     }
+
+
+    /**
+     * User has many subscriptions
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * User has one role
+     */
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * User has many posts
+     */
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * User has many likes
+     */
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * User has many comments
+     */
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * User has many saves
+     */
+
+    public function saves()
+    {
+        return $this->hasMany(Save::class);
+    }
+
+    /**
+     * Check if user is admin
+     */
+    public function scopeOfRole($user, $role)
+    {
+        return $user->where('role_id', $role)->exists();
+    }
 }

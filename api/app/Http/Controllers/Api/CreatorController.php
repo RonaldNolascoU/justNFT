@@ -29,6 +29,8 @@ class CreatorController extends Controller
             ]
         );
 
+        $all['username'] = strtolower($all['username']);
+
         User::where('email', auth()->user()->email)->update($all);
 
         return response()->json(['success' => true, 'user' => User::find(auth()->user()->id)]);

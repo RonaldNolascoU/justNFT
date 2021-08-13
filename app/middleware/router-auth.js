@@ -24,7 +24,13 @@ export default function ({ window, app, store, redirect, route }) {
     return redirect('/')
   }
 
-  if (isUserSignedIn && user && user.role_id != 2 && isContentCreatorRoute) {
+  if (
+    isUserSignedIn &&
+    user &&
+    user.role_id != 2 &&
+    isContentCreatorRoute &&
+    route.path == '/me'
+  ) {
     return redirect('/')
   }
 

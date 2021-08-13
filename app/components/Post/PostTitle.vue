@@ -7,14 +7,20 @@
       <div class="flex justify-between flex-auto" style="margin-left: 5em">
         <div>
           <nuxt-link
-            :to="nametoSlug('Vishal123')"
+            :to="nametoSlug(post.creator.username)"
             class="hover:underline dark:hover:text-white"
           >
             <b class="text-lg font-bold dark:text-white fs-24">{{
-              post.user
+              post.creator.name
             }}</b>
           </nuxt-link>
-          <p class="mt-1 text-muted fs-24">44m</p>
+          <p class="mt-1 text-muted fs-24">
+            {{
+              $dateFns.formatDistance(new Date(post.created_at), new Date(), {
+                addSuffix: true,
+              })
+            }}
+          </p>
         </div>
         <div class="self-center fs-24">
           <i class="cursor-pointer fas fa-ellipsis-v dark:text-white"></i>
@@ -23,7 +29,7 @@
     </div>
     <!-- Text -->
     <p class="mt-3 text-justify text dark:text-white fs-24">
-      {{ post.content }}
+      {{ post.caption }}
     </p>
     <!-- Text -->
   </div>
