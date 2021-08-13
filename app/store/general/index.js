@@ -295,9 +295,28 @@ export const actions = {
     })
   },
 
+  resetPassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      localStorage.clear()
+
+      AuthService.resetPassword(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err, 'err')
+        })
+    })
+  },
+
   logout({ commit, dispatch }) {
     commit('disconnect')
   },
+
   creatorSignUp({ commit }, payload) {
     return new Promise((resolve, reject) => {
       localStorage.clear()
@@ -335,21 +354,6 @@ export const actions = {
   changePassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
       AuthService.changePassword(payload)
-        .then(({ data }) => {
-          if (!data.success) {
-            return reject(data.msg)
-          }
-
-          resolve(data)
-        })
-        .catch((err) => {
-          reject(err)
-        })
-    })
-  },
-  changePasswordCreator({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      AuthService.changePasswordCreator(payload)
         .then(({ data }) => {
           if (!data.success) {
             return reject(data.msg)

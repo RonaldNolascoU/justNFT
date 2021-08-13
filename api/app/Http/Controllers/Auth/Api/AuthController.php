@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -146,5 +147,35 @@ class AuthController extends Controller
         } catch (\Exception $error) {
             return response()->json(['success' => false]);
         }
+    }
+
+    /**
+     * Change the current password
+     * @param Request $request
+     * @return Renderable
+     */
+    public function changePassword(Request $request)
+    {
+        $user = \Auth::user();
+        $userPassword = $user->password;
+
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|same:confirm_password|min:6',
+            'confirm_password' => 'required',
+        ]);
+
+        if (!Hash::check($request->old_password, $userPassword)) {
+            return response()->json(
+                ['success' => false, 'message' => 'password not match']
+            );
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json(
+            ['success' => true, 'message' => 'password successfully updated', 'user' => auth()->user()]
+        );
     }
 }

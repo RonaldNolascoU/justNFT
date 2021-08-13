@@ -59,4 +59,24 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [];
     }
+
+    public function isAdmin()
+    {
+        $this->user_id === 0;
+    }
+
+    public function isRegular()
+    {
+        $this->user_id === 1;
+    }
+
+    public function isCreator()
+    {
+        $this->user_id === 2;
+    }
+
+    public function isMetamask()
+    {
+        $this->user_id === 3;
+    }
 }
