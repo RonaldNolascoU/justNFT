@@ -5,17 +5,21 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
   generate: {
-    routes() {
-      axios.get('https://api.justyours.me/api/users').then((res) => {
-        const { creators, success } = res.data
-        if (success) {
-          creators.push({ username: 'me' })
-          console.log(creators, 'creators')
-          return creators.map((user) => {
-            return '/' + user.username
-          })
-        }
-      })
+    routes(callback) {
+      axios
+        .get('https://api.justyours.me/api/users')
+        .then((res) => {
+          const { creators, success } = res.data
+          if (success) {
+            creators.push({ username: 'me' })
+            console.log(creators, 'creators')
+            const routes = creators.map((user) => {
+              return '/' + user.username
+            })
+            callback(null, routes)
+          }
+        })
+        .catch(callback)
     },
   },
   ssr: false,
