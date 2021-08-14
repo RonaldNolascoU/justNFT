@@ -10,6 +10,7 @@ export default {
         const { creators, success } = res.data
         if (success) {
           creators.push({ username: 'me' })
+          console.log(creators, 'creators')
           return creators.map((user) => {
             return '/' + user.username
           })
