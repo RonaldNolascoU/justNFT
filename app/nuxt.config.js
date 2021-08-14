@@ -17,7 +17,7 @@ export default {
             })
           }
         })
-        .catch(err)
+        .catch((err) => {})
     },
   },
   ssr: false,
