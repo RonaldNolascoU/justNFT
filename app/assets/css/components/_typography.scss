@@ -153,3 +153,8 @@
   overflow: hidden;
   display: inherit;
 }
+
+.link-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}

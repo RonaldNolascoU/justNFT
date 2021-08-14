@@ -10,36 +10,40 @@ class CreatorController extends Controller
 {
     public function store(ContentCreatorRequest $request)
     {
-        $all = $request->all();
-        $idImgs = $all['file'];
-        $profileImg = $all['profileImage'];
+        if (!auth()->user()->isMetamask()) {
+            $all = $request->all();
+            $idImgs = $all['file'];
+            $profileImg = $all['profileImage'];
 
-        $idsImgPaths = $this->processImg($idImgs);
-        $profileImgPath = $this->saveImg($profileImg);
+            $idsImgPaths = $this->processImg($idImgs);
+            $profileImgPath = $this->saveImg($profileImg);
 
-        unset($all['file'], $all['profileImage']);
+            unset($all['file'], $all['profileImage']);
 
-        $all = array_merge(
-            $all,
-            [
-                'id_img_1' => $idsImgPaths[0],
-                'id_img_2' => $idsImgPaths[1],
-                'profile_img' => $profileImgPath,
-                'approved' => false,
-            ]
-        );
+            $all = array_merge(
+                $all,
+                [
+                    'id_img_1' => $idsImgPaths[0],
+                    'id_img_2' => $idsImgPaths[1],
+                    'profile_img' => $profileImgPath,
+                    'approved' => false,
+                ]
+            );
 
-        $all['username'] = strtolower($all['username']);
+            $all['username'] = strtolower($all['username']);
 
-        User::where('email', auth()->user()->email)->update($all);
+            User::where('email', auth()->user()->email)->update($all);
 
-        return response()->json(
-            [
-                'success' => true,
-                'message' => 'Your request was sent to our system. We’ll notify you via email with request status',
-                'user' => User::find(auth()->user()->id)
-            ]
-        );
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Your request was sent to our system. We’ll notify you via email with request status',
+                    'user' => User::find(auth()->user()->id)
+                ]
+            );
+        }
+
+        return response()->json(['success' => false, 'msg' => 'Unauthorized'], 403);
     }
 
     public function processImg(array $images)

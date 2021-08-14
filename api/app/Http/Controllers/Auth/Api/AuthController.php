@@ -156,26 +156,30 @@ class AuthController extends Controller
      */
     public function changePassword(Request $request)
     {
-        $user = \Auth::user();
-        $userPassword = $user->password;
+        if (!auth()->user()->isMetamask()) {
+            $user = \Auth::user();
+            $userPassword = $user->password;
 
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|same:confirm_password|min:6',
-            'confirm_password' => 'required',
-        ]);
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|same:confirm_password|min:6',
+                'confirm_password' => 'required',
+            ]);
 
-        if (!Hash::check($request->old_password, $userPassword)) {
+            if (!Hash::check($request->old_password, $userPassword)) {
+                return response()->json(
+                    ['success' => false, 'message' => 'password not match']
+                );
+            }
+
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
             return response()->json(
-                ['success' => false, 'message' => 'password not match']
+                ['success' => true, 'message' => 'password successfully updated', 'user' => auth()->user()]
             );
         }
 
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        return response()->json(
-            ['success' => true, 'message' => 'password successfully updated', 'user' => auth()->user()]
-        );
+        return response()->json(['success' => false, 'msg' => 'Unauthorized'], 403);
     }
 }
