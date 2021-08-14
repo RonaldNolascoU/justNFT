@@ -153,7 +153,7 @@ export default {
     background: 'white',
   },
   axios: {
-    baseURL: isDev ? 'http://localhost:8000/api' : 'https://app.justyours.me',
+    baseURL: isDev ? 'http://localhost:8000/api' : 'https://justyours.ml/api',
   },
   auth: {
     localStorage: false,
