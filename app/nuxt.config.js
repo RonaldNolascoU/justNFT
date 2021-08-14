@@ -5,19 +5,19 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
   generate: {
-    routes(callback) {
+    routes() {
       axios
         .get('https://api.justyours.me/users')
         .then((res) => {
           const { creators, success } = res.data
           if (success) {
-            const routes = creators.map((user) => {
+            creators.push({ username: 'me' })
+            return creators.map((user) => {
               return '/' + user.username
             })
-            callback(null, routes)
           }
         })
-        .catch(callback)
+        .catch(err)
     },
   },
   ssr: false,
