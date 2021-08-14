@@ -78,8 +78,13 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
-    '@nuxt/image',
     '@nuxtjs/date-fns',
+    [
+      '@nuxt/image',
+      {
+        provider: 'static',
+      },
+    ],
   ],
   tailwindcss: {
     jit: true,
@@ -98,7 +103,12 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
-    '@nuxt/image',
+    [
+      '@nuxt/image',
+      {
+        provider: 'static',
+      },
+    ],
   ],
   i18n: {
     vueI18nLoader: true,
