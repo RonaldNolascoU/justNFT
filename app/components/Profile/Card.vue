@@ -3,7 +3,7 @@
     <div class="relative">
       <vs-card actionable class="w-full">
         <div slot="media">
-          <nuxt-img
+          <img
             class="cover__photo"
             :src="
               contentCreator.cover

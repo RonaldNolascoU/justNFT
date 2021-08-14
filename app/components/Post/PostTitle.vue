@@ -2,7 +2,7 @@
   <div class="mb-5 xl:mx-6">
     <div class="flex relative">
       <div class="flex flex-shrink-0 mr-4 absolute">
-        <nuxt-img src="/images/post.png" class="rounded-full" />
+        <img src="/images/post.png" class="rounded-full" />
       </div>
       <div class="flex justify-between flex-auto" style="margin-left: 5em">
         <div>

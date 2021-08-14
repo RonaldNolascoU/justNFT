@@ -31,7 +31,7 @@
           :key="comment.content"
         >
           <div class="flex-shrink-0 block mr-4">
-            <nuxt-img :src="comment.user.img" class="w-12 h-12 rounded-full" />
+            <img :src="comment.user.img" class="w-12 h-12 rounded-full" />
           </div>
           <div class="flex justify-between flex-auto">
             <div>
@@ -64,7 +64,7 @@
       <div class="mt-3 add__comment">
         <div class="flex items-center">
           <div class="flex-shrink-0 mr-4">
-            <nuxt-img src="/images/post.png" class="w-12 h-12 rounded-full" />
+            <img src="/images/post.png" class="w-12 h-12 rounded-full" />
           </div>
           <div class="flex-auto comment">
             <div class="relative mt-1">

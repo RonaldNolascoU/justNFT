@@ -23,7 +23,7 @@
             >
               <div class="flex icon">
                 <div class="relative pb-1">
-                  <nuxt-img
+                  <img
                     class="rounded-full"
                     :src="`/images/msg/${msg.image}.png`"
                   />

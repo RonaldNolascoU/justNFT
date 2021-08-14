@@ -28,7 +28,7 @@
           <div
             class="flex items-center justify-center bg-navy text-center rounded-b-lg flex-none py-1"
           >
-            <nuxt-img src="/images/wallet-icon.png" alt="JUST Icon" />
+            <img src="/images/wallet-icon.png" alt="JUST Icon" />
             <span class="fs-24 ml-2 font-bold text-white"
               >{{ item.cost }} JUST</span
             >

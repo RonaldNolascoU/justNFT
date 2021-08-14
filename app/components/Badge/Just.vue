@@ -4,7 +4,7 @@
       class="relative flex items-center px-5 px-10 py-1 border-solid rounded-full border-custom-gray fs-16 dark:bg-white lg:dark:bg-transparent cursor-pointer"
       @click.prevent.stop="buyJust = !buyJust"
     >
-      <nuxt-img
+      <img
         class="absolute self-start my-3 mr-2 xl:my-0 just-logo"
         src="/images/wallet-icon.png"
       />
@@ -19,7 +19,7 @@
       class="absolute flex items-center px-4 w-full justify-center py-1 mt-3 rounded-full bg-navy z-50 cursor-pointer select-none"
       :class="{ 'ease-in-out': buyJust }"
     >
-      <nuxt-img class="ml-1.5 mr-1" src="/images/just-pink.png" />
+      <img class="ml-1.5 mr-1" src="/images/just-pink.png" />
       <a
         href="https://trade.zoocoin.cash/trade/market?inputCurrency=FTM&outputCurrency=0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8"
         target="_blank"

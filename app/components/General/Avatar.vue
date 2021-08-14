@@ -6,7 +6,7 @@
     <div
       class="w-full border-4 rounded-full border-color-primary profile__wrapper"
     >
-      <nuxt-img
+      <img
         class="w-full rounded-full profile-img"
         :class="isGrayScale ? 'filter grayscale' : null"
         :src="image"

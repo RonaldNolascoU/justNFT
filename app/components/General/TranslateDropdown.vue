@@ -6,7 +6,7 @@
           class="language cursor-pointer xl:dark:text-gray"
           @click="openDropdown()"
         >
-          <nuxt-img
+          <img
             class="mr-2 order-2 xl:order-1"
             :src="`/locales/${selectedLanguage.code}_flag.png`"
           />
@@ -27,10 +27,7 @@
             :key="index"
             @click="selectLanguage(language)"
           >
-            <nuxt-img
-              class="mr-2"
-              :src="`/locales/${language.code}_flag.png`"
-            />
+            <img class="mr-2" :src="`/locales/${language.code}_flag.png`" />
             <span
               :class="['code dark:text-white', isMobile ? 'fs-20' : 'fs-14']"
             >

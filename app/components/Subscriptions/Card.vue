@@ -3,7 +3,7 @@
     <div class="relative">
       <vs-card actionable class="w-full">
         <div slot="media">
-          <nuxt-img
+          <img
             :src="subscription.cover"
             :alt="subscription.name"
             :class="!subscription.active ? 'filter grayscale' : null"

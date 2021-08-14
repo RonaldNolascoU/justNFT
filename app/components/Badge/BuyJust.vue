@@ -6,7 +6,7 @@
     <div
       class="flex items-center px-8 w-full justify-center py-1 mt-3 rounded-full bg-navy z-50 cursor-pointer select-none"
     >
-      <nuxt-img class="ml-1.5 mr-1" src="/images/just-pink.png" />
+      <img class="ml-1.5 mr-1" src="/images/just-pink.png" />
       <a
         href="https://trade.zoocoin.cash/trade/market?inputCurrency=FTM&outputCurrency=0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8"
         target="_blank"

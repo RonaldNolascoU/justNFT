@@ -14,7 +14,7 @@
       >
         <vs-card actionable class="cardx">
           <div slot="media" class="relative">
-            <nuxt-img :src="`/images/${suggestion.img}`" />
+            <img :src="`/images/${suggestion.img}`" />
             <div class="absolute flex justify-center w-full center top-80">
               <vs-button block class="w-full truncate pills" color="#c53761">
                 <nuxt-link

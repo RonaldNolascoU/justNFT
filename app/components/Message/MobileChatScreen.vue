@@ -12,7 +12,7 @@
             ></span>
             <div class="flex items-center justify-between" v-if="chat">
               <div class="flex current_chat items-center">
-                <nuxt-img
+                <img
                   class="rounded-full absolute"
                   width="40"
                   height="40"
