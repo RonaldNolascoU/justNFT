@@ -1,9 +1,11 @@
 import axios from 'axios'
 const qs = require('qs')
+require('dotenv').config()
+const isDev = process.env.NODE_ENV !== 'production'
 
 const HTTP = axios.create({
   // baseURL: 'https://app.justyours.me',
-  baseURL: 'http://localhost:8000/api',
+  baseURL: isDev ? 'http://localhost:8000/api' : 'https://justyours.ml/api',
   headers: {
     'Cache-Control': 'no-cache',
     'Access-Control-Allow-Headers': '*',

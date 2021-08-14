@@ -98,6 +98,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
+    '@nuxt/image',
   ],
   i18n: {
     vueI18nLoader: true,
