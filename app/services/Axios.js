@@ -1,6 +1,5 @@
 import axios from 'axios'
 const qs = require('qs')
-require('dotenv').config()
 const isDev = process.env.NODE_ENV !== 'production'
 
 const HTTP = axios.create({
