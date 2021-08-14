@@ -7,7 +7,7 @@
         Account
       </h1>
 
-      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
+      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200" v-if="false">
         <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
           <div class="sm:col-span-6">
             <h3 class="text-xl font-medium text-blue-gray-900 dark:text-white">
@@ -338,6 +338,8 @@
           </button>
         </div>
       </form>
+
+      <h1 v-else>Coming soon...</h1>
     </div>
   </div>
 </template>

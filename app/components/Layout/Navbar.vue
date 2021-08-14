@@ -267,6 +267,8 @@ export default {
       this.$store.commit('TOGGLE_SIDEBAR')
     },
     handleOpenModals(type) {
+      alert('Coming soon...')
+      return
       if (type == 'msg') {
         this.msgBox = !this.msgBox
         this.notifyBox = false

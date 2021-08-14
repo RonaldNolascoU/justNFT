@@ -1,5 +1,5 @@
 <template>
-  <PostCreateNewPost />
+  <div></div>
 </template>
 
 <script>

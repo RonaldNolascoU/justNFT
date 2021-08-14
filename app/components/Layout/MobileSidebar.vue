@@ -8,10 +8,27 @@
         <BadgeJust />
         <BadgeAddress />
       </div>
-      <GeneralAvatar image="/images/profile.png" />
+      <GeneralAvatar
+        image="/images/profile.png"
+        v-if="$store.state.auth.user.role_id == 2"
+      />
     </div>
     <div class="routes">
       <ul>
+        <li
+          v-if="$store.state.auth.user.role_id == 2"
+          class="divide-y-4 divide-yellow-600 text-center border-b-2 border-gray-100"
+        >
+          <nuxt-link :to="'/profile'" class="dark:text-active">
+            <div class="flex justify-center items-center pb-2 pt-2 my-2">
+              <div class="fs-20">
+                {{ $t(`sidebar.profile`) }}
+              </div>
+              <i class="fas fa-user fs-20 ml-3" />
+            </div>
+          </nuxt-link>
+        </li>
+
         <li
           v-for="(option, index) in options"
           :key="index"
@@ -69,6 +86,7 @@
             >
               <nuxt-link
                 to="/new-post"
+                v-if="$auth.user.role_id == 2"
                 class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-1 px-10 text-center font-semibold btn-fs fs-20 text-white-color"
               >
                 Add Post
@@ -99,13 +117,6 @@ export default {
   data() {
     return {
       options: [
-        {
-          icon: 'fas fa-user',
-          pack: 'fa',
-          name: 'My Profile',
-          i18n: 'profile',
-          to: '/profile',
-        },
         {
           icon: 'home',
           pack: 'material',

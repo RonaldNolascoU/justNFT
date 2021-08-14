@@ -80,6 +80,7 @@
         </div>
         <nuxt-link
           to="/new-post"
+          v-if="$auth.user.role_id == 2"
           class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-2 px-16 text-center font-semibold btn-fs text-white-color"
         >
           Add Post

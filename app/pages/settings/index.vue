@@ -68,7 +68,7 @@
                       : null,
                     {
                       'link-disabled':
-                        $auth.user.role_id && setting.name == 'Security',
+                        $auth.user.role_id == 3 && setting.name == 'Security',
                     },
                   ]"
                   aria-current="page"
