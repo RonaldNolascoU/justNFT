@@ -27,6 +27,7 @@ Route::group([
     Route::post('/signup-metamask', [AuthController::class, 'registerWithMetamask']);
     Route::post('password/email', [ForgotPasswordController::class, 'forgot']);
     Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
+    Route::get('/users', [UserController::class, 'index']);
 });
 
 Route::group([

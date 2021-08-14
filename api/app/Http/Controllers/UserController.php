@@ -15,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $creators = User::where('role_id', 2)->select('name', 'username', 'role_id', 'profile_img', 'wallet_address', 'rate')->get();
+
+        return response()->json(['success' => true, 'creators' => $creators]);
     }
 
     /**

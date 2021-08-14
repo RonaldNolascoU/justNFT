@@ -1,8 +1,25 @@
 import i18n from './config/i18n'
+import axios from 'axios'
 require('dotenv').config()
 const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
+  generate: {
+    routes(callback) {
+      axios
+        .get('https://api.justyours.me/users')
+        .then((res) => {
+          const { creators, success } = res.data
+          if (success) {
+            const routes = creators.map((user) => {
+              return '/' + user.username
+            })
+            callback(null, routes)
+          }
+        })
+        .catch(callback)
+    },
+  },
   ssr: false,
   target: 'static',
   components: true,
