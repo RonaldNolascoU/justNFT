@@ -62,11 +62,15 @@
                   :key="index"
                   class="flex p-6 border-b border-blue-gray-200 dark:hover:bg-light-gray cursor-pointer"
                   @click="selectOption(setting)"
-                  :class="
+                  :class="[
                     setting.selected
                       ? 'bg-blue-50 dark:bg-light-gray bg-opacity-50'
-                      : null
-                  "
+                      : null,
+                    {
+                      'link-disabled':
+                        $auth.user.role_id && setting.name == 'Security',
+                    },
+                  ]"
                   aria-current="page"
                 >
                   <div v-html="setting.svg"></div>

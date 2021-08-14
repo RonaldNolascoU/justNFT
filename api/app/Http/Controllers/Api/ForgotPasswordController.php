@@ -10,16 +10,20 @@ class ForgotPasswordController extends Controller
 {
     public function forgot()
     {
-        request()->validate(['email' => 'required|email']);
+        if (!auth()->user()->isMetamask()) {
+            request()->validate(['email' => 'required|email']);
 
-        $status = Password::sendResetLink(
-            request()->only('email')
-        );
+            $status = Password::sendResetLink(
+                request()->only('email')
+            );
 
-        if ($status === Password::RESET_LINK_SENT) {
-            return response()->json(['success' => true, 'msg' => 'Reset password link sent on your email id.']);
+            if ($status === Password::RESET_LINK_SENT) {
+                return response()->json(['success' => true, 'msg' => 'Reset password link sent on your email id.']);
+            }
+            return response()->json(['success' => false, 'msg' => 'Something went wrong']);
         }
-        return response()->json(['success' => false, 'msg' => 'Something went wrong']);
+
+        return response()->json(['success' => false, 'msg' => 'Unauthorized'], 403);
     }
 
     public function reset()
