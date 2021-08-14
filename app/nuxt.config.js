@@ -164,7 +164,9 @@ export default {
     background: 'white',
   },
   axios: {
-    baseURL: isDev ? 'http://localhost:8000/api' : 'https://justyours.ml/api',
+    baseURL: isDev
+      ? 'http://localhost:8000/api'
+      : 'https://api.justyours.me/api',
   },
   auth: {
     localStorage: false,

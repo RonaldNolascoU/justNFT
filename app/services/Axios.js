@@ -4,7 +4,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 const HTTP = axios.create({
   // baseURL: 'https://app.justyours.me',
-  baseURL: isDev ? 'http://localhost:8000/api' : 'https://justyours.ml/api',
+  baseURL: isDev ? 'http://localhost:8000/api' : 'https://api.justyours.me/api',
   headers: {
     'Cache-Control': 'no-cache',
     'Access-Control-Allow-Headers': '*',
