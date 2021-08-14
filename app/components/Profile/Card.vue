@@ -206,6 +206,12 @@ export default {
           wallet_address,
           subscriptionRate,
         } = this.contentCreator
+        if (!window.ethereum) {
+          alert(
+            'Non-Ethereum browser detected. You should consider trying MetaMask!'
+          )
+          this.loading = false
+        }
         getAccounts()
           .then(async (result) => {
             console.log(result, 'result')
