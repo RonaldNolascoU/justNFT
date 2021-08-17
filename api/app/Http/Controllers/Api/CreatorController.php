@@ -8,6 +8,19 @@ use App\Http\Requests\ContentCreatorRequest;
 
 class CreatorController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $creators = User::where('role_id', '!=', 2)->get();
+
+        return response()->json(['success' => true, 'creators' => $creators]);
+    }
+
     public function store(ContentCreatorRequest $request)
     {
         if (!auth()->user()->isMetamask()) {
