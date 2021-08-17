@@ -67,8 +67,10 @@
                       ? 'bg-blue-50 dark:bg-light-gray bg-opacity-50'
                       : null,
                     {
-                      'link-disabled':
-                        $auth.user.role_id == 3 && setting.name == 'Security',
+                      hidden:
+                        $auth.user.role_id == 3 &&
+                        (setting.name == 'Security' ||
+                          setting.name == 'Account'),
                     },
                   ]"
                   aria-current="page"
@@ -78,19 +80,23 @@
                     <p class="font-medium text-blue-gray-900 dark:text-white">
                       {{ setting.name }}
                     </p>
-                    <p class="mt-1 text-blue-gray-500">
+                    <!-- <p class="mt-1 text-blue-gray-500">
                       {{ setting.description }}
-                    </p>
+                    </p> -->
                   </div>
                 </a>
               </div>
             </nav>
 
             <!-- Main content -->
-            <SettingsAccount v-if="settingSelected == 'Account'" />
+            <SettingsAccount
+              v-if="settingSelected == 'Account' && $auth.user.role_id != 3"
+            />
             <SettingsNotifications v-if="settingSelected == 'Notifications'" />
             <SettingsSecurity v-if="settingSelected == 'Security'" />
-            <SettingsAppereance v-if="settingSelected == 'Appereance'" />
+            <SettingsAppereance
+              v-if="settingSelected == 'Appereance' && $auth.user.role_id != 3"
+            />
             <SettingsBilling v-if="settingSelected == 'Billing'" />
           </div>
         </div>
@@ -207,7 +213,11 @@ export default {
     },
     onResize() {
       this.isMobile = window.innerWidth < 1024
-      if (!this.isMobile && this.$route.hash == '') {
+      if (
+        !this.isMobile &&
+        this.$route.hash == '' &&
+        this.$auth.user.role_id != 3
+      ) {
         this.settingSelected = 'Account'
         this.$router.replace({ hash: `#account` })
       }

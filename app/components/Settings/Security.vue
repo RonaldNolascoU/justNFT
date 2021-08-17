@@ -17,10 +17,7 @@
               Password
             </h3>
             <p class="mt-1 text-sm text-blue-gray-500 dark:text-gray">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-              quidem corporis veritatis dolorum saepe, rerum numquam culpa harum
-              fugiat unde dolores perspiciatis vel non recusandae? Odio fugit
-              ipsum maiores tempora!
+              Remember, Just Yours will never ask for your password
             </p>
           </div>
 
@@ -76,12 +73,6 @@
         }}</span>
 
         <div class="pt-8 flex justify-end">
-          <button
-            type="button"
-            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            Cancel
-          </button>
           <button
             type="submit"
             class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

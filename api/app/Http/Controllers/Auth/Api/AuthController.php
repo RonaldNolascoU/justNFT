@@ -59,7 +59,7 @@ class AuthController extends Controller
 
     public function registerWithMetamask(Request $request)
     {
-        $user = User::where('wallet_address', $request->wallet_address)->first();
+        $user = User::where('wallet_address', strtolower($request->wallet_address))->first();
 
         if (!$user) {
             $validator = Validator::make($request->all(), [

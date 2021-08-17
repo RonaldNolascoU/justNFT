@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\Api\CreatorController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\Api\AuthController;
@@ -42,7 +43,7 @@ Route::group([
     Route::group([
         'prefix' => 'wallet'
     ], function () {
-        Route::get('/getWallet', [AuthController::class, 'getWallet']);
+        Route::get('/create', [WalletController::class, 'createWallet']);
     });
     
     Route::group([
@@ -56,6 +57,7 @@ Route::group([
         'prefix' => 'posts'
     ], function () {
         Route::get('/', [PostController::class, 'index']);
+        Route::get('/{post}', [PostController::class, 'show']);
     });
 
     Route::group([

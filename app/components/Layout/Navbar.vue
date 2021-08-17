@@ -117,18 +117,6 @@
             />
           </div>
         </div>
-
-        <div
-          class="px-4 sm:px-10 2xl:px-10 xl:pl-5 flex flex-col align-center xl:align-start sm:pt-0"
-          role="button"
-          @click="$router.push('/store')"
-        >
-          <span
-            class="text-white material-icons fs-40 nav-icons fs-res-20 icons-color select-none"
-          >
-            store
-          </span>
-        </div>
       </div>
 
       <div class="hidden xl:flex">

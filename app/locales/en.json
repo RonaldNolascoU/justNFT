@@ -80,7 +80,8 @@
     "subscriptions": "Subscriptions",
     "settings": "Settings",
     "darkMode": "Dark Mode",
-    "logOut": "Log Out"
+    "logOut": "Log Out",
+    "store": "Store"
   },
   "home": {
     "social": {
