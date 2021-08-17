@@ -7,6 +7,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\Api\CreatorController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\Api\AuthController;
+use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 
 /*
@@ -32,6 +33,14 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => ['auth:api', 'admin'],
+    'prefix' => 'admin'
+], function () {
+    Route::get('/users', [UserController::class, 'listUsers']);
+    Route::get('/creator-users', [UserController::class, 'listCreators']);
+});
+
+Route::group([
     'middleware' => ['auth:api', 'isVerified']
 ], function () {
     Route::post('/create-creator', [CreatorController::class, 'store']);
@@ -45,7 +54,7 @@ Route::group([
     ], function () {
         Route::get('/create', [WalletController::class, 'createWallet']);
     });
-    
+
     Route::group([
         'prefix' => 'subscriptions'
     ], function () {
