@@ -8,7 +8,7 @@
     >
       <img class="ml-1.5 mr-1" src="/images/just-pink.png" />
       <a
-        href="https://trade.zoocoin.cash/trade/market?inputCurrency=FTM&outputCurrency=0xC8Da1a26ABEF9e2E41B4C89c1b345Cc05ce034e8"
+        href="https://trade.zoocoin.cash/trade/market?inputCurrency=FTM&outputCurrency=0x37c045be4641328dfeb625f1dde610d061613497"
         target="_blank"
         class="fs-16 text-white font-bold mr-1.5"
         >{{ $t('navbar.buyJust') }}</a

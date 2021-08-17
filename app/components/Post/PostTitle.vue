@@ -14,16 +14,23 @@
               post.creator.name
             }}</b>
           </nuxt-link>
-          <p class="mt-1 text-muted fs-24">
+          <nuxt-link
+            class="mt-1 text-muted fs-24 block hover:underline"
+            :to="`${nametoSlug(post.creator.username)}/${post._id}`"
+          >
             {{
               $dateFns.formatDistance(new Date(post.created_at), new Date(), {
                 addSuffix: true,
               })
             }}
-          </p>
+          </nuxt-link>
         </div>
-        <div class="self-center fs-24">
-          <i class="cursor-pointer fas fa-ellipsis-v dark:text-white"></i>
+        <div class="self-center fs-24 relative">
+          <i
+            class="cursor-pointer fas fa-ellipsis-v dark:text-white"
+            @click.prevent.stop="toggleDropdown"
+          ></i>
+          <GeneralActions v-if="isOpen" :open="isOpen" @hide="hide" />
         </div>
       </div>
     </div>
@@ -43,13 +50,29 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      isOpen: false,
+    }
+  },
   computed: {},
   methods: {
     nametoSlug(str) {
       return stringToSlug(str)
     },
+    toggleDropdown() {
+      this.isOpen = !this.isOpen
+    },
+    hide() {
+      this.isOpen = false
+    },
   },
 }
 </script>
 
-<style></style>
+<style scoped>
+.text-muted {
+  color: #7c7c7c !important;
+  font-weight: normal;
+}
+</style>

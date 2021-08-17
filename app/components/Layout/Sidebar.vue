@@ -104,6 +104,12 @@ export default {
           icon: 'fas fa-home',
         },
         {
+          to: '/store',
+          name: 'Store',
+          i18n: 'store',
+          icon: 'fas fa-store',
+        },
+        {
           to: '/saved',
           name: 'Saved',
           i18n: 'saved',

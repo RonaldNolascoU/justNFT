@@ -1,5 +1,5 @@
 <template>
-  <PostContent />
+  <PostFeed />
 </template>
 
 <script>

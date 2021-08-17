@@ -102,16 +102,16 @@ export default {
     this.$store.commit('OPEN_AGREE_MODAL')
     const { token } = this.$route.query
     await this.$axios
-      .get('/me', {
+      .get('/wallet/create', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((result) => {
-        const { user, success } = result.data
+        const { user, success, privateKey, seed } = result.data
         if (success) {
           this.$auth.setUserToken(token, token)
           this.$auth.setUser(user)
-          this.walletWords = user.seed_phrase.split(' ')
-          this.privateKey = user.private_key
+          this.walletWords = seed.split(' ')
+          this.privateKey = privateKey
         } else {
           this.$router.push('/')
         }

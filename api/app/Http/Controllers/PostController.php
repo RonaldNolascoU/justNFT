@@ -34,4 +34,11 @@ class PostController extends Controller
 
         return response()->json(['success' => true, 'posts' => $posts]);
     }
+
+    public function show(Post $post)
+    {
+        $post->creator = $post->creator;
+        
+        return response()->json(['success' => true, 'post' => $post]);
+    }
 }
