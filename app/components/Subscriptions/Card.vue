@@ -4,7 +4,7 @@
       <vs-card actionable class="w-full">
         <div slot="media">
           <img
-            :src="subscription.cover"
+            src="/images/subscriptions/3.png"
             :alt="subscription.name"
             :class="!subscription.active ? 'filter grayscale' : null"
           />
@@ -18,15 +18,14 @@
       />
     </div>
     <div class="flex justify-between -mt-4">
-      <!-- <div></div> -->
       <div class="personal__data">
-        <h3 class="font-semibold text-pink fs-24">
+        <!-- <h3 class="font-semibold text-pink fs-24">
           <nuxt-link
             :to="nametoSlug(subscription.name)"
             class="hover:underline dark:hover:text-primary"
             >{{ subscription.name }}</nuxt-link
           >
-        </h3>
+        </h3> -->
         <span class="font-semibold text-blue fs-16">{{
           subscription.active
             ? $t(`subscriptions.${subscription.i18n}`) +
@@ -37,6 +36,7 @@
               subscription.expired_at
         }}</span>
       </div>
+
       <div class="relative">
         <i
           title="More options"
@@ -94,6 +94,7 @@ export default {
   props: {
     subscription: {
       type: Object,
+      default: () => [],
     },
   },
   data() {

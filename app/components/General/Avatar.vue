@@ -7,7 +7,7 @@
       class="w-full border-4 rounded-full border-color-primary profile__wrapper"
     >
       <img
-        class="w-full rounded-full profile-img"
+        class="w-full rounded-full"
         :class="isGrayScale ? 'filter grayscale' : null"
         :src="image"
         alt="profile"

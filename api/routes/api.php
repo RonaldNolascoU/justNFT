@@ -5,8 +5,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\Api\CreatorController;
-use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\Api\AuthController;
+use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 
 /*

@@ -45,21 +45,5 @@ class AuthService {
     return HTTP.post(`addPost`, data, { cache: false })
   }
   // END CREATORS
-
-  getSubscriptions() {
-    return HTTP.post(`subscriptionList`, { cache: false })
-  }
-
-  subscribe(data) {
-    return HTTP.post(`subscribe`, data, { cache: false })
-  }
-
-  getDetails(username) {
-    return HTTP.post(`contentCreater-details`, username, { cache: false })
-  }
-
-  isSubscribed(username) {
-    return HTTP.post(`isSubscribed`, username, { cache: false })
-  }
 }
 export default new AuthService()
