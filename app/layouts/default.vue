@@ -68,11 +68,13 @@ export default {
     }
   },
   created() {
-    window.ethereum.on('accountsChanged', (accounts) => {
-      console.log('accountsChanges', accounts)
-      // TODO: CHECK HERE WITH USER WALLET. IF EXISTS, SO LOGIN
-      this.$store.commit('general/disconnect')
-    })
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        console.log('accountsChanges', accounts)
+        // TODO: CHECK HERE WITH USER WALLET. IF EXISTS, SO LOGIN
+        this.$store.commit('general/disconnect')
+      })
+    }
   },
 }
 </script>
