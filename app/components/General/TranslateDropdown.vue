@@ -7,12 +7,10 @@
           @click="openDropdown()"
         >
           <img
-            class="mr-2 order-2 xl:order-1"
+            class="mr-2"
             :src="`/locales/${selectedLanguage.code}_flag.png`"
           />
-          <i
-            class="fas fa-globe language__icon text-primary mr-2 order-1 xl:order-2"
-          ></i>
+          <i class="fas fa-globe language__icon text-primary mr-2"></i>
           <span :class="['code code-name ', isMobile ? 'fs-20' : 'fs-14']">
             {{ selectedLanguage.name }}
           </span>

@@ -1,19 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
 use App\Models\Subscription;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscribeRequest;
 
 class SubscriptionController extends Controller
 {
     public function index()
     {
-        $subscriptions = Subscription::where('user_id', auth()->user()->id)->get();
+        $subscriptions = new Subscription();
 
-        return response()->json(['success' => true, 'subscriptions' => $subscriptions]);
+        $allSubs = $subscriptions->where('user_id', auth()->user()->id)
+            ->with('creator')
+            ->get();
+        $renewSubs = $subscriptions->where('user_id', auth()->user()->id)
+            ->whereDate('expire_date', '<', now())
+            ->with('creator')
+            ->get();
+        $activeSubs = $subscriptions->where('user_id', auth()->user()->id)
+            ->whereDate('expire_date', '>=', now())
+            ->with('creator')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'subscriptions' => [
+                'all' => $allSubs,
+                'renew' => $renewSubs,
+                'active' => $activeSubs,
+            ]
+        ]);
     }
 
     // TODO: Refactor this shitty code. Right now im sleeping asf

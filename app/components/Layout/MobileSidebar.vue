@@ -1,7 +1,7 @@
 <template>
   <div
     v-click-outside="hideSidebar"
-    class="rounded-xl bg-white dark:bg-black px-4 py-4 absolute -translate-y-full right-0 top-0 mobile__sidebar overflow-y-scroll"
+    class="rounded-xl bg-white dark:bg-black px-6 py-4 absolute -translate-y-full right-0 top-0 mobile__sidebar overflow-y-scroll"
   >
     <div class="user__data flex items-center">
       <div class="badges mt-5 mr-5">
@@ -40,31 +40,9 @@
             class="dark:text-active"
           >
             <div
-              v-if="option.to"
-              class="flex justify-center items-center pb-2 pt-2 my-2"
+              v-if="option.type == 'switch'"
+              class="fs-20 flex justify-start items-center text-secondary pb-2 pt-2 my-2"
             >
-              <span class="fs-20">
-                {{ $t(`sidebar.${option.i18n}`) }}
-              </span>
-              <i
-                v-if="option.pack == 'fa'"
-                :class="option.icon"
-                class="fs-20 ml-3"
-              />
-              <span v-else class="material-icons-round fs-20 ml-3">
-                {{ option.icon }}
-              </span>
-            </div>
-            <div
-              v-else-if="option.type == 'switch'"
-              class="fs-20 flex justify-center items-center text-secondary pb-2 pt-2 my-2"
-            >
-              <label
-                @click="toggleDarkMode"
-                class="mr-3 fs-20 cursor-pointer select-none text-secondary xl:whitespace-nowrap"
-                for="dark"
-                >{{ $t('sidebar.darkMode') }}</label
-              >
               <vs-switch
                 color="#C53761"
                 :value="$store.state.darkMode"
@@ -72,37 +50,43 @@
                 size="sm"
                 id="dark"
               />
+              <label
+                @click="toggleDarkMode"
+                class="ml-3 fs-20 cursor-pointer select-none text-secondary xl:whitespace-nowrap"
+                for="dark"
+                >{{ $t('sidebar.darkMode') }}</label
+              >
             </div>
             <div
               v-else-if="option.type == 'language'"
-              class="flex justify-center items-center pt-2 my-2 cursor-pointer"
+              class="flex justify-start items-center pt-2 my-2 cursor-pointer"
             >
               <GeneralTranslateDropdown />
             </div>
 
             <div
               v-else-if="option.type == 'new-post'"
-              class="flex justify-center items-center my-2 cursor-pointer"
+              class="flex justify-end items-center my-2 cursor-pointer"
             >
               <nuxt-link
                 to="/new-post"
-                v-if="$auth.user.role_id == 2"
                 class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-1 px-10 text-center font-semibold btn-fs fs-20 text-white-color"
               >
                 Add Post
               </nuxt-link>
             </div>
+
             <!-- LOGOUT -->
             <div
               v-else
-              class="flex justify-center items-center pt-2 my-2 cursor-pointer"
+              class="flex justify-start items-center pt-2 my-2 cursor-pointer"
               @click="$store.dispatch('general/logout')"
             >
+              <span class="material-icons-round fs-20 mr-3">
+                {{ option.icon }}
+              </span>
               <span class="fs-20">
                 {{ $t(`sidebar.${option.i18n}`) }}
-              </span>
-              <span class="material-icons-round fs-20 ml-3">
-                {{ option.icon }}
               </span>
             </div>
           </component>
@@ -174,7 +158,11 @@ export default {
       this.$store.commit('TOGGLE_SIDEBAR')
     },
   },
-  mounted() {},
+  mounted() {
+    if (this.$auth.user !== 2) {
+      this.options = this.options.filter((x) => x.type != 'new-post')
+    }
+  },
 }
 </script>
 

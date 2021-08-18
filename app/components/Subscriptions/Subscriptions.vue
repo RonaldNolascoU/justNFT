@@ -95,39 +95,39 @@ export default {
         },
       ],
       subscriptions: [
-        {
-          i18n: 'subscribedSince',
-          name: 'Alisha Soprano',
-          subscribed_at: '12th march',
-          cover: '/images/subscriptions/1.png',
-          profile_pic: '/images/subscriptions/2.png',
-          active: true,
-        },
-        {
-          i18n: 'subscribedSince',
-          name: 'Alisha Soprano2',
-          subscribed_at: '26th April',
-          cover: '/images/subscriptions/3.png',
-          profile_pic: '/images/subscriptions/4.png',
-          active: true,
-        },
-        {
-          i18n: 'subscribedSince',
-          name: 'Alisha Soprano3',
-          subscribed_at: '9th may',
-          cover: '/images/subscriptions/5.png',
-          profile_pic: '/images/subscriptions/6.png',
-          active: true,
-        },
-        {
-          i18n: 'expiredSince',
-          name: 'Beach Bum XOX',
-          subscribed_at: '14th June',
-          cover: '/images/subscriptions/7.png',
-          profile_pic: '/images/subscriptions/8.png',
-          expired_at: '12th march',
-          active: false,
-        },
+        // {
+        //   i18n: 'subscribedSince',
+        //   name: 'Alisha Soprano',
+        //   subscribed_at: '12th march',
+        //   cover: '/images/subscriptions/1.png',
+        //   profile_pic: '/images/subscriptions/2.png',
+        //   active: true,
+        // },
+        // {
+        //   i18n: 'subscribedSince',
+        //   name: 'Alisha Soprano2',
+        //   subscribed_at: '26th April',
+        //   cover: '/images/subscriptions/3.png',
+        //   profile_pic: '/images/subscriptions/4.png',
+        //   active: true,
+        // },
+        // {
+        //   i18n: 'subscribedSince',
+        //   name: 'Alisha Soprano3',
+        //   subscribed_at: '9th may',
+        //   cover: '/images/subscriptions/5.png',
+        //   profile_pic: '/images/subscriptions/6.png',
+        //   active: true,
+        // },
+        // {
+        //   i18n: 'expiredSince',
+        //   name: 'Beach Bum XOX',
+        //   subscribed_at: '14th June',
+        //   cover: '/images/subscriptions/7.png',
+        //   profile_pic: '/images/subscriptions/8.png',
+        //   expired_at: '12th march',
+        //   active: false,
+        // },
       ],
       selectedTab: {
         slug: 'all',
@@ -136,23 +136,16 @@ export default {
   },
   computed: {
     filteredList() {
-      if (this.selectedTab.slug == 'all') return this.subscriptions
-      if (this.selectedTab.slug == 'active') {
-        return this.subscriptions.filter((subscription) => {
-          return subscription.active
-        })
-      }
-
-      return this.subscriptions.filter((subscription) => {
-        return !subscription.active
-      })
+      if (this.selectedTab.slug == 'all') return this.subscriptions.all
+      if (this.selectedTab.slug == 'active') return this.subscriptions.active
+      else return this.subscriptions.renew
     },
   },
   created() {
     this.getSubs()
   },
   methods: {
-    ...mapActions('general', ['getSubscriptions']),
+    ...mapActions('subscriptions', ['getSubscriptions']),
     selectOption(tab) {
       this.selectedTab = tab
       this.tabs.map((x) => {
@@ -190,7 +183,11 @@ export default {
       }
     },
     getSubs() {
-      this.getSubscriptions().then((res) => console.log(res))
+      this.getSubscriptions().then((res) => {
+        if (res.success) {
+          this.subscriptions = res.subscriptions
+        }
+      })
     },
   },
 }
