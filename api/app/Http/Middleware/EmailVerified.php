@@ -20,7 +20,7 @@ class EmailVerified
 
         $user = auth()->check() ? auth()->user() : User::where('email', $request->email)->first();
 
-        if (!$user->hasVerifiedEmail()) {
+        if ($user && !$user->hasVerifiedEmail()) {
             return response()->json(['success' => false, 'message' => 'Your email address is not verified.'], 403);
         }
 

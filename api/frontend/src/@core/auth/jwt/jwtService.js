@@ -1,5 +1,5 @@
 import jwtDefaultConfig from "./jwtDefaultConfig";
-
+import useJwt from "@/auth/jwt/useJwt";
 export default class JwtService {
     // Will be used by this service for making API calls
     axiosIns = null;
@@ -44,28 +44,48 @@ export default class JwtService {
 
                 // if (status === 401) {
                 if (response && response.status === 401) {
-                    if (!this.isAlreadyFetchingAccessToken) {
-                        this.isAlreadyFetchingAccessToken = true;
-                        this.refreshToken().then(r => {
-                            this.isAlreadyFetchingAccessToken = false;
+                    console.log("here");
+                    // Remove userData from localStorage
+                    // ? You just removed token from localStorage. If you like, you can also make API call to backend to blacklist used token
+                    localStorage.removeItem(
+                        useJwt.jwtConfig.storageTokenKeyName
+                    );
+                    localStorage.removeItem(
+                        useJwt.jwtConfig.storageRefreshTokenKeyName
+                    );
 
-                            // Update accessToken in localStorage
-                            this.setToken(r.data.accessToken);
-                            this.setRefreshToken(r.data.refreshToken);
+                    document.cookie = "justyours_session=; Max-Age=-99999999";
 
-                            this.onAccessTokenFetched(r.data.accessToken);
-                        });
-                    }
-                    const retryOriginalRequest = new Promise(resolve => {
-                        this.addSubscriber(accessToken => {
-                            // Make sure to assign accessToken according to your response.
-                            // Check: https://pixinvent.ticksy.com/ticket/2413870
-                            // Change Authorization header
-                            originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`;
-                            resolve(this.axiosIns(originalRequest));
-                        });
-                    });
-                    return retryOriginalRequest;
+                    // Remove userData from localStorage
+                    localStorage.removeItem("userData");
+
+                    // Reset ability
+                    this.$ability.update([]);
+
+                    // Redirect to login page
+                    this.$router.push({ name: "auth-login" });
+                    // if (!this.isAlreadyFetchingAccessToken) {
+                    //     this.isAlreadyFetchingAccessToken = true;
+                    //     this.refreshToken().then(r => {
+                    //         this.isAlreadyFetchingAccessToken = false;
+
+                    //         // Update accessToken in localStorage
+                    //         this.setToken(r.data.accessToken);
+                    //         this.setRefreshToken(r.data.refreshToken);
+
+                    //         this.onAccessTokenFetched(r.data.accessToken);
+                    //     });
+                    // }
+                    // const retryOriginalRequest = new Promise(resolve => {
+                    //     this.addSubscriber(accessToken => {
+                    //         // Make sure to assign accessToken according to your response.
+                    //         // Check: https://pixinvent.ticksy.com/ticket/2413870
+                    //         // Change Authorization header
+                    //         originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`;
+                    //         resolve(this.axiosIns(originalRequest));
+                    //     });
+                    // });
+                    // return retryOriginalRequest;
                 }
                 return Promise.reject(error);
             }

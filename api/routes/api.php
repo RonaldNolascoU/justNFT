@@ -24,10 +24,12 @@ Route::group([
     'middleware' => 'api'
 ], function () {
     Route::post('/login', [AuthController::class, 'login'])->middleware('isVerified');
+    Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('isVerified');
+    Route::post('/admin/login', [AuthController::class, 'adminLogin']);
     Route::post('/signup', [AuthController::class, 'register']);
     Route::post('/signup-metamask', [AuthController::class, 'registerWithMetamask']);
-    Route::post('password/email', [ForgotPasswordController::class, 'forgot']);
-    Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
+    Route::post('password/email', [ForgotPasswordController::class, 'forgot'])->middleware('isVerified');
+    Route::post('password/reset', [ForgotPasswordController::class, 'reset'])->middleware('isVerified');
     Route::get('/users', [UserController::class, 'index']);
 });
 
@@ -36,7 +38,11 @@ Route::group([
     'prefix' => 'admin'
 ], function () {
     Route::get('/users', [UserController::class, 'listUsers']);
-    Route::get('/creator-users', [UserController::class, 'listCreators']);
+    Route::get('/users/{user}', [UserController::class, 'getUser']);
+    Route::get('/users/{user}/approve', [UserController::class, 'approveContentCreator']);
+    Route::get('/users/{user}/reject', [UserController::class, 'rejectContentCreator']);
+    Route::post('/users/{user}', [UserController::class, 'updateUser']);
+    Route::get('/creator-users', [UserController::class, 'listContentCreators']);
 });
 
 Route::group([

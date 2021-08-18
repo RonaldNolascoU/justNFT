@@ -24,41 +24,11 @@
             <b-col lg="4" class="d-flex align-items-center auth-bg px-2 p-lg-5">
                 <b-col sm="8" md="6" lg="12" class="px-xl-2 mx-auto">
                     <b-card-title class="mb-1 font-weight-bold" title-tag="h2">
-                        Welcome to Vuexy! 👋
+                        Welcome to Just Yours! 👋
                     </b-card-title>
                     <b-card-text class="mb-2">
-                        Please sign-in to your account and start the adventure
+                        Please sign-in to your account
                     </b-card-text>
-
-                    <b-alert variant="primary" show>
-                        <div class="alert-body font-small-2">
-                            <p>
-                                <small class="mr-50"
-                                    ><span class="font-weight-bold"
-                                        >Admin:</span
-                                    >
-                                    admin@demo.com | admin</small
-                                >
-                            </p>
-                            <p>
-                                <small class="mr-50"
-                                    ><span class="font-weight-bold"
-                                        >Client:</span
-                                    >
-                                    client@demo.com | client</small
-                                >
-                            </p>
-                        </div>
-                        <feather-icon
-                            v-b-tooltip.hover.left="
-                                'This is just for ACL demo purpose'
-                            "
-                            icon="HelpCircleIcon"
-                            size="18"
-                            class="position-absolute"
-                            style="top: 10; right: 10;"
-                        />
-                    </b-alert>
 
                     <!-- form -->
                     <validation-observer ref="loginForm" #default="{invalid}">
@@ -162,36 +132,6 @@
                             </b-button>
                         </b-form>
                     </validation-observer>
-
-                    <b-card-text class="text-center mt-2">
-                        <span>New on our platform? </span>
-                        <b-link :to="{ name: 'auth-register' }">
-                            <span>&nbsp;Create an account</span>
-                        </b-link>
-                    </b-card-text>
-
-                    <!-- divider -->
-                    <div class="divider my-2">
-                        <div class="divider-text">
-                            or
-                        </div>
-                    </div>
-
-                    <!-- social buttons -->
-                    <div class="auth-footer-btn d-flex justify-content-center">
-                        <b-button variant="facebook" href="javascript:void(0)">
-                            <feather-icon icon="FacebookIcon" />
-                        </b-button>
-                        <b-button variant="twitter" href="javascript:void(0)">
-                            <feather-icon icon="TwitterIcon" />
-                        </b-button>
-                        <b-button variant="google" href="javascript:void(0)">
-                            <feather-icon icon="MailIcon" />
-                        </b-button>
-                        <b-button variant="github" href="javascript:void(0)">
-                            <feather-icon icon="GithubIcon" />
-                        </b-button>
-                    </div>
                 </b-col>
             </b-col>
             <!-- /Login-->
@@ -255,8 +195,8 @@ export default {
     data() {
         return {
             status: "",
-            password: "admin",
-            userEmail: "admin@demo.com",
+            password: null,
+            userEmail: null,
             sideImg: require("@/assets/images/pages/login-v2.svg"),
 
             // validation rules
@@ -289,37 +229,40 @@ export default {
                             password: this.password
                         })
                         .then(response => {
-                            const { userData } = response.data;
-                            useJwt.setToken(response.data.accessToken);
-                            useJwt.setRefreshToken(response.data.refreshToken);
+                            const { user, token, success } = response.data;
+                            console.log(user, "data");
+                            if (user && user.role_id != 0) return;
+
+                            useJwt.setToken(token);
+                            useJwt.setRefreshToken(token);
                             localStorage.setItem(
                                 "userData",
-                                JSON.stringify(userData)
+                                JSON.stringify({
+                                    ...user,
+                                    ability: [
+                                        { action: "manage", subject: "all" }
+                                    ]
+                                })
                             );
-                            this.$ability.update(userData.ability);
-
-                            // ? This is just for demo purpose as well.
-                            // ? Because we are showing eCommerce app's cart items count in navbar
-                            this.$store.commit(
-                                "app-ecommerce/UPDATE_CART_ITEMS_COUNT",
-                                userData.extras.eCommerceCartItemsCount
-                            );
+                            this.$ability.update([
+                                {
+                                    action: "manage",
+                                    subject: "all"
+                                }
+                            ]);
 
                             // ? This is just for demo purpose. Don't think CASL is role based in this case, we used role in if condition just for ease
                             this.$router
-                                .replace(
-                                    getHomeRouteForLoggedInUser(userData.role)
-                                )
+                                .replace(getHomeRouteForLoggedInUser("admin"))
                                 .then(() => {
                                     this.$toast({
                                         component: ToastificationContent,
                                         position: "top-right",
                                         props: {
-                                            title: `Welcome ${userData.fullName ||
-                                                userData.username}`,
+                                            title: `Welcome Admin`,
                                             icon: "CoffeeIcon",
                                             variant: "success",
-                                            text: `You have successfully logged in as ${userData.role}. Now you can start to explore!`
+                                            text: `You have successfully logged in!`
                                         }
                                     });
                                 });

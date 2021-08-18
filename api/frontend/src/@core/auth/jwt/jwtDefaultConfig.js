@@ -2,9 +2,9 @@ export default {
     // Base URL
     baseUrl: "http://localhost:8000/api",
     // Endpoints
-    loginEndpoint: "/jwt/login",
+    loginEndpoint: "/admin/login",
     registerEndpoint: "/jwt/register",
-    refreshEndpoint: "/jwt/refresh-token",
+    refreshEndpoint: "/refresh",
     logoutEndpoint: "/jwt/logout",
 
     // This will be prefixed in authorization header with token

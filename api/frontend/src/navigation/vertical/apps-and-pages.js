@@ -70,12 +70,12 @@ export default [
         title: "Users",
         icon: "UserIcon",
         route: "apps-users-list"
-    },
-    {
-        title: "Content Creators",
-        icon: "ShoppingCartIcon",
-        route: "apps-creators-list"
     }
+    // {
+    //     title: "Content Creators",
+    //     icon: "ShoppingCartIcon",
+    //     route: "apps-creators-list"
+    // }
     // {
     //   title: 'Pages',
     //   icon: 'FileIcon',

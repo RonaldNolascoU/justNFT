@@ -25,14 +25,9 @@ const router = new VueRouter({
         return { x: 0, y: 0 };
     },
     routes: [
-        { path: "/", redirect: { name: "apps-users-list" } },
+        { path: "/", redirect: "/apps/users/list" },
         ...apps,
-        ...dashboard,
         ...pages,
-        ...chartsMaps,
-        ...formsTable,
-        ...uiElements,
-        ...others,
         {
             path: "*",
             redirect: "error-404"
@@ -42,11 +37,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, _, next) => {
     const isLoggedIn = isUserLoggedIn();
+    console.log(isLoggedIn);
 
     if (!canNavigate(to)) {
         // Redirect to login if not logged in
-        if (!isLoggedIn) return next({ name: "auth-login" });
-
+        if (!isLoggedIn) return next("/login");
         // If logged in => not authorized
         return next({ name: "misc-not-authorized" });
     }
@@ -54,7 +49,7 @@ router.beforeEach((to, _, next) => {
     // Redirect if logged in
     if (to.meta.redirectIfLoggedIn && isLoggedIn) {
         const userData = getUserData();
-        next(getHomeRouteForLoggedInUser(userData ? userData.role : null));
+        next(getHomeRouteForLoggedInUser(userData ? "admin" : null));
     }
 
     return next();

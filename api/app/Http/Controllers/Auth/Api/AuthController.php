@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Traits\AdminPortalTrait;
 
 class AuthController extends Controller
 {
 
+    use AdminPortalTrait;
     /**
      * Get the token array structure.
      *
@@ -107,7 +109,7 @@ class AuthController extends Controller
         }
 
         if (!$token = auth()->attempt($validator->validated())) {
-            return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            return response()->json(['success' => false, 'error' => 'Invalid Credentials'], 422);
         }
 
         return $this->createNewToken($token);

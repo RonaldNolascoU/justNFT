@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use App\Http\Traits\AdminPortalTrait;
 
 class UserController extends Controller
 {
+
+    use AdminPortalTrait;
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $creators = User::where('role_id', 2)->select('name', 'username', 'role_id', 'profile_img', 'wallet_address', 'rate')->get();
+        $creators = User::where('role_id', 2)->select('name', 'email', 'username', 'role_id', 'profile_img', 'wallet_address', 'rate')->get();
 
         return response()->json(['success' => true, 'creators' => $creators]);
     }

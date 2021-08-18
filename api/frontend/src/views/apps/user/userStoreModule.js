@@ -9,7 +9,7 @@ export default {
         fetchUsers(ctx, queryParams) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get("/users", { params: queryParams })
+                    .get("/admin/users", { params: queryParams })
                     .then(response => resolve(response))
                     .catch(error => reject(error));
             });
@@ -17,7 +17,7 @@ export default {
         fetchUser(ctx, { id }) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/apps/user/users/${id}`)
+                    .get(`/admin/users/${id}`)
                     .then(response => resolve(response))
                     .catch(error => reject(error));
             });
@@ -26,6 +26,22 @@ export default {
             return new Promise((resolve, reject) => {
                 axios
                     .post("/apps/user/users", { user: userData })
+                    .then(response => resolve(response))
+                    .catch(error => reject(error));
+            });
+        },
+        approveCreator(ctx, { id }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/admin/users/${id}/approve`)
+                    .then(response => resolve(response))
+                    .catch(error => reject(error));
+            });
+        },
+        rejectCreator(ctx, { id }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/admin/users/${id}/reject`)
                     .then(response => resolve(response))
                     .catch(error => reject(error));
             });

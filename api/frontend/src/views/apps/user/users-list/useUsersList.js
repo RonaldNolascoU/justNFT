@@ -14,23 +14,17 @@ export default function useUsersList() {
 
     // Table Handlers
     const tableColumns = [
-        { key: "user", sortable: true },
+        { key: "name", sortable: true },
+        { key: "username", sortable: true },
         { key: "email", sortable: true },
         { key: "role", sortable: true },
-        {
-            key: "currentPlan",
-            label: "Plan",
-            formatter: title,
-            sortable: true
-        },
-        { key: "status", sortable: true },
         { key: "actions" }
     ];
     const perPage = ref(10);
     const totalUsers = ref(0);
     const currentPage = ref(1);
     const perPageOptions = [10, 25, 50, 100];
-    const searchQuery = ref("");
+    const searchQuery = ref(null);
     const sortBy = ref("id");
     const isSortDirDesc = ref(true);
     const roleFilter = ref(null);
@@ -72,19 +66,33 @@ export default function useUsersList() {
         store
             .dispatch("app-user/fetchUsers", {
                 q: searchQuery.value,
-                perPage: perPage.value,
                 page: currentPage.value,
                 sortBy: sortBy.value,
-                sortDesc: isSortDirDesc.value,
-                role: roleFilter.value,
-                plan: planFilter.value,
-                status: statusFilter.value
+                sortDesc: isSortDirDesc.value
             })
             .then(response => {
-                const { users, total } = response.data;
+                const { users } = response.data;
 
-                callback(users);
-                totalUsers.value = total;
+                users &&
+                    users.data.map(user => {
+                        switch (user.role_id) {
+                            case 0:
+                                user.role = "Admin";
+                                break;
+                            case 1:
+                                user.role = "User";
+                                break;
+                            case 2:
+                                user.role = "Content Creator";
+                                break;
+                            case 3:
+                                user.role = "Metamask";
+                                break;
+                        }
+                    });
+
+                callback(users ? users.data : []);
+                totalUsers.value = users ? users.total : 0;
             })
             .catch(() => {
                 toast({
