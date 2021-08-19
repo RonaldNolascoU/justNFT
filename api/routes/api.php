@@ -42,6 +42,8 @@ Route::group([
     Route::get('/users/{user}/approve', [UserController::class, 'approveContentCreator']);
     Route::get('/users/{user}/reject', [UserController::class, 'rejectContentCreator']);
     Route::post('/users/{user}', [UserController::class, 'updateUser']);
+    Route::delete('/users/{user}', [UserController::class, 'delete']);
+    
     Route::get('/creator-users', [UserController::class, 'listContentCreators']);
 });
 

@@ -54,6 +54,11 @@ export default {
     max-height: 110px;
     height: 110px;
   }
+
+  img {
+    max-height: 110px;
+    height: 110px;
+  }
 }
 
 .absolute__profile_pic {

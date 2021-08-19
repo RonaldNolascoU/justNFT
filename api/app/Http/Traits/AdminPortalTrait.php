@@ -2,16 +2,29 @@
 
 namespace App\Http\Traits;
 
+use Validator;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Validator;
 
 trait AdminPortalTrait
 {
 
     public function listUsers(Request $request)
     {
-        $users = User::search($request->q)->paginate(10);
+        $users = User::search($request->q);
+
+        $roles = [];
+
+        if ($request->filter) {
+            $role = Role::where('role', $request->filter)->where('role', '!=', 'admin')->first();
+            $role = $role->id;
+            $users = $users->where('role_id', $role);
+        } else {
+            $users = $users->whereIn('role_id', [1,2,3]);
+        }
+
+        $users = $users->paginate(10);
 
         return response()->json(['success' => true, 'users' => $users]);
     }
@@ -58,6 +71,7 @@ trait AdminPortalTrait
     public function approveContentCreator(User $user)
     {
         $user->approved = true;
+        $user->role_id = 2;
         $user->save();
 
         return response()->json(['success' => true]);
@@ -66,8 +80,22 @@ trait AdminPortalTrait
     public function rejectContentCreator(User $user)
     {
         $user->approved = false;
+        $user->role_id = 1;
         $user->save();
 
         return response()->json(['success' => true]);
+    }
+
+    public function delete(User $user)
+    {
+        $success = false;
+        try {
+            $user->delete();
+            $success = true;
+        } catch (\Exception $error) {
+            $success = false;
+        }
+
+        return response()->json(['success' => $success]);
     }
 }

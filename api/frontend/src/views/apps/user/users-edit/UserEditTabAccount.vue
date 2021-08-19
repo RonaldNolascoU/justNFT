@@ -5,7 +5,10 @@
             <template #aside>
                 <b-avatar
                     ref="previewEl"
-                    :src="userData.avatar"
+                    :src="
+                        'https://d8v7xo28xqxp.cloudfront.net/' +
+                            userData.profile_img
+                    "
                     :text="avatarText(userData.fullName)"
                     :variant="`light-${resolveUserRoleVariant(userData.role)}`"
                     size="90px"
@@ -78,6 +81,7 @@
                 <b-col cols="12" md="4">
                     <b-form-group label="Wallet Address" label-for="address">
                         <b-form-input
+                            disabled
                             id="address"
                             v-model="userData.wallet_address"
                         />
@@ -96,10 +100,10 @@
         </b-button>
         <b-button
             variant="outline-secondary"
-            type="reset"
+            @click="$router.back()"
             :block="$store.getters['app/currentBreakPoint'] === 'xs'"
         >
-            Reset
+            Back
         </b-button>
     </div>
 </template>

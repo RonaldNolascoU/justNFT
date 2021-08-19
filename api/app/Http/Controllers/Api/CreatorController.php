@@ -40,6 +40,7 @@ class CreatorController extends Controller
                     'id_img_2' => $idsImgPaths[1],
                     'profile_img' => $profileImgPath,
                     'approved' => false,
+                    'creator_request_send' => true
                 ]
             );
 
@@ -72,8 +73,8 @@ class CreatorController extends Controller
     public function saveImg($image)
     {
         $filename = time() . '.' . str_replace(' ', '-', $image->getClientOriginalName());
-        $path = "images/$filename";
-        \Storage::disk('local')->put($path, file_get_contents($image));
+        $path = "images/creators/$filename";
+        \Storage::disk('s3')->put($path, file_get_contents($image));
 
         return $path;
     }

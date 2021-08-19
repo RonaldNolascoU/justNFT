@@ -14,10 +14,10 @@ export default function useUsersList() {
 
     // Table Handlers
     const tableColumns = [
-        { key: "name", sortable: true },
-        { key: "username", sortable: true },
-        { key: "email", sortable: true },
-        { key: "role", sortable: true },
+        { key: "name", sortable: false },
+        { key: "username", sortable: false },
+        { key: "email", sortable: false },
+        { key: "role", sortable: false },
         { key: "actions" }
     ];
     const perPage = ref(10);
@@ -30,6 +30,7 @@ export default function useUsersList() {
     const roleFilter = ref(null);
     const planFilter = ref(null);
     const statusFilter = ref(null);
+    const allUsers = ref([]);
 
     const dataMeta = computed(() => {
         const localItemsCount = refUserListTable.value
@@ -68,7 +69,8 @@ export default function useUsersList() {
                 q: searchQuery.value,
                 page: currentPage.value,
                 sortBy: sortBy.value,
-                sortDesc: isSortDirDesc.value
+                sortDesc: isSortDirDesc.value,
+                filter: roleFilter.value
             })
             .then(response => {
                 const { users } = response.data;
@@ -92,6 +94,7 @@ export default function useUsersList() {
                     });
 
                 callback(users ? users.data : []);
+                allUsers.value = users ? users.data : [];
                 totalUsers.value = users ? users.total : 0;
             })
             .catch(() => {
@@ -156,6 +159,8 @@ export default function useUsersList() {
         // Extra Filters
         roleFilter,
         planFilter,
-        statusFilter
+        statusFilter,
+
+        allUsers
     };
 }

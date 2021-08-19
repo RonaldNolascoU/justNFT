@@ -3,7 +3,10 @@
     <div class="pl-4 sidebar xl:pl-3">
       <div class="flex flex-col items-start 2xl:items-center">
         <GeneralAvatar
-          image="/images/profile.png"
+          :image="
+            $store.state.auth.user.profile_img &&
+            `${S3Bucket}/${$store.state.auth.user.profile_img}`
+          "
           v-if="$store.state.auth.user.role_id == 2"
         />
 
@@ -135,6 +138,11 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    S3Bucket() {
+      return 'https://d8v7xo28xqxp.cloudfront.net'
+    },
   },
   methods: {
     toggleDarkMode() {

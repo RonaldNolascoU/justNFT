@@ -75,11 +75,12 @@
                     </b-button>
                     <b-button
                         variant="outline-secondary"
+                        @click="$router.back()"
                         :block="
                             $store.getters['app/currentBreakPoint'] === 'xs'
                         "
                     >
-                        Reset
+                        Back
                     </b-button>
                 </b-col>
             </b-row>

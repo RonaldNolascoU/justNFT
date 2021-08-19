@@ -45,6 +45,14 @@ export default {
                     .then(response => resolve(response))
                     .catch(error => reject(error));
             });
+        },
+        deleteUser(ctx, { id }) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .delete(`/admin/users/${id}`)
+                    .then(response => resolve(response))
+                    .catch(error => reject(error));
+            });
         }
     }
 };

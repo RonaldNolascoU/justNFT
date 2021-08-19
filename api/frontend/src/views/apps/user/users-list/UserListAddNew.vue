@@ -101,46 +101,6 @@
                         </b-form-group>
                     </validation-provider>
 
-                    <!-- Company -->
-                    <validation-provider
-                        #default="validationContext"
-                        name="Contact"
-                        rules="required"
-                    >
-                        <b-form-group label="Contact" label-for="contact">
-                            <b-form-input
-                                id="contact"
-                                v-model="userData.contact"
-                                :state="getValidationState(validationContext)"
-                                trim
-                            />
-
-                            <b-form-invalid-feedback>
-                                {{ validationContext.errors[0] }}
-                            </b-form-invalid-feedback>
-                        </b-form-group>
-                    </validation-provider>
-
-                    <!-- Company -->
-                    <validation-provider
-                        #default="validationContext"
-                        name="Company"
-                        rules="required"
-                    >
-                        <b-form-group label="Company" label-for="company">
-                            <b-form-input
-                                id="company"
-                                v-model="userData.company"
-                                :state="getValidationState(validationContext)"
-                                trim
-                            />
-
-                            <b-form-invalid-feedback>
-                                {{ validationContext.errors[0] }}
-                            </b-form-invalid-feedback>
-                        </b-form-group>
-                    </validation-provider>
-
                     <!-- Country -->
                     <validation-provider
                         #default="validationContext"

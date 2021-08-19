@@ -54,7 +54,7 @@ export default class JwtService {
                         useJwt.jwtConfig.storageRefreshTokenKeyName
                     );
 
-                    document.cookie = "justyours_session=; Max-Age=-99999999";
+                    document.cookie = "name=justyours_session;max-age=0";
 
                     // Remove userData from localStorage
                     localStorage.removeItem("userData");

@@ -28,7 +28,12 @@
                             />
                         </div>
                     </b-col>
-                    <b-col cols="12" md="6" class="d-flex justify-content-end">
+                    <b-col
+                        cols="12"
+                        md="6"
+                        class="d-flex justify-content-end"
+                        v-if="false"
+                    >
                         <b-button
                             variant="primary"
                             @click="isAddNewUserSidebarActive = true"
@@ -52,8 +57,18 @@
                 :sort-desc.sync="isSortDirDesc"
             >
                 <!-- Column: User -->
+
+                <template #cell(name)="data">
+                    <span v-if="data.item.role_id == 2">{{
+                        data.item.name
+                    }}</span>
+                    <span v-else> - </span>
+                </template>
                 <template #cell(username)="data">
-                    <b-media vertical-align="center">
+                    <b-media
+                        vertical-align="center"
+                        v-if="data.item.role_id == 2"
+                    >
                         <template #aside>
                             <b-avatar
                                 size="32"
@@ -83,6 +98,7 @@
                             >@{{ data.item.username }}</small
                         >
                     </b-media>
+                    <span v-else> - </span>
                 </template>
 
                 <!-- Column: Status -->
@@ -134,8 +150,14 @@
                             <span class="align-middle ml-50">Edit</span>
                         </b-dropdown-item>
 
-                        <b-dropdown-item>
-                            <feather-icon icon="TrashIcon" />
+                        <b-dropdown-item
+                            @click="selectUser(data.item)"
+                            v-b-modal.modal-no-backdrop
+                        >
+                            <feather-icon
+                                icon="TrashIcon"
+                                @click="selectUser(data.item)"
+                            />
                             <span class="align-middle ml-50">Delete</span>
                         </b-dropdown-item>
                     </b-dropdown>
@@ -186,6 +208,19 @@
                 </b-row>
             </div>
         </b-card>
+        <b-modal
+            v-if="selectedUser"
+            id="modal-no-backdrop"
+            no-close-on-backdrop
+            content-class="shadow"
+            :title="`Warning`"
+            ok-title="Yes, delete"
+            @ok="deleteUser"
+        >
+            <b-card-text>
+                Are you sure you want to delete this user?
+            </b-card-text>
+        </b-modal>
     </div>
 </template>
 
@@ -203,16 +238,21 @@ import {
     BBadge,
     BDropdown,
     BDropdownItem,
-    BPagination
+    BPagination,
+    BCardText
 } from "bootstrap-vue";
 import vSelect from "vue-select";
 import store from "@/store";
+import router from "@/router";
 import { ref, onUnmounted } from "@vue/composition-api";
 import { avatarText } from "@core/utils/filter";
 import UsersListFilters from "./UsersListFilters.vue";
 import useUsersList from "./useUsersList";
 import userStoreModule from "../userStoreModule";
 import UserListAddNew from "./UserListAddNew.vue";
+
+import { useToast } from "vue-toastification/composition";
+import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
 
 export default {
     components: {
@@ -232,11 +272,13 @@ export default {
         BDropdown,
         BDropdownItem,
         BPagination,
+        BCardText,
 
         vSelect
     },
     setup() {
         const USER_APP_STORE_MODULE_NAME = "app-user";
+        const toast = useToast();
 
         // Register module
         if (!store.hasModule(USER_APP_STORE_MODULE_NAME))
@@ -251,8 +293,7 @@ export default {
         const isAddNewUserSidebarActive = ref(false);
 
         const roleOptions = [
-            { label: "Admin", value: "admin" },
-            { label: "User", value: "user" },
+            { label: "User", value: "regular" },
             { label: "Content Creator", value: "creator" },
             { label: "Metamask", value: "metamask" }
         ];
@@ -277,7 +318,8 @@ export default {
             resolveUserStatusVariant,
 
             // Extra Filters
-            roleFilter
+            roleFilter,
+            allUsers
         } = useUsersList();
 
         return {
@@ -308,8 +350,49 @@ export default {
             roleOptions,
 
             // Extra Filters
-            roleFilter
+            roleFilter,
+
+            toast,
+            allUsers
         };
+    },
+    data() {
+        return {
+            selectedUser: null
+        };
+    },
+    methods: {
+        showToast(title, icon, variant) {
+            this.toast({
+                component: ToastificationContent,
+                props: {
+                    title,
+                    icon,
+                    variant
+                }
+            });
+        },
+        selectUser(user) {
+            this.selectedUser = user;
+        },
+        deleteUser() {
+            store
+                .dispatch(`app-user/deleteUser`, {
+                    id: this.selectedUser._id
+                })
+                .then(response => {
+                    const { user, success } = response.data;
+                    if (success) {
+                        this.showToast("Deleted", "CheckIcon", "success");
+                        this.refetchData();
+                    } else {
+                        this.showToast("Error", "AlertTriangleIcon", "danger");
+                    }
+                })
+                .catch(error => {
+                    this.showToast("Error", "AlertTriangleIcon", "danger");
+                });
+        }
     }
 };
 </script>
