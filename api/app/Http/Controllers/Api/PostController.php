@@ -12,6 +12,11 @@ class PostController extends Controller
 {
     public function index()
     {
+        /**
+         *  TODO: If user has subscriptions, show only posts when he's subscribed. If the user is not subscribed to anyone, show only "JustYours" account post
+         * "JustYours" is the main account
+         * */
+
         $userSubscriptions = auth()->user()->subscriptions;
         $creatorIds =  $userSubscriptions->pluck('creator_id');
         $posts = Post::with(['likes', 'comments', 'saves', 'creator' => function ($query) {
@@ -58,7 +63,10 @@ class PostController extends Controller
 
     public function listPostSaved()
     {
-        $posts = Post::has('saves')->with(['likes', 'comments', 'saves', 'creator' => function ($query) {
+        // TODO: Get only saved posts by user
+        $posts = Post::has('saves')->with(['likes', 'comments', 'saves' => function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        }, 'creator' => function ($query) {
             $query->select('name', 'username');
         }, 'comments.user' => function ($query) {
             $query->select('name', 'username');
