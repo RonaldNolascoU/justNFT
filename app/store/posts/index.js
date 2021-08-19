@@ -16,4 +16,34 @@ export const actions = {
         })
     })
   },
+  getSavedPosts({ commit }) {
+    return new Promise((resolve, reject) => {
+      PostService.getSavedPosts()
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  savePost({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      PostService.savePost(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
 }

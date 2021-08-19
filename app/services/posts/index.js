@@ -6,5 +6,11 @@ class PostService {
   getPosts() {
     return HTTP.get(`posts`)
   }
+  getSavedPosts() {
+    return HTTP.get(`posts/posts-saved`)
+  }
+  savePost(payload) {
+    return HTTP.post(`posts/save-post`, payload)
+  }
 }
 export default new PostService()

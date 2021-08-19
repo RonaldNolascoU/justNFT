@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CreatorController;
 use App\Http\Controllers\Auth\Api\AuthController;
+use App\Http\Controllers\Api\SuggestionController;
 use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 
@@ -63,6 +64,12 @@ Route::group([
     });
 
     Route::group([
+        'prefix' => 'suggestions'
+    ], function () {
+        Route::get('/', [SuggestionController::class, 'index']);
+    });
+
+    Route::group([
         'prefix' => 'subscriptions'
     ], function () {
         Route::get('/', [SubscriptionController::class, 'index']);
@@ -73,7 +80,9 @@ Route::group([
         'prefix' => 'posts'
     ], function () {
         Route::get('/', [PostController::class, 'index']);
+        Route::get('/posts-saved', [PostController::class, 'listPostSaved']);
         Route::get('/{post}', [PostController::class, 'show']);
+        Route::post('/save-post', [PostController::class, 'savePost']);
     });
 
     Route::group([
