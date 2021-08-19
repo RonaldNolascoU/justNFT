@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import stringToSlug from '@/scripts/slug.js'
 export default {
   name: 'Suggestions',
@@ -67,7 +68,11 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.getSuggestions()
+  },
   methods: {
+    ...mapActions('suggestions', ['getSuggestions']),
     nametoSlug(str) {
       return stringToSlug(str)
     },

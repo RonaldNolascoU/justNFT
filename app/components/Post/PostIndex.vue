@@ -13,7 +13,7 @@
     <!-- Image -->
 
     <!-- Footer -->
-    <PostSocialContainer :post="post" />
+    <PostSocialContainer :post="post" @reloadSaved="$emit('reloadSaved')" />
     <!-- Footer -->
 
     <div

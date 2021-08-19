@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <PostFeed mode="saved" />
 </template>
 
 <script>

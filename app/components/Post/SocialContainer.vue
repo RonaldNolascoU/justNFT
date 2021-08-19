@@ -17,9 +17,10 @@
       </div>
       <div
         class="flex-auto font-semibold text-right cursor-pointer dark:text-white"
+        @click="savingPost(post._id)"
       >
         {{ $t('home.social.save') }}
-        <i class="fas fa-bookmark save"></i>
+        <i :class="[isSaved ? 'fas' : 'far', 'fa-bookmark save']"></i>
       </div>
     </div>
     <!-- Comment -->
@@ -106,6 +107,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   props: {
     post: {
@@ -115,15 +117,28 @@ export default {
   data() {
     return {
       comment: null,
+      isSaved: false,
     }
   },
+  mounted() {
+    this.isSaved = !!this.post.saves.length
+  },
   methods: {
+    ...mapActions('posts', ['savePost']),
     addComment(post) {
       post.commentsArray.push({
         content: this.comment,
         user: { img: '/images/post.png' },
       })
       this.comment = null
+    },
+    savingPost(id) {
+      this.savePost({ id }).then((res) => {
+        if (res.success) {
+          this.isSaved = !this.isSaved
+          this.$emit('reloadSaved', this.isSaved)
+        }
+      })
     },
   },
 }

@@ -2,9 +2,9 @@
   <div class="relative my-8">
     <div class="relative">
       <vs-card actionable class="w-full">
-        <div slot="media">
+        <div class="cover__photo" slot="media">
           <img
-            src="/images/subscriptions/3.png"
+            src="/images/default_header.png"
             :alt="subscription.name"
             :class="!subscription.active ? 'filter grayscale' : null"
           />
@@ -19,21 +19,21 @@
     </div>
     <div class="flex justify-between -mt-4">
       <div class="personal__data">
-        <!-- <h3 class="font-semibold text-pink fs-24">
+        <h3 class="font-semibold text-pink fs-24">
           <nuxt-link
-            :to="nametoSlug(subscription.name)"
+            :to="nametoSlug(subscription.creator.name)"
             class="hover:underline dark:hover:text-primary"
-            >{{ subscription.name }}</nuxt-link
+            >{{ subscription.creator.name }}</nuxt-link
           >
-        </h3> -->
+        </h3>
         <span class="font-semibold text-blue fs-16">{{
           subscription.active
-            ? $t(`subscriptions.${subscription.i18n}`) +
+            ? $t(`subscriptions.subscribedSince`) +
               ' ' +
-              subscription.subscribed_at
-            : $t(`subscriptions.${subscription.i18n}`) +
+              formatDate(subscription.created_at)
+            : $t(`subscriptions.expiredSince`) +
               ' ' +
-              subscription.expired_at
+              formatDate(subscription.expire_date)
         }}</span>
       </div>
 
@@ -112,8 +112,15 @@ export default {
     nametoSlug(str) {
       return stringToSlug(str)
     },
+    formatDate(date) {
+      return this.$dateFns.format(new Date(date), 'do MMM')
+    },
   },
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.cover__photo {
+  max-height: 200px;
+}
+</style>
