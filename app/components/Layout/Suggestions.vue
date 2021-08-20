@@ -8,28 +8,39 @@
     </p>
     <div id="scroll-suggestion" class="xl:h-screen xl:overflow-y-scroll">
       <div
-        v-for="(suggestion, index) in suggestions"
+        v-for="(suggestion, index) in suggestionsArray"
         :key="index"
         class="mt-7 mb-5 xl:mb-16 pb-0.5"
       >
         <vs-card actionable class="cardx">
           <div slot="media" class="relative">
-            <img :src="`/images/${suggestion.img}`" />
+            <img
+              class="suggested-img-card"
+              :src="`${
+                suggestion.profile_img
+                  ? $store.state.general.S3Bucket + '/' + suggestion.profile_img
+                  : '/images/default_header.png'
+              }`"
+            />
             <div class="absolute flex justify-center w-full center top-80">
               <vs-button block class="w-full truncate pills" color="#c53761">
                 <nuxt-link
                   class="block text-white truncate fs-20"
-                  :to="nametoSlug(suggestion.name)"
+                  :to="nameToSlug(suggestion.name)"
                 >
-                  {{ suggestion.name }} - {{ suggestion.price }} $JUST
+                  {{ suggestion.name }} -
+                  {{
+                    suggestion.price > 0 ? suggestion.price + ' $JUST' : 'Free'
+                  }}
                 </nuxt-link>
               </vs-button>
             </div>
           </div>
         </vs-card>
         <div
-          v-if="suggestions.length == index + 1"
+          v-if="suggestionsArray.length == index + 1"
           class="flex justify-center xl:my-16 xl:pb-24"
+          @click="viewAll = !viewAll"
         >
           <vs-button class="pills" color="#c53761" block>
             <span class="fs-20 btn-letter-spacing"
@@ -49,32 +60,31 @@ export default {
   name: 'Suggestions',
   data() {
     return {
-      suggestions: [
-        {
-          name: 'Lana Fernandes',
-          price: 12,
-          img: 'suggestion3.png',
-        },
-        {
-          name: 'Sarina Izvyk',
-          price: 7,
-          img: 'suggestion2.png',
-        },
-        {
-          name: 'Mariska XX',
-          price: 5,
-          img: 'suggestion1.png',
-        },
-      ],
+      viewAll: false,
+      suggestions: [],
+      suggestionsTemp: [],
     }
   },
   mounted() {
-    this.getSuggestions()
+    this.gettingSuggestions()
+  },
+  computed: {
+    suggestionsArray() {
+      return this.viewAll ? this.suggestions : this.suggestionsTemp
+    },
   },
   methods: {
     ...mapActions('suggestions', ['getSuggestions']),
-    nametoSlug(str) {
+    nameToSlug(str) {
       return stringToSlug(str)
+    },
+    gettingSuggestions() {
+      this.getSuggestions().then((res) => {
+        if (res.success) {
+          this.suggestions = res.suggestions
+          this.suggestionsTemp = res.suggestions.slice(0, 3).map((i) => i)
+        }
+      })
     },
   },
 }

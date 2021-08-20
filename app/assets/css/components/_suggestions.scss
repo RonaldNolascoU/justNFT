@@ -14,4 +14,14 @@
       height: auto;
     }
   }
+  .suggested-img-card {
+    @media (min-width: 1536px) {
+      max-height: 250px;
+    }
+    @media (min-width: 600px) {
+      max-height: 300px;
+    }
+    object-fit: cover;
+    max-height: 200px;
+  }
 }

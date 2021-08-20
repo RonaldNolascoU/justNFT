@@ -11,6 +11,7 @@ export const state = () => ({
   },
   loading: true,
   returnTo: null,
+  S3Bucket: 'https://d8v7xo28xqxp.cloudfront.net',
 })
 
 export const getters = {
