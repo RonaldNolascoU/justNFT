@@ -43,7 +43,8 @@ class SubscriptionController extends Controller
             $request->merge([
                 'user_id' => auth()->user()->id,
                 'start_date' => now()->format('Y-m-d h:i:s'),
-                'expire_date' => Carbon::now()->addMonth(1)->format('Y-m-d h:i:s')
+                'expire_date' => Carbon::now()->addMonth(1)->format('Y-m-d h:i:s'),
+                // add pending status and send notification
             ]);
 
             if ($request->transactionId == 'free') {
@@ -51,6 +52,7 @@ class SubscriptionController extends Controller
                 return response()->json(['success' => $subscription]);
             }
 
+            // Dispatch queue
             if (isTransactionValid($request->wallet_address, $request->transactionId)) {
                 $subscription = Subscription::create($request->all());
                 return response()->json(['success' => $subscription]);
