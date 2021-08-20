@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\URL;
+use App\Notifications\WelcomeNotification;
 
 class VerificationController extends Controller
 {

@@ -74,6 +74,7 @@ Route::group([
     ], function () {
         Route::get('/', [SubscriptionController::class, 'index']);
         Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
+        Route::post('updateRate', [SubscriptionController::class, 'updateRate']);
     });
 
     Route::group([

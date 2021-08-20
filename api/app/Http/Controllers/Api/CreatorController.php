@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContentCreatorRequest;
+use App\Notifications\PendingApprovalNotification;
 
 class CreatorController extends Controller
 {
@@ -47,6 +48,8 @@ class CreatorController extends Controller
             $all['username'] = strtolower($all['username']);
 
             User::where('email', auth()->user()->email)->update($all);
+
+            $user->notify(new PendingApprovalNotification($user));
 
             return response()->json(
                 [

@@ -31,4 +31,19 @@ export const actions = {
         })
     })
   },
+  updateRate({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      SubscriptionService.updateRate(payload)
+        .then(({ data }) => {
+          if (!data.success) {
+            return reject(data.msg)
+          }
+
+          resolve(data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
 }

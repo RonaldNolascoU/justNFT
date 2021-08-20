@@ -7,7 +7,7 @@
         Account
       </h1>
 
-      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200" v-if="false">
+      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200" v-if="true">
         <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
           <div class="sm:col-span-6">
             <h3 class="text-xl font-medium text-blue-gray-900 dark:text-white">
@@ -293,29 +293,6 @@
         </div>
 
         <div class="pt-8 grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
-          <div class="sm:col-span-6">
-            <h3 class="text-xl font-medium text-blue-gray-900 dark:text-white">
-              Subscription Details
-            </h3>
-            <p class="mt-1 text-sm text-blue-gray-500 dark:text-gray">
-              This information will be displayed publicly so be careful what you
-              share.
-            </p>
-          </div>
-
-          <div class="sm:col-span-6 dark:bg-input">
-            <label
-              for="email-address"
-              class="block text-sm font-medium text-blue-gray-900 dark:text-white"
-            >
-              Subscription Rate
-            </label>
-            <input
-              type="text"
-              class="pl-2 mt-1 block w-full border-blue-gray-300 dark:text-white dark:border-none rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-
           <p class="text-sm text-blue-gray-500 dark:text-white sm:col-span-6">
             This account was created on
             <time datetime="2017-01-05T20:35:40"

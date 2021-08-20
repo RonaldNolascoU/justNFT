@@ -132,5 +132,8 @@
   },
   "cookies": {
     "disclaimer": "Usamos cookies para brindarle la mejor experiencia. Si acepta nuestro uso de cookies, continúe utilizando nuestro sitio. Haga clic aquí para consultar nuestra política de cookies. Nuestra Política de privacidad se ha actualizado, si está de acuerdo con nuestra política, continúe en nuestro sitio."
+  },
+  "general" : {
+    "save": "Guardar"
   }
 }

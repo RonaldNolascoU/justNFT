@@ -43,12 +43,10 @@
             class="text-left fs-24 grid grid-cols-2 gap-2 items-center text-secondary dark:text-active hover:text-black dark:hover:text-white"
           >
             <i
-              v-if="route.name !== 'dark'"
               :class="route.icon"
               class="text-secondary dark:text-active hover:text-black dark:hover:text-white"
             />
             <NuxtLink
-              v-if="route.name !== 'dark'"
               :to="route.to"
               class="flex items-center text-xl text-secondary dark:text-active hover:text-black dark:hover:text-white sidebar__route_link ml-2"
             >
@@ -56,29 +54,29 @@
                 {{ $t(`sidebar.${route.i18n}`) }}
               </span>
             </NuxtLink>
-            <!-- Dark Mode -->
-            <template
-              v-if="route.name == 'dark'"
-              class="text-xl text-secondary"
-            >
-              <div>
-                <vs-switch
-                  color="#C53761"
-                  :value="$store.state.darkMode"
-                  @click="toggleDarkMode"
-                  size="sm"
-                  id="dark"
-                />
-              </div>
-              <div>
-                <label
-                  @click="toggleDarkMode()"
-                  class="text-xl cursor-pointer select-none text-secondary xl:whitespace-nowrap sidebar__route_link"
-                  for="dark"
-                  >{{ $t('sidebar.darkMode') }}</label
-                >
-              </div>
-            </template>
+          </div>
+        </div>
+        <div class="w-1/2 mb-12 sidebar__route">
+          <div
+            class="text-xl text-secondary grid grid-cols-2 gap-2 items-center text-secondary dark:text-active hover:text-black dark:hover:text-white"
+          >
+            <div>
+              <vs-switch
+                color="#C53761"
+                :value="$store.state.darkMode"
+                @click="toggleDarkMode"
+                size="sm"
+                id="dark"
+              />
+            </div>
+            <div>
+              <label
+                @click="toggleDarkMode()"
+                class="text-xl cursor-pointer select-none text-secondary xl:whitespace-nowrap sidebar__route_link"
+                for="dark"
+                >{{ $t('sidebar.darkMode') }}</label
+              >
+            </div>
           </div>
         </div>
         <nuxt-link
@@ -105,36 +103,35 @@ export default {
           name: 'Home',
           i18n: 'home',
           icon: 'fas fa-home',
+          contentCreatorRoute: false,
         },
         {
           to: '/store',
           name: 'Store',
           i18n: 'store',
           icon: 'fas fa-store',
+          contentCreatorRoute: false,
         },
         {
           to: '/saved',
           name: 'Saved',
           i18n: 'saved',
           icon: 'fas fa-bookmark',
+          contentCreatorRoute: false,
         },
         {
           to: '/subscriptions',
           name: 'Subscriptions',
           i18n: 'subscriptions',
           icon: 'fas fa-money-check',
+          contentCreatorRoute: false,
         },
         {
           to: '/settings',
           name: 'Settings',
           i18n: 'settings',
           icon: 'fas fa-cog',
-        },
-        {
-          to: '#',
-          name: 'dark',
-          i18n: 'darkMode',
-          icon: 'fas fa-cog',
+          contentCreatorRoute: false,
         },
       ],
     }
@@ -152,7 +149,12 @@ export default {
       return stringToSlug(str)
     },
   },
-  mounted() {},
+  mounted() {
+    if (this.$auth.user.role_id != 2) {
+      let settingsPage = this.routes.find((x) => x.name == 'Settings')
+      settingsPage.contentCreatorRoute = true
+    }
+  },
 }
 </script>
 

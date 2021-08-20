@@ -6,6 +6,8 @@ use Validator;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Notifications\ApprovedContentCreatorNotification;
+use App\Notifications\RejectedContentCreatorNotification;
 
 trait AdminPortalTrait
 {
@@ -74,6 +76,8 @@ trait AdminPortalTrait
         $user->role_id = 2;
         $user->save();
 
+        $user->notify(new ApprovedContentCreatorNotification($user));
+
         return response()->json(['success' => true]);
     }
 
@@ -82,6 +86,8 @@ trait AdminPortalTrait
         $user->approved = false;
         $user->role_id = 1;
         $user->save();
+
+        $user->notify(new RejectedContentCreatorNotification($user));
 
         return response()->json(['success' => true]);
     }

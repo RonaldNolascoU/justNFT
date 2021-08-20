@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
 use App\Models\Subscription;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscribeRequest;
 
@@ -58,5 +59,16 @@ class SubscriptionController extends Controller
             return response()->json(['success' => false, 'msg' => 'Transaction is still processing or is invalid']);
         }
         return response()->json(['success' => false, 'msg' => 'Unauthorized'], 403);
+    }
+
+    public function updateRate(Request $request)
+    {
+        dd($request->all());
+        if (!auth()->user()->isCreator() || empty($request->rate) || !is_numeric($request->rate)) {
+            return response()->json(['success' => false]);
+        }
+
+        auth()->user()->update(['rate' => $request->rate]);
+        return response()->json(['success' => true]);
     }
 }
