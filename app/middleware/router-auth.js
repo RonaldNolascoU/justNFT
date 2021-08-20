@@ -20,6 +20,15 @@ export default function ({ window, app, store, redirect, route }) {
   const isSigninRoute = ['/signin', '/reset-password'].includes(route.path)
   const isContentCreatorRoute = ['model'].includes(route.name)
 
+  const isSettingRoute = [
+    '/settings#account',
+    '/settings#subscription',
+  ].includes(route.fullPath)
+
+  if (isUserSignedIn && user.role_id != 2 && isSettingRoute) {
+    return redirect('/')
+  }
+
   if (
     isUserSignedIn &&
     user &&

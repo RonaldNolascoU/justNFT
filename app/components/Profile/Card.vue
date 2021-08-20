@@ -17,8 +17,8 @@
       <GeneralAvatar
         :isAbsolute="true"
         :image="
-          contentCreator.cover
-            ? contentCreator.cover
+          contentCreator.profile_img
+            ? $store.state.general.S3Bucket + '/' + contentCreator.profile_img
             : '/images/default_header.png'
         "
         :showAvailableStatus="false"

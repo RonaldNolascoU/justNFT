@@ -9,4 +9,9 @@ class Save extends Model
     protected $collection = 'saves';
     protected $connection = 'mongodb';
     protected $guarded = [];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

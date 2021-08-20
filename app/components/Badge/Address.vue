@@ -2,21 +2,13 @@
   <div class="relative">
     <div
       class="px-5 py-1 border-solid rounded-full border-custom-gray fs-16 flex justify-center mt-5 xl:mt-0 cursor-pointer"
-      :title="
-        $store.state.general.wallet.address ||
-        $store.state.auth.user.wallet_address ||
-        '-'
-      "
+      :title="$store.state.auth.user.wallet_address || '-'"
       @click.prevent.stop="toggleDropdown"
     >
       <input
         type="hidden"
         class="hidden"
-        :value="
-          $store.state.general.wallet.address ||
-          $store.state.auth.user.wallet_address ||
-          '-'
-        "
+        :value="$store.state.auth.user.wallet_address || '-'"
         ref="address"
       />
       <span class="font-semibold text-gray">

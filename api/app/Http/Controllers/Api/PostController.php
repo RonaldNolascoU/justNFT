@@ -45,6 +45,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->creator = $post->creator;
+        $post->saves = $post->saves;
+        $post->likes = $post->likes;
+        $post->comments = $post->comments;
 
         return response()->json(['success' => true, 'post' => $post]);
     }
@@ -64,14 +67,11 @@ class PostController extends Controller
     public function listPostSaved()
     {
         // TODO: Get only saved posts by user
-        $posts = Post::has('saves')->with(['likes', 'comments', 'saves' => function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        }, 'creator' => function ($query) {
-            $query->select('name', 'username');
-        }, 'comments.user' => function ($query) {
-            $query->select('name', 'username');
-        }])->paginate(15);
 
+        $posts = Save::whereHas('post')
+        ->with('post', 'post.likes', 'post.comments', 'post.saves', 'post.creator', 'post.comments.user')
+        ->where('user_id', auth()->user()->id)
+        ->paginate(15);
         return response()->json(['success' => true, 'posts' => $posts]);
     }
 }

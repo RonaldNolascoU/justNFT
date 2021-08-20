@@ -26,11 +26,11 @@
               <vs-button block class="w-full truncate pills" color="#c53761">
                 <nuxt-link
                   class="block text-white truncate fs-20"
-                  :to="nameToSlug(suggestion.name)"
+                  :to="nameToSlug(suggestion.username)"
                 >
                   {{ suggestion.name }} -
                   {{
-                    suggestion.price > 0 ? suggestion.price + ' $JUST' : 'Free'
+                    suggestion.rate > 0 ? suggestion.rate + ' $JUST' : 'Free'
                   }}
                 </nuxt-link>
               </vs-button>
@@ -102,5 +102,8 @@ export default {
 }
 .vs-button {
   width: 85% !important;
+}
+.text-white {
+  color: white !important;
 }
 </style>

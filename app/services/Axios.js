@@ -1,6 +1,7 @@
 import axios from 'axios'
 const qs = require('qs')
 const isDev = process.env.NODE_ENV !== 'production'
+import store from '@/store'
 
 const HTTP = axios.create({
   // baseURL: 'https://app.justyours.me',
@@ -31,15 +32,14 @@ HTTP.interceptors.request.use((config) => {
 })
 
 HTTP.interceptors.response.use(
-  function (response) {
+  (response) => {
     return response
   },
-  function (error) {
+  (error) => {
     console.log(error.response.data)
     if (error.response.status === 401) {
       console.log('Forbidden')
-      // store.dispatch('logout')
-      // router.push('/login')
+      this.$store.dispatch('general/disconnect')
     }
     return Promise.reject(error)
   }

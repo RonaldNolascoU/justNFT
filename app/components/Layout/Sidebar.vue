@@ -138,7 +138,7 @@ export default {
   },
   computed: {
     S3Bucket() {
-      return this.$store.state.S3Bucket
+      return this.$store.state.general.S3Bucket
     },
   },
   methods: {

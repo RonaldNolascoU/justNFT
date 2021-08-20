@@ -68,9 +68,9 @@
                       : null,
                     {
                       hidden:
-                        $auth.user.role_id == 3 &&
-                        (setting.name == 'Security' ||
-                          setting.name == 'Account'),
+                        ([1, 3].includes($auth.user.role_id) &&
+                          ['Account', 'Subscription'].includes(setting.name)) ||
+                        ($auth.user.role_id == 3 && setting.name == 'Security'),
                     },
                   ]"
                   aria-current="page"
@@ -138,9 +138,6 @@
             <div class="ml-3 text-sm">
               <p class="font-medium text-blue-gray-900 dark:text-white">
                 {{ setting.name }}
-              </p>
-              <p class="mt-1 text-blue-gray-500">
-                {{ setting.description }}
               </p>
             </div>
           </a>
@@ -230,10 +227,13 @@ export default {
       if (
         !this.isMobile &&
         this.$route.hash == '' &&
-        this.$auth.user.role_id != 3
+        [1, 2].includes(this.$auth.user.role_id)
       ) {
-        this.settingSelected = 'Account'
-        this.$router.replace({ hash: `#account` })
+        this.settingSelected =
+          this.$auth.user.role_id == 2 ? 'Account' : 'Security'
+        this.$router.replace({
+          hash: this.$auth.user.role_id == 2 ? '#account' : '#security',
+        })
       }
     },
   },

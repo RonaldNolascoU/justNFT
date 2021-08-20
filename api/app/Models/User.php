@@ -64,22 +64,22 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     public function isAdmin()
     {
-        $this->role_id === 0;
+        return $this->role_id === 0;
     }
 
     public function isRegular()
     {
-        $this->role_id === 1;
+        return $this->role_id === 1;
     }
 
     public function isCreator()
     {
-        $this->role_id === 2;
+        return $this->role_id === 2;
     }
 
     public function isMetamask()
     {
-        $this->role_id === 3;
+        return $this->role_id === 3;
     }
     /**
      * User has many subscriptions

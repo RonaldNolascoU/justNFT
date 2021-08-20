@@ -72,6 +72,8 @@ class AuthController extends Controller
                 return response()->json($validator->errors(), 400);
             }
 
+            $request->wallet_address = strtolower($request->wallet_address);
+
             $user = User::create(array_merge(
                 $validator->validated(),
                 [

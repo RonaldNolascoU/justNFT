@@ -63,8 +63,7 @@ class SubscriptionController extends Controller
 
     public function updateRate(Request $request)
     {
-        dd($request->all());
-        if (!auth()->user()->isCreator() || empty($request->rate) || !is_numeric($request->rate)) {
+        if (!auth()->user()->isCreator() || is_null($request->rate) || !is_numeric(floatval($request->rate))) {
             return response()->json(['success' => false]);
         }
 

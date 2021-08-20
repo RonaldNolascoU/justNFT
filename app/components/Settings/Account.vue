@@ -7,7 +7,7 @@
         Account
       </h1>
 
-      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200" v-if="true">
+      <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200" v-if="false">
         <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
           <div class="sm:col-span-6">
             <h3 class="text-xl font-medium text-blue-gray-900 dark:text-white">
@@ -155,7 +155,8 @@
               name="email-address"
               id="email-address"
               autocomplete="email"
-              v-model="$store.state.auth.user.email"
+              disabled
+              :value="$store.state.auth.user.email"
               class="pl-2 mt-1 block w-full border-blue-gray-300 dark:text-white dark:border-none rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>

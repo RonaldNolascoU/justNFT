@@ -87,6 +87,7 @@ export default {
     { src: '~/plugins/directives', mode: 'client' },
     { src: '~/plugins/scripts', mode: 'client' },
     { src: '~/plugins/auth', mode: 'client' },
+    { src: '~/plugins/axios', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

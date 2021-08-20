@@ -48,7 +48,11 @@ export default {
           console.log(result, 'result')
           const { success, posts } = result
           if (success) {
-            this.posts = posts.data
+            const postsObject = posts.data.map((x) => {
+              return x.post
+            })
+            console.log(postsObject)
+            this.posts = postsObject
           }
         })
         .catch((err) => {

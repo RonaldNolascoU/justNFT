@@ -57,13 +57,19 @@ export default {
       loading: false,
     }
   },
+  mounted() {
+    this.rate = this.$auth.user.rate
+  },
   methods: {
     ...mapActions('subscriptions', ['updateRate']),
     onSubmit() {
       if (this.loading) return
       this.loading = true
 
-      this.updateRate()
+      const rate = {
+        rate: this.rate,
+      }
+      this.updateRate(rate)
         .then((response) => {
           // const { success } = response
           console.log(response)

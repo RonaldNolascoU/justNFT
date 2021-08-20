@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'default',
   middleware: ['router-auth'],
@@ -58,6 +59,9 @@ export default {
       let routes = ['subscriptions']
       return routes.includes(this.$nuxt.$route.name)
     },
+  },
+  methods: {
+    ...mapActions('general', ['signUpWithMetamask']),
   },
   mounted() {
     if (
@@ -71,8 +75,21 @@ export default {
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', (accounts) => {
         console.log('accountsChanges', accounts)
-        // TODO: CHECK HERE WITH USER WALLET. IF EXISTS, SO LOGIN
-        this.$store.commit('general/disconnect')
+        this.signUpWithMetamask({ wallet_address: accounts[0] })
+          .then((res) => {
+            if (res.success) {
+              this.$store.dispatch('general/saveMetaMaskLoggedState')
+              this.$store.dispatch('general/getBalance')
+              this.$auth.setUserToken(res.token, res.token)
+              this.$auth.setUser(res.user)
+            } else {
+              this.$store.commit('general/disconnect')
+            }
+          })
+          .catch((err) => {
+            this.$store.commit('general/disconnect')
+            console.log(err)
+          })
       })
     }
   },

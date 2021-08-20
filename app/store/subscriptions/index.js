@@ -31,9 +31,9 @@ export const actions = {
         })
     })
   },
-  updateRate({ commit }, payload) {
+  updateRate({ commit }, rate) {
     return new Promise((resolve, reject) => {
-      SubscriptionService.updateRate(payload)
+      SubscriptionService.updateRate(rate)
         .then(({ data }) => {
           if (!data.success) {
             return reject(data.msg)
