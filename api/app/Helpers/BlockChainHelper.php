@@ -11,8 +11,8 @@ use Sop\CryptoTypes\Asymmetric\EC\ECPrivateKey;
 function createWallet()
 {
     $config = [
-    'private_key_type' => OPENSSL_KEYTYPE_EC,
-    'curve_name' => 'secp256k1'
+        'private_key_type' => OPENSSL_KEYTYPE_EC,
+        'curve_name' => 'secp256k1'
     ];
 
     $res = openssl_pkey_new($config);
@@ -86,14 +86,24 @@ function isTransactionValid($walletAddress, $transactionHash)
     $transactions = getTransactions($walletAddress);
     $transactionsCount = sizeof($transactions);
 
-    
+
     if ($transactionsCount == 0) {
         return false;
     }
-    
+
     if ($transactions[0]->hash == $transactionHash) {
         return true;
     }
 
     return false;
+}
+
+if (!function_exists('ddh')) {
+    function ddh($var)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: *');
+        header('Access-Control-Allow-Headers: *');
+        dd($var);
+    }
 }

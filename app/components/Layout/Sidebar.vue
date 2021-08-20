@@ -141,7 +141,7 @@ export default {
   },
   computed: {
     S3Bucket() {
-      return 'https://d8v7xo28xqxp.cloudfront.net'
+      return this.$store.state.S3Bucket
     },
   },
   methods: {
