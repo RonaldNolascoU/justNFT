@@ -24,7 +24,7 @@ use App\Http\Controllers\Api\ForgotPasswordController;
 Route::group([
     'middleware' => 'api'
 ], function () {
-    Route::post('/login', [AuthController::class, 'login'])->middleware('isVerified');
+    Route::post('/login', [AuthController::class, 'login'])->middleware(['isVerified', "throttle:5,1"]);
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('isVerified');
     Route::post('/admin/login', [AuthController::class, 'adminLogin']);
     Route::post('/signup', [AuthController::class, 'register']);

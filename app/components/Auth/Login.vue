@@ -1,5 +1,10 @@
 <template>
   <form @submit.prevent="onSubmit" class="w-full">
+    <span
+      v-if="generalErrors"
+      class="fs-16 text-primary font-semibold w-full"
+      >{{ generalErrors }}</span
+    >
     <input
       class="input-height fs-16 border-lighter border-2 w-full rounded-full pl-4 mt-3 lg:mt-2"
       v-model="email"
@@ -57,6 +62,7 @@ export default {
         password: null,
       },
       loading: false,
+      generalErrors: null,
     }
   },
   async mounted() {
@@ -71,6 +77,7 @@ export default {
       }
       this.email = null
       this.password = null
+      this.generalErrors = null
     },
     openForgotPassword() {
       this.$emit('changeAuthMode', 'forgot')
@@ -95,6 +102,7 @@ export default {
         })
         .then((response) => {
           const { success, user, message, access_token } = response.data
+          console.log(response.data)
           if (success) {
             this.errors = {}
             this.$auth.setUser({ ...user, token: access_token })
@@ -106,7 +114,26 @@ export default {
         })
         .catch((err) => {
           this.loading = false
-          this.errors.email = err
+          console.log(err, 'err')
+          console.log(err.response)
+          this.generalErrors = err.message
+          if (err.response.status === 400) {
+            this.generalErrors = err.response.data.error
+            this.errors = {}
+          }
+
+          if (err.response.status === 429) {
+            this.generalErrors = 'To Many Attempts. Please retry in 1 minute'
+            this.errors = {}
+          }
+
+          if (err.response.data && err.response.data.errors) {
+            const { password, email } = err.response.data.errors
+            this.errors.email = email && email.join('')
+            this.errors.password = password && password.join('')
+            this.generalErrors = null
+          }
+          // this.generalErrors = err
         })
     },
     sendEmailToRestartPass() {

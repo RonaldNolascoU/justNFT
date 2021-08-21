@@ -1,6 +1,10 @@
+const isDev = process.env.NODE_ENV !== "production";
+
 export default {
     // Base URL
-    baseUrl: "http://localhost:8000/api",
+    baseUrl: isDev
+        ? "http://localhost:8000/api"
+        : "https://api.justyours.me/api",
     // Endpoints
     loginEndpoint: "/admin/login",
     registerEndpoint: "/jwt/register",
