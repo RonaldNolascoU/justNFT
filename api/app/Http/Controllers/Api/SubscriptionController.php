@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Models\Transaction;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\SubscriptionProcessJob;
 use App\Http\Requests\SubscribeRequest;
 
 class SubscriptionController extends Controller
@@ -44,7 +46,6 @@ class SubscriptionController extends Controller
                 'user_id' => auth()->user()->id,
                 'start_date' => now()->format('Y-m-d h:i:s'),
                 'expire_date' => Carbon::now()->addMonth(1)->format('Y-m-d h:i:s'),
-                // add pending status and send notification
             ]);
 
             if ($request->transactionId == 'free') {
@@ -52,13 +53,26 @@ class SubscriptionController extends Controller
                 return response()->json(['success' => $subscription]);
             }
 
-            // Dispatch queue
-            if (isTransactionValid($request->wallet_address, $request->transactionId)) {
-                $subscription = Subscription::create($request->all());
-                return response()->json(['success' => $subscription]);
-            }
+            $transaction = Transaction::create([
+                'status' => 'pending',
+                'amount' => $request->amount,
+                'transactionId' => $request->transactionId,
+                'to' => $request->wallet_address_to,
+                'from' => $request->wallet_address,
+                'creator_id' => $request->creator_id,
+                'user_id' => auth()->user()->id,
+            ]);
 
-            return response()->json(['success' => false, 'msg' => 'Transaction is still processing or is invalid']);
+            $request->merge([
+                'transaction_id' => $transaction->_id
+            ]);
+
+            SubscriptionProcessJob::dispatch(auth()->user(), $transaction, $request->all())
+                ->delay(now()->addSeconds(5));
+
+            return response()->json([
+                'success' => true, 'message' => "You will notified when your subscription is complete."
+            ]);
         }
         return response()->json(['success' => false, 'msg' => 'Unauthorized'], 403);
     }

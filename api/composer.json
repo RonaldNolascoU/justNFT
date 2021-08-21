@@ -21,6 +21,7 @@
         "laravel/ui": "^3.3",
         "league/flysystem-aws-s3-v3": "^1.0",
         "minter/minter-php-bip-44": "^1.2",
+        "predis/predis": "^1.1",
         "renoki-co/laravel-web3": "^1.1",
         "sop/asn1": "^3.3",
         "sop/crypto-encoding": "^0.2.0",
