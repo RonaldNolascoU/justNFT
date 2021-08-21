@@ -41,7 +41,7 @@
           >
         </h3>
       </div>
-      <div class="mt-4">
+      <div class="mt-4" v-if="$auth.user.role_id == 2">
         <div class="personal__data">
           <h3 class="font-semibold fs-24">
             <span class="dark:text-white">
