@@ -1,8 +1,11 @@
 <template>
   <div class="mt-3 fs-24 xl:mx-7">
     <div class="flex justify-between">
-      <div class="flex-auto font-semibold cursor-pointer">
-        <i class="fas fa-heart heart"></i>
+      <div
+        class="flex-auto font-semibold cursor-pointer"
+        @click="likeUnlikePost(post._id)"
+      >
+        <i :class="[isLiked ? 'fas' : 'far', 'fa-heart save']"></i>
         <span class="text-pink">
           {{ (post.likes && post.likes.length) || 0 }}
         </span>
@@ -118,13 +121,19 @@ export default {
     return {
       comment: null,
       isSaved: false,
+      isLiked: false,
     }
   },
   mounted() {
-    this.isSaved = !!this.post.saves.length
+    this.isSaved = this.post
+      ? this.post.saves.some((x) => x.user_id == this.$auth.user._id)
+      : false
+    this.isLiked = this.post
+      ? this.post.likes.some((x) => x.user_id == this.$auth.user._id)
+      : false
   },
   methods: {
-    ...mapActions('posts', ['savePost']),
+    ...mapActions('posts', ['savePost', 'likePost']),
     addComment(post) {
       post.commentsArray.push({
         content: this.comment,
@@ -137,6 +146,17 @@ export default {
         if (res.success) {
           this.isSaved = !this.isSaved
           this.$emit('reloadSaved', this.isSaved)
+        }
+      })
+    },
+    likeUnlikePost(id) {
+      this.likePost({ id }).then((res) => {
+        if (res.success) {
+          this.isLiked = !this.isLiked
+          this.isLiked
+            ? this.post.likes.push({ id: id })
+            : this.post.likes.pop()
+          // this.$emit('reloadSaved', this.isLiked)
         }
       })
     },

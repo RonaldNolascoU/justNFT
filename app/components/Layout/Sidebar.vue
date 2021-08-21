@@ -79,13 +79,21 @@
             </div>
           </div>
         </div>
-        <nuxt-link
+        <!-- <nuxt-link
           to="/new-post"
           v-if="$auth.user.role_id == 2"
           class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-2 px-16 text-center font-semibold btn-fs text-white-color"
         >
           Add Post
-        </nuxt-link>
+        </nuxt-link> -->
+        <a
+          to="/new-post"
+          @click="comingSoon()"
+          v-if="$auth.user.role_id == 2"
+          class="rounded-full border-primary hover:bg-primary bg-primary font-bold py-2 px-16 text-center font-semibold btn-fs text-white-color"
+        >
+          Add Post
+        </a>
       </div>
     </div>
   </transition>
@@ -147,6 +155,9 @@ export default {
     },
     nametoSlug(str) {
       return stringToSlug(str)
+    },
+    comingSoon() {
+      alert('coming soon...')
     },
   },
   mounted() {

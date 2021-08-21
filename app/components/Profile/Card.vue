@@ -41,8 +41,22 @@
           >
         </h3>
       </div>
+      <div class="mt-4">
+        <div class="personal__data">
+          <h3 class="font-semibold fs-24">
+            <span class="dark:text-white">
+              Current Subscriptions:
+              <span class="text-primary">{{
+                (contentCreator.subscriptionsCount &&
+                  contentCreator.subscriptionsCount) ||
+                0
+              }}</span>
+            </span>
+          </h3>
+        </div>
+      </div>
     </div>
-    <div class="content mt-10 lg:mt-20">
+    <div class="content mt-10 lg:mt-10">
       <div class="flex justify-between fs-24">
         <div class="info dark:text-white">
           <b>{{ contentCreator.name || '' }}</b>
@@ -52,7 +66,7 @@
         </div>
         <i class="fas fa-ellipsis-v text-gray" />
       </div>
-      <div class="mt-8" v-if="!contentCreator.me">
+      <div class="mt-8" v-if="!contentCreator.me && $auth.user.role_id != 2">
         <div class="subscribe__button_wrapper flex justify-center fs-24">
           <a
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"

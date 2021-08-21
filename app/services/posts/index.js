@@ -12,5 +12,8 @@ class PostService {
   savePost(payload) {
     return HTTP.post(`posts/save-post`, payload)
   }
+  likePost(payload) {
+    return HTTP.post(`posts/like-post`, payload)
+  }
 }
 export default new PostService()

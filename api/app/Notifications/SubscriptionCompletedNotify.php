@@ -43,9 +43,10 @@ class SubscriptionCompletedNotify extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Subscription Completed!')
+            ->subject('Subscription Completed')
             ->line('Hi, ' . $this->user->name)
-            ->line("Your subscription to $this->username by $this->amount JUST has been completed!")
+            ->line("Your subscription to $this->username by $this->amount" . '$JUST has been completed!')
+            ->action("Go to $this->username profile", url(env('APP_FRONT_URL') . '/' . $this->username))
             ->line('Thank you for using our application!');
     }
 

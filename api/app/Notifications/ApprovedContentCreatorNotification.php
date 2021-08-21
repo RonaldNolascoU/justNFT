@@ -46,7 +46,7 @@ class ApprovedContentCreatorNotification extends Notification
                     ->subject('Your request has been approved!')
                     ->line('Hi, ' . $this->user->name)
                     ->line('Congratulations! Your account has been approved to be a content creator')
-                    ->action('Start Creating Content', url(env('APP_FRONT_URL') . '/settings#subscription'));
+                    ->action('Setup Profile', url(env('APP_FRONT_URL') . '/settings#subscription'));
     }
 
     /**

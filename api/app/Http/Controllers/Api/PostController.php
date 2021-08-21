@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Like;
 use App\Models\Post;
+use App\Models\Save;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Save;
 
 class PostController extends Controller
 {
@@ -19,7 +20,9 @@ class PostController extends Controller
 
         $userSubscriptions = auth()->user()->subscriptions;
         $creatorIds =  $userSubscriptions->pluck('creator_id');
-        $posts = Post::with(['likes', 'comments', 'saves', 'creator' => function ($query) {
+        $posts = Post::with(['likes', 'comments', 'saves' => function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        }, 'creator' => function ($query) {
             $query->select('name', 'username');
         }, 'comments.user' => function ($query) {
             $query->select('name', 'username');
@@ -54,7 +57,7 @@ class PostController extends Controller
 
     public function savePost()
     {
-        $savePost = Save::where('post_id', request()->id)->first();
+        $savePost = Save::where('post_id', request()->id)->where('user_id', auth()->user()->id)->first();
         if ($savePost) {
             $savePost->delete();
             return response()->json(['success' => true, 'message' => 'Post Unsaved.']);
@@ -62,6 +65,18 @@ class PostController extends Controller
         Save::create(['post_id' => request()->id, 'user_id' => auth()->user()->id]);
 
         return response()->json(['success' => true, 'message' => 'Post Saved.']);
+    }
+
+    public function likePost()
+    {
+        $likePost = Like::where('post_id', request()->id)->where('user_id', auth()->user()->id)->first();
+        if ($likePost) {
+            $likePost->delete();
+            return response()->json(['success' => true, 'message' => 'Unliked']);
+        }
+        Like::create(['post_id' => request()->id, 'user_id' => auth()->user()->id]);
+
+        return response()->json(['success' => true, 'message' => 'Liked']);
     }
 
     public function listPostSaved()

@@ -23,7 +23,7 @@
           >
             <nuxt-link
               to="/"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="inline-flex text-white items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Go back home
             </nuxt-link>
@@ -37,5 +37,13 @@
 export default {
   props: ['error'],
   layout: 'blank', // you can set a custom layout for the error page
+
+  mounted() {},
 }
 </script>
+
+<style scoped>
+.text-white {
+  color: white !important;
+}
+</style>

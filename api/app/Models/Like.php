@@ -9,4 +9,5 @@ class Like extends Model
 {
     protected $collection = 'likes';
     protected $connection = 'mongodb';
+    protected $guarded = [];
 }

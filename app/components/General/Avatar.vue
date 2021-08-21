@@ -58,6 +58,13 @@ export default {
   img {
     max-height: 110px;
     height: 110px;
+
+    @media (max-width: 768px) {
+      max-height: 60px;
+    }
+    @media (min-width: 769px) and (max-width: 1280px) {
+      max-height: 80px;
+    }
   }
 }
 

@@ -84,6 +84,7 @@ Route::group([
         Route::get('/posts-saved', [PostController::class, 'listPostSaved']);
         Route::get('/{post}', [PostController::class, 'show']);
         Route::post('/save-post', [PostController::class, 'savePost']);
+        Route::post('/like-post', [PostController::class, 'likePost']);
     });
 
     Route::group([

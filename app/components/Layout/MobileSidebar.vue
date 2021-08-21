@@ -20,11 +20,11 @@
           class="divide-y-4 divide-yellow-600 text-center border-b-2 border-gray-100"
         >
           <nuxt-link :to="'/profile'" class="dark:text-active">
-            <div class="flex justify-center items-center pb-2 pt-2 my-2">
+            <div class="flex justify-start items-center pb-2 pt-2 my-2">
               <div class="fs-20">
+                <i class="fas fa-user fs-20 ml-3" />
                 {{ $t(`sidebar.profile`) }}
               </div>
-              <i class="fas fa-user fs-20 ml-3" />
             </div>
           </nuxt-link>
         </li>
@@ -49,6 +49,7 @@
                 @click="toggleDarkMode"
                 size="sm"
                 id="dark"
+                class="ml-3"
               />
               <label
                 @click="toggleDarkMode"
@@ -59,14 +60,14 @@
             </div>
             <div
               v-else-if="option.type == 'language'"
-              class="flex justify-start items-center pt-2 my-2 cursor-pointer"
+              class="flex justify-start items-center pt-2 my-2 cursor-pointer ml-3"
             >
               <GeneralTranslateDropdown />
             </div>
 
             <div
               v-else-if="option.type == 'new-post'"
-              class="flex justify-end items-center my-2 cursor-pointer"
+              class="flex justify-end items-center my-2 cursor-pointer ml-3"
             >
               <nuxt-link
                 to="/new-post"
@@ -76,10 +77,9 @@
               </nuxt-link>
             </div>
 
-            <!-- LOGOUT -->
             <div
               v-else
-              class="flex justify-start items-center pt-2 my-2 cursor-pointer"
+              class="flex justify-start items-center pt-2 my-2 cursor-pointer ml-3"
               @click="$store.dispatch('general/logout')"
             >
               <span class="material-icons-round fs-20 mr-3">
