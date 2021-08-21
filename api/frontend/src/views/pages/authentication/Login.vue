@@ -78,6 +78,49 @@
                                 </validation-provider>
                             </b-form-group>
 
+                            <!-- forgot password -->
+                            <b-form-group>
+                                <validation-provider
+                                    #default="{ errors }"
+                                    name="Password"
+                                    vid="password"
+                                    rules="required"
+                                >
+                                    <b-input-group
+                                        class="input-group-merge"
+                                        :class="
+                                            errors.length > 0
+                                                ? 'is-invalid'
+                                                : null
+                                        "
+                                    >
+                                        <b-form-input
+                                            id="login-password"
+                                            v-model="password"
+                                            :state="
+                                                errors.length > 0 ? false : null
+                                            "
+                                            class="form-control-merge"
+                                            :type="passwordFieldType"
+                                            name="login-password"
+                                            placeholder="Password"
+                                        />
+                                        <b-input-group-append is-text>
+                                            <feather-icon
+                                                class="cursor-pointer"
+                                                :icon="passwordToggleIcon"
+                                                @click="
+                                                    togglePasswordVisibility
+                                                "
+                                            />
+                                        </b-input-group-append>
+                                    </b-input-group>
+                                    <small class="text-danger">{{
+                                        errors[0]
+                                    }}</small>
+                                </validation-provider>
+                            </b-form-group>
+
                             <!-- checkbox -->
                             <b-form-group>
                                 <b-form-checkbox
