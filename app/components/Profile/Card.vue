@@ -56,9 +56,15 @@
         <div class="subscribe__button_wrapper flex justify-center fs-24">
           <a
             class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
-            v-if="isSubscribed || contentCreator.isSubscribed"
+            v-if="contentCreator.isSubscribed"
           >
             <b>Subscribed</b>
+          </a>
+          <a
+            class="px-4 md:px-16 py-2 text-white bg-primary rounded-2xl flex justify-center items-center cursor-pointer"
+            v-else-if="isSubscribed"
+          >
+            <b>Pending</b>
           </a>
           <a
             v-else
@@ -268,33 +274,34 @@ export default {
                 console.log(hash)
                 let receiptInterval = setInterval(() => {
                   getReceipt(this)
-                }, 1000)
+                }, 1500)
                 function getReceipt(instance) {
                   web3.eth.getTransactionReceipt(hash, (error, receipt) => {
                     console.log(error, receipt, 'receipt response')
                     if (receipt) {
-                      setTimeout(() => {
-                        instance
-                          .subscribeToContentCreator({
-                            creator_id: instance.contentCreator._id,
-                            transactionId: hash,
-                            amount: instance.contentCreator.rate,
-                            wallet_address: instance.metamaskAddress,
-                          })
-                          .then((res) => {
-                            console.log(res)
-                            const { success } = res
-                            if (success) {
-                              instance.isSubscribed = true
-                            }
-                            instance.loading = false
-                          })
-                          .catch((err) => {
-                            console.log(err)
-                            instance.loading = false
-                          })
-                      }, 5000)
                       clearReceiptInterval()
+                      instance
+                        .subscribeToContentCreator({
+                          creator_id: instance.contentCreator._id,
+                          transactionId: hash,
+                          amount: instance.contentCreator.rate,
+                          wallet_address: instance.metamaskAddress,
+                          username: instance.contentCreator.username,
+                          wallet_address_to: toAddress,
+                        })
+                        .then((res) => {
+                          console.log(res)
+                          const { success } = res
+                          if (success) {
+                            instance.isSubscribed = true
+                          }
+                          instance.loading = false
+                        })
+                        .catch((err) => {
+                          console.log(err)
+                          instance.loading = false
+                        })
+
                       return
                     }
                   })
