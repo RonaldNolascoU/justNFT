@@ -258,7 +258,7 @@ export const actions = {
   },
   signUpWithMetamask({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      // localStorage.clear()
+      localStorage.clear()
 
       // dispatch('loading/loadingState', true, { root: true })
 

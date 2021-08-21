@@ -51,6 +51,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import Web3 from 'web3'
 export default {
   name: 'default',
   middleware: ['router-auth'],
@@ -76,10 +77,65 @@ export default {
       window.ethereum.on('accountsChanged', (accounts) => {
         console.log('accountsChanges', accounts)
         this.signUpWithMetamask({ wallet_address: accounts[0] })
-          .then((res) => {
+          .then(async (res) => {
             if (res.success) {
-              this.$store.dispatch('general/saveMetaMaskLoggedState')
-              this.$store.dispatch('general/getBalance')
+              console.log(window.ethereum)
+              if (window.ethereum === null)
+                this.$store.commit('general/disconnect')
+              if (!this.$auth.user.wallet_address) return
+              let minABI = [
+                {
+                  constant: true,
+                  inputs: [{ name: '_owner', type: 'address' }],
+                  name: 'balanceOf',
+                  outputs: [{ name: 'balance', type: 'uint256' }],
+                  type: 'function',
+                },
+                // decimals
+                {
+                  constant: true,
+                  inputs: [],
+                  name: 'decimals',
+                  outputs: [{ name: '', type: 'uint8' }],
+                  type: 'function',
+                },
+              ]
+
+              let justYoursTokenAddress =
+                '0x37c045be4641328dfeb625f1dde610d061613497'
+              // Get ERC20 Token contract instance
+              let web3 = new Web3(ethereum)
+              let contract = new web3.eth.Contract(
+                minABI,
+                justYoursTokenAddress
+              )
+
+              // Call balanceOf function
+              await contract.methods
+                .balanceOf(accounts[0])
+                .call()
+                .then(async (result) => {
+                  console.log(result, 'result')
+                  await contract.methods
+                    .decimals()
+                    .call()
+                    .then((decimals) => {
+                      this.$store.commit(
+                        'general/setWalletBalance',
+                        (Math.round((+result / 10 ** +decimals) * 10) / 10)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                      )
+                    })
+                    .catch((err) => {
+                      console.log(err, 'Error getting decimals')
+                      this.$store.commit('general/disconnect')
+                    })
+                })
+                .catch((err) => {
+                  console.log(err, 'Error getting balance')
+                  this.$store.commit('general/disconnect')
+                })
               this.$auth.setUserToken(res.token, res.token)
               this.$auth.setUser(res.user)
             } else {
